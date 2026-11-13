@@ -507,7 +507,11 @@ const V=r=>{const c=r[4]+r[5],g=RA[r[1]]||0;return {b:r[3],c,g,t:c+g}};
 const chosen=()=>A().filter(r=>!OFF.has(r[1]));
 let YA=0;
 const fixName=n=>String(n||"").replace(/^(Janvier|Février|Avril|Septembre|Octobre) – /,"$1 → ").replace(/^Vacances d'été – /,"Vacances d'été · ");
+// Clé de répartition par défaut : dépenses 2026 réelles, rattachées à la date d'activité (voir README)
+const PH_KEY2026=[["Janvier → février",3.8],["Vacances d'hiver",10],["Février → avril",10.1],["Vacances de printemps",7.3],["Avril → juin",9.6],["Vacances d'été · juillet",13.5],["Vacances d'été · août",11.5],["Septembre → octobre",8.1],["Vacances de la Toussaint",8.6],["Octobre → décembre",4.1],["Vacances de Noël",4],["Séjour 1",2.9],["Séjour 2",5.1],["Petit séjour 1",1],["Petit séjour 2",.4]];
+const phKey2026=()=>PH_KEY2026.map(([name,pct],i)=>({id:"k26"+i.toString(36)+Date.now().toString(36).slice(-4),name,pct}));
 let PH=LS.get("ab-phases",[]).map(p=>({id:p.id,name:fixName(p.name),pct:p.pct??""})); // [{id,name,pct}] dans l'ordre chronologique
+if(!PH.length){PH=phKey2026();LS.set("ab-phases",PH)} // aucune période enregistrée : clé 2026 par défaut
 // Périodes passées : sélection libre, dans n'importe quel ordre
 let PHSEL=new Set(LS.get("ab-phsel3",[]));
 const isSel=id=>PHSEL.has(id);
@@ -692,8 +696,11 @@ $("phlist").addEventListener("click",e=>{
   list.addEventListener("pointerup",end);list.addEventListener("pointercancel",end);
 })();
 $("phbase").onclick=()=>openModal(`<h3>Réinitialiser les périodes ?</h3>
-  <p class="note">${PH.length?`Les ${PH.length} période${PH.length>1?"s":""} actuelle${PH.length>1?"s":""} et leurs pourcentages seront remplacées`:"La liste sera remplie"} par les 11 périodes de base, avec une répartition égale du budget à ajuster ensuite.</p>
-  <div class="mbt"><button class="tbtn" data-close>Annuler</button><button class="tbtn pri" id="mok">Réinitialiser</button></div>`,()=>{
+  <p class="note">${PH.length?`Les ${PH.length} période${PH.length>1?"s":""} actuelle${PH.length>1?"s":""} et leurs pourcentages seront remplacées.`:"La liste sera remplie."} Choisis la base :</p>
+  <div class="vopt"><button class="tbtn" id="mkey"><b>Clé 2026 (recommandée)</b><small>15 périodes dont 4 séjours, pourcentages tirés des dépenses réelles 2026</small></button>
+  <button class="tbtn" id="mok"><b>Répartition égale</b><small>11 périodes scolaires, même pourcentage pour chacune</small></button></div>
+  <div class="mbt"><button class="tbtn" data-close>Annuler</button></div>`,()=>{
+  $("mkey").onclick=()=>{PH=phKey2026();PHSEL=new Set();savePH();setDate();renderPhSet();closeModal()};
   $("mok").onclick=()=>{const n=PH_BASE.length,base=Math.floor(1000/n)/10,extra=Math.round((100-base*n)*10);
     PH=PH_BASE.map((name,i)=>({id:(Date.now()+i).toString(36),name,pct:i<extra?Math.round((base+.1)*10)/10:base}));
     PHSEL=new Set();savePH();setDate();renderPhSet();closeModal()}});
