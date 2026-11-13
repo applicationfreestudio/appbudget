@@ -2,14 +2,22 @@
 <html lang="fr"><head><meta charset="utf-8"><title>App Budget</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="mobile-web-app-capable" content="yes">
+<script>try{const t=localStorage.getItem("ab-theme");const v=t&&JSON.parse(t);if(v==="light"||v==="dark")document.documentElement.setAttribute("data-theme",v)}catch(e){}</script>
 <style>
 :root{--bl:#2a6fb0;--bg:#f6f5f1;--card:#fff;--tx:#1d1d1b;--mu:#6b6a64;--ln:#e2e0d8;--a:#2a6fb0;--e:#9cc3e6;--h:#c8473a;--w:#c9961a;color-scheme:light}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#171815;--card:#222320;--tx:#efeee8;--mu:#a09f97;--ln:#34352f;--a:#6aa9e6;--e:#2c4f73;--h:#f0877a;--w:#e6b84a;color-scheme:dark}}
 :root[data-theme="dark"]{--bg:#171815;--card:#222320;--tx:#efeee8;--mu:#a09f97;--ln:#34352f;--a:#6aa9e6;--e:#2c4f73;--h:#f0877a;--w:#e6b84a;color-scheme:dark}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif;padding:env(safe-area-inset-top,0) env(safe-area-inset-right,0) env(safe-area-inset-bottom,0) env(safe-area-inset-left,0)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif;padding:0 env(safe-area-inset-right,0) env(safe-area-inset-bottom,0) env(safe-area-inset-left,0)}
 main{max-width:760px;margin:0 auto;padding:16px}
-h1{font-size:1.4rem;margin:8px 0 2px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+h1{font-size:1.4rem;margin:-16px -16px 6px;padding:calc(10px + env(safe-area-inset-top,0px)) 16px 10px;display:flex;justify-content:space-between;align-items:center;gap:10px;position:sticky;top:0;z-index:30;
+  background:var(--bg);background:color-mix(in srgb,var(--bg) 38%,transparent);-webkit-backdrop-filter:saturate(1.8) blur(8px);backdrop-filter:saturate(1.8) blur(8px);border-bottom:1px solid color-mix(in srgb,var(--ln) 60%,transparent)}
+.ti{display:flex;align-items:center;gap:9px;min-width:0}
+.ti svg{flex:none;width:36px;height:36px}
+.tt{display:flex;flex-direction:column;line-height:1.05;min-width:0}
+.tt #ttl{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ver{font-size:.62rem;font-weight:500;color:var(--mu);letter-spacing:.02em;margin-top:2px}
+#th svg{display:block}
 .hb{display:flex;gap:6px}
 .sub{color:var(--mu);font-size:clamp(.78rem,3.6vw,.9rem);margin-bottom:14px;line-height:1.5}
 .sub>div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -259,6 +267,31 @@ html.lock,html.lock body{overflow:hidden}
 .bkr{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-top:1px solid var(--ln)}
 .bkr b{display:block;font-size:.95rem}.bkr small{color:var(--mu);font-size:.76rem}
 .bkr button{flex:none;padding:8px 12px}
+details.dsec{padding:0}
+details.dsec>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:14px;-webkit-tap-highlight-color:transparent}
+details.dsec>summary::-webkit-details-marker{display:none}
+details.dsec>summary::after{content:"";margin-left:auto;flex:none;width:9px;height:9px;border-right:2px solid var(--mu);border-bottom:2px solid var(--mu);transform:rotate(45deg);transition:transform .2s}
+details.dsec[open]>summary::after{transform:rotate(-135deg)}
+details.dsec>summary b{font-size:1rem}
+.dsm{font-size:.78rem;color:var(--mu)}
+details.dsec>:not(summary){margin-left:14px;margin-right:14px}
+details.dsec>:last-child{margin-bottom:14px}
+#dart #setlist .card{margin-left:0;margin-right:0}
+.thm{display:flex;margin:12px 0 14px;border:1px solid var(--ln);border-radius:8px;overflow:hidden}
+.thm button{flex:1;margin:0;padding:9px 6px;border:0;border-radius:0;background:none;color:var(--mu);font:500 14px/1.2 inherit;font-family:inherit;cursor:pointer}
+.thm button+button{border-left:1px solid var(--ln)}
+.thm button.on{background:var(--a);color:#fff;font-weight:600}
+.acc{display:grid;grid-template-columns:repeat(4,1fr);gap:10px 4px;margin-top:4px}
+.acc button{display:flex;flex-direction:column;align-items:center;gap:5px;min-width:0;margin:0;padding:0;background:none;border:0;color:inherit;cursor:pointer;font-family:inherit}
+.acc button span{color:var(--mu);font-size:12px;text-align:center}
+.acc button[aria-pressed=true] span{color:var(--tx);font-weight:700}
+.acc i{display:block;width:36px;height:36px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.15)}
+.acc button[aria-pressed=true] i{outline:3px solid var(--tx);outline-offset:2px}
+.sl2{display:grid;grid-template-columns:auto 1fr 6em;gap:10px;align-items:center;margin:16px 0 4px}
+.sl2 label{font-size:.92rem}.sl2 input{width:100%;margin:0;accent-color:var(--a)}.sl2 span{text-align:right;font-weight:500;font-size:.88rem}
+.chk2{display:flex;align-items:flex-start;gap:10px;margin-top:14px;font-size:.92rem;cursor:pointer}
+.chk2 input{width:20px;height:20px;flex:none;margin:0;accent-color:var(--a)}
+.chk2 small{display:block;color:var(--mu);font-size:.78rem}
 .empty{text-align:center;color:var(--mu);padding:24px}
 @media (max-width:420px){.tot{flex-direction:column;align-items:stretch}.ring{margin:0 auto}}
 /* Code couleur : bleu = disponible, or = niveau acceptable (90-100 %), rouge = dépassement */
@@ -267,15 +300,15 @@ html.lock,html.lock body{overflow:hidden}
 .li .lt b{color:var(--bl)}.li.warn .lt b{color:var(--w)}.li.over .lt b{color:var(--h)}
 .pv b{color:var(--bl)}.pv.warn b{color:var(--w)}.pv.over b{color:var(--h)}
 .phh span{white-space:nowrap}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .frise button.on,:root:not([data-theme="light"]) .tbtn.pri{color:#0d1b2a}}
-:root[data-theme="dark"] .frise button.on,:root[data-theme="dark"] .tbtn.pri{color:#0d1b2a}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .frise button.on,:root:not([data-theme="light"]) .tbtn.pri,:root:not([data-theme="light"]) .thm button.on{color:#0d1b2a}}
+:root[data-theme="dark"] .frise button.on,:root[data-theme="dark"] .tbtn.pri,:root[data-theme="dark"] .thm button.on{color:#0d1b2a}
 .frise .pcw>button.on{color:#fff}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .frise .pcw>button.on.good{color:#0d1b2a}}
 :root[data-theme="dark"] .frise .pcw>button.on.good{color:#0d1b2a}
 </style></head>
 <body><main>
-<h1><span id="ttl">App Budget</span>
-  <span class="hb"><button class="tbtn" id="th" aria-label="Changer de thème"><svg width="16" height="16" viewBox="0 0 16 16" style="display:block"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg></button><button class="tbtn" id="nav">⚙ Paramètres</button></span>
+<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.1</small></span></span>
+  <span class="hb"><button class="tbtn" id="th" aria-label="Thème : système" title="Thème : système"></button><button class="tbtn" id="nav">⚙ Paramètres</button></span>
 </h1>
 <div class="sub"><div id="org"></div><div>Dépenses <span id="yr"></span> · situation au <b id="dt"></b></div></div>
 
@@ -312,13 +345,13 @@ html.lock,html.lock body{overflow:hidden}
 
 <!-- ===== Paramètres ===== -->
 <section id="v-set" hidden>
-  <div class="card up">
-    <b>Périodes de l'année</b>
+  <details class="card up dsec" id="dper">
+    <summary><b>Périodes de l'année</b><span class="dsm" id="dpers"></span></summary>
     <p class="note" style="margin:4px 0 6px">Les périodes se succèdent dans l'ordre de la liste. Le pourcentage est la part du budget prévue pour chaque période.</p>
     <div id="phlist"></div>
     <div class="phf"><span id="phsum" class="note"></span><button class="tbtn" id="phvent">Ventilation des %</button><button class="tbtn" id="phround">Arrondir à la dizaine</button><button class="tbtn" id="phadd">+ Ajouter une période</button></div>
     <div class="phf" style="margin-top:10px;padding-top:10px;border-top:1px solid var(--ln)"><button class="tbtn" id="phbase">Réinitialiser les périodes</button></div>
-  </div>
+  </details>
   <div class="card up">
     <b>Mettre à jour les données</b>
     <p class="note" style="margin:4px 0 10px">Envoie la « Situation budgétaire détaillée par analytique » (PDF) la plus récente.</p>
@@ -336,13 +369,16 @@ html.lock,html.lock body{overflow:hidden}
     <div id="rglist"></div>
     <label class="it" style="border:0;padding-bottom:0"><div class="tx"><b>Compter la régie dans les jauges</b><small>Décoche pour voir uniquement la situation officielle</small></div><span class="sw"><input type="checkbox" id="regon"><i></i></span></label>
   </div>
-  <div class="qa" style="margin:4px 0 14px">
+  <details class="card up dsec" id="dart">
+  <summary><b>Articles suivis</b><span class="dsm" id="darts"></span></summary>
+  <div class="qa" style="margin:10px 0 14px">
     <button class="tbtn" data-q="all">Tout cocher</button>
     <button class="tbtn" data-q="none">Tout décocher</button>
     <button class="tbtn" data-q="budget">Lignes avec budget</button>
     <button class="tbtn" data-q="used">Lignes consommées</button>
   </div>
   <div id="setlist"></div>
+  </details>
   <div class="card up" id="bk">
     <b>Sauvegarde et restauration</b>
     <p class="note" style="margin:4px 0 10px">Fichiers .json à garder (ou à déposer sur GitHub) pour restaurer l'application.</p>
@@ -360,6 +396,13 @@ html.lock,html.lock body{overflow:hidden}
       <div class="qa" style="margin-top:10px"><button class="tbtn" data-cfsave="full">Sauvegarde complète datée</button><button class="tbtn" data-cfsave="key">Sauvegarde des périodes</button></div>
       <div id="cflist"></div>
     </div>
+  </div>
+  <div class="card up">
+    <b>Couleur du thème</b>
+    <div class="thm" id="thm" role="radiogroup" aria-label="Mode d'affichage"><button type="button" data-t="auto" role="radio" title="Selon le réglage de l'appareil">Système</button><button type="button" data-t="light" role="radio">Clair</button><button type="button" data-t="dark" role="radio">Sombre</button></div>
+    <div class="acc" id="acc"></div>
+    <div class="sl2"><label for="acci">Intensité</label><input id="acci" type="range" min="-100" max="100" step="5" value="0"><span id="accv">Normale</span></div>
+    <label class="chk2"><input type="checkbox" id="sbc"><span>Colorer la barre système dans le thème<small>Sinon, elle garde sa couleur par défaut.</small></span></label>
   </div>
   <button class="tbtn pri" id="done" style="width:100%;padding:12px;font-size:1rem">Voir le tableau de bord</button>
 </section>
@@ -621,6 +664,7 @@ $("phb").addEventListener("click",e=>{
 
 // ===== Phases (paramètres) =====
 function renderPhSet(){
+  setTimeout(()=>{const n=PH.length,t=PH.reduce((a,p)=>a+(+p.pct||0),0);$("dpers").textContent=n?`${n} période${n>1?"s":""} · ${t.toLocaleString("fr-FR",{maximumFractionDigits:1})} %`:"aucune";const k=A().length,o=A().filter(r=>OFF.has(r[1])).length;$("darts").textContent=`${k-o} / ${k} suivis`});
   $("phlist").innerHTML=PH.length?PH.map((p,i)=>`<div class="phr" data-id="${p.id}">
     <div class="l1"><span class="grip" aria-label="Maintenir pour déplacer" title="Maintenir pour déplacer"><i></i><i></i><i></i></span>
       <input data-k="name" value="${esc(p.name||"")}" placeholder="Intitulé de la période">
@@ -1056,11 +1100,43 @@ $("done").onclick=()=>{go("home");scrollTo(0,0)};
 addEventListener("hashchange",route);
 setDate();route();
 
-// ===== Thème =====
+// ===== Thème : mode (système / clair / sombre), couleur, intensité, barre système =====
 const root=document.documentElement;
-{const t=LS.get("ab-theme",null);if(t)root.dataset.theme=t}
-$("th").onclick=()=>{const dark=root.dataset.theme?root.dataset.theme==="dark":matchMedia("(prefers-color-scheme:dark)").matches;
-  root.dataset.theme=dark?"light":"dark";LS.set("ab-theme",root.dataset.theme)};
-
+// couleurs d'accent : [clair, sombre]
+const ACL={budget:["#2a6fb0","#6aa9e6","Bleu budget"],vert:["#2F5D50","#6FB39E","Vert"],bleu:["#44536C","#92A9CE","Bleu ardoise"],violet:["#564D68","#ADA0C8","Violet"],rose:["#664856","#C699AD","Rose"],terre:["#694A40","#CA9C8C","Terracotta"],jaune:["#665633","#D2B77F","Jaune"],gris:["#4D5358","#A0A9B0","Gris"]};
+const isDark=()=>root.dataset.theme?root.dataset.theme==="dark":matchMedia("(prefers-color-scheme:dark)").matches;
+function adj(hex,k){if(!k)return hex;const n=parseInt(hex.slice(1),16);let r=(n>>16&255)/255,g=(n>>8&255)/255,b=(n&255)/255;
+  const mx=Math.max(r,g,b),mn=Math.min(r,g,b);let h=0,S=0,L=(mx+mn)/2;
+  if(mx!==mn){const d=mx-mn;S=L>.5?d/(2-mx-mn):d/(mx+mn);h=mx===r?(g-b)/d+(g<b?6:0):mx===g?(b-r)/d+2:(r-g)/d+4;h/=6}
+  if(k>0){S=S+(1-S)*k*.55;L=L+(.5-L)*k*.25}else{S=S*(1+k*.55);L=L+(.8-L)*(-k)*.3}
+  const f=(p,q,t)=>{if(t<0)t+=1;if(t>1)t-=1;return t<1/6?p+(q-p)*6*t:t<.5?q:t<2/3?p+(q-p)*(2/3-t)*6:p},q=L<.5?L*(1+S):L+S-L*S,p=2*L-q,hx=x=>Math.round(x*255).toString(16).padStart(2,"0");
+  return "#"+hx(f(p,q,h+1/3))+hx(f(p,q,h))+hx(f(p,q,h-1/3))}
+function applyTheme(){
+  const t=LS.get("ab-theme","auto"),a=ACL[LS.get("ab-acc","budget")]?LS.get("ab-acc","budget"):"budget",k=(+LS.get("ab-acci",0)||0)/100;
+  if(t==="light"||t==="dark")root.dataset.theme=t;else delete root.dataset.theme;
+  const dk=isDark(),base=ACL[a][dk?1:0],c=adj(base,k);
+  root.style.setProperty("--a",c);root.style.setProperty("--acl",adj(ACL[a][0],k));
+  // bouton du titre : icône selon le mode
+  const ic={auto:'<svg width="18" height="18" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg>',
+    light:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>',
+    dark:'<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1Z"/></svg>'};
+  const lab={auto:"système",light:"clair",dark:"sombre"}[t]||"système";
+  $("th").innerHTML=ic[t]||ic.auto;$("th").title=$("th").ariaLabel="Thème : "+lab;
+  document.querySelectorAll("#thm button").forEach(b=>{const on=b.dataset.t===(t==="light"||t==="dark"?t:"auto");b.classList.toggle("on",on);b.setAttribute("aria-checked",on)});
+  document.querySelectorAll("#acc button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.acc===a));
+  $("acci").value=Math.round(k*100);$("accv").textContent=k<=-.6?"Pastel":k<-.15?"Douce":k<.15?"Normale":k<.6?"Vive":"Très vive";
+  $("sbc").checked=!!LS.get("ab-sbc",false);
+  let m=document.querySelector('meta[name="theme-color"]');
+  if(LS.get("ab-sbc",false)){if(!m){m=document.createElement("meta");m.name="theme-color";document.head.appendChild(m)}m.content=adj(ACL[a][0],k)}else if(m)m.remove();
+}
+$("acc").innerHTML=Object.entries(ACL).map(([k,[l,d,n]])=>`<button type="button" data-acc="${k}" aria-label="Couleur ${n}"><i style="background:linear-gradient(135deg,${l} 50%,${d} 50%)"></i><span>${n}</span></button>`).join("");
+$("acc").onclick=e=>{const b=e.target.closest("[data-acc]");if(b){LS.set("ab-acc",b.dataset.acc);applyTheme()}};
+$("thm").onclick=e=>{const b=e.target.closest("[data-t]");if(b){LS.set("ab-theme",b.dataset.t);applyTheme()}};
+$("acci").oninput=e=>{LS.set("ab-acci",+e.target.value);applyTheme()};
+$("sbc").onchange=e=>{LS.set("ab-sbc",e.target.checked);applyTheme()};
+// bouton du titre : système → clair → sombre → système
+$("th").onclick=()=>{const t=LS.get("ab-theme","auto"),n={auto:"light",light:"dark",dark:"auto"}[t]||"light";LS.set("ab-theme",n);applyTheme()};
+try{matchMedia("(prefers-color-scheme:dark)").addEventListener("change",applyTheme)}catch(_){}
+applyTheme();
 </script>
 </body></html>
