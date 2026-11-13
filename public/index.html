@@ -963,7 +963,7 @@ const CF={ok:false,auth:false,tok:LS.get("ab-cftoken",""),t:null};
 async function cfFetch(path,opt={}){
   const r=await fetch("/api/"+path,{...opt,headers:{...(opt.headers||{}),Authorization:"Bearer "+CF.tok}});
   if(r.status===401)throw new Error("jeton refusé");
-  if(!r.ok&&r.status!==404)throw new Error("erreur "+r.status);
+  if(!r.ok&&r.status!==404){let m="";try{m=(await r.clone().json()).error||""}catch(_){}throw new Error("erreur "+r.status+(m?" : "+m:""))}
   return r;
 }
 function cfDirty(){if(!CF.auth)return;clearTimeout(CF.t);CF.t=setTimeout(cfPush,1500)}
