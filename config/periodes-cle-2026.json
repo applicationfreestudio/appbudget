@@ -1,0 +1,98 @@
+{
+  "app": "App Budget",
+  "format": 1,
+  "type": "periodes-cle",
+  "exportedAt": "2026-11-13T17:24:14.041Z",
+  "periodes": [
+    {
+      "id": "mwf5ho1b",
+      "nom": "Janvier → février",
+      "pct": 3.8
+    },
+    {
+      "id": "mwf5ho1c",
+      "nom": "Vacances d'hiver",
+      "pct": 10
+    },
+    {
+      "id": "mwf5ho1d",
+      "nom": "Février → avril",
+      "pct": 10.1
+    },
+    {
+      "id": "mwf5ho1e",
+      "nom": "Vacances de printemps",
+      "pct": 7.3
+    },
+    {
+      "id": "mwf5ho1f",
+      "nom": "Avril → juin",
+      "pct": 9.6
+    },
+    {
+      "id": "mwf5ho1g",
+      "nom": "Vacances d'été · juillet",
+      "pct": 13.5
+    },
+    {
+      "id": "mwf5ho1h",
+      "nom": "Vacances d'été · août",
+      "pct": 11.5
+    },
+    {
+      "id": "mwf5ho1i",
+      "nom": "Septembre → octobre",
+      "pct": 8.1
+    },
+    {
+      "id": "mwf5ho1j",
+      "nom": "Vacances de la Toussaint",
+      "pct": 8.6
+    },
+    {
+      "id": "mwf5ho1k",
+      "nom": "Octobre → décembre",
+      "pct": 4.1
+    },
+    {
+      "id": "mwf5ho1l",
+      "nom": "Vacances de Noël",
+      "pct": 4
+    },
+    {
+      "id": "mwf6abso",
+      "nom": "Séjour 1",
+      "pct": 2.9
+    },
+    {
+      "id": "mwf8kcar",
+      "nom": "Séjour 2",
+      "pct": 5.1
+    },
+    {
+      "id": "mwf8kkwp",
+      "nom": "Petit séjour 1",
+      "pct": 1
+    },
+    {
+      "id": "mwf8kr71",
+      "nom": "Petit séjour 2",
+      "pct": 0.4
+    }
+  ],
+  "periodesPassees": [
+    "mwf5ho1b",
+    "mwf5ho1d",
+    "mwf5ho1f",
+    "mwf5ho1i",
+    "mwf5ho1k",
+    "mwf5ho1c",
+    "mwf5ho1e",
+    "mwf5ho1g",
+    "mwf5ho1h",
+    "mwf6abso",
+    "mwf8kcar",
+    "mwf8kkwp",
+    "mwf8kr71"
+  ]
+}

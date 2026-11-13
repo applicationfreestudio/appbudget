@@ -1,0 +1,322 @@
+{
+  "app": "App Budget",
+  "format": 1,
+  "type": "sauvegarde-complete",
+  "exportedAt": "2026-11-13T17:24:14.044Z",
+  "situation": {
+    "date": "2026-11-06",
+    "title": "Accueil jeunes Selles sur Cher",
+    "ana": "3382",
+    "source": "origine",
+    "order": [
+      "011",
+      "65",
+      "21"
+    ],
+    "chapters": {
+      "21": "Immobilisations corporelles",
+      "65": "Autres charges de gestion courante",
+      "011": "Charges à caractère général"
+    },
+    "rows": [
+      [
+        "011",
+        "6042",
+        "Achats de prestations de services",
+        17000,
+        1066.27,
+        16803.62
+      ],
+      [
+        "011",
+        "60621",
+        "Combustibles",
+        170,
+        0,
+        0
+      ],
+      [
+        "011",
+        "60622",
+        "Carburants",
+        2500,
+        0,
+        1696.43
+      ],
+      [
+        "011",
+        "60623",
+        "Alimentation",
+        6000,
+        0,
+        5122
+      ],
+      [
+        "011",
+        "60628",
+        "Autres fournitures non stockées",
+        0,
+        0,
+        32.33
+      ],
+      [
+        "011",
+        "60631",
+        "Fournitures d'entretien",
+        500,
+        0,
+        12.41
+      ],
+      [
+        "011",
+        "60632",
+        "Fournitures de petit équipement",
+        1000,
+        0,
+        2323.87
+      ],
+      [
+        "011",
+        "6064",
+        "Fournitures administratives",
+        350,
+        0,
+        0
+      ],
+      [
+        "011",
+        "611",
+        "Contrats de prestations de services",
+        4000,
+        1459.6,
+        3866.77
+      ],
+      [
+        "011",
+        "61358",
+        "Locations – autres",
+        8000,
+        1525.52,
+        9242.32
+      ],
+      [
+        "011",
+        "61551",
+        "Entretien matériel roulant",
+        1000,
+        152.98,
+        922.08
+      ],
+      [
+        "011",
+        "6156",
+        "Maintenance",
+        1500,
+        0,
+        757.77
+      ],
+      [
+        "011",
+        "6161",
+        "Assurances multirisques",
+        714,
+        0,
+        712.73
+      ],
+      [
+        "011",
+        "6182",
+        "Documentation générale et technique",
+        800,
+        1035,
+        0
+      ],
+      [
+        "011",
+        "6231",
+        "Annonces et insertions",
+        0,
+        0,
+        70
+      ],
+      [
+        "011",
+        "6247",
+        "Transports collectifs",
+        11000,
+        0,
+        5724.18
+      ],
+      [
+        "011",
+        "6251",
+        "Voyages, déplacements et missions",
+        1200,
+        0,
+        46.4
+      ],
+      [
+        "011",
+        "62516",
+        "Missions",
+        200,
+        0,
+        0
+      ],
+      [
+        "011",
+        "6261",
+        "Frais d'affranchissement",
+        160,
+        0,
+        66.48
+      ],
+      [
+        "011",
+        "6262",
+        "Frais de télécommunications",
+        1500,
+        0,
+        1057.83
+      ],
+      [
+        "011",
+        "627",
+        "Services bancaires et assimilés",
+        20,
+        0,
+        42.31
+      ],
+      [
+        "011",
+        "62875",
+        "Aux communes membres du GFP",
+        1000,
+        0,
+        511.29
+      ],
+      [
+        "65",
+        "65818",
+        "Autres charges de gestion courante",
+        800,
+        0,
+        0
+      ],
+      [
+        "21",
+        "21838",
+        "Autre matériel informatique",
+        0,
+        0,
+        919.46
+      ],
+      [
+        "21",
+        "2188",
+        "Autres immobilisations corporelles",
+        0,
+        0,
+        485.57
+      ]
+    ]
+  },
+  "articlesNonSuivis": [],
+  "regie": {
+    "etats": [],
+    "compterDansJauges": true
+  },
+  "periodes": [
+    {
+      "id": "mwf5ho1b",
+      "nom": "Janvier → février",
+      "pct": 3.8
+    },
+    {
+      "id": "mwf5ho1c",
+      "nom": "Vacances d'hiver",
+      "pct": 10
+    },
+    {
+      "id": "mwf5ho1d",
+      "nom": "Février → avril",
+      "pct": 10.1
+    },
+    {
+      "id": "mwf5ho1e",
+      "nom": "Vacances de printemps",
+      "pct": 7.3
+    },
+    {
+      "id": "mwf5ho1f",
+      "nom": "Avril → juin",
+      "pct": 9.6
+    },
+    {
+      "id": "mwf5ho1g",
+      "nom": "Vacances d'été · juillet",
+      "pct": 13.5
+    },
+    {
+      "id": "mwf5ho1h",
+      "nom": "Vacances d'été · août",
+      "pct": 11.5
+    },
+    {
+      "id": "mwf5ho1i",
+      "nom": "Septembre → octobre",
+      "pct": 8.1
+    },
+    {
+      "id": "mwf5ho1j",
+      "nom": "Vacances de la Toussaint",
+      "pct": 8.6
+    },
+    {
+      "id": "mwf5ho1k",
+      "nom": "Octobre → décembre",
+      "pct": 4.1
+    },
+    {
+      "id": "mwf5ho1l",
+      "nom": "Vacances de Noël",
+      "pct": 4
+    },
+    {
+      "id": "mwf6abso",
+      "nom": "Séjour 1",
+      "pct": 2.9
+    },
+    {
+      "id": "mwf8kcar",
+      "nom": "Séjour 2",
+      "pct": 5.1
+    },
+    {
+      "id": "mwf8kkwp",
+      "nom": "Petit séjour 1",
+      "pct": 1
+    },
+    {
+      "id": "mwf8kr71",
+      "nom": "Petit séjour 2",
+      "pct": 0.4
+    }
+  ],
+  "periodesPassees": [
+    "mwf5ho1b",
+    "mwf5ho1d",
+    "mwf5ho1f",
+    "mwf5ho1i",
+    "mwf5ho1k",
+    "mwf5ho1c",
+    "mwf5ho1e",
+    "mwf5ho1g",
+    "mwf5ho1h",
+    "mwf6abso",
+    "mwf8kcar",
+    "mwf8kkwp",
+    "mwf8kr71"
+  ],
+  "tri": "code"
+}
