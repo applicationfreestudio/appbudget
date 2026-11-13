@@ -381,7 +381,7 @@ details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-righ
 :root[data-theme="dark"] .frise .pcw>button.on.good{color:#0d1b2a}
 </style></head>
 <body><main>
-<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.18</small></span></span>
+<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.19</small></span></span>
   <span class="hb"><button class="tbtn" id="nav">⚙ Paramètres</button><button class="tbtn" id="fs" aria-label="Plein écran" title="Plein écran"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button></span>
 </h1>
 <div class="sub"><div id="org"></div><div>Dépenses <span id="yr"></span> · situation au <b id="dt"></b></div></div>
@@ -626,7 +626,7 @@ const CHN=k=>k==="REG"?"Comptes régie hors budget":DATA.chapters[k];
 const V=r=>{const c=r[4]+r[5],g=RA[r[1]]||0,x=XA[r[1]]||0;return {b:r[3],c,g,x,t:c+g+x}};
 let XA={};
 function xAcc(){const rows=chosen(),B=rows.reduce((s,r)=>s+r[3],0),o={};if(!B)return o;
-  const ex=phList().reduce((s,p)=>s+(PHSEL.has(p.id)?Math.max(0,(+p.av||1)-1)*B*(+p.pct||0)/100:0),0);
+  const ex=phList().reduce((s,p)=>{if(PHSEL.has(p.id))return s;const e=B*(+p.pct||0)/100,c=p.lock&&p.lockAmt!=null?+p.lockAmt:Math.min(3,+p.av||0)*e;return s+Math.max(0,c-e)},0);
   if(ex>0.005)rows.forEach(r=>{if(r[3]>0)o[r[1]]=ex*r[3]/B});return o}
 const chosen=()=>A().filter(r=>!OFF.has(r[1]));
 let YA=0;
@@ -634,37 +634,31 @@ const fixName=n=>String(n||"").replace(/^(Janvier|Février|Avril|Septembre|Octob
 // Clé de répartition par défaut : dépenses 2026 réelles, rattachées à la date d'activité (voir README)
 const PH_KEY2026=[["Janvier → février",3.8],["Vacances d'hiver",10],["Février → avril",10.1],["Vacances de printemps",7.3],["Avril → juin",9.6],["Vacances d'été · juillet",13.5],["Vacances d'été · août",11.5],["Septembre → octobre",8.1],["Vacances de la Toussaint",8.6],["Octobre → décembre",4.1],["Vacances de Noël",4],["Séjour 1",2.9],["Séjour 2",5.1],["Petit séjour 1",1],["Petit séjour 2",.4]];
 const phKey2026=()=>PH_KEY2026.map(([name,pct],i)=>({id:"k26"+i.toString(36)+Date.now().toString(36).slice(-4),name,pct}));
-let PH=LS.get("ab-phases",[]).map(p=>({id:p.id,name:fixName(p.name),pct:p.pct??"",av:+p.av||0,avPrev:+p.avPrev||0})); // [{id,name,pct}] dans l'ordre chronologique
+let PH=LS.get("ab-phases",[]).map(p=>({id:p.id,name:fixName(p.name),pct:p.pct??"",av:+p.av||0,avPrev:+p.avPrev||0,...(p.lock?{lock:true,lockAmt:p.lockAmt??null}:{})})); // [{id,name,pct}] dans l'ordre chronologique
 if(!PH.length){PH=phKey2026();LS.set("ab-phases",PH)} // aucune période enregistrée : clé 2026 par défaut
 // Périodes passées : sélection libre, dans n'importe quel ordre
 let PHSEL=new Set(LS.get("ab-phsel3",[]));
 const isSel=id=>PHSEL.has(id);
 function phCalc(){
-  // Modèle : Σ consommé des périodes = consommé global (données + dépassements déclarés) ; Σ restants des périodes non terminées = disponible.
+  // Règles :
+  //  - période terminée : son enveloppe est consommée, restant 0 (ni plus ni moins) ;
+  //  - période non terminée : le curseur indique la part consommée de son enveloppe, au-delà de 100 % = dépassement ;
+  //  - un dépassement est déduit des enveloppes restant à consommer des autres périodes non terminées,
+  //    au prorata de ce qu'il reste à consommer sur chacune ; il s'ajoute aussi au consommé global (V() via XA).
   const L=phList(),T=totals(),env=L.map(x=>T.b*(+x.pct)/100);
   const sel=L.map(x=>PHSEL.has(x.id)),nSel=sel.filter(Boolean).length;
-  const av=L.map((x,i)=>sel[i]?Math.max(1,+x.av||1):Math.max(0,Math.min(1,+x.av||0)));   // terminée : ≥ 100 % (au-delà = dépassement déclaré)
-  const fk=L.map(x=>x.lock&&x.lockAmt!=null?+x.lockAmt:null);                       // verrouillée : montant consommé figé
+  const fk=L.map((x,i)=>!sel[i]&&x.lock&&x.lockAmt!=null?+x.lockAmt:null);                  // verrouillée : montant figé
+  const av=L.map((x,i)=>sel[i]?1:fk[i]!=null?(env[i]>0?fk[i]/env[i]:0):Math.max(0,Math.min(3,+x.av||0)));
+  const cons=env.map((v,i)=>sel[i]?v:fk[i]!=null?fk[i]:av[i]*v);
+  const over=env.map((v,i)=>sel[i]?0:Math.max(0,cons[i]-v)),extra=over.reduce((a,b)=>a+b,0);
+  const w=env.map((v,i)=>sel[i]||over[i]>0?0:Math.max(0,v-cons[i])),W=w.reduce((a,b)=>a+b,0);
+  const ded=w.map(x=>W>0.005?extra*x/W:0);                       // part du dépassement déduite de chaque enveloppe
+  const adj=env.map((v,i)=>v-ded[i]);
+  const remain=adj.map((v,i)=>sel[i]?0:v-cons[i]);
   const plannedSel=env.reduce((s,v,i)=>s+(sel[i]?v:0),0),restEnv=env.reduce((s,v,i)=>s+(sel[i]?0:v),0);
-  // dépassement déclaré (> 100 %) : déjà ajouté au consommé global via V() (XA)
-  const extra=env.reduce((s,v,i)=>s+(sel[i]?Math.max(0,av[i]-1)*v:0),0);
-  const cons=env.map(()=>0);
-  // 1) périodes en cours : part de leur enveloppe indiquée par le curseur
-  L.forEach((x,i)=>{if(!sel[i])cons[i]=fk[i]!=null?fk[i]:av[i]*env[i]});
-  const partial=cons.reduce((s,v,i)=>s+(sel[i]?0:v),0);
-  // 2) périodes terminées : le reste du consommé réel, au prorata de leur enveloppe × avancement (une période en dépassement en prend plus)
-  const Rt=Math.max(0,T.t-partial),K=L.reduce((s,x,i)=>s+(sel[i]&&fk[i]!=null?fk[i]:0),0);
-  const N=env.reduce((s,v,i)=>s+(sel[i]&&fk[i]==null?av[i]*v:0),0),q=N>0.005?Math.max(0,Rt-K)/N:1;
-  L.forEach((x,i)=>{if(sel[i])cons[i]=fk[i]!=null?fk[i]:av[i]*env[i]*q});
-  const consSel=cons.reduce((s,v,i)=>s+(sel[i]?v:0),0),dispo=T.b-T.t;
-  // 3) restants : période terminée = enveloppe − consommé (écart reporté) ; périodes en cours = part du disponible
-  //    au prorata de ce qu'il leur reste de leur enveloppe
-  const w=env.map((v,i)=>sel[i]?0:Math.max(0,v-cons[i])),W=w.reduce((a,b)=>a+b,0);
-  const remain=env.map((v,i)=>sel[i]?v-cons[i]:(W>0.005?dispo*w[i]/W:(restEnv>0?dispo*v/restEnv:0)));
-  const adj=env.map((v,i)=>sel[i]?v:cons[i]+remain[i]);
-  L.forEach((x,i)=>{if(fk[i]!=null&&!sel[i])av[i]=env[i]>0?Math.min(1,fk[i]/env[i]):0});
-  const gap=T.t-cons.reduce((a,b)=>a+b,0);                     // ≠ 0 : consommé réel non attribué (ou déclaré en trop)
-  return {L,T,env,sel,nSel,av,plannedSel,restEnv,adj,cons,partial,consSel,ecart:plannedSel-consSel,remain,extra,gap,nRest:L.length-nSel,dispo};
+  const partial=cons.reduce((s,v,i)=>s+(sel[i]?0:v),0),restLeft=remain.reduce((s,v,i)=>s+(sel[i]||over[i]>0?0:v),0);
+  return {L,T,env,sel,nSel,av,adj,cons,remain,over,extra,ded,uncovered:Math.max(0,extra-W),plannedSel,restEnv,partial,restLeft,
+    consSel:plannedSel,nRest:L.length-nSel,dispo:T.b-T.t};
 }
 const PH_BASE=["Janvier → février","Vacances d'hiver","Février → avril","Vacances de printemps","Avril → juin","Vacances d'été · juillet","Vacances d'été · août","Septembre → octobre","Vacances de la Toussaint","Octobre → décembre","Vacances de Noël"];
 // nom de période affiché : flèche discrète entre deux mois
@@ -732,24 +726,22 @@ function renderPhase(){
     const M=pslMax(av),pos=av*100/M*100,cut=Math.min(pos,100/M*100);
     const lk=!!x.lock;
     return `<div class="pcw ${cls}${lk?" lk":""}" data-pw="${x.id}"><button type="button" class="plk" data-lk="${x.id}" aria-pressed="${lk}" aria-label="${lk?"Déverrouiller":"Verrouiller"} la consommation" title="${lk?"Consommation figée : appuyer pour déverrouiller":"Figer la consommation"}">${lk?'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>':'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.5-1.9"/></svg>'}</button><div class="pch"><span class="pn">${pas?'<i class="ck">✓</i>':""}${x.name?phName(x.name):"Période "+(i+1)}</span>
-      <div class="pam"><span><small>Consommé</small><b class="neg" data-pc>${f0(cons)}</b></span><span><small data-pl>${pas?"Écart":"Restant"}</small><b class="${rest<-0.5?"neg":"pos"}" data-pr>${Math.abs(rest)<0.5?"0 €":(rest<0?"−\u2060\u200a\u2060":"+\u2060\u200a\u2060")+f0(Math.abs(rest))}</b></span></div>
+      <div class="pam"><span><small>Consommé</small><b class="neg" data-pc>${f0(cons)}</b></span><span><small data-pl>Restant</small><b class="${rest<-0.5?"neg":"pos"}" data-pr>${Math.abs(rest)<0.5?"0 €":(rest<0?"−\u2060\u200a\u2060":"+\u2060\u200a\u2060")+f0(Math.abs(rest))}</b></span></div>
       <small class="pv0">${pas?"enveloppe "+f0(env[i]):"enveloppe "+fs(C.adj[i])}</small></div>
-      <div class="pslw${M>100?" ext":""}" style="--m:${100/M*100}%"><input type="range" class="psl"${lk?" disabled":""} min="0" max="${M}" step="1" value="${Math.round(av*100)}" data-av="${x.id}" style="--v:${pos}%;--c:${cut}%;--sc:${pslC(av,rest)};--s1:${av>1.004?"var(--bl)":pslC(av,rest)}" aria-label="Avancement de la consommation : ${esc(x.name||"période")}"></div></div>`};
+      <div class="pslw${M>100?" ext":""}" style="--m:${100/M*100}%"><input type="range" class="psl"${lk||pas?" disabled":""} min="0" max="${M}" step="1" value="${Math.round(av*100)}" data-av="${x.id}" style="--v:${pos}%;--c:${cut}%;--sc:${pslC(av,rest)};--s1:${av>1.004?"var(--bl)":pslC(av,rest)}" aria-label="Avancement de la consommation : ${esc(x.name||"période")}"></div></div>`};
   const kind=x=>new RegExp(`(${MOIS})\\s*(?:[–—-]|→)\\s*(${MOIS})`,"i").test(x.name||"")?0:/vacances/i.test(x.name||"")?1:2;
   const rowsH=[0,1,2].map(k=>{const it=L.map((x,i)=>[x,i]).filter(([x])=>kind(x)===k);return it.length?`<div class="frow">${it.map(([x,i])=>chip(x,i)).join("")}</div>`:""}).join("");
   $("phb").innerHTML=`<div class="frise" id="frise">${rowsH}</div><div class="fnav" id="fnav" role="scrollbar" aria-label="Mini-carte des périodes : faire défiler" aria-controls="frise"><div class="mm"></div><i></i></div>
    ${Math.abs(tot-100)>.01?`<div class="phd"><span class="ko">Total des périodes : ${tot.toLocaleString("fr-FR",{maximumFractionDigits:1})} %</span></div>`:""}
-   ${C.nSel?`<div class="phg" style="margin-top:8px">
-     <div><small>Prévu sur les périodes terminées</small><b>${f0(C.plannedSel)}</b></div>
-     <div><small>Consommé sur ces périodes</small><b>${f0(C.consSel)}</b></div>
-     <div class="full"><small>${C.ecart<0?"Dépassement reporté sur les autres périodes":"Non-dépensé reporté sur les autres périodes"}</small>${sgn(C.ecart,f0)}</div>
-     ${C.extra>0.5?`<div class="full"><small>dont dépassement déclaré au curseur (ajouté au consommé global)</small>${sgn(-C.extra,f0)}</div>`:""}
-     <div class="full"><small>Disponible pour ${C.nRest} période${C.nRest>1?"s":""} restante${C.nRest>1?"s":""}</small>${sgn(C.dispo,f0)}</div>
+   <div class="phg" style="margin-top:8px">
+     <div><small>Enveloppes des périodes terminées</small><b>${f0(C.plannedSel)}</b></div>
+     <div><small>Consommé sur les périodes en cours</small><b>${f0(C.partial)}</b></div>
+     ${C.extra>0.5?`<div class="full"><small>Dépassement déduit des autres périodes</small>${sgn(-C.extra,f0)}</div>`:""}
+     <div class="full"><small>Reste à consommer sur ${C.nRest} période${C.nRest>1?"s":""}</small>${sgn(C.restLeft,f0)}</div>
+     <div class="full"><small>Disponible réel (budget − consommé)</small>${sgn(C.dispo,f0)}</div>
    </div>
-   ${C.partial?`<div class="note" style="margin-top:8px">Déjà consommé sur les périodes en cours : <b class="neg">${f0(C.partial)}</b>.</div>`:""}
-   ${C.gap<-0.5?`<div class="note ko" style="margin-top:8px">Les curseurs des périodes en cours dépassent le consommé réel de ${f0(-C.gap)} : baisse-les ou vérifie les données.</div>`:""}
-   <div class="note" style="margin-top:8px">${C.nRest?`Le disponible est réparti sur les périodes en cours et à venir, au prorata de ce qu'il reste de leur enveloppe.`:"Toutes les périodes sont terminées."} Les périodes terminées se partagent le consommé réel ; un dépassement déclaré au-delà de 100 % s'ajoute au consommé global et réduit le disponible.</div>`
-   :`<div class="phd">Fais avancer le curseur de chaque période selon la consommation : à 100 %, la période est terminée.</div>`}`;
+   ${C.uncovered>0.5?`<div class="note ko" style="margin-top:8px">Le dépassement dépasse ce qu'il reste à consommer de ${f0(C.uncovered)}.</div>`:""}
+   <div class="note" style="margin-top:8px">Une période terminée consomme son enveloppe (restant 0). Sur les autres, le curseur indique la part consommée ; au-delà de 100 %, le dépassement est déduit des enveloppes restant à consommer et ajouté au consommé global.</div>`;
   if(keep!==null)$("frise").scrollLeft=keep;
   fnavInit();fnavPaint(C);
 }
@@ -784,10 +776,10 @@ $("phb").addEventListener("input",e=>{const id=e.target.dataset.av;if(!id)return
   if(+el.value>=+el.max&&+el.max<300){el.max=+el.max+25;el.value=el.value}
   const v=+el.value/100;pslPaint(el);
   // recalcul complet en direct (sans enregistrer) : ce qui s'affiche pendant le glissement = ce qui restera au relâchement
-  const old=p.av,had=PHSEL.has(id);p.av=v;if(v>=1)PHSEL.add(id);else PHSEL.delete(id);XA=xAcc();const C=phCalc();renderHome(true);p.av=old;if(had)PHSEL.add(id);else PHSEL.delete(id);
+  const old=p.av;p.av=v;XA=xAcc();const C=phCalc();renderHome(true);p.av=old;
   C.L.forEach((x,i)=>{const w=document.querySelector(`#phb [data-pw="${x.id}"]`);if(!w||(C.sel[i]&&x.id!==id))return;
     const r=C.remain[i];const pc=w.querySelector("[data-pc]");pc.textContent=f0(C.cons[i]);
-    w.querySelector("[data-pl]").textContent=C.sel[i]?"Écart":"Restant";const pr=w.querySelector("[data-pr]");pr.textContent=Math.abs(r)<0.5?"0 €":(r<0?"−\u2060\u200a\u2060":"+\u2060\u200a\u2060")+f0(Math.abs(r));pr.className=r<-0.5?"neg":"pos";
+    const pr=w.querySelector("[data-pr]");pr.textContent=Math.abs(r)<0.5?"0 €":(r<0?"−\u2060\u200a\u2060":"+\u2060\u200a\u2060")+f0(Math.abs(r));pr.className=r<-0.5?"neg":"pos";
     const pv=w.querySelector(".pv0");if(pv)pv.textContent=C.sel[i]?"enveloppe "+f0(C.env[i]):"enveloppe "+fs(C.adj[i]);
     w.classList.toggle("bad",C.sel[i]&&r<-0.5);
     const sl=w.querySelector(".psl");if(sl){sl.style.setProperty("--sc",pslC(C.av[i],r));sl.style.setProperty("--s1",C.av[i]>1.004?"var(--bl)":pslC(C.av[i],r))}});
@@ -800,20 +792,20 @@ $("phb").addEventListener("click",e=>{if(e.target.closest(".psl"))return;
     savePH();renderHome()}return}
   const w=e.target.closest("[data-pw]");if(!w)return;
   const id=w.dataset.pw,p=PH.find(x=>x.id===id);if(!p||p.lock)return;
-  if(PHSEL.has(id)){PHSEL.delete(id);p.av=Math.min(+p.avPrev||0,.99)}else{p.avPrev=+p.av||0;p.av=1;PHSEL.add(id)}
+  if(PHSEL.has(id))PHSEL.delete(id);else PHSEL.add(id)
   savePH();setDate();renderHome()});
 $("phb").addEventListener("change",e=>{const id=e.target.dataset.av;if(!id)return;const p=PH.find(x=>x.id===id);if(!p)return;const v=+e.target.value/100;
-  p.av=v;if(v>=1)PHSEL.add(id);else PHSEL.delete(id);savePH();setDate();renderHome()});
+  p.av=v;savePH();setDate();renderHome()});
 function periodDetail(id){
   const C=phCalc(),L=C.L,i=L.findIndex(x=>x.id===id),p=L[i],passed=C.sel[i];
-  const k=C.env[i]>0?(+p.pct)/100*(passed?C.cons[i]:C.adj[i])/C.env[i]:0;
+  const k=C.env[i]>0?(+p.pct)/100*C.adj[i]/C.env[i]:0;
   const rows=chosen().filter(r=>r[3]>0),T=rows.reduce((s,r)=>s+r[3],0);
   const groups=ORDER().map(c=>{const rr=rows.filter(r=>r[0]===c);if(!rr.length)return"";
     return `<div class="mg"><div class="mgh"><span>${esc(CHN(c))}</span><b>${fs(rr.reduce((s,r)=>s+r[3],0)*k)}</b></div>
       ${rr.map(r=>`<div class="mr"><span class="nm">${esc(r[2])}<small> ${r[1]}</small></span><b>${fs(r[3]*k)}</b></div>`).join("")}</div>`}).join("");
   openModal(`<div class="mh"><div><small>Période ${i+1}/${L.length}${passed?" · passée":""}</small><h3>${p.name?phName(p.name):"Période "+(i+1)}</h3></div><div class="mha"><button class="tbtn" data-close aria-label="Fermer">✕</button></div></div>
     <div class="mt"><span>${(+p.pct).toLocaleString("fr-FR",{maximumFractionDigits:1})} % du budget${!passed&&C.nSel?" · ajusté":""}</span><b class="${T*k<0?"neg":""}">${fs(T*k)}</b></div>
-    ${passed?`<div class="mt" style="margin-top:-4px"><span>Résultat (écart reporté)</span>${sgn(C.remain[i],f0)}</div>`
+    ${passed?`<div class="mt" style="margin-top:-4px"><span>Restant</span>${sgn(C.remain[i],f0)}</div>`
       :C.nSel?`<div class="note" style="margin:-2px 0 8px">Montants ajustés : part de l'écart ${C.adj[i]-C.env[i]<0?"−\u2060\u200a\u2060":"+\u2060\u200a\u2060"}${f0(Math.abs(C.adj[i]-C.env[i]))} incluse.</div>`:""}
     <div class="ml">${groups}</div>`);
 }
@@ -1225,12 +1217,12 @@ $("cflist").addEventListener("click",async e=>{const r=e.target.closest("[data-c
     if(sv&&Array.isArray(sv.off)){OFF=new Set(sv.off);LS.set("ab-off",sv.off)}
     const ph=await db.doc("prefs/phases").get().catch(()=>null);
     const phv=ph&&ph.data&&ph.data();
-    if(phv&&typeof phv.list==="string"){try{PH=JSON.parse(phv.list).map(p=>({id:p.id,name:fixName(p.name),pct:p.pct??"",av:+p.av||0,avPrev:+p.avPrev||0}));LS.set("ab-phases",PH)}catch(_){}}
+    if(phv&&typeof phv.list==="string"){try{PH=JSON.parse(phv.list).map(p=>({id:p.id,name:fixName(p.name),pct:p.pct??"",av:+p.av||0,avPrev:+p.avPrev||0,...(p.lock?{lock:true,lockAmt:p.lockAmt??null}:{})}));LS.set("ab-phases",PH)}catch(_){}}
     if(phv&&phv.v===3&&Array.isArray(phv.sel)){PHSEL=new Set(phv.sel);LS.set("ab-phsel3",phv.sel)}
     if(phv&&phv.at)PHAT=phv.at;
     // suivi en direct : une modification faite ailleurs (autre appareil, restauration) remplace l'état local
     db.doc("prefs/phases").onSnapshot(sn=>{const v=sn.exists&&sn.data();if(!v||!(v.at>PHAT)||typeof v.list!=="string")return;
-      try{PH=JSON.parse(v.list).map(p=>({id:p.id,name:fixName(p.name),pct:p.pct??"",av:+p.av||0,avPrev:+p.avPrev||0}));PHSEL=new Set(Array.isArray(v.sel)?v.sel:[]);PHAT=v.at;
+      try{PH=JSON.parse(v.list).map(p=>({id:p.id,name:fixName(p.name),pct:p.pct??"",av:+p.av||0,avPrev:+p.avPrev||0,...(p.lock?{lock:true,lockAmt:p.lockAmt??null}:{})}));PHSEL=new Set(Array.isArray(v.sel)?v.sel:[]);PHAT=v.at;
         LS.set("ab-phases",PH);LS.set("ab-phsel3",[...PHSEL]);LS.set("ab-phat",PHAT);setDate();route()}catch(_){}},()=>{});
     const rg=await db.doc("regie/etats").get().catch(()=>null);
     const rv=rg&&rg.data&&rg.data();
