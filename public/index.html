@@ -372,7 +372,7 @@ details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-righ
 :root[data-theme="dark"] .frise .pcw>button.on.good{color:#0d1b2a}
 </style></head>
 <body><main>
-<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.11</small></span></span>
+<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.12</small></span></span>
   <span class="hb"><button class="tbtn" id="nav">⚙ Paramètres</button><button class="tbtn" id="fs" aria-label="Plein écran" title="Plein écran"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button></span>
 </h1>
 <div class="sub"><div id="org"></div><div>Dépenses <span id="yr"></span> · situation au <b id="dt"></b></div></div>
@@ -740,9 +740,15 @@ function fnavInit(){const f=$("frise"),n=$("fnav");if(!f||!n)return;const t=n.fi
   n.addEventListener("pointerup",end);n.addEventListener("pointercancel",end);}
 const parseEur=v=>{const n=parseFloat(String(v).replace(/[\s\u00a0\u2060\u200a\u2060€]/g,"").replace(",","."));return isFinite(n)&&n>0?Math.round(n*100)/100:0};
 // Curseur d'avancement : 0 % → 100 % (= période terminée, entièrement consommée)
-$("phb").addEventListener("input",e=>{const id=e.target.dataset.av;if(!id)return;const el=e.target,v=+el.value/100,adj=+el.dataset.adj;
-  el.style.setProperty("--v",v*100+"%");const w=el.closest(".pcw"),c=v*adj,r=adj-c;
-  w.querySelector("[data-pc]").textContent=f0(c);const pr=w.querySelector("[data-pr]");pr.textContent=(r<0?"−\u2060\u200a\u2060":"+\u2060\u200a\u2060")+f0(Math.abs(r));pr.className=r<0?"neg":"pos"});
+$("phb").addEventListener("input",e=>{const id=e.target.dataset.av;if(!id)return;const el=e.target,v=+el.value/100,p=PH.find(x=>x.id===id);if(!p)return;
+  el.style.setProperty("--v",v*100+"%");
+  // recalcul complet en direct (sans enregistrer) : ce qui s'affiche pendant le glissement = ce qui restera au relâchement
+  const old=p.av,had=PHSEL.has(id);p.av=v;if(v>=1)PHSEL.add(id);else PHSEL.delete(id);const C=phCalc();p.av=old;if(had)PHSEL.add(id);else PHSEL.delete(id);
+  C.L.forEach((x,i)=>{const w=document.querySelector(`#phb [data-pw="${x.id}"]`);if(!w||(C.sel[i]&&x.id!==id))return;
+    const r=C.remain[i];w.querySelector("[data-pc]").textContent=f0(C.cons[i]);
+    const pr=w.querySelector("[data-pr]");pr.textContent=Math.abs(r)<0.5?"0 €":(r<0?"−\u2060\u200a\u2060":"+\u2060\u200a\u2060")+f0(Math.abs(r));pr.className=r<-0.5?"neg":"pos";
+    const pv=w.querySelector(".pv0");if(pv)pv.textContent="enveloppe "+fs(C.adj[i])});
+});
 $("phb").addEventListener("click",e=>{if(e.target.closest(".psl"))return;const w=e.target.closest("[data-pw]");if(!w)return;
   const id=w.dataset.pw,p=PH.find(x=>x.id===id);if(!p)return;
   if(PHSEL.has(id)){PHSEL.delete(id);p.av=Math.min(+p.avPrev||0,.99)}else{p.avPrev=+p.av||0;p.av=1;PHSEL.add(id)}
