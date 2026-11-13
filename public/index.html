@@ -15,6 +15,8 @@ body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.45 system-ui,-app
 main{max-width:760px;margin:0 auto;padding:16px;padding-top:calc(16px + env(safe-area-inset-top,0px))}
 /* zone système du haut : opaque, non floutée (comme App Hike) */
 body::before{content:"";position:fixed;left:0;right:0;top:0;height:env(safe-area-inset-top,0px);background:var(--sbcol,var(--bg));z-index:31;pointer-events:none}
+/* plein écran : zone de sécurité du haut totalement transparente, seule la barre de titre reste translucide */
+html:fullscreen body::before{background:transparent}
 h1{font-size:1.4rem;margin:-16px -16px 6px;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px;position:sticky;top:env(safe-area-inset-top,0px);z-index:30;
   background:var(--bg);background:color-mix(in srgb,var(--bg) 38%,transparent);-webkit-backdrop-filter:saturate(1.8) blur(8px);backdrop-filter:saturate(1.8) blur(8px);border-bottom:1px solid color-mix(in srgb,var(--ln) 60%,transparent)}
 .ti{display:flex;align-items:center;gap:9px;min-width:0}
@@ -70,6 +72,7 @@ select{font:inherit;font-size:.85rem;padding:7px 8px;border-radius:10px;border:1
 .over .pv b{color:var(--h)}.warn .pv b{color:var(--w)}
 .hg{position:relative;height:20px;background:var(--ln);border-radius:4px;overflow:hidden}
 .li .sc,#tg .sc{display:none}
+.li .l3{margin-top:14px}
 .hg.big{height:26px;border-radius:5px}
 .hg i{position:absolute;left:0;top:0;bottom:0;background:var(--a);border-radius:0}
 .hg.warn i{background:var(--w)}.hg.over i{background:var(--h)}
@@ -78,7 +81,20 @@ select{font:inherit;font-size:.85rem;padding:7px 8px;border-radius:10px;border:1
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .hg em{background:repeating-linear-gradient(-45deg,rgba(0,0,0,.4) 0 5px,transparent 5px 10px)}}
 .rgl{font-size:.72rem;color:var(--mu);margin-top:3px}
 .rgl i{display:inline-block;width:14px;height:9px;border-radius:2px;vertical-align:middle;margin-right:5px;background:repeating-linear-gradient(-45deg,var(--mu) 0 2px,transparent 2px 4px)}
-.hg s{position:absolute;top:0;bottom:0;width:2px;background:var(--tx);opacity:.45}
+.lgd{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:.74rem;color:var(--mu);margin-top:10px}
+.lgd i{display:inline-block;width:5px;height:14px;border-radius:3px;vertical-align:-2px;margin-right:6px}
+.lgd .lp{background:repeating-linear-gradient(180deg,var(--tx) 0 4px,color-mix(in srgb,var(--tx) 35%,transparent) 4px 7px)}.lgd .lb{background:var(--tx)}
+.gw{position:relative;margin-top:18px}
+.mk{position:absolute;top:-5px;bottom:-5px;width:0;pointer-events:none}
+.mk::before{content:"";position:absolute;top:0;bottom:0;left:-2.5px;width:5px;border-radius:3px;box-shadow:0 0 0 2px var(--card)}
+.mk em{position:absolute;bottom:100%;margin-bottom:2px;left:0;transform:translateX(-50%);font:700 .62rem/1 system-ui,sans-serif;letter-spacing:.03em;text-transform:uppercase;white-space:nowrap;font-style:normal}
+.mk em.dn{bottom:auto;top:100%;margin:2px 0 0}
+.mk em.l{transform:translateX(calc(-100% + 3px))}.mk em.r{transform:translateX(-3px)}
+.mkp::before{background:repeating-linear-gradient(180deg,var(--tx) 0 4px,color-mix(in srgb,var(--tx) 35%,transparent) 4px 7px)}
+.mkp em{color:var(--tx);opacity:.75}
+.mkb::before{background:var(--tx)}
+.mkb em{color:var(--tx)}
+
 .hg u{position:absolute;top:0;bottom:0;width:3px;background:var(--tx);text-decoration:none}
 .sc{position:relative;display:flex;justify-content:space-between;font-size:.72rem;color:var(--mu);margin-top:4px;font-variant-numeric:tabular-nums}
 .amt{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
@@ -176,6 +192,7 @@ select{font:inherit;font-size:.85rem;padding:7px 8px;border-radius:10px;border:1
 .pcw.done.good{background:color-mix(in srgb,var(--bl) 14%,var(--card));border-color:color-mix(in srgb,var(--bl) 40%,var(--ln))}
 .pcw.done.bad,.pcw.neg-f{background:color-mix(in srgb,var(--h) 12%,var(--card));border-color:color-mix(in srgb,var(--h) 40%,var(--ln))}
 .pcw.rest{border-color:color-mix(in srgb,var(--a) 45%,var(--ln))}
+.pcw .pch{cursor:pointer}
 .pch .pn{display:block;font-size:.78rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pam{display:flex;justify-content:space-between;gap:6px;margin-top:3px}
 .pam span{display:flex;flex-direction:column;min-width:0}
@@ -207,6 +224,7 @@ select{font:inherit;font-size:.85rem;padding:7px 8px;border-radius:10px;border:1
 .frise button.on.bad{background:var(--h)!important;border-color:var(--h);color:#fff!important}
 .frise button.neg-f b{color:var(--h)}
 .frise .pv0{font-size:.66rem;color:var(--mu);font-weight:400}
+.pcw .pv0{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:.84rem;font-weight:600;color:var(--tx);opacity:.8;margin-top:3px}
 .frise button.on .pv0{color:inherit;opacity:.8}
 .frise .ck{font-style:normal;margin-right:4px;font-weight:700}
 .frise .est{font-style:normal;opacity:.6;margin-right:2px}
@@ -340,7 +358,7 @@ details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-righ
 :root[data-theme="dark"] .frise .pcw>button.on.good{color:#0d1b2a}
 </style></head>
 <body><main>
-<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.4</small></span></span>
+<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.5</small></span></span>
   <span class="hb"><button class="tbtn" id="fs" aria-label="Plein écran" title="Plein écran"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button><button class="tbtn" id="nav">⚙ Paramètres</button></span>
 </h1>
 <div class="sub"><div id="org"></div><div>Dépenses <span id="yr"></span> · situation au <b id="dt"></b></div></div>
@@ -351,6 +369,7 @@ details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-righ
     <div class="pv" id="tpv" style="margin-top:0"><span>Consommation totale</span><b id="tp"></b></div>
     <div id="tg"></div>
     <div class="kv" id="kv" style="margin-top:14px"></div>
+    <div class="lgd"><span><i class="lp"></i>prévu à ce stade</span><span><i class="lb"></i>limite du budget (si dépassée)</span></div>
     <div class="leg" hidden>
       <span><i class="dot" style="background:var(--a)"></i>Dans le budget</span>
       <span><i class="dot" style="background:var(--w)"></i>≥ 90 %</span>
@@ -587,7 +606,7 @@ const fixName=n=>String(n||"").replace(/^(Janvier|Février|Avril|Septembre|Octob
 // Clé de répartition par défaut : dépenses 2026 réelles, rattachées à la date d'activité (voir README)
 const PH_KEY2026=[["Janvier → février",3.8],["Vacances d'hiver",10],["Février → avril",10.1],["Vacances de printemps",7.3],["Avril → juin",9.6],["Vacances d'été · juillet",13.5],["Vacances d'été · août",11.5],["Septembre → octobre",8.1],["Vacances de la Toussaint",8.6],["Octobre → décembre",4.1],["Vacances de Noël",4],["Séjour 1",2.9],["Séjour 2",5.1],["Petit séjour 1",1],["Petit séjour 2",.4]];
 const phKey2026=()=>PH_KEY2026.map(([name,pct],i)=>({id:"k26"+i.toString(36)+Date.now().toString(36).slice(-4),name,pct}));
-let PH=LS.get("ab-phases",[]).map(p=>({id:p.id,name:fixName(p.name),pct:p.pct??"",av:+p.av||0})); // [{id,name,pct}] dans l'ordre chronologique
+let PH=LS.get("ab-phases",[]).map(p=>({id:p.id,name:fixName(p.name),pct:p.pct??"",av:+p.av||0,avPrev:+p.avPrev||0})); // [{id,name,pct}] dans l'ordre chronologique
 if(!PH.length){PH=phKey2026();LS.set("ab-phases",PH)} // aucune période enregistrée : clé 2026 par défaut
 // Périodes passées : sélection libre, dans n'importe quel ordre
 let PHSEL=new Set(LS.get("ab-phsel3",[]));
@@ -629,10 +648,13 @@ function saveOff(){LS.set("ab-off",[...OFF]);cfDirty();if(DB)DB.doc("prefs/selec
 // ===== Jauge horizontale (consommé = mandaté + engagé) =====
 function hbar(b,c,big,g=0){
   const t=c+g,den=Math.max(b,t)||1,p=pc(t,b),k=p>100?"over":p>=90?"warn":"";
-  let h=`<div class="hg${big?" big":""} ${k}"><i style="width:${t/den*100}%"></i>`;
-  if(b>0)h+=`<s style="left:calc(${YA*b/den*100}% - 1px)"></s>`;
-  if(t>b&&b>0)h+=`<u style="left:calc(${b/den*100}% - 1px)"></u>`;
-  return h+`</div><div class="sc"><span>0</span><span>${t>b&&b>0?"trait noir = limite du budget ("+f0(b)+")":b>0?"budget "+f0(b):""}</span></div>`;
+  const xp=YA*b/den*100,xb=b/den*100,near=Math.abs(xb-xp)<16;
+  let h=`<div class="gw"><div class="hg${big?" big":""} ${k}"><i style="width:${t/den*100}%"></i></div>`;
+  // bâtonnet « prévu à ce stade » (clé de répartition) et bâtonnet « budget max » (affiché quand le budget est dépassé)
+  const al=x=>x<8?"r":x>92?"l":"";
+  if(b>0&&YA>0)h+=`<span class="mk mkp" style="left:${xp}%"><em class="${al(xp)}">prévu</em></span>`;
+  if(t>b&&b>0)h+=`<span class="mk mkb" style="left:${xb}%"><em class="${al(xb)}${near?" dn":""}">budget</em></span>`;
+  return h+`</div>`;
 }
 
 // ===== Synthèse =====
@@ -667,7 +689,7 @@ function renderPhase(){
     const cls=pas?"done "+(r<0?"bad":"good"):(av>0?(rest<0?"neg-f":"rest"):"");
     return `<div class="pcw ${cls}" data-pw="${x.id}"><div class="pch"><span class="pn">${pas?'<i class="ck">✓</i>':""}${x.name?phName(x.name):"Période "+(i+1)}</span>
       <div class="pam"><span><small>Consommé</small><b class="neg" data-pc>${f0(cons)}</b></span><span><small>Restant</small><b class="${rest<0?"neg":"pos"}" data-pr>${rest<0?"−":"+"}${f0(Math.abs(rest))}</b></span></div>
-      <small class="pv0">${pas?"prévu "+f0(env[i])+" · terminée ≈":"enveloppe "+fs(C.adj[i])}</small></div>
+      <small class="pv0">${pas?"prévu "+f0(env[i])+" ≈":"enveloppe "+fs(C.adj[i])}</small></div>
       <input type="range" class="psl" min="0" max="100" step="1" value="${Math.round(av*100)}" data-av="${x.id}" data-env="${env[i]}" data-adj="${C.adj[i]}" style="--v:${av*100}%" aria-label="Avancement de la consommation : ${esc(x.name||"période")}"></div>`};
   const kind=x=>new RegExp(`(${MOIS})\\s*(?:[–—-]|→)\\s*(${MOIS})`,"i").test(x.name||"")?0:/vacances/i.test(x.name||"")?1:2;
   const rowsH=[0,1,2].map(k=>{const it=L.map((x,i)=>[x,i]).filter(([x])=>kind(x)===k);return it.length?`<div class="frow">${it.map(([x,i])=>chip(x,i)).join("")}</div>`:""}).join("");
@@ -689,6 +711,10 @@ const parseEur=v=>{const n=parseFloat(String(v).replace(/[\s\u00a0\u202f€]/g,"
 $("phb").addEventListener("input",e=>{const id=e.target.dataset.av;if(!id)return;const el=e.target,v=+el.value/100,env=+el.dataset.env,adj=+el.dataset.adj;
   el.style.setProperty("--v",v*100+"%");const w=el.closest(".pcw"),c=v*env,r=adj-c;
   w.querySelector("[data-pc]").textContent=f0(c);const pr=w.querySelector("[data-pr]");pr.textContent=(r<0?"−":"+")+f0(Math.abs(r));pr.className=r<0?"neg":"pos"});
+$("phb").addEventListener("click",e=>{if(e.target.closest(".psl"))return;const w=e.target.closest("[data-pw]");if(!w)return;
+  const id=w.dataset.pw,p=PH.find(x=>x.id===id);if(!p)return;
+  if(PHSEL.has(id)){PHSEL.delete(id);p.av=Math.min(+p.avPrev||0,.99)}else{p.avPrev=+p.av||0;p.av=1;PHSEL.add(id)}
+  savePH();setDate();renderHome()});
 $("phb").addEventListener("change",e=>{const id=e.target.dataset.av;if(!id)return;const p=PH.find(x=>x.id===id);if(!p)return;const v=+e.target.value/100;
   p.av=v;if(v>=1)PHSEL.add(id);else PHSEL.delete(id);savePH();setDate();renderHome()});
 function periodDetail(id){
@@ -1112,12 +1138,12 @@ $("cflist").addEventListener("click",async e=>{const r=e.target.closest("[data-c
     if(sv&&Array.isArray(sv.off)){OFF=new Set(sv.off);LS.set("ab-off",sv.off)}
     const ph=await db.doc("prefs/phases").get().catch(()=>null);
     const phv=ph&&ph.data&&ph.data();
-    if(phv&&typeof phv.list==="string"){try{PH=JSON.parse(phv.list).map(p=>({id:p.id,name:fixName(p.name),pct:p.pct??"",av:+p.av||0}));LS.set("ab-phases",PH)}catch(_){}}
+    if(phv&&typeof phv.list==="string"){try{PH=JSON.parse(phv.list).map(p=>({id:p.id,name:fixName(p.name),pct:p.pct??"",av:+p.av||0,avPrev:+p.avPrev||0}));LS.set("ab-phases",PH)}catch(_){}}
     if(phv&&phv.v===3&&Array.isArray(phv.sel)){PHSEL=new Set(phv.sel);LS.set("ab-phsel3",phv.sel)}
     if(phv&&phv.at)PHAT=phv.at;
     // suivi en direct : une modification faite ailleurs (autre appareil, restauration) remplace l'état local
     db.doc("prefs/phases").onSnapshot(sn=>{const v=sn.exists&&sn.data();if(!v||!(v.at>PHAT)||typeof v.list!=="string")return;
-      try{PH=JSON.parse(v.list).map(p=>({id:p.id,name:fixName(p.name),pct:p.pct??"",av:+p.av||0}));PHSEL=new Set(Array.isArray(v.sel)?v.sel:[]);PHAT=v.at;
+      try{PH=JSON.parse(v.list).map(p=>({id:p.id,name:fixName(p.name),pct:p.pct??"",av:+p.av||0,avPrev:+p.avPrev||0}));PHSEL=new Set(Array.isArray(v.sel)?v.sel:[]);PHAT=v.at;
         LS.set("ab-phases",PH);LS.set("ab-phsel3",[...PHSEL]);LS.set("ab-phat",PHAT);setDate();route()}catch(_){}},()=>{});
     const rg=await db.doc("regie/etats").get().catch(()=>null);
     const rv=rg&&rg.data&&rg.data();
@@ -1181,7 +1207,9 @@ function applyTheme(){
   $("acci").value=Math.round(k*100);$("accv").textContent=k<=-.6?"Pastel":k<-.15?"Douce":k<.15?"Normale":k<.6?"Vive":"Très vive";
   $("sbc").checked=!!LS.get("ab-sbc",false);
   let m=document.querySelector('meta[name="theme-color"]');
-  if(LS.get("ab-sbc",false)){if(!m){m=document.createElement("meta");m.name="theme-color";document.head.appendChild(m)}m.content=adj(ACL[a][0],k);root.style.setProperty("--sbcol",adj(ACL[a][0],k))}else{if(m)m.remove();root.style.removeProperty("--sbcol")}
+  if(!m){m=document.createElement("meta");m.name="theme-color";document.head.appendChild(m)}
+  if(LS.get("ab-sbc",false)){m.content=adj(ACL[a][0],k);root.style.setProperty("--sbcol",adj(ACL[a][0],k))}
+  else{m.content=dk?"#171815":"#f6f5f1";root.style.removeProperty("--sbcol")} // barre système : couleur du fond (comportement habituel)
 }
 $("acc").innerHTML=Object.entries(ACL).map(([k,[l,d,n]])=>`<button type="button" data-acc="${k}" aria-label="Couleur ${n}"><i style="background:linear-gradient(135deg,${l} 50%,${d} 50%)"></i><span>${n}</span></button>`).join("");
 $("acc").onclick=e=>{const b=e.target.closest("[data-acc]");if(b){LS.set("ab-acc",b.dataset.acc);applyTheme()}};
