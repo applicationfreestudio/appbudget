@@ -195,11 +195,11 @@ select{font:inherit;font-size:.85rem;padding:7px 8px;border-radius:10px;border:1
 .tl b{position:absolute;top:-2px;bottom:-2px;width:2px;background:var(--tx);pointer-events:none}
 .frow{display:flex;gap:6px;width:max-content}
 .frise{display:flex;flex-direction:column;gap:8px;overflow-x:auto;scroll-snap-type:x proximity;margin:10px -14px 2px;padding:2px 14px 8px;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
-.fnav{position:relative;height:28px;margin:2px 0 4px;touch-action:none;cursor:pointer}
-.fnav::before{content:"";position:absolute;left:0;right:0;top:50%;height:8px;margin-top:-4px;border-radius:4px;background:color-mix(in srgb,var(--mu) 18%,var(--card));border:1px solid var(--ln)}
-.fnav i{position:absolute;top:50%;height:16px;margin-top:-8px;border-radius:8px;background:color-mix(in srgb,var(--mu) 55%,var(--card));box-shadow:0 1px 3px rgba(0,0,0,.2);min-width:36px;cursor:grab}
-.fnav i::after{content:"";position:absolute;left:50%;top:50%;width:14px;height:6px;margin:-3px 0 0 -7px;border-left:2px solid var(--card);border-right:2px solid var(--card);box-sizing:border-box}
-.fnav.drag i{cursor:grabbing;background:color-mix(in srgb,var(--mu) 75%,var(--card))}
+.fnav{position:relative;height:30px;margin:2px 0 6px;touch-action:none;cursor:pointer;border-radius:6px;background:color-mix(in srgb,var(--mu) 8%,var(--card));border:1px solid var(--ln)}
+.fnav .mm{position:absolute;inset:4px 4px 2px}
+.fnav .mm b{position:absolute;border-radius:2px}
+.fnav i{position:absolute;top:-1px;bottom:-1px;border:2px solid var(--tx);border-radius:6px;box-sizing:border-box;cursor:grab;background:color-mix(in srgb,var(--tx) 6%,transparent)}
+.fnav.drag i{cursor:grabbing;background:color-mix(in srgb,var(--tx) 12%,transparent)}
 .frise{scrollbar-width:none}.frise::-webkit-scrollbar{display:none}
 .pcw{flex:0 0 176px;width:176px;display:flex;flex-direction:column;gap:4px;scroll-snap-align:center}
 .pcw{border:1px solid var(--ln);border-radius:8px;padding:8px 10px 6px;background:color-mix(in srgb,var(--mu) 10%,var(--card));display:flex;flex-direction:column;gap:6px}
@@ -374,7 +374,7 @@ details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-righ
 :root[data-theme="dark"] .frise .pcw>button.on.good{color:#0d1b2a}
 </style></head>
 <body><main>
-<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.14</small></span></span>
+<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.15</small></span></span>
   <span class="hb"><button class="tbtn" id="nav">⚙ Paramètres</button><button class="tbtn" id="fs" aria-label="Plein écran" title="Plein écran"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button></span>
 </h1>
 <div class="sub"><div id="org"></div><div>Dépenses <span id="yr"></span> · situation au <b id="dt"></b></div></div>
@@ -635,14 +635,16 @@ function phCalc(){
   // Périodes non terminées : enveloppe ajustée = enveloppe prévue × facteur ; le curseur porte sur cette enveloppe ajustée.
   // Le facteur répartit au prorata ce qui reste réellement disponible (budget des périodes − consommé total)
   // sur la part non encore consommée des périodes non terminées → restant total = disponible, sans valeur négative.
-  const avail=env.reduce((a,b)=>a+b,0)-T.t,P=env.reduce((s,v,i)=>s+(sel[i]?0:av[i]*v),0),free=restEnv-P;
+  // dépassement déclaré au curseur sur les périodes terminées (> 100 %) : dépense en plus, retirée du disponible
+  const extra=env.reduce((s,v,i)=>s+(sel[i]?Math.max(0,av[i]-1)*v:0),0);
+  const avail=env.reduce((a,b)=>a+b,0)-T.t-extra,P=env.reduce((s,v,i)=>s+(sel[i]?0:av[i]*v),0),free=restEnv-P;
   const factor=free>0.005?avail/free:(restEnv>0?1+(avail)/restEnv:1);
   const adj=env.map((v,i)=>sel[i]?v:v*factor);
   const cons=adj.map((v,i)=>av[i]*v);                           // terminée : enveloppe × avancement (≥ 100 %)
   const remain=adj.map((v,i)=>v-cons[i]);                       // terminée : 0, ou négatif si dépassement déclaré
-  const partial=cons.reduce((s,v,i)=>s+(sel[i]?0:v),0),consSel=T.t-partial;
+  const partial=cons.reduce((s,v,i)=>s+(sel[i]?0:v),0),consSel=T.t-partial+extra;
   const ecart=plannedSel-consSel;                               // + : non dépensé ; − : dépassement (réparti sur les autres)
-  return {L,T,env,sel,nSel,av,plannedSel,restEnv,ecart,factor,adj,cons,partial,consSel,remain,nRest:L.length-nSel,dispo:T.b-T.t};
+  return {L,T,env,sel,nSel,av,plannedSel,restEnv,ecart,factor,adj,cons,partial,consSel,remain,extra,nRest:L.length-nSel,dispo:T.b-T.t-extra};
 }
 const PH_BASE=["Janvier → février","Vacances d'hiver","Février → avril","Vacances de printemps","Avril → juin","Vacances d'été · juillet","Vacances d'été · août","Septembre → octobre","Vacances de la Toussaint","Octobre → décembre","Vacances de Noël"];
 // nom de période affiché : flèche discrète entre deux mois
@@ -714,24 +716,30 @@ function renderPhase(){
       <div class="pslw${M>100?" ext":""}" style="--m:${100/M*100}%"><input type="range" class="psl" min="0" max="${M}" step="1" value="${Math.round(av*100)}" data-av="${x.id}" style="--v:${pos}%;--c:${cut}%;--sc:${pslC(av,rest)};--s1:${av>1.004?"var(--bl)":pslC(av,rest)}" aria-label="Avancement de la consommation : ${esc(x.name||"période")}"></div></div>`};
   const kind=x=>new RegExp(`(${MOIS})\\s*(?:[–—-]|→)\\s*(${MOIS})`,"i").test(x.name||"")?0:/vacances/i.test(x.name||"")?1:2;
   const rowsH=[0,1,2].map(k=>{const it=L.map((x,i)=>[x,i]).filter(([x])=>kind(x)===k);return it.length?`<div class="frow">${it.map(([x,i])=>chip(x,i)).join("")}</div>`:""}).join("");
-  $("phb").innerHTML=`<div class="frise" id="frise">${rowsH}</div><div class="fnav" id="fnav" role="scrollbar" aria-label="Faire défiler les périodes" aria-controls="frise"><i></i></div>
+  $("phb").innerHTML=`<div class="frise" id="frise">${rowsH}</div><div class="fnav" id="fnav" role="scrollbar" aria-label="Mini-carte des périodes : faire défiler" aria-controls="frise"><div class="mm"></div><i></i></div>
    ${Math.abs(tot-100)>.01?`<div class="phd"><span class="ko">Total des périodes : ${tot.toLocaleString("fr-FR",{maximumFractionDigits:1})} %</span></div>`:""}
    ${C.nSel?`<div class="phg" style="margin-top:8px">
      <div><small>Prévu sur les périodes passées</small><b>${f0(C.plannedSel)}</b></div>
      <div><small>Consommé sur ces périodes</small><b>${f0(C.consSel)}</b></div>
      <div class="full"><small>${C.ecart<0?"Dépassement à répartir":"Non-dépensé à répartir"}</small>${sgn(C.ecart,f0)}</div>
+     ${C.extra>0.5?`<div class="full"><small>Dépassement déclaré sur les périodes terminées</small>${sgn(-C.extra,f0)}</div>`:""}
      <div class="full"><small>Disponible pour ${C.nRest} période${C.nRest>1?"s":""} restante${C.nRest>1?"s":""}</small>${sgn(C.dispo,f0)}</div>
    </div>
    ${C.partial?`<div class="note" style="margin-top:8px">Déjà consommé sur les périodes en cours : <b class="neg">${f0(C.partial)}</b> (déduit de leur enveloppe).</div>`:""}
-   <div class="note" style="margin-top:8px">${C.nRest?`L'écart est réparti sur les périodes non passées au prorata de leurs pourcentages.`:"Toutes les périodes sont passées."} Une période terminée compte son enveloppe entière ; l'écart avec la consommation réelle est reporté sur les autres.</div>`
+   <div class="note" style="margin-top:8px">${C.nRest?`L'écart est réparti sur les périodes non passées au prorata de leurs pourcentages.`:"Toutes les périodes sont passées."} Une période terminée compte son enveloppe entière, plus le dépassement déclaré au-delà de 100 % (retiré du disponible) ; l'écart avec la consommation réelle est reporté sur les autres.</div>`
    :`<div class="phd">Fais avancer le curseur de chaque période selon la consommation : à 100 %, la période est terminée.</div>`}`;
   if(keep!==null)$("frise").scrollLeft=keep;
-  fnavInit();
+  fnavInit();fnavPaint(C);
 }
 // Barre de défilement horizontale des périodes (évite de toucher les curseurs)
-function fnavInit(){const f=$("frise"),n=$("fnav");if(!f||!n)return;const t=n.firstElementChild;
+// Mini-carte : un bloc par période, placé comme dans la frise (3 lignes), coloré selon son état
+function fnavPaint(C){const f=$("frise"),n=$("fnav");if(!f||!n)return;const mm=n.querySelector(".mm"),SW=f.scrollWidth||1,rows=[...f.querySelectorAll(".frow")];
+  mm.innerHTML=rows.map((r,ri)=>[...r.querySelectorAll("[data-pw]")].map(w=>{const i=C.L.findIndex(x=>x.id===w.dataset.pw);if(i<0)return"";
+    const av=C.av[i],c=av<=0?"color-mix(in srgb,var(--mu) 30%,var(--card))":C.sel[i]?pslC(av,C.remain[i]):`color-mix(in srgb,${pslC(av,C.remain[i])} 45%,var(--card))`;
+    return `<b style="left:${(w.offsetLeft-f.firstElementChild.offsetLeft)/SW*100}%;width:${w.offsetWidth/SW*100}%;top:${ri*(100/rows.length)}%;height:calc(${100/rows.length}% - 2px);background:${c}"></b>`}).join("")).join("")}
+function fnavInit(){const f=$("frise"),n=$("fnav");if(!f||!n)return;const t=n.querySelector("i");
   const upd=()=>{const W=n.clientWidth,max=f.scrollWidth-f.clientWidth;if(max<=1){n.style.display="none";return}n.style.display="";
-    const tw=Math.max(36,W*f.clientWidth/f.scrollWidth);t.style.width=tw+"px";t.style.left=(W-tw)*f.scrollLeft/max+"px"};
+    const tw=Math.max(24,W*f.clientWidth/f.scrollWidth);t.style.width=tw+"px";t.style.left=(W-tw)*f.scrollLeft/max+"px"};
   f.addEventListener("scroll",upd,{passive:true});new ResizeObserver(upd).observe(f);upd();
   let off=null;
   const go=x=>{const r=n.getBoundingClientRect(),tw=t.offsetWidth,max=f.scrollWidth-f.clientWidth;
@@ -761,6 +769,7 @@ $("phb").addEventListener("input",e=>{const id=e.target.dataset.av;if(!id)return
     const pv=w.querySelector(".pv0");if(pv)pv.textContent=C.sel[i]?"terminée · "+f0(C.env[i]):"enveloppe "+fs(C.adj[i]);
     w.classList.toggle("bad",C.sel[i]&&r<-0.5);
     const sl=w.querySelector(".psl");if(sl){sl.style.setProperty("--sc",pslC(C.av[i],r));sl.style.setProperty("--s1",C.av[i]>1.004?"var(--bl)":pslC(C.av[i],r))}});
+  fnavPaint(C);
 });
 $("phb").addEventListener("click",e=>{if(e.target.closest(".psl"))return;const w=e.target.closest("[data-pw]");if(!w)return;
   const id=w.dataset.pw,p=PH.find(x=>x.id===id);if(!p)return;
