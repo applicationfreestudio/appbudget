@@ -12,5 +12,7 @@
   "r2_buckets": [
     { "binding": "FILES", "bucket_name": "appbudget-files" }
   ],
+  // conserve les variables définies dans le tableau de bord lors des déploiements automatiques
+  "keep_vars": true,
   "observability": { "enabled": true }
 }
