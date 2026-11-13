@@ -251,6 +251,11 @@ html.lock,html.lock body{overflow:hidden}
 .vopt .vw [data-v]{margin-top:6px;padding:7px 12px}
 .phf{display:flex;justify-content:flex-end;align-items:center;gap:8px;margin-top:8px;flex-wrap:wrap}
 .phf #phsum{margin-right:auto}
+.cfr{display:flex;gap:8px}.cfr input{flex:1;min-width:0;font:inherit;font-size:.9rem;padding:9px 10px;border-radius:10px;border:1px solid var(--ln);background:var(--bg);color:var(--tx)}
+.cff{display:flex;align-items:center;gap:8px;padding:8px 0;border-top:1px solid var(--ln);font-size:.85rem}
+.cff .n{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cff small{color:var(--mu);font-size:.72rem;display:block}
+.cff button{flex:none;font-size:.78rem;padding:5px 9px}
+.cfh{font-size:.75rem;font-weight:700;color:var(--a);margin-top:12px;text-transform:uppercase;letter-spacing:.05em}
 .bkr{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-top:1px solid var(--ln)}
 .bkr b{display:block;font-size:.95rem}.bkr small{color:var(--mu);font-size:.76rem}
 .bkr button{flex:none;padding:8px 12px}
@@ -345,6 +350,16 @@ html.lock,html.lock body{overflow:hidden}
     <div class="bkr"><div><b>Périodes et clé de répartition</b><small>Intitulés, ordre, pourcentages et périodes passées</small></div><button class="tbtn pri" data-bk="key">Enregistrer</button></div>
     <label class="tbtn fl" style="margin-top:10px">⤒ Restaurer depuis un fichier<input type="file" id="bkin" accept=".json,application/json" hidden></label>
     <div id="bkst" class="note" style="margin-top:8px"></div>
+  </div>
+<div class="card up" id="cf" hidden>
+    <b>Stockage Cloudflare</b>
+    <p class="note" style="margin:4px 0 10px">Les données sont enregistrées automatiquement dans le stockage R2 et retrouvées sur tous tes appareils. Les PDF et états de régie importés y sont archivés.</p>
+    <div class="cfr"><input type="password" id="cftok" placeholder="Jeton d'accès (APP_TOKEN)" autocomplete="off"><button class="tbtn pri" id="cfgo">Connecter</button></div>
+    <div id="cfst" class="note" style="margin-top:8px"></div>
+    <div id="cfact" hidden>
+      <div class="qa" style="margin-top:10px"><button class="tbtn" data-cfsave="full">Sauvegarde complète datée</button><button class="tbtn" data-cfsave="key">Sauvegarde des périodes</button></div>
+      <div id="cflist"></div>
+    </div>
   </div>
   <button class="tbtn pri" id="done" style="width:100%;padding:12px;font-size:1rem">Voir le tableau de bord</button>
 </section>
@@ -515,7 +530,7 @@ const phTot=()=>phList().reduce((s,p)=>s+(+p.pct),0);
 // part du budget (en %) prévue jusqu'à la fin de la phase en cours
 const expectedPct=()=>phList().reduce((s,p)=>s+(PHSEL.has(p.id)?+p.pct:0),0);
 let PHAT=LS.get("ab-phat",0);
-function savePH(){PHAT=Date.now();LS.set("ab-phases",PH);LS.set("ab-phsel3",[...PHSEL]);LS.set("ab-phat",PHAT);if(DB)DB.doc("prefs/phases").set({list:JSON.stringify(PH),sel:[...PHSEL],v:3,at:PHAT}).catch(()=>{})}
+function savePH(){PHAT=Date.now();LS.set("ab-phases",PH);LS.set("ab-phsel3",[...PHSEL]);LS.set("ab-phat",PHAT);cfDirty();if(DB)DB.doc("prefs/phases").set({list:JSON.stringify(PH),sel:[...PHSEL],v:3,at:PHAT}).catch(()=>{})}
 function setDate(){
   const d=new Date(DATA.date+"T12:00:00"),y0=new Date(d.getFullYear(),0,1),y1=new Date(d.getFullYear()+1,0,1);
   YA=PHSEL.size&&phList().some(p=>PHSEL.has(p.id))?expectedPct()/100:(d-y0)/(y1-y0);
@@ -525,7 +540,7 @@ function setDate(){
   $("ya").textContent=Math.round(YA*100)+" %";
   $("src").textContent=DATA.source==="origine"?"":` · importée le ${fd(DATA.importedAt.slice(0,10))}`;
 }
-function saveOff(){LS.set("ab-off",[...OFF]);if(DB)DB.doc("prefs/selection").set({off:[...OFF],at:Date.now()}).catch(()=>{})}
+function saveOff(){LS.set("ab-off",[...OFF]);cfDirty();if(DB)DB.doc("prefs/selection").set({off:[...OFF],at:Date.now()}).catch(()=>{})}
 
 // ===== Jauge horizontale (consommé = mandaté + engagé) =====
 function hbar(b,c,big,g=0){
@@ -762,7 +777,7 @@ document.querySelector(".qa").onclick=e=>{
 };
 
 // ===== Import PDF =====
-let PENDING=null;
+let PENDING=null,PDFFILE=null;
 function loadScript(src){return new Promise((ok,ko)=>{const s=document.createElement("script");s.src=src;s.onload=ok;s.onerror=()=>ko(new Error("chargement impossible : "+src));document.head.appendChild(s)})}
 async function pdfLib(){
   if(window.pdfjsLib&&window.pdfjsWorker)return window.pdfjsLib;
@@ -784,7 +799,7 @@ $("pdf").onchange=async e=>{
     const r=parseBudget(pages);
     if(!r.articles.length)throw new Error("aucun article de dépense trouvé. Est-ce bien une « Situation budgétaire détaillée par analytique » ?");
     if(!r.date)throw new Error("date de situation introuvable en tête du document.");
-    PENDING={date:r.date,title:r.title||DATA.title,ana:r.ana||DATA.ana,source:"pdf",file:file.name,importedAt:new Date().toISOString(),
+    PDFFILE=file;PENDING={date:r.date,title:r.title||DATA.title,ana:r.ana||DATA.ana,source:"pdf",file:file.name,importedAt:new Date().toISOString(),
       order:r.order,chapters:Object.fromEntries(r.order.map(k=>[k,cap(r.chapters[k])])),
       rows:r.articles.map(a=>[a.ch,a.code,NICE[a.code]||a.label,a.B,a.E,a.R])};
     const T=PENDING.rows.reduce((s,x)=>({b:s.b+x[3],c:s.c+x[4]+x[5]}),{b:0,c:0});
@@ -808,7 +823,7 @@ $("pdf").onchange=async e=>{
   }catch(err){$("upst").innerHTML=`<span class="ko">Import impossible</span> : ${String(err.message||err).replace(/</g,"&lt;")}`}
 };
 function applyData(d,save){
-  DATA=d;PENDING=null;LS.set("ab-data",d.source==="origine"?null:d);
+  DATA=d;PENDING=null;LS.set("ab-data",d.source==="origine"?null:d);if(save){cfDirty();if(PDFFILE)cfArchive("documents/situations/"+d.date+"-"+PDFFILE.name,PDFFILE)}
   if(save&&DB)DB.doc("budget/current").set(d.source==="origine"?{reset:true,at:Date.now()}:{...d,rows:JSON.stringify(d.rows)}).catch(()=>{$("upst").textContent="Données appliquées sur cet appareil (synchronisation impossible)."});
   $("prev").hidden=true;
   $("upst").innerHTML=save?`<span class="ok">✓</span> Données mises à jour : situation au ${fd(d.date)}.`:"";
@@ -848,7 +863,7 @@ function parseRegie(wb,file){
   return {lines:out,declared,labels,file};
 }
 const sig=l=>l.join("|");
-let RPEND=null;
+let RPEND=null;const RFILES={};
 async function xlsxLib(){if(window.XLSX)return XLSX;await loadScript("https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js");return XLSX}
 $("reg").onchange=async e=>{
   const files=[...e.target.files];e.target.value="";if(!files.length)return;
@@ -864,7 +879,7 @@ $("reg").onchange=async e=>{
       const total=Math.round(r.lines.reduce((s,l)=>s+l[4],0)*100)/100;
       const byAcc={};for(const l of fresh)byAcc[l[2]]=Math.round(((byAcc[l[2]]||0)+l[4])*100)/100;
       const ds=fresh.map(l=>l[0]).filter(Boolean).sort();
-      RPEND.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),file:file.name,lines:fresh,byAcc,labels:r.labels,
+      RFILES[file.name]=file;RPEND.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),file:file.name,lines:fresh,byAcc,labels:r.labels,
         total:Math.round(fresh.reduce((s,l)=>s+l[4],0)*100)/100,read:total,declared:r.declared,dup:r.lines.length-fresh.length,
         from:ds[0]||null,to:ds[ds.length-1]||null,importedAt:new Date().toISOString()});
     }
@@ -878,12 +893,12 @@ $("reg").onchange=async e=>{
       ${x.dup?`<br>${x.dup} ligne${x.dup>1?"s":""} déjà importée${x.dup>1?"s":""} ignorée${x.dup>1?"s":""}.`:""}</div></div>`).join("")}
       <div class="bt"><button class="tbtn" id="rgno">Annuler</button>${ok.length?`<button class="tbtn pri" id="rgok">Ajouter ${ok.length>1?ok.length+" états":"l'état"}</button>`:""}</div></div>`;
     $("rgno").onclick=()=>{RPEND=null;$("rgprev").hidden=true};
-    if(ok.length)$("rgok").onclick=()=>{REG=REG.concat(ok);RPEND=null;$("rgprev").hidden=true;saveReg();$("rgst").innerHTML=`<span class="ok">✓</span> ${ok.length} état${ok.length>1?"s":""} ajouté${ok.length>1?"s":""}.`;renderSet()};
+    if(ok.length)$("rgok").onclick=()=>{REG=REG.concat(ok);ok.forEach(x=>RFILES[x.file]&&cfArchive("documents/regie/"+x.file,RFILES[x.file]));RPEND=null;$("rgprev").hidden=true;saveReg();$("rgst").innerHTML=`<span class="ok">✓</span> ${ok.length} état${ok.length>1?"s":""} ajouté${ok.length>1?"s":""}.`;renderSet()};
   }catch(err){$("rgst").innerHTML=`<span class="ko">Import impossible</span> : ${esc(err.message||err)}`}
 };
 const esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 function nameOf(k,lb){const r=DATA.rows.find(r=>r[1]===k);return r?r[2]:(lb&&lb[k])||"Compte "+k}
-function saveReg(){
+function saveReg(){cfDirty();
   LS.set("ab-regie",REG);
   if(DB)DB.doc("regie/etats").set({list:JSON.stringify(REG),at:Date.now()}).catch(()=>{$("rgst").textContent="Enregistré sur cet appareil (synchronisation impossible)."});
 }
@@ -895,7 +910,7 @@ function renderRegList(){
 $("rglist").onclick=e=>{const id=e.target.dataset.del;if(!id)return;
   const b=e.target;if(b.dataset.c!=="1"){b.dataset.c="1";b.textContent="Confirmer ?";b.classList.add("pri");return}
   REG=REG.filter(x=>x.id!==id);saveReg();renderSet()};
-$("regon").onchange=e=>{LS.set("ab-regon",e.target.checked);if(DB)DB.doc("prefs/regie").set({on:e.target.checked}).catch(()=>{});renderSet()};
+$("regon").onchange=e=>{LS.set("ab-regon",e.target.checked);cfDirty();if(DB)DB.doc("prefs/regie").set({on:e.target.checked}).catch(()=>{});renderSet()};
 
 // ===== Sauvegarde / restauration =====
 const stamp=()=>{const d=new Date();return d.toISOString().slice(0,10)};
@@ -929,6 +944,8 @@ function applyBackup(o){
 }
 $("bkin").onchange=async e=>{const f=e.target.files[0];e.target.value="";if(!f)return;
   let o;try{o=JSON.parse(await f.text())}catch(_){$("bkst").innerHTML='<span class="ko">Fichier illisible (JSON attendu).</span>';return}
+  confirmRestore(o,f.name)};
+function confirmRestore(o,fname){const f={name:fname};
   if(!o||o.app!=="App Budget"||!["sauvegarde-complete","periodes-cle"].includes(o.type)){$("bkst").innerHTML='<span class="ko">Ce fichier n\'est pas une sauvegarde App Budget.</span>';return}
   const full=o.type==="sauvegarde-complete",sum=(o.periodes||[]).reduce((a,p)=>a+(+p.pct||0),0);
   openModal(`<div class="mh"><div><small>${esc(f.name)}</small><h3>Restaurer ${full?"la sauvegarde complète":"les périodes"} ?</h3></div><div class="mha"><button class="tbtn" data-close aria-label="Fermer">✕</button></div></div>
@@ -940,6 +957,51 @@ $("bkin").onchange=async e=>{const f=e.target.files[0];e.target.value="";if(!f)r
     <div class="mbt"><button class="tbtn" data-close>Annuler</button><button class="tbtn pri" id="bkok">Restaurer</button></div>`,()=>{
       $("bkok").onclick=()=>{applyBackup(o);closeModal();$("bkst").innerHTML='<span class="ok">✓</span> Restauration effectuée.'}});
 };
+
+// ===== Stockage Cloudflare (Worker + R2), actif quand l'appli est servie par le Worker =====
+const CF={ok:false,auth:false,tok:LS.get("ab-cftoken",""),t:null};
+async function cfFetch(path,opt={}){
+  const r=await fetch("/api/"+path,{...opt,headers:{...(opt.headers||{}),Authorization:"Bearer "+CF.tok}});
+  if(r.status===401)throw new Error("jeton refusé");
+  if(!r.ok&&r.status!==404)throw new Error("erreur "+r.status);
+  return r;
+}
+function cfDirty(){if(!CF.auth)return;clearTimeout(CF.t);CF.t=setTimeout(cfPush,1500)}
+async function cfPush(){const o=backup("full");
+  try{await cfFetch("files/etat/courant.json",{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(o)});LS.set("ab-cfsync",o.exportedAt);
+    $("cfst").innerHTML=`<span class="ok">✓</span> Synchronisé à ${new Date().toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"})}`}
+  catch(e){$("cfst").innerHTML=`<span class="ko">Synchronisation impossible</span> : ${esc(e.message)}`}}
+async function cfArchive(key,file){if(!CF.auth)return;
+  try{await cfFetch("files/"+key.split("/").map(encodeURIComponent).join("/"),{method:"PUT",headers:{"Content-Type":file.type||"application/octet-stream"},body:file});cfList()}catch(_){}}
+async function cfList(){if(!CF.auth)return;
+  try{const r=await cfFetch("files");const j=await r.json();const fs=(j.files||[]).sort((a,b)=>b.uploaded.localeCompare(a.uploaded));
+    const grp=[["Sauvegardes",x=>x.key.startsWith("sauvegardes/")],["Documents archivés",x=>x.key.startsWith("documents/")]];
+    $("cflist").innerHTML=grp.map(([t,fn])=>{const l=fs.filter(fn);return l.length?`<div class="cfh">${t}</div>`+l.map(x=>`<div class="cff"><div class="n">${esc(x.key.split("/").pop())}<small>${new Date(x.uploaded).toLocaleString("fr-FR")} · ${(x.size/1024).toLocaleString("fr-FR",{maximumFractionDigits:0})} Ko</small></div>${x.key.endsWith(".json")?`<button class="tbtn" data-cfr="${esc(x.key)}">Restaurer</button>`:`<a class="tbtn" href="/api/files/${x.key.split("/").map(encodeURIComponent).join("/")}?token=${encodeURIComponent(CF.tok)}" target="_blank" rel="noopener">Ouvrir</a>`}<button class="tbtn" data-cfd="${esc(x.key)}" aria-label="Supprimer">✕</button></div>`).join(""):""}).join("")||'<div class="note" style="margin-top:8px">Aucun fichier enregistré pour l\'instant.</div>'}
+  catch(e){$("cflist").innerHTML=`<div class="note ko">${esc(e.message)}</div>`}}
+async function cfConnect(silent){
+  if(!CF.tok){CF.auth=false;$("cfact").hidden=true;return}
+  try{const r=await cfFetch("files/etat/courant.json");CF.auth=true;LS.set("ab-cftoken",CF.tok);$("cfact").hidden=false;
+    if(r.ok){const o=await r.json();if(o&&o.exportedAt&&o.exportedAt>(LS.get("ab-cfsync","")||"")){applyBackup(o);LS.set("ab-cfsync",o.exportedAt);route()}}
+    else cfPush();
+    $("cfst").innerHTML=`<span class="ok">✓</span> Connecté au stockage Cloudflare.`;cfList()}
+  catch(e){CF.auth=false;$("cfact").hidden=true;if(!silent)$("cfst").innerHTML=`<span class="ko">Connexion impossible</span> : ${esc(e.message)}`}}
+$("cfgo").onclick=()=>{CF.tok=$("cftok").value.trim();cfConnect(false)};
+document.querySelectorAll("[data-cfsave]").forEach(b=>b.onclick=async()=>{const k=b.dataset.cfsave,o=backup(k);
+  const name=`sauvegardes/${k==="full"?"appbudget-sauvegarde":"appbudget-periodes"}-${new Date().toISOString().slice(0,16).replace(/[:T]/g,"-")}.json`;
+  try{await cfFetch("files/"+name,{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(o,null,2)});$("cfst").innerHTML=`<span class="ok">✓</span> ${esc(name.split("/").pop())} enregistré.`;cfList()}
+  catch(e){$("cfst").innerHTML=`<span class="ko">${esc(e.message)}</span>`}});
+$("cflist").addEventListener("click",async e=>{const r=e.target.closest("[data-cfr]"),d=e.target.closest("[data-cfd]");
+  if(r){try{const o=await (await cfFetch("files/"+r.dataset.cfr)).json();confirmRestore(o,r.dataset.cfr.split("/").pop())}catch(err){$("cfst").innerHTML=`<span class="ko">${esc(err.message)}</span>`}}
+  if(d){if(d.dataset.c!=="1"){d.dataset.c="1";d.textContent="Supprimer ?";d.classList.add("pri");return}
+    try{await cfFetch("files/"+d.dataset.cfd,{method:"DELETE"});cfList()}catch(err){$("cfst").innerHTML=`<span class="ko">${esc(err.message)}</span>`}}});
+(async()=>{ // détection du Worker (inactif dans Claude)
+  if(!/^https?:$/.test(location.protocol))return;
+  try{const r=await fetch("/api/health",{cache:"no-store"});if(!r.ok)return;const j=await r.json();if(!j||j.app!=="appbudget")return;
+    CF.ok=true;$("cf").hidden=false;$("cftok").value=CF.tok;
+    if(!j.storage){$("cfst").innerHTML='<span class="ko">Le Worker répond mais le stockage R2 n\'est pas relié (binding FILES).</span>';return}
+    if(!j.token){$("cfst").innerHTML='<span class="ko">Le secret APP_TOKEN n\'est pas défini dans Cloudflare.</span>';return}
+    cfConnect(true)}catch(_){}
+})();
 
 // ===== Synchronisation entre appareils (si disponible) =====
 (async()=>{

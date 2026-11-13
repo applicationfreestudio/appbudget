@@ -2,13 +2,15 @@
 
 Suivi des budgets de dépenses de l'**Accueil jeunes de Selles-sur-Cher** (analytique 3382, CC Val de Cher Controis, nomenclature M57).
 
-L'application tient dans un seul fichier, `index.html`, à ouvrir dans un navigateur. Elle est aussi publiée comme artefact Claude.
+L'application tient dans un seul fichier, `public/index.html`. Elle est servie par un **Worker Cloudflare**, qui stocke aussi les fichiers dans **R2**. Elle est également publiée comme artefact Claude ; dans Claude, le stockage Cloudflare n'est pas disponible.
 
 ## Contenu du dépôt
 
 | Fichier | Rôle |
 |---|---|
-| `index.html` | L'application complète (HTML, CSS, JavaScript) |
+| `public/index.html` | L'application complète (HTML, CSS, JavaScript) |
+| `worker/index.js` | Worker Cloudflare : sert l'application et l'API de stockage `/api/*` |
+| `wrangler.jsonc` | Configuration du Worker (assets, bucket R2 `appbudget-files`) |
 | `config/periodes-cle-2026.json` | Périodes et clé de répartition 2026 (restaurable seule) |
 | `config/sauvegarde-complete-2026-11-13.json` | Sauvegarde complète : situation budgétaire, articles suivis, régie, périodes |
 
@@ -20,6 +22,31 @@ L'application tient dans un seul fichier, `index.html`, à ouvrir dans un naviga
 - Choix des articles suivis.
 - Périodes de l'année avec une clé de répartition (%). Les écarts des périodes passées sont reportés sur les suivantes.
 - Sauvegarde et restauration au format JSON (Paramètres → Sauvegarde et restauration).
+
+## Mise en place sur Cloudflare (une seule fois)
+
+1. **R2 → Create bucket** : nommer le bucket `appbudget-files`.
+2. **Workers & Pages** : le projet relié au dépôt GitHub doit être un **Worker**, et non un projet Pages, pour que `wrangler.jsonc` soit pris en compte.
+   - Commande de build : aucune.
+   - Commande de déploiement : `npx wrangler deploy`.
+
+   Chaque push sur `main` redéploie automatiquement.
+3. **Worker → Settings → Variables and Secrets** : ajouter un **secret** `APP_TOKEN`, un mot de passe long de ton choix. Le dépôt étant public, ce jeton ne doit jamais être écrit dans le code.
+4. Ouvrir l'adresse du Worker (`https://appbudget.<compte>.workers.dev`), puis **Paramètres → Stockage Cloudflare**. Saisir le jeton et cliquer sur **Connecter**.
+
+### Ce que fait le stockage
+
+- **État courant :** les données de l'application sont enregistrées automatiquement (`etat/courant.json`) à chaque modification et rechargées sur tout appareil connecté avec le jeton.
+- **Sauvegardes :** les sauvegardes datées à la demande vont dans `sauvegardes/`, restaurables depuis la liste.
+- **Archives :** les PDF de situation et les états de régie importés sont archivés dans `documents/`.
+
+### API (`/api`, en-tête `Authorization: Bearer <APP_TOKEN>`)
+
+| Méthode | Chemin | Rôle |
+|---|---|---|
+| GET | `/api/health` | État du Worker : R2 relié et secret défini (sans jeton) |
+| GET | `/api/files?prefix=` | Liste des fichiers |
+| GET / PUT / DELETE | `/api/files/<chemin>` | Lire, écrire ou supprimer un fichier (25 Mo maximum) |
 
 ## Restaurer une configuration
 
