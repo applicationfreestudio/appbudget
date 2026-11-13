@@ -36,7 +36,9 @@ async function api(request, env, url) {
   const path = url.pathname.replace(/^\/api\/?/, "");
 
   if (path === "health") {
-    return json({ app: "appbudget", ok: true, storage: !!env.FILES, token: !!env.APP_TOKEN });
+    // diagnostic : noms des variables présentes (jamais leurs valeurs)
+    const names = Object.keys(env).filter((k) => !["ASSETS", "FILES"].includes(k));
+    return json({ app: "appbudget", ok: true, storage: !!env.FILES, token: !!env.APP_TOKEN, variables: names });
   }
   if (!env.FILES) return json({ error: "stockage R2 non relié (binding FILES)" }, 503);
   if (!env.APP_TOKEN) return json({ error: "secret APP_TOKEN non défini" }, 503);
