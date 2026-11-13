@@ -12,8 +12,10 @@
 :root[data-theme="dark"]{--bg:#171815;--card:#222320;--tx:#efeee8;--mu:#a09f97;--ln:#34352f;--a:#6aa9e6;--e:#2c4f73;--h:#f0877a;--w:#e6b84a;color-scheme:dark}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif;padding:0 env(safe-area-inset-right,0) env(safe-area-inset-bottom,0) env(safe-area-inset-left,0)}
-main{max-width:760px;margin:0 auto;padding:16px}
-h1{font-size:1.4rem;margin:-16px -16px 6px;padding:calc(10px + env(safe-area-inset-top,0px)) 16px 10px;display:flex;justify-content:space-between;align-items:center;gap:10px;position:sticky;top:0;z-index:30;
+main{max-width:760px;margin:0 auto;padding:16px;padding-top:calc(16px + env(safe-area-inset-top,0px))}
+/* zone système du haut : opaque, non floutée (comme App Hike) */
+body::before{content:"";position:fixed;left:0;right:0;top:0;height:env(safe-area-inset-top,0px);background:var(--sbcol,var(--bg));z-index:31;pointer-events:none}
+h1{font-size:1.4rem;margin:-16px -16px 6px;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px;position:sticky;top:env(safe-area-inset-top,0px);z-index:30;
   background:var(--bg);background:color-mix(in srgb,var(--bg) 38%,transparent);-webkit-backdrop-filter:saturate(1.8) blur(8px);backdrop-filter:saturate(1.8) blur(8px);border-bottom:1px solid color-mix(in srgb,var(--ln) 60%,transparent)}
 .ti{display:flex;align-items:center;gap:9px;min-width:0}
 .ti svg{flex:none;width:36px;height:36px}
@@ -170,6 +172,12 @@ select{font:inherit;font-size:.85rem;padding:7px 8px;border-radius:10px;border:1
 .frow{display:flex;gap:6px;width:max-content}
 .frise{display:flex;flex-direction:column;gap:8px;overflow-x:auto;scroll-snap-type:x proximity;margin:10px -14px 2px;padding:2px 14px 8px;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
 .pcw{flex:0 0 150px;width:150px;display:flex;flex-direction:column;gap:4px;scroll-snap-align:center}
+.cso{display:flex;align-items:center;gap:3px;padding:3px 8px;border:1px solid color-mix(in srgb,var(--h) 35%,var(--ln));border-radius:6px;background:var(--card);color:var(--h);font-weight:800;font-size:1.02rem;cursor:text}
+.cso i{font-style:normal;flex:none}
+.cso input{flex:1;min-width:0;width:100%;border:0;background:none;padding:2px 0;font:inherit;color:var(--h);font-weight:800;font-variant-numeric:tabular-nums;text-align:right;outline:none}
+.cso input::placeholder{color:color-mix(in srgb,var(--h) 40%,transparent)}
+.cso:focus-within{border-color:var(--h);box-shadow:0 0 0 2px color-mix(in srgb,var(--h) 25%,transparent)}
+.cso.done{justify-content:center;font-size:.72rem;font-weight:500;color:var(--mu);border-style:dashed;border-color:var(--ln);background:none;cursor:default}
 .pcw .det{font:inherit;font-size:.72rem;padding:3px 0;border:0;background:none!important;color:var(--a);cursor:pointer;text-decoration:underline;text-underline-offset:2px;min-width:0!important;display:block;text-align:center}
 .frise .pcw>button[data-ph]{flex:1 1 auto;display:flex;flex-direction:column;align-items:flex-start;gap:2px;width:150px;min-width:150px;max-width:150px;box-sizing:border-box;font:inherit;text-align:left;padding:7px 10px;border-radius:6px;border:1px solid var(--ln);cursor:pointer;color:var(--tx);position:relative}
 .frise button span{font-size:.76rem;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
@@ -319,8 +327,8 @@ details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-righ
 :root[data-theme="dark"] .frise .pcw>button.on.good{color:#0d1b2a}
 </style></head>
 <body><main>
-<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.2</small></span></span>
-  <span class="hb"><button class="tbtn" id="inst" hidden title="Installer l'application">⤓ Installer</button><button class="tbtn" id="fs" aria-label="Plein écran" title="Plein écran"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button><button class="tbtn" id="nav">⚙ Paramètres</button></span>
+<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.3</small></span></span>
+  <span class="hb"><button class="tbtn" id="fs" aria-label="Plein écran" title="Plein écran"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button><button class="tbtn" id="nav">⚙ Paramètres</button></span>
 </h1>
 <div class="sub"><div id="org"></div><div>Dépenses <span id="yr"></span> · situation au <b id="dt"></b></div></div>
 
@@ -566,7 +574,7 @@ const fixName=n=>String(n||"").replace(/^(Janvier|Février|Avril|Septembre|Octob
 // Clé de répartition par défaut : dépenses 2026 réelles, rattachées à la date d'activité (voir README)
 const PH_KEY2026=[["Janvier → février",3.8],["Vacances d'hiver",10],["Février → avril",10.1],["Vacances de printemps",7.3],["Avril → juin",9.6],["Vacances d'été · juillet",13.5],["Vacances d'été · août",11.5],["Septembre → octobre",8.1],["Vacances de la Toussaint",8.6],["Octobre → décembre",4.1],["Vacances de Noël",4],["Séjour 1",2.9],["Séjour 2",5.1],["Petit séjour 1",1],["Petit séjour 2",.4]];
 const phKey2026=()=>PH_KEY2026.map(([name,pct],i)=>({id:"k26"+i.toString(36)+Date.now().toString(36).slice(-4),name,pct}));
-let PH=LS.get("ab-phases",[]).map(p=>({id:p.id,name:fixName(p.name),pct:p.pct??""})); // [{id,name,pct}] dans l'ordre chronologique
+let PH=LS.get("ab-phases",[]).map(p=>({id:p.id,name:fixName(p.name),pct:p.pct??"",conso:+p.conso||0})); // [{id,name,pct}] dans l'ordre chronologique
 if(!PH.length){PH=phKey2026();LS.set("ab-phases",PH)} // aucune période enregistrée : clé 2026 par défaut
 // Périodes passées : sélection libre, dans n'importe quel ordre
 let PHSEL=new Set(LS.get("ab-phsel3",[]));
@@ -575,11 +583,14 @@ function phCalc(){
   const L=phList(),T=totals(),env=L.map(x=>T.b*(+x.pct)/100);
   const sel=L.map(x=>PHSEL.has(x.id)),nSel=sel.filter(Boolean).length;
   const plannedSel=env.reduce((s,v,i)=>s+(sel[i]?v:0),0),restEnv=env.reduce((s,v,i)=>s+(sel[i]?0:v),0);
-  const ecart=plannedSel-T.t;                 // + : non dépensé ; − : dépassement
+  // consommation déjà saisie sur les périodes non passées (période en cours)
+  const cons=L.map((x,i)=>sel[i]?0:Math.max(0,+x.conso||0)),partial=cons.reduce((a,b)=>a+b,0),consSel=T.t-partial;
+  const ecart=plannedSel-consSel;             // + : non dépensé ; − : dépassement
   const factor=restEnv?1+ecart/restEnv:1;     // ventilation sur les périodes non passées
   const res=env.map((v,i)=>sel[i]&&plannedSel?ecart*v/plannedSel:0);   // résultat estimé de chaque période passée
   const adj=env.map((v,i)=>sel[i]?v:v*factor);
-  return {L,T,env,sel,nSel,plannedSel,restEnv,ecart,factor,res,adj,nRest:L.length-nSel,dispo:T.b-T.t};
+  const remain=adj.map((v,i)=>sel[i]?0:v-cons[i]);
+  return {L,T,env,sel,nSel,plannedSel,restEnv,ecart,factor,res,adj,cons,partial,consSel,remain,nRest:L.length-nSel,dispo:T.b-T.t};
 }
 const PH_BASE=["Janvier → février","Vacances d'hiver","Février → avril","Vacances de printemps","Avril → juin","Vacances d'été · juillet","Vacances d'été · août","Septembre → octobre","Vacances de la Toussaint","Octobre → décembre","Vacances de Noël"];
 // nom de période affiché : flèche discrète entre deux mois
@@ -640,22 +651,29 @@ function renderPhase(){
   $("phn").textContent=`${C.nSel} / ${L.length}`;$("phn").className="";
   const chip=(x,i)=>{let cls,amt;
     if(C.sel[i]){const r=C.res[i];cls="done "+(r<0?"bad":"good");amt='<i class="est">≈</i>'+(r<0?"−":"+")+f0(Math.abs(r))}
-    else{cls=C.nSel?(C.adj[i]<0?"neg-f":"rest"):"";amt=fs(C.adj[i])}
-    return `<div class="pcw"><button data-ph="${x.id}" class="${cls}" aria-pressed="${C.sel[i]}"><span>${C.sel[i]?'<i class="ck">✓</i>':""}${x.name?phName(x.name):"Période "+(i+1)}</span><b>${amt}</b>${C.nSel?`<small class="pv0">prévu ${f0(env[i])}</small>`:""}</button><button class="det" data-det="${x.id}" aria-label="Détail par article">Détail</button></div>`};
+    else{cls=(C.nSel||C.cons[i])?(C.remain[i]<0?"neg-f":"rest"):"";amt=fs(C.remain[i])}
+    const showPv=C.nSel||C.cons[i];
+    return `<div class="pcw"><button data-ph="${x.id}" class="${cls}" aria-pressed="${C.sel[i]}"><span>${C.sel[i]?'<i class="ck">✓</i>':""}${x.name?phName(x.name):"Période "+(i+1)}</span><b>${amt}</b>${showPv?`<small class="pv0">${C.sel[i]?"prévu "+f0(env[i]):"enveloppe "+fs(C.adj[i])}</small>`:""}</button>
+      ${C.sel[i]?'<div class="cso done">consommée</div>':`<label class="cso" title="Déjà consommé sur cette période"><i>−</i><input inputmode="decimal" data-cso="${x.id}" value="${x.conso?String(Math.round(x.conso*100)/100).replace(".",","):""}" placeholder="0" aria-label="Déjà consommé sur ${esc(x.name||"la période")}"><i>€</i></label>`}</div>`};
   const kind=x=>new RegExp(`(${MOIS})\\s*(?:[–—-]|→)\\s*(${MOIS})`,"i").test(x.name||"")?0:/vacances/i.test(x.name||"")?1:2;
   const rowsH=[0,1,2].map(k=>{const it=L.map((x,i)=>[x,i]).filter(([x])=>kind(x)===k);return it.length?`<div class="frow">${it.map(([x,i])=>chip(x,i)).join("")}</div>`:""}).join("");
   $("phb").innerHTML=`<div class="frise" id="frise">${rowsH}</div>
    ${Math.abs(tot-100)>.01?`<div class="phd"><span class="ko">Total des périodes : ${tot.toLocaleString("fr-FR",{maximumFractionDigits:1})} %</span></div>`:""}
    ${C.nSel?`<div class="phg" style="margin-top:8px">
      <div><small>Prévu sur les périodes passées</small><b>${f0(C.plannedSel)}</b></div>
-     <div><small>Consommé</small><b>${f0(C.T.t)}</b></div>
+     <div><small>Consommé sur ces périodes</small><b>${f0(C.consSel)}</b></div>
      <div class="full"><small>${C.ecart<0?"Dépassement à répartir":"Non-dépensé à répartir"}</small>${sgn(C.ecart,f0)}</div>
      <div class="full"><small>Disponible pour ${C.nRest} période${C.nRest>1?"s":""} restante${C.nRest>1?"s":""}</small>${sgn(C.dispo,f0)}</div>
    </div>
+   ${C.partial?`<div class="note" style="margin-top:8px">Déjà consommé sur les périodes en cours : <b class="neg">−${f0(C.partial)}</b> (déduit de leur enveloppe).</div>`:""}
    <div class="note" style="margin-top:8px">${C.nRest?`L'écart est réparti sur les périodes non passées au prorata de leurs pourcentages.`:"Toutes les périodes sont passées."} ≈ : part de l'écart attribuée à chaque période passée, au prorata.</div>`
-   :`<div class="phd">Touche les périodes passées pour les cocher (dans n'importe quel ordre) ; touche à nouveau pour décocher.</div>`}`;
+   :`<div class="phd">Touche les périodes passées pour les cocher (dans n'importe quel ordre) ; touche à nouveau pour décocher. Sous une période non passée, indique ce qui est déjà consommé.</div>`}`;
   if(keep!==null)$("frise").scrollLeft=keep;
 }
+const parseEur=v=>{const n=parseFloat(String(v).replace(/[\s\u00a0\u202f€]/g,"").replace(",","."));return isFinite(n)&&n>0?Math.round(n*100)/100:0};
+$("phb").addEventListener("input",e=>{const id=e.target.dataset.cso;if(!id)return;const p=PH.find(x=>x.id===id);if(!p)return;p.conso=parseEur(e.target.value);LS.set("ab-phases",PH)});
+$("phb").addEventListener("change",e=>{const id=e.target.dataset.cso;if(!id)return;savePH();setDate();renderHome()});
+$("phb").addEventListener("keydown",e=>{if(e.target.dataset.cso&&e.key==="Enter")e.target.blur()});
 function periodDetail(id){
   const C=phCalc(),L=C.L,i=L.findIndex(x=>x.id===id),p=L[i],passed=C.sel[i];
   const k=(+p.pct)/100*(!passed&&C.nSel?C.factor:1);
@@ -670,7 +688,7 @@ function periodDetail(id){
     <div class="ml">${groups}</div>`);
 }
 $("phb").addEventListener("click",e=>{
-  const d=e.target.closest("[data-det]");if(d){periodDetail(d.dataset.det);return}
+  if(e.target.closest(".cso"))return;
   const b=e.target.closest("[data-ph]");if(!b)return;
   const id=b.dataset.ph;PHSEL.has(id)?PHSEL.delete(id):PHSEL.add(id);savePH();
   setDate();renderHome()});
@@ -980,7 +998,7 @@ $("regon").onchange=e=>{LS.set("ab-regon",e.target.checked);cfDirty();if(DB)DB.d
 const stamp=()=>{const d=new Date();return d.toISOString().slice(0,10)};
 function backup(kind){
   const base={app:"App Budget",format:1,type:kind==="full"?"sauvegarde-complete":"periodes-cle",exportedAt:new Date().toISOString()};
-  const per={periodes:PH.map(p=>({id:p.id,nom:p.name,pct:+p.pct||0})),periodesPassees:[...PHSEL]};
+  const per={periodes:PH.map(p=>({id:p.id,nom:p.name,pct:+p.pct||0,dejaConsomme:+p.conso||0})),periodesPassees:[...PHSEL]};
   if(kind!=="full")return {...base,...per};
   return {...base,situation:DATA,articlesNonSuivis:[...OFF],regie:{etats:REG,compterDansJauges:REGON()},...per,tri:LS.get("ab-sort","code")};
 }
@@ -996,7 +1014,7 @@ document.querySelectorAll("[data-bk]").forEach(b=>b.onclick=async()=>{
   $("bkst").innerHTML=r==="ok"?`<span class="ok">✓</span> ${name} enregistré.`:r==="copied"?"Téléchargement indisponible ici : le contenu a été copié dans le presse-papiers.":r==="declined"?"Enregistrement annulé.":`<span class="ko">Impossible d'enregistrer le fichier.</span>`;
 });
 function applyBackup(o){
-  if(o.periodes){PH=o.periodes.map(p=>({id:p.id||Math.random().toString(36).slice(2,10),name:fixName(p.nom??p.name),pct:+(p.pct)||0}));PHSEL=new Set((o.periodesPassees||[]).filter(id=>PH.some(p=>p.id===id)));savePH()}
+  if(o.periodes){PH=o.periodes.map(p=>({id:p.id||Math.random().toString(36).slice(2,10),name:fixName(p.nom??p.name),pct:+(p.pct)||0,conso:+p.dejaConsomme||0}));PHSEL=new Set((o.periodesPassees||[]).filter(id=>PH.some(p=>p.id===id)));savePH()}
   if(o.type==="sauvegarde-complete"){
     if(o.situation&&Array.isArray(o.situation.rows)){DATA=o.situation;LS.set("ab-data",DATA.source==="origine"?null:DATA);
       if(DB)DB.doc("budget/current").set(DATA.source==="origine"?{reset:true,at:Date.now()}:{...DATA,rows:JSON.stringify(DATA.rows)}).catch(()=>{})}
@@ -1082,12 +1100,12 @@ $("cflist").addEventListener("click",async e=>{const r=e.target.closest("[data-c
     if(sv&&Array.isArray(sv.off)){OFF=new Set(sv.off);LS.set("ab-off",sv.off)}
     const ph=await db.doc("prefs/phases").get().catch(()=>null);
     const phv=ph&&ph.data&&ph.data();
-    if(phv&&typeof phv.list==="string"){try{PH=JSON.parse(phv.list).map(p=>({id:p.id,name:fixName(p.name),pct:p.pct??""}));LS.set("ab-phases",PH)}catch(_){}}
+    if(phv&&typeof phv.list==="string"){try{PH=JSON.parse(phv.list).map(p=>({id:p.id,name:fixName(p.name),pct:p.pct??"",conso:+p.conso||0}));LS.set("ab-phases",PH)}catch(_){}}
     if(phv&&phv.v===3&&Array.isArray(phv.sel)){PHSEL=new Set(phv.sel);LS.set("ab-phsel3",phv.sel)}
     if(phv&&phv.at)PHAT=phv.at;
     // suivi en direct : une modification faite ailleurs (autre appareil, restauration) remplace l'état local
     db.doc("prefs/phases").onSnapshot(sn=>{const v=sn.exists&&sn.data();if(!v||!(v.at>PHAT)||typeof v.list!=="string")return;
-      try{PH=JSON.parse(v.list).map(p=>({id:p.id,name:fixName(p.name),pct:p.pct??""}));PHSEL=new Set(Array.isArray(v.sel)?v.sel:[]);PHAT=v.at;
+      try{PH=JSON.parse(v.list).map(p=>({id:p.id,name:fixName(p.name),pct:p.pct??"",conso:+p.conso||0}));PHSEL=new Set(Array.isArray(v.sel)?v.sel:[]);PHAT=v.at;
         LS.set("ab-phases",PH);LS.set("ab-phsel3",[...PHSEL]);LS.set("ab-phat",PHAT);setDate();route()}catch(_){}},()=>{});
     const rg=await db.doc("regie/etats").get().catch(()=>null);
     const rv=rg&&rg.data&&rg.data();
@@ -1121,10 +1139,7 @@ function fsUi(){const fs=$("fs");if(standalone()||!document.documentElement.requ
 $("fs").onclick=async()=>{try{document.fullscreenElement?await document.exitFullscreen():await document.documentElement.requestFullscreen()}catch(_){$("fs").hidden=true}};
 document.addEventListener("fullscreenchange",fsUi);
 try{matchMedia("(display-mode: standalone)").addEventListener("change",fsUi)}catch(_){}
-let INSTP=null;
-addEventListener("beforeinstallprompt",e=>{e.preventDefault();INSTP=e;if(!standalone())$("inst").hidden=false});
-$("inst").onclick=async()=>{if(!INSTP)return;INSTP.prompt();try{await INSTP.userChoice}catch(_){}INSTP=null;$("inst").hidden=true};
-addEventListener("appinstalled",()=>{$("inst").hidden=true;fsUi()});
+addEventListener("appinstalled",fsUi);
 if("serviceWorker" in navigator&&/^https:$/.test(location.protocol)&&!/claude/i.test(location.hostname))navigator.serviceWorker.register("sw.js").catch(()=>{});
 fsUi();
 
@@ -1154,7 +1169,7 @@ function applyTheme(){
   $("acci").value=Math.round(k*100);$("accv").textContent=k<=-.6?"Pastel":k<-.15?"Douce":k<.15?"Normale":k<.6?"Vive":"Très vive";
   $("sbc").checked=!!LS.get("ab-sbc",false);
   let m=document.querySelector('meta[name="theme-color"]');
-  if(LS.get("ab-sbc",false)){if(!m){m=document.createElement("meta");m.name="theme-color";document.head.appendChild(m)}m.content=adj(ACL[a][0],k)}else if(m)m.remove();
+  if(LS.get("ab-sbc",false)){if(!m){m=document.createElement("meta");m.name="theme-color";document.head.appendChild(m)}m.content=adj(ACL[a][0],k);root.style.setProperty("--sbcol",adj(ACL[a][0],k))}else{if(m)m.remove();root.style.removeProperty("--sbcol")}
 }
 $("acc").innerHTML=Object.entries(ACL).map(([k,[l,d,n]])=>`<button type="button" data-acc="${k}" aria-label="Couleur ${n}"><i style="background:linear-gradient(135deg,${l} 50%,${d} 50%)"></i><span>${n}</span></button>`).join("");
 $("acc").onclick=e=>{const b=e.target.closest("[data-acc]");if(b){LS.set("ab-acc",b.dataset.acc);applyTheme()}};
