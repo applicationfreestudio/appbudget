@@ -374,7 +374,7 @@ details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-righ
 :root[data-theme="dark"] .frise .pcw>button.on.good{color:#0d1b2a}
 </style></head>
 <body><main>
-<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.15</small></span></span>
+<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.16</small></span></span>
   <span class="hb"><button class="tbtn" id="nav">⚙ Paramètres</button><button class="tbtn" id="fs" aria-label="Plein écran" title="Plein écran"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button></span>
 </h1>
 <div class="sub"><div id="org"></div><div>Dépenses <span id="yr"></span> · situation au <b id="dt"></b></div></div>
@@ -615,7 +615,12 @@ function extraRows(){const known=new Set(DATA.rows.map(r=>r[1]));
 const A=()=>DATA.rows.concat(extraRows());
 const ORDER=()=>DATA.order.concat(extraRows().length?["REG"]:[]);
 const CHN=k=>k==="REG"?"Comptes régie hors budget":DATA.chapters[k];
-const V=r=>{const c=r[4]+r[5],g=RA[r[1]]||0;return {b:r[3],c,g,t:c+g}};
+// x = dépassement déclaré sur les périodes terminées, réparti sur les articles au prorata de leur budget
+const V=r=>{const c=r[4]+r[5],g=RA[r[1]]||0,x=XA[r[1]]||0;return {b:r[3],c,g,x,t:c+g+x}};
+let XA={};
+function xAcc(){const rows=chosen(),B=rows.reduce((s,r)=>s+r[3],0),o={};if(!B)return o;
+  const ex=phList().reduce((s,p)=>s+(PHSEL.has(p.id)?Math.max(0,(+p.av||1)-1)*B*(+p.pct||0)/100:0),0);
+  if(ex>0.005)rows.forEach(r=>{if(r[3]>0)o[r[1]]=ex*r[3]/B});return o}
 const chosen=()=>A().filter(r=>!OFF.has(r[1]));
 let YA=0;
 const fixName=n=>String(n||"").replace(/^(Janvier|Février|Avril|Septembre|Octobre) – /,"$1 → ").replace(/^Vacances d'été – /,"Vacances d'été · ");
@@ -635,16 +640,16 @@ function phCalc(){
   // Périodes non terminées : enveloppe ajustée = enveloppe prévue × facteur ; le curseur porte sur cette enveloppe ajustée.
   // Le facteur répartit au prorata ce qui reste réellement disponible (budget des périodes − consommé total)
   // sur la part non encore consommée des périodes non terminées → restant total = disponible, sans valeur négative.
-  // dépassement déclaré au curseur sur les périodes terminées (> 100 %) : dépense en plus, retirée du disponible
+  // dépassement déclaré au curseur sur les périodes terminées (> 100 %) : déjà inclus dans T.t via V() (XA), donc retiré du disponible
   const extra=env.reduce((s,v,i)=>s+(sel[i]?Math.max(0,av[i]-1)*v:0),0);
-  const avail=env.reduce((a,b)=>a+b,0)-T.t-extra,P=env.reduce((s,v,i)=>s+(sel[i]?0:av[i]*v),0),free=restEnv-P;
+  const avail=env.reduce((a,b)=>a+b,0)-T.t,P=env.reduce((s,v,i)=>s+(sel[i]?0:av[i]*v),0),free=restEnv-P;
   const factor=free>0.005?avail/free:(restEnv>0?1+(avail)/restEnv:1);
   const adj=env.map((v,i)=>sel[i]?v:v*factor);
   const cons=adj.map((v,i)=>av[i]*v);                           // terminée : enveloppe × avancement (≥ 100 %)
   const remain=adj.map((v,i)=>v-cons[i]);                       // terminée : 0, ou négatif si dépassement déclaré
-  const partial=cons.reduce((s,v,i)=>s+(sel[i]?0:v),0),consSel=T.t-partial+extra;
+  const partial=cons.reduce((s,v,i)=>s+(sel[i]?0:v),0),consSel=T.t-partial;
   const ecart=plannedSel-consSel;                               // + : non dépensé ; − : dépassement (réparti sur les autres)
-  return {L,T,env,sel,nSel,av,plannedSel,restEnv,ecart,factor,adj,cons,partial,consSel,remain,extra,nRest:L.length-nSel,dispo:T.b-T.t-extra};
+  return {L,T,env,sel,nSel,av,plannedSel,restEnv,ecart,factor,adj,cons,partial,consSel,remain,extra,nRest:L.length-nSel,dispo:T.b-T.t};
 }
 const PH_BASE=["Janvier → février","Vacances d'hiver","Février → avril","Vacances de printemps","Avril → juin","Vacances d'été · juillet","Vacances d'été · août","Septembre → octobre","Vacances de la Toussaint","Octobre → décembre","Vacances de Noël"];
 // nom de période affiché : flèche discrète entre deux mois
@@ -682,8 +687,8 @@ function hbar(b,c,big,g=0){
 
 // ===== Synthèse =====
 function summary(){
-  RA=regAcc();setTimeout(renderPhase);
-  const rows=chosen(),T=rows.reduce((s,r)=>{const v=V(r);return {b:s.b+v.b,c:s.c+v.c,g:s.g+v.g}},{b:0,c:0,g:0}),t=T.c+T.g;
+  RA=regAcc();XA=xAcc();setTimeout(renderPhase);
+  const rows=chosen(),T=rows.reduce((s,r)=>{const v=V(r);return {b:s.b+v.b,c:s.c+v.c,g:s.g+v.g+v.x}},{b:0,c:0,g:0}),t=T.c+T.g;
   const TP=pc(t,T.b),k=TP>100?"over":TP>=90?"warn":"";
   $("tpv").className="pv "+k;
   $("tp").textContent=rows.length?ps1(TP):"—";
@@ -762,7 +767,7 @@ $("phb").addEventListener("input",e=>{const id=e.target.dataset.av;if(!id)return
   if(+el.value>=+el.max&&+el.max<300){el.max=+el.max+25;el.value=el.value}
   const v=+el.value/100;pslPaint(el);
   // recalcul complet en direct (sans enregistrer) : ce qui s'affiche pendant le glissement = ce qui restera au relâchement
-  const old=p.av,had=PHSEL.has(id);p.av=v;if(v>=1)PHSEL.add(id);else PHSEL.delete(id);const C=phCalc();p.av=old;if(had)PHSEL.add(id);else PHSEL.delete(id);
+  const old=p.av,had=PHSEL.has(id);p.av=v;if(v>=1)PHSEL.add(id);else PHSEL.delete(id);XA=xAcc();const C=phCalc();p.av=old;if(had)PHSEL.add(id);else PHSEL.delete(id);XA=xAcc();
   C.L.forEach((x,i)=>{const w=document.querySelector(`#phb [data-pw="${x.id}"]`);if(!w||(C.sel[i]&&x.id!==id))return;
     const r=C.remain[i];const pc=w.querySelector("[data-pc]");pc.textContent=f0(C.cons[i]);
     const pr=w.querySelector("[data-pr]");pr.textContent=Math.abs(r)<0.5?"0 €":(r<0?"−\u2060\u200a\u2060":"+\u2060\u200a\u2060")+f0(Math.abs(r));pr.className=r<-0.5?"neg":"pos";
@@ -910,7 +915,7 @@ $("phadd").onclick=()=>{PH.push({id:Date.now().toString(36),name:"",pct:""});LS.
 
 // ===== Lignes article =====
 function card(r){
-  const [ch,code,nm]=r,{b,c:c0,g,t:c}=V(r),p=pc(c,b),k=p>100?"over":p>=90?"warn":"",dispo=b-c;
+  const [ch,code,nm]=r,{b,c:c0,g:g0,x,t:c}=V(r),g=g0+x,p=pc(c,b),k=p>100?"over":p>=90?"warn":"",dispo=b-c;
   return `<div class="li ${k}">
     <div class="lt"><div class="nmw"><span class="nm">${nm}</span><span class="cd">${code}</span></div><b${p===Infinity?' style="font-size:1.05rem"':""}>${p===Infinity?"Hors budget":ps(p)}</b></div>
     ${hbar(b,c0,0,g)}
