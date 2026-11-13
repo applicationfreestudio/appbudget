@@ -206,7 +206,14 @@ select{font:inherit;font-size:.85rem;padding:7px 8px;border-radius:10px;border:1
 .pcw.done.good{background:color-mix(in srgb,var(--bl) 14%,var(--card));border-color:color-mix(in srgb,var(--bl) 40%,var(--ln))}
 .pcw.done.bad,.pcw.neg-f{background:color-mix(in srgb,var(--h) 12%,var(--card));border-color:color-mix(in srgb,var(--h) 40%,var(--ln))}
 .pcw.rest{border-color:color-mix(in srgb,var(--a) 45%,var(--ln))}
-.pcw .pch{cursor:pointer}
+.pcw{position:relative}
+.pcw .pch{cursor:pointer}.pcw.lk .pch{cursor:default}
+.pcw .pn{padding-right:22px}
+.plk{position:absolute;top:5px;right:5px;width:26px;height:26px;display:grid;place-items:center;padding:0;border:1px solid transparent;border-radius:6px;background:none;color:var(--mu);cursor:pointer;opacity:.75}
+.plk[aria-pressed="true"]{color:var(--tx);opacity:1;background:var(--card);border-color:var(--ln)}
+.psl:disabled{cursor:default}
+.psl:disabled::-webkit-slider-thumb{width:0;height:0;border:0;box-shadow:none;background:none}
+.psl:disabled::-moz-range-thumb{width:0;height:0;border:0;background:none}
 .pch .pn{display:block;font-size:.78rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pam{display:flex;justify-content:space-between;gap:6px;margin-top:3px}
 .pam span{display:flex;flex-direction:column;min-width:0}
@@ -374,7 +381,7 @@ details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-righ
 :root[data-theme="dark"] .frise .pcw>button.on.good{color:#0d1b2a}
 </style></head>
 <body><main>
-<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.16</small></span></span>
+<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.17</small></span></span>
   <span class="hb"><button class="tbtn" id="nav">⚙ Paramètres</button><button class="tbtn" id="fs" aria-label="Plein écran" title="Plein écran"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button></span>
 </h1>
 <div class="sub"><div id="org"></div><div>Dépenses <span id="yr"></span> · situation au <b id="dt"></b></div></div>
@@ -642,10 +649,13 @@ function phCalc(){
   // sur la part non encore consommée des périodes non terminées → restant total = disponible, sans valeur négative.
   // dépassement déclaré au curseur sur les périodes terminées (> 100 %) : déjà inclus dans T.t via V() (XA), donc retiré du disponible
   const extra=env.reduce((s,v,i)=>s+(sel[i]?Math.max(0,av[i]-1)*v:0),0);
-  const avail=env.reduce((a,b)=>a+b,0)-T.t,P=env.reduce((s,v,i)=>s+(sel[i]?0:av[i]*v),0),free=restEnv-P;
-  const factor=free>0.005?avail/free:(restEnv>0?1+(avail)/restEnv:1);
+  // période non terminée verrouillée : montant consommé figé (lockAmt), son curseur suit l'enveloppe ajustée
+  const fk=L.map((x,i)=>!sel[i]&&x.lock&&x.lockAmt!=null?+x.lockAmt:null),Kt=fk.reduce((s,v)=>s+(v||0),0);
+  const avail=env.reduce((a,b)=>a+b,0)-T.t,P=env.reduce((s,v,i)=>s+(sel[i]||fk[i]!=null?0:av[i]*v),0),free=restEnv-P;
+  const factor=free>0.005?(avail+Kt)/free:(restEnv>0?1+(avail)/restEnv:1);
   const adj=env.map((v,i)=>sel[i]?v:v*factor);
-  const cons=adj.map((v,i)=>av[i]*v);                           // terminée : enveloppe × avancement (≥ 100 %)
+  const cons=adj.map((v,i)=>fk[i]!=null?fk[i]:av[i]*v);
+  fk.forEach((k,i)=>{if(k!=null)av[i]=adj[i]>0?Math.max(0,Math.min(1,k/adj[i])):0});                           // terminée : enveloppe × avancement (≥ 100 %)
   const remain=adj.map((v,i)=>v-cons[i]);                       // terminée : 0, ou négatif si dépassement déclaré
   const partial=cons.reduce((s,v,i)=>s+(sel[i]?0:v),0),consSel=T.t-partial;
   const ecart=plannedSel-consSel;                               // + : non dépensé ; − : dépassement (réparti sur les autres)
@@ -686,8 +696,8 @@ function hbar(b,c,big,g=0){
 }
 
 // ===== Synthèse =====
-function summary(){
-  RA=regAcc();XA=xAcc();setTimeout(renderPhase);
+function summary(live){
+  RA=regAcc();XA=xAcc();if(!live)setTimeout(renderPhase);
   const rows=chosen(),T=rows.reduce((s,r)=>{const v=V(r);return {b:s.b+v.b,c:s.c+v.c,g:s.g+v.g+v.x}},{b:0,c:0,g:0}),t=T.c+T.g;
   const TP=pc(t,T.b),k=TP>100?"over":TP>=90?"warn":"";
   $("tpv").className="pv "+k;
@@ -715,10 +725,11 @@ function renderPhase(){
   const chip=(x,i)=>{const pas=C.sel[i],av=C.av[i],cons=C.cons[i],rest=C.remain[i];
     const cls=pas?(rest<-0.5?"done bad":"done good"):(av>0?(rest<-0.5?"neg-f":"rest"):"");
     const M=pslMax(av),pos=av*100/M*100,cut=Math.min(pos,100/M*100);
-    return `<div class="pcw ${cls}" data-pw="${x.id}"><div class="pch"><span class="pn">${pas?'<i class="ck">✓</i>':""}${x.name?phName(x.name):"Période "+(i+1)}</span>
+    const lk=!!x.lock;
+    return `<div class="pcw ${cls}${lk?" lk":""}" data-pw="${x.id}"><button type="button" class="plk" data-lk="${x.id}" aria-pressed="${lk}" aria-label="${lk?"Déverrouiller":"Verrouiller"} la consommation" title="${lk?"Consommation figée : appuyer pour déverrouiller":"Figer la consommation"}">${lk?'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>':'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.5-1.9"/></svg>'}</button><div class="pch"><span class="pn">${pas?'<i class="ck">✓</i>':""}${x.name?phName(x.name):"Période "+(i+1)}</span>
       <div class="pam"><span><small>Consommé</small><b class="neg" data-pc>${f0(cons)}</b></span><span><small>Restant</small><b class="${rest<-0.5?"neg":"pos"}" data-pr>${Math.abs(rest)<0.5?"0 €":(rest<0?"−\u2060\u200a\u2060":"+\u2060\u200a\u2060")+f0(Math.abs(rest))}</b></span></div>
       <small class="pv0">${pas?"terminée · "+f0(env[i]):"enveloppe "+fs(C.adj[i])}</small></div>
-      <div class="pslw${M>100?" ext":""}" style="--m:${100/M*100}%"><input type="range" class="psl" min="0" max="${M}" step="1" value="${Math.round(av*100)}" data-av="${x.id}" style="--v:${pos}%;--c:${cut}%;--sc:${pslC(av,rest)};--s1:${av>1.004?"var(--bl)":pslC(av,rest)}" aria-label="Avancement de la consommation : ${esc(x.name||"période")}"></div></div>`};
+      <div class="pslw${M>100?" ext":""}" style="--m:${100/M*100}%"><input type="range" class="psl"${lk?" disabled":""} min="0" max="${M}" step="1" value="${Math.round(av*100)}" data-av="${x.id}" style="--v:${pos}%;--c:${cut}%;--sc:${pslC(av,rest)};--s1:${av>1.004?"var(--bl)":pslC(av,rest)}" aria-label="Avancement de la consommation : ${esc(x.name||"période")}"></div></div>`};
   const kind=x=>new RegExp(`(${MOIS})\\s*(?:[–—-]|→)\\s*(${MOIS})`,"i").test(x.name||"")?0:/vacances/i.test(x.name||"")?1:2;
   const rowsH=[0,1,2].map(k=>{const it=L.map((x,i)=>[x,i]).filter(([x])=>kind(x)===k);return it.length?`<div class="frow">${it.map(([x,i])=>chip(x,i)).join("")}</div>`:""}).join("");
   $("phb").innerHTML=`<div class="frise" id="frise">${rowsH}</div><div class="fnav" id="fnav" role="scrollbar" aria-label="Mini-carte des périodes : faire défiler" aria-controls="frise"><div class="mm"></div><i></i></div>
@@ -767,7 +778,7 @@ $("phb").addEventListener("input",e=>{const id=e.target.dataset.av;if(!id)return
   if(+el.value>=+el.max&&+el.max<300){el.max=+el.max+25;el.value=el.value}
   const v=+el.value/100;pslPaint(el);
   // recalcul complet en direct (sans enregistrer) : ce qui s'affiche pendant le glissement = ce qui restera au relâchement
-  const old=p.av,had=PHSEL.has(id);p.av=v;if(v>=1)PHSEL.add(id);else PHSEL.delete(id);XA=xAcc();const C=phCalc();p.av=old;if(had)PHSEL.add(id);else PHSEL.delete(id);XA=xAcc();
+  const old=p.av,had=PHSEL.has(id);p.av=v;if(v>=1)PHSEL.add(id);else PHSEL.delete(id);XA=xAcc();const C=phCalc();renderHome(true);p.av=old;if(had)PHSEL.add(id);else PHSEL.delete(id);
   C.L.forEach((x,i)=>{const w=document.querySelector(`#phb [data-pw="${x.id}"]`);if(!w||(C.sel[i]&&x.id!==id))return;
     const r=C.remain[i];const pc=w.querySelector("[data-pc]");pc.textContent=f0(C.cons[i]);
     const pr=w.querySelector("[data-pr]");pr.textContent=Math.abs(r)<0.5?"0 €":(r<0?"−\u2060\u200a\u2060":"+\u2060\u200a\u2060")+f0(Math.abs(r));pr.className=r<-0.5?"neg":"pos";
@@ -776,8 +787,13 @@ $("phb").addEventListener("input",e=>{const id=e.target.dataset.av;if(!id)return
     const sl=w.querySelector(".psl");if(sl){sl.style.setProperty("--sc",pslC(C.av[i],r));sl.style.setProperty("--s1",C.av[i]>1.004?"var(--bl)":pslC(C.av[i],r))}});
   fnavPaint(C);
 });
-$("phb").addEventListener("click",e=>{if(e.target.closest(".psl"))return;const w=e.target.closest("[data-pw]");if(!w)return;
-  const id=w.dataset.pw,p=PH.find(x=>x.id===id);if(!p)return;
+$("phb").addEventListener("click",e=>{if(e.target.closest(".psl"))return;
+  const lb=e.target.closest("[data-lk]");if(lb){const q=PH.find(x=>x.id===lb.dataset.lk);if(q){const C=phCalc(),i=C.L.findIndex(x=>x.id===q.id);
+    if(!q.lock){q.lock=true;if(!C.sel[i])q.lockAmt=Math.round(C.cons[i]*100)/100}       // fige le montant consommé
+    else{q.lock=false;if(!C.sel[i])q.av=C.av[i];delete q.lockAmt}
+    savePH();renderHome()}return}
+  const w=e.target.closest("[data-pw]");if(!w)return;
+  const id=w.dataset.pw,p=PH.find(x=>x.id===id);if(!p||p.lock)return;
   if(PHSEL.has(id)){PHSEL.delete(id);p.av=Math.min(+p.avPrev||0,.99)}else{p.avPrev=+p.av||0;p.av=1;PHSEL.add(id)}
   savePH();setDate();renderHome()});
 $("phb").addEventListener("change",e=>{const id=e.target.dataset.av;if(!id)return;const p=PH.find(x=>x.id===id);if(!p)return;const v=+e.target.value/100;
@@ -924,8 +940,8 @@ function card(r){
 }
 const so=$("so");so.value=LS.get("ab-sort","code");
 function key(r){const c=V(r).t,p=pc(c,r[3]);return so.value==="pct"?-(p===Infinity?1e9:p):so.value==="eur"?-c:so.value==="dispo"?(r[3]-c):0}
-function renderHome(){
-  summary();RA=regAcc();
+function renderHome(live){
+  summary(live);RA=regAcc();
   const rows=chosen();
   if(!rows.length){$("arts").innerHTML=`<div class="card empty">Aucun article sélectionné.<br><br><button class="tbtn pri" onclick="go('parametres')">Choisir mes articles</button></div>`;return}
   if(so.value==="code"){
