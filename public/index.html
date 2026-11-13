@@ -2,6 +2,9 @@
 <html lang="fr"><head><meta charset="utf-8"><title>App Budget</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <script>try{const t=localStorage.getItem("ab-theme");const v=t&&JSON.parse(t);if(v==="light"||v==="dark")document.documentElement.setAttribute("data-theme",v)}catch(e){}</script>
 <style>
 :root{--bl:#2a6fb0;--bg:#f6f5f1;--card:#fff;--tx:#1d1d1b;--mu:#6b6a64;--ln:#e2e0d8;--a:#2a6fb0;--e:#9cc3e6;--h:#c8473a;--w:#c9961a;color-scheme:light}
@@ -292,6 +295,15 @@ details.dsec>:last-child{margin-bottom:14px}
 .chk2{display:flex;align-items:flex-start;gap:10px;margin-top:14px;font-size:.92rem;cursor:pointer}
 .chk2 input{width:20px;height:20px;flex:none;margin:0;accent-color:var(--a)}
 .chk2 small{display:block;color:var(--mu);font-size:.78rem}
+.h2i{display:flex;align-items:center;gap:8px;font-size:1rem;font-weight:700;margin:0 0 2px}
+.si{flex:none;color:var(--a)}
+details.dsec>summary .si{margin-right:-2px}
+.h3s{font-size:.85rem;text-transform:uppercase;letter-spacing:.05em;color:var(--mu);margin:14px 0 4px;font-weight:700}
+details.dsec>.h3s:first-of-type{margin-top:2px}
+details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-right:14px!important}
+.nsrc{margin-top:12px;padding-top:10px;border-top:1px solid var(--ln)}
+#fs,#inst{padding:7px 10px}
+#fs svg{display:block}
 .empty{text-align:center;color:var(--mu);padding:24px}
 @media (max-width:420px){.tot{flex-direction:column;align-items:stretch}.ring{margin:0 auto}}
 /* Code couleur : bleu = disponible, or = niveau acceptable (90-100 %), rouge = dépassement */
@@ -307,8 +319,8 @@ details.dsec>:last-child{margin-bottom:14px}
 :root[data-theme="dark"] .frise .pcw>button.on.good{color:#0d1b2a}
 </style></head>
 <body><main>
-<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.1</small></span></span>
-  <span class="hb"><button class="tbtn" id="th" aria-label="Thème : système" title="Thème : système"></button><button class="tbtn" id="nav">⚙ Paramètres</button></span>
+<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.2</small></span></span>
+  <span class="hb"><button class="tbtn" id="inst" hidden title="Installer l'application">⤓ Installer</button><button class="tbtn" id="fs" aria-label="Plein écran" title="Plein écran"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button><button class="tbtn" id="nav">⚙ Paramètres</button></span>
 </h1>
 <div class="sub"><div id="org"></div><div>Dépenses <span id="yr"></span> · situation au <b id="dt"></b></div></div>
 
@@ -346,22 +358,23 @@ details.dsec>:last-child{margin-bottom:14px}
 <!-- ===== Paramètres ===== -->
 <section id="v-set" hidden>
   <details class="card up dsec" id="dper">
-    <summary><b>Périodes de l'année</b><span class="dsm" id="dpers"></span></summary>
+    <summary><svg class="si" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4M7 13.5h3M7 17h3M14 13.5h3"/></svg><b>Périodes de l'année</b><span class="dsm" id="dpers"></span></summary>
     <p class="note" style="margin:4px 0 6px">Les périodes se succèdent dans l'ordre de la liste. Le pourcentage est la part du budget prévue pour chaque période.</p>
     <div id="phlist"></div>
     <div class="phf"><span id="phsum" class="note"></span><button class="tbtn" id="phvent">Ventilation des %</button><button class="tbtn" id="phround">Arrondir à la dizaine</button><button class="tbtn" id="phadd">+ Ajouter une période</button></div>
     <div class="phf" style="margin-top:10px;padding-top:10px;border-top:1px solid var(--ln)"><button class="tbtn" id="phbase">Réinitialiser les périodes</button></div>
   </details>
   <div class="card up">
-    <b>Mettre à jour les données</b>
+    <h2 class="h2i"><svg class="si" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2.5H6.5A2.5 2.5 0 0 0 4 5v14a2.5 2.5 0 0 0 2.5 2.5h11A2.5 2.5 0 0 0 20 19V8.5Z"/><path d="M14 2.5v6h6"/><path d="M14.5 12.6a3 3 0 1 0 0 3.8M9 13.7h4M9 15.3h4"/></svg>Mise à jour des données budgétaires</h2>
     <p class="note" style="margin:4px 0 10px">Envoie la « Situation budgétaire détaillée par analytique » (PDF) la plus récente.</p>
     <label class="tbtn pri fl">📄 Choisir le PDF<input type="file" id="pdf" accept="application/pdf,.pdf" hidden></label>
     <div id="upst" class="note" style="margin-top:10px"></div>
     <div id="prev" hidden></div>
     <div class="note" style="margin-top:10px">Données actuelles : situation au <b id="cur"></b> · <a href="#parametres" id="reset" style="color:inherit">revenir aux données d'origine</a></div>
+    <div class="note nsrc">Consommé = mandaté + engagé non mandaté (« Réalisé total » du document). Source : « Situation budgétaire détaillée par analytique » (M57) du <span id="dt2"></span><span id="src"></span>. Le chapitre 012 (personnel) est absent de ce type d'export. Recettes non affichées.</div>
   </div>
   <div class="card up">
-    <b>Dépenses de régie en cours</b>
+    <h2 class="h2i"><svg class="si" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 2.5h14v19l-2.3-1.5-2.4 1.5-2.3-1.5-2.3 1.5-2.4-1.5L5 21.5Z"/><path d="M8.5 7.5h7M8.5 11h7M8.5 14.5h4"/></svg>Dépenses de régie en cours</h2>
     <p class="note" style="margin:4px 0 10px">États du régisseur (.ods, .xlsx) pas encore intégrés à la situation budgétaire. Ils s'ajoutent aux jauges.</p>
     <label class="tbtn pri fl">📊 Ajouter un état de régie<input type="file" id="reg" accept=".ods,.xlsx,.xls,.csv,application/vnd.oasis.opendocument.spreadsheet" multiple hidden></label>
     <div id="rgst" class="note" style="margin-top:10px"></div>
@@ -370,7 +383,7 @@ details.dsec>:last-child{margin-bottom:14px}
     <label class="it" style="border:0;padding-bottom:0"><div class="tx"><b>Compter la régie dans les jauges</b><small>Décoche pour voir uniquement la situation officielle</small></div><span class="sw"><input type="checkbox" id="regon"><i></i></span></label>
   </div>
   <details class="card up dsec" id="dart">
-  <summary><b>Articles suivis</b><span class="dsm" id="darts"></span></summary>
+  <summary><svg class="si" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11"/><path d="m3.5 6 1.2 1.2L7 4.8M3.5 12l1.2 1.2L7 10.8M3.5 18l1.2 1.2L7 16.8"/></svg><b>Articles suivis</b><span class="dsm" id="darts"></span></summary>
   <div class="qa" style="margin:10px 0 14px">
     <button class="tbtn" data-q="all">Tout cocher</button>
     <button class="tbtn" data-q="none">Tout décocher</button>
@@ -379,16 +392,17 @@ details.dsec>:last-child{margin-bottom:14px}
   </div>
   <div id="setlist"></div>
   </details>
-  <div class="card up" id="bk">
-    <b>Sauvegarde et restauration</b>
+  <details class="card up dsec" id="bk">
+    <summary><svg class="si" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 18.5a4.5 4.5 0 0 1-.6-9 6 6 0 0 1 11.6 1.5 3.8 3.8 0 0 1-.5 7.5"/><path d="M12 12v8.5M8.8 15.2 12 12l3.2 3.2"/></svg><b>Sauvegarde</b><span class="dsm" id="bks"></span></summary>
+    <h3 class="h3s">Fichiers de sauvegarde</h3>
     <p class="note" style="margin:4px 0 10px">Fichiers .json à garder (ou à déposer sur GitHub) pour restaurer l'application.</p>
     <div class="bkr"><div><b>Sauvegarde complète</b><small>Situation budgétaire, articles suivis, états de régie, périodes et clé de répartition</small></div><button class="tbtn pri" data-bk="full">Enregistrer</button></div>
     <div class="bkr"><div><b>Périodes et clé de répartition</b><small>Intitulés, ordre, pourcentages et périodes passées</small></div><button class="tbtn pri" data-bk="key">Enregistrer</button></div>
     <label class="tbtn fl" style="margin-top:10px">⤒ Restaurer depuis un fichier<input type="file" id="bkin" accept=".json,application/json" hidden></label>
     <div id="bkst" class="note" style="margin-top:8px"></div>
-  </div>
-<div class="card up" id="cf" hidden>
-    <b>Stockage Cloudflare</b>
+  
+    <div id="cf" hidden>
+    <h3 class="h3s">Stockage Cloudflare</h3>
     <p class="note" style="margin:4px 0 10px">Les données sont enregistrées automatiquement dans le stockage R2 et retrouvées sur tous tes appareils. Les PDF et états de régie importés y sont archivés.</p>
     <div class="cfr"><input type="password" id="cftok" placeholder="Jeton d'accès (APP_TOKEN)" autocomplete="off"><button class="tbtn pri" id="cfgo">Connecter</button></div>
     <div id="cfst" class="note" style="margin-top:8px"></div>
@@ -396,20 +410,19 @@ details.dsec>:last-child{margin-bottom:14px}
       <div class="qa" style="margin-top:10px"><button class="tbtn" data-cfsave="full">Sauvegarde complète datée</button><button class="tbtn" data-cfsave="key">Sauvegarde des périodes</button></div>
       <div id="cflist"></div>
     </div>
-  </div>
+  
+    </div>
+  </details>
   <div class="card up">
-    <b>Couleur du thème</b>
+    <h2 class="h2i"><svg class="si" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18c1.4 0 2-1 2-2 0-.6-.3-1-.6-1.4-.3-.4-.5-.8-.5-1.3 0-1 .8-1.8 1.8-1.8H17a4 4 0 0 0 4-4c0-4.2-4-7.5-9-7.5Z"/><circle cx="7.5" cy="11" r="1.2" fill="currentColor"/><circle cx="10" cy="7" r="1.2" fill="currentColor"/><circle cx="15" cy="7.5" r="1.2" fill="currentColor"/></svg>Couleur du thème</h2>
     <div class="thm" id="thm" role="radiogroup" aria-label="Mode d'affichage"><button type="button" data-t="auto" role="radio" title="Selon le réglage de l'appareil">Système</button><button type="button" data-t="light" role="radio">Clair</button><button type="button" data-t="dark" role="radio">Sombre</button></div>
     <div class="acc" id="acc"></div>
     <div class="sl2"><label for="acci">Intensité</label><input id="acci" type="range" min="-100" max="100" step="5" value="0"><span id="accv">Normale</span></div>
     <label class="chk2"><input type="checkbox" id="sbc"><span>Colorer la barre système dans le thème<small>Sinon, elle garde sa couleur par défaut.</small></span></label>
   </div>
-  <button class="tbtn pri" id="done" style="width:100%;padding:12px;font-size:1rem">Voir le tableau de bord</button>
 </section>
 
-<div class="card note" style="margin-top:14px">
-  Consommé = mandaté + engagé non mandaté (« Réalisé total » du document). Source : « Situation budgétaire détaillée par analytique » (M57) du <span id="dt2"></span><span id="src"></span>. Le chapitre 012 (personnel) est absent de ce type d'export. Recettes non affichées.
-</div>
+
 </main>
 <div id="md" hidden><div class="mb" role="dialog" aria-modal="true"><div id="mdb"></div></div></div>
 <script>
@@ -664,7 +677,7 @@ $("phb").addEventListener("click",e=>{
 
 // ===== Phases (paramètres) =====
 function renderPhSet(){
-  setTimeout(()=>{const n=PH.length,t=PH.reduce((a,p)=>a+(+p.pct||0),0);$("dpers").textContent=n?`${n} période${n>1?"s":""} · ${t.toLocaleString("fr-FR",{maximumFractionDigits:1})} %`:"aucune";const k=A().length,o=A().filter(r=>OFF.has(r[1])).length;$("darts").textContent=`${k-o} / ${k} suivis`});
+  setTimeout(()=>{$("bks").textContent=CF.auth?"Cloudflare connecté":"fichiers .json";const n=PH.length,t=PH.reduce((a,p)=>a+(+p.pct||0),0);$("dpers").textContent=n?`${n} période${n>1?"s":""} · ${t.toLocaleString("fr-FR",{maximumFractionDigits:1})} %`:"aucune";const k=A().length,o=A().filter(r=>OFF.has(r[1])).length;$("darts").textContent=`${k-o} / ${k} suivis`});
   $("phlist").innerHTML=PH.length?PH.map((p,i)=>`<div class="phr" data-id="${p.id}">
     <div class="l1"><span class="grip" aria-label="Maintenir pour déplacer" title="Maintenir pour déplacer"><i></i><i></i><i></i></span>
       <input data-k="name" value="${esc(p.name||"")}" placeholder="Intitulé de la période">
@@ -1096,9 +1109,24 @@ function route(){
   set?renderSet():renderHome();
 }
 $("nav").onclick=()=>{go(location.hash==="#parametres"?"home":"parametres");scrollTo(0,0)};
-$("done").onclick=()=>{go("home");scrollTo(0,0)};
+
 addEventListener("hashchange",route);
 setDate();route();
+
+// ===== Plein écran et installation (application Chrome) =====
+const standalone=()=>matchMedia("(display-mode: standalone)").matches||matchMedia("(display-mode: fullscreen)").matches||navigator.standalone===true;
+function fsUi(){const fs=$("fs");if(standalone()||!document.documentElement.requestFullscreen){fs.hidden=true;return}
+  fs.hidden=false;const on=!!document.fullscreenElement;fs.title=fs.ariaLabel=on?"Quitter le plein écran":"Plein écran";
+  fs.innerHTML=on?'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4v5H4M20 9h-5V4M15 20v-5h5M4 15h5v5"/></svg>':'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg>'}
+$("fs").onclick=async()=>{try{document.fullscreenElement?await document.exitFullscreen():await document.documentElement.requestFullscreen()}catch(_){$("fs").hidden=true}};
+document.addEventListener("fullscreenchange",fsUi);
+try{matchMedia("(display-mode: standalone)").addEventListener("change",fsUi)}catch(_){}
+let INSTP=null;
+addEventListener("beforeinstallprompt",e=>{e.preventDefault();INSTP=e;if(!standalone())$("inst").hidden=false});
+$("inst").onclick=async()=>{if(!INSTP)return;INSTP.prompt();try{await INSTP.userChoice}catch(_){}INSTP=null;$("inst").hidden=true};
+addEventListener("appinstalled",()=>{$("inst").hidden=true;fsUi()});
+if("serviceWorker" in navigator&&/^https:$/.test(location.protocol)&&!/claude/i.test(location.hostname))navigator.serviceWorker.register("sw.js").catch(()=>{});
+fsUi();
 
 // ===== Thème : mode (système / clair / sombre), couleur, intensité, barre système =====
 const root=document.documentElement;
@@ -1121,7 +1149,6 @@ function applyTheme(){
     light:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>',
     dark:'<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1Z"/></svg>'};
   const lab={auto:"système",light:"clair",dark:"sombre"}[t]||"système";
-  $("th").innerHTML=ic[t]||ic.auto;$("th").title=$("th").ariaLabel="Thème : "+lab;
   document.querySelectorAll("#thm button").forEach(b=>{const on=b.dataset.t===(t==="light"||t==="dark"?t:"auto");b.classList.toggle("on",on);b.setAttribute("aria-checked",on)});
   document.querySelectorAll("#acc button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.acc===a));
   $("acci").value=Math.round(k*100);$("accv").textContent=k<=-.6?"Pastel":k<-.15?"Douce":k<.15?"Normale":k<.6?"Vive":"Très vive";
@@ -1134,8 +1161,6 @@ $("acc").onclick=e=>{const b=e.target.closest("[data-acc]");if(b){LS.set("ab-acc
 $("thm").onclick=e=>{const b=e.target.closest("[data-t]");if(b){LS.set("ab-theme",b.dataset.t);applyTheme()}};
 $("acci").oninput=e=>{LS.set("ab-acci",+e.target.value);applyTheme()};
 $("sbc").onchange=e=>{LS.set("ab-sbc",e.target.checked);applyTheme()};
-// bouton du titre : système → clair → sombre → système
-$("th").onclick=()=>{const t=LS.get("ab-theme","auto"),n={auto:"light",light:"dark",dark:"auto"}[t]||"light";LS.set("ab-theme",n);applyTheme()};
 try{matchMedia("(prefers-color-scheme:dark)").addEventListener("change",applyTheme)}catch(_){}
 applyTheme();
 </script>

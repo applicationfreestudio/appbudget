@@ -9,6 +9,7 @@ L'application tient dans un seul fichier, `public/index.html`. Elle est servie p
 | Fichier | Rôle |
 |---|---|
 | `public/index.html` | L'application complète (HTML, CSS, JavaScript) |
+| `public/manifest.webmanifest`, `public/sw.js`, icônes | Installation comme application Chrome (PWA) |
 | `worker/index.js` | Worker Cloudflare : sert l'application et l'API de stockage `/api/*` |
 | `wrangler.jsonc` | Configuration du Worker (assets, bucket R2 `appbudget-files`) |
 | `config/periodes-cle-2026.json` | Périodes et clé de répartition 2026 (restaurable seule) |
