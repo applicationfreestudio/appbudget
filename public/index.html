@@ -34,7 +34,7 @@ h1{margin:0 -16px 8px;padding:14px 16px 12px!important;display:flex;justify-cont
 .ver{font-size:calc(.53em - 2px);font-weight:500;color:var(--mu);margin-top:2px;white-space:nowrap;font-variant-numeric:tabular-nums}
 
 #th svg{display:block}
-.hb{display:flex;flex-direction:row;align-items:flex-end;justify-content:flex-end;gap:10px;align-self:flex-end;margin-bottom:2px}.hb .hbr{order:1}.hb .urd{order:2;margin-right:-4px}.urd .sgb svg{display:block}
+.hb{display:flex;flex-direction:row;align-items:flex-end;justify-content:flex-end;gap:10px;position:absolute;right:16px;bottom:13px}.ver.hid{visibility:hidden}.hb .ni{display:none}h1.hc1 .hb{gap:6px}h1.hc1 .hb .sgb{font-size:14px;padding:0 3px}h1.hc2 .hb{gap:6px}h1.hc2 .hb .nl{display:none}h1.hc2 .hb .ni{display:block}h1.hc2 .hb .sgb{padding:0 3px;align-items:center}.hb .hbr{order:1;align-items:center}.nsep{flex:none;width:1.5px;height:18px;border-radius:1px;background:color-mix(in srgb,var(--mu) 45%,transparent);align-self:center}.nsep[hidden]{display:none}.hb .sgb[hidden]{display:none}.hb .urd{order:2;margin-right:-4px}.urd .sgb svg{display:block}
 .hb .hbr{display:flex;gap:6px;align-items:flex-end}
 .hb .sgb{all:unset;box-sizing:border-box;display:inline-flex;align-items:flex-end;gap:4px;padding:0 10px;font:500 17px/1.15 Barlow,system-ui,sans-serif;color:var(--mu);cursor:pointer;white-space:nowrap;-webkit-tap-highlight-color:transparent}
 .urd{display:inline-flex;gap:0;margin-right:2px}.urd .sgb{padding:0 6px}
@@ -322,7 +322,7 @@ select{font:inherit;font-size:.85rem;padding:7px 8px;border-radius:10px;border:1
 .psl:disabled::-webkit-slider-thumb{width:0;height:0;border:0;box-shadow:none;background:none}
 .psl:disabled::-moz-range-thumb{width:0;height:0;border:0;background:none}
 .pch .pn{display:block;font-size:.78rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pam{display:flex;justify-content:space-between;gap:6px;margin-top:3px}
+.pam{display:flex;justify-content:space-between;gap:6px;margin-top:3px}.prg{margin-top:3px;font-size:.74rem;color:var(--mu);display:flex;justify-content:space-between;gap:6px}.prg b{color:var(--h);font-variant-numeric:tabular-nums}.pcw.big .prg{font-size:.85rem}
 .pam span{display:flex;flex-direction:column;min-width:0}
 .pam small{font-size:.62rem;color:var(--mu);text-transform:uppercase;letter-spacing:.03em}
 .pam b{font-size:.86rem;font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
@@ -457,6 +457,8 @@ html.lock,html.lock body{overflow:hidden}
 .rgf input,.rgf select{font:inherit;font-size:1rem;color:var(--tx);background:var(--bg);border:1px solid var(--ln);border-radius:10px;padding:10px 11px;width:100%;box-sizing:border-box;min-width:0}
 .rgf input[type=date]{font-size:1rem;padding:9px 8px}.rgf input:focus,.rgf select:focus{outline:2px solid var(--a);outline-offset:-1px}
 .rgg{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+.rgac{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:7px 0;cursor:pointer}.rgac>span:first-child{min-width:0;font-size:.9rem}.rgac small{color:var(--mu);font-size:.75rem}.rgac .sw{flex:none!important;position:relative;display:inline-block;width:46px;height:28px}.rgac .sw i::after{width:22px;height:22px}.rgac .sw input:checked+i::after{left:21px}
+.rgus{font-size:.8rem;color:var(--mu)}
 .rgerr{color:var(--h);font-size:.85rem;font-weight:600}.rgerr:empty{display:none}
 .rgfb{display:flex;gap:8px;justify-content:flex-end;margin-top:2px}.rgfb .rgdel{margin-right:auto;color:var(--h);border-color:color-mix(in srgb,var(--h) 40%,var(--ln))}
 .rgd{all:unset;box-sizing:border-box;display:flex;flex-direction:column;gap:3px;width:100%;padding:11px 2px;border-bottom:1px solid var(--ln);cursor:pointer}.rgd:last-child{border-bottom:0}.rgd.on{background:color-mix(in srgb,var(--a) 8%,transparent);border-radius:8px;padding-left:8px;padding-right:8px}
@@ -466,7 +468,7 @@ html.lock,html.lock body{overflow:hidden}
 .robn{margin:-4px 0 12px;padding:8px 12px;border-radius:10px;background:color-mix(in srgb,var(--a) 10%,var(--card));color:var(--mu);font-size:.85rem;font-weight:600}
 .ro #urd{display:none!important}.ro #v-set>:not(#dper):not(#thc){display:none!important}
 .ro #dper .grip,.ro #dper [data-del],.ro #dper .phf3,.ro #dper #phadd,.ro #dper #phraz,.ro #dper .phla{display:none!important}
-.ro #phlist input,.ro #phlist label,.ro #phlist button,.ro .psl,.ro .pve{pointer-events:none}.ro #phlist .psw,.ro .pdn,.ro #nav2{display:none!important}.cft{display:flex;flex-direction:column;line-height:1.2}.cft .dsm{margin-top:1px}.cfi .cfar,#cf.on .cfi .cfx{display:none}#cf.on .cfi .cfar{display:inline;stroke:#2f8f63;stroke-width:2.4}.cfi .cfx{stroke:var(--h);stroke-width:2.4}#cf>:last-child{margin-bottom:0}
+.ro #phlist input,.ro #phlist label,.ro #phlist button,.ro .psl,.ro .pve{pointer-events:none}.ro #phlist .psw,.ro .pdn{display:none!important}.fxi{display:none}.ro .fxi{display:inline-grid;place-items:center;flex:none;width:26px;height:26px;border-radius:50%;font-style:normal;font-weight:800;font-size:.85rem;background:var(--ln);color:color-mix(in srgb,var(--mu) 55%,var(--card))}.ro .fxi.on{background:var(--a);color:#fff}.cft{display:flex;flex-direction:column;line-height:1.2}.cft .dsm{margin-top:1px}.cfi .cfar,#cf.on .cfi .cfx{display:none}#cf.on .cfi .cfar{display:inline;stroke:#2f8f63;stroke-width:2.4}.cfi .cfx{stroke:var(--h);stroke-width:2.4}#cf>:last-child{margin-bottom:0}
 .bkr button,.bkr label.tbtn{flex:none;padding:8px 12px;margin:0;font-size:.85rem}
 details.dsec{padding:0}
 details.dsec>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:14px;-webkit-tap-highlight-color:transparent}
@@ -518,8 +520,8 @@ details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-righ
 :root[data-theme="dark"] .frise .pcw>button.on.good{color:#0d1b2a}
 </style></head>
 <body><main>
-<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.57</small></span></span>
-  <span class="hb"><span class="urd" id="urd" hidden><button type="button" class="sgb" id="undo" aria-label="Annuler la dernière modification" title="Annuler"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button><button type="button" class="sgb" id="redo" aria-label="Rétablir la modification" title="Rétablir"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg></button></span><span class="hbr"><button type="button" class="sgb" id="nav2">Régie</button><button type="button" class="sgb" id="nav">Paramètres<svg class="chv" viewBox="0 0 12 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4l6 8-6 8"/></svg></button><button class="tbtn" id="fs" aria-label="Plein écran" title="Plein écran"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button></span></span>
+<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.58</small></span></span>
+  <span class="hb"><span class="urd" id="urd" hidden><button type="button" class="sgb" id="undo" aria-label="Annuler la dernière modification" title="Annuler"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button><button type="button" class="sgb" id="redo" aria-label="Rétablir la modification" title="Rétablir"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg></button></span><span class="hbr"><button type="button" class="sgb" id="nav2"></button><i class="nsep" id="nsep" aria-hidden="true"></i><button type="button" class="sgb" id="nav">Paramètres<svg class="chv" viewBox="0 0 12 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4l6 8-6 8"/></svg></button><button class="tbtn" id="fs" aria-label="Plein écran" title="Plein écran"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button></span></span>
 </h1>
 <div class="sub"><div id="org"></div><div>Dépenses <span id="yr"></span> · situation au <b id="dt"></b></div></div>
 
@@ -555,6 +557,14 @@ details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-righ
 
 <!-- ===== Paramètres ===== -->
 <section id="v-rg" hidden>
+  <details class="card up dsec" id="rgcfg">
+    <summary><svg class="si" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg><b>Paramètres de la régie</b><span class="dsm" id="rgcs"></span></summary>
+    <h3 class="h3s">Type de régie</h3>
+    <div class="thm" id="rgty" role="radiogroup" aria-label="Type de régie" style="margin-top:6px"><button type="button" data-rgt="avances" role="radio">Avances</button><button type="button" data-rgt="recettes" role="radio">Recettes</button><button type="button" data-rgt="mixte" role="radio">Avances et recettes</button></div>
+    <h3 class="h3s">Dépenses autorisées</h3>
+    <p class="note" style="margin:2px 0 6px">Comptes proposés dans le formulaire. Au départ, seuls ceux présents dans les fichiers de régie importés sont activés.</p>
+    <div id="rgacl"></div>
+  </details>
   <div class="card up">
     <h2 class="h2i"><svg class="si" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6M9 16h3"/></svg>Dépenses de régie en cours</h2>
     <p class="note" style="margin:4px 0 10px">Dépenses payées en régie, pas encore dans la situation budgétaire. Elles sont décomptées de la jauge principale et, si elles sont affectées à une période, de son restant.</p>
@@ -568,14 +578,16 @@ details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-righ
         <label>Date<input type="date" name="date" required></label>
         <label>N° de pièce<input type="text" name="piece" autocomplete="off"></label>
       </div>
-      <label>Tiers<input type="text" name="tiers" autocomplete="off" placeholder="Fournisseur, magasin…"></label>
-      <label>Objet<input type="text" name="objet" autocomplete="off" placeholder="Achat, sortie, activité…"></label>
+      <label>Fournisseur (tiers)<input type="text" name="tiers" list="dltiers" autocomplete="off" placeholder="Magasin, prestataire…"></label>
+      <label>Activité (objet)<input type="text" name="objet" list="dlobjet" autocomplete="off" placeholder="Sortie, atelier, goûter…"></label>
+      <datalist id="dltiers"></datalist><datalist id="dlobjet"></datalist>
       <label>Compte (nature)<select name="compte"></select></label>
       <label id="rgfo" hidden>Numéro de compte<input type="text" name="autre" inputmode="numeric" autocomplete="off" placeholder="6064"></label>
       <div class="rgg">
         <label>Montant (€)<input type="number" name="montant" step="0.01" min="0" inputmode="decimal" required></label>
         <label>Période<select name="per"></select></label>
       </div>
+      <div class="rgus" id="rgus"></div>
       <div class="rgerr" id="rgerr"></div>
       <div class="mbt rgfb"><button type="button" class="tbtn rgdel" id="rgdel" hidden>Supprimer</button><button type="button" class="tbtn" id="rgcan">Annuler</button><button type="submit" class="tbtn pri">Enregistrer</button></div>
     </form>
@@ -924,7 +936,7 @@ function renderPhase(){
     const cls=pas?(rest<-0.5?"done bad":"done good"):(av>0?(rest<-0.5?"neg-f":"rest"):"");
     const lb=x.fix&&!big?`<span class="plk fxe" title="Montant bloqué" aria-label="Montant bloqué">€</span>`:"";
     const hd=`<div class="pch"><span class="pn">${pas?'<i class="ck">✓</i>':""}${x.name?phName(x.name):"Période "+(i+1)}</span>
-      <div class="pam"><span><small>Consommé</small><b class="neg" data-pc>${f0(cons)}</b></span><span><small data-pl>Restant</small><b class="${rest<-0.5?"neg":"pos"}" data-pr>${Math.abs(rest)<0.5?"0 €":(rest<0?"−\u2060\u200a\u2060":"+\u2060\u200a\u2060")+f0(Math.abs(rest))}</b></span></div></div>`;
+      <div class="pam"><span><small>Consommé</small><b class="neg" data-pc>${f0(cons)}</b></span><span><small data-pl>Restant</small><b class="${rest<-0.5?"neg":"pos"}" data-pr>${Math.abs(rest)<0.5?"0 €":(rest<0?"−\u2060\u200a\u2060":"+\u2060\u200a\u2060")+f0(Math.abs(rest))}</b></span></div>${(C.rg[i]||0)>0.004?`<div class="prg">Régie en cours <b>${f0(C.rg[i])}</b></div>`:""}</div>`;
     if(!big){const bw=pbW(cons,C.adj[i],rest);   // carte de base : dépense (bleu = prévu, rouge = au-delà de l'alloué), or si terminée
       return `<div class="pcw ${cls}" data-pw="${x.id}">${lb}${hd}<div class="pbar">${pas?`<i style="width:100%;background:var(--w)"></i>`:`<i class="pbf" style="width:${bw[0]}%"></i><i class="pbx" style="width:${bw[1]}%"></i>`}</div></div>`}
     // carte agrandie : curseur de dépense (horizontal) et curseur d'enveloppe (vertical, à gauche)
@@ -1078,7 +1090,7 @@ function renderPhSet(){
       <input data-k="name" value="${esc(p.name||"")}" placeholder="Intitulé de la période"${lk?" readonly":""}>
       <div class="pct"><input type="number" inputmode="decimal" min="0" max="100" step="0.1" data-k="pct" value="${pv}"${p.fix||lk?" readonly":""}><span>%</span></div>
       ${lk?"":`<button class="tbtn" data-del="${p.id}" aria-label="Retirer">✕</button>`}${lb}</div>
-      <div class="l3r"><label class="sw psw fxs" title="Bloquer le montant de la période"><input type="checkbox" data-fx="${p.id}"${p.fix?" checked":""}${lk?" disabled":""} aria-label="Bloquer le montant de la période"><i></i></label><input type="range" class="sl" data-sl="${p.id}" min="0" max="${slMaxOf(i)}" step="0.1" value="${+p.pct||0}" aria-label="Pourcentage de la période"${p.fix||lk?" disabled":""}><b class="eur" data-eur="${p.id}"></b></div>
+      <div class="l3r"><i class="fxi${p.fix?" on":""}" title="${p.fix?"Montant figé":"Montant non figé"}">€</i><label class="sw psw fxs" title="Bloquer le montant de la période"><input type="checkbox" data-fx="${p.id}"${p.fix?" checked":""}${lk?" disabled":""} aria-label="Bloquer le montant de la période"><i></i></label><input type="range" class="sl" data-sl="${p.id}" min="0" max="${slMaxOf(i)}" step="0.1" value="${+p.pct||0}" aria-label="Pourcentage de la période"${p.fix||lk?" disabled":""}><b class="eur" data-eur="${p.id}"></b></div>
     </div>`}).join(""):'<div class="note">Aucune période pour l\'instant.</div>';
   phSum();setTimeout(phvsUpd);{const a=$("phlkall");if(a)a.checked=PH.length>0&&PH.every(x=>x.lock)}
 }
@@ -1404,7 +1416,7 @@ function backup(kind){
   const base={app:"App Budget",format:1,type:kind==="full"?"sauvegarde-complete":"periodes-cle",exportedAt:new Date().toISOString()};
   const per={periodes:PH.map(p=>({id:p.id,nom:p.name,pct:+p.pct||0,avancement:+p.av||0,...(p.lock?{verrou:true}:{}),...(p.fix?{fige:true,montantFige:+p.fixAmt||0}:{})})),periodesPassees:[...PHSEL]};
   if(kind!=="full")return {...base,...per};
-  return {...base,situation:DATA,articlesNonSuivis:[...OFF],regie:{etats:REG,depenses:REGD},...per,tri:LS.get("ab-sort","code")};
+  return {...base,situation:DATA,articlesNonSuivis:[...OFF],regie:{etats:REG,depenses:REGD,parametres:RGCFG},...per,tri:LS.get("ab-sort","code")};
 }
 async function saveFile(name,text){
   try{const dl=window.claude&&claude.use?await claude.use("downloads"):null;
@@ -1425,7 +1437,7 @@ function applyBackup(o){
     if(o.situation&&Array.isArray(o.situation.rows)){DATA=o.situation;LS.set("ab-data",DATA.source==="origine"?null:DATA);
       if(DB)DB.doc("budget/current").set(DATA.source==="origine"?{reset:true,at:Date.now()}:{...DATA,rows:JSON.stringify(DATA.rows)}).catch(()=>{})}
     if(Array.isArray(o.articlesNonSuivis)){OFF=new Set(o.articlesNonSuivis);saveOff()}
-    if(o.regie){REG=Array.isArray(o.regie.etats)?o.regie.etats:[];saveReg();REGD=Array.isArray(o.regie.depenses)?o.regie.depenses:[];saveRegD();if(typeof o.regie.compterDansJauges==="boolean"){LS.set("ab-regon",o.regie.compterDansJauges);if(DB)DB.doc("prefs/regie").set({on:o.regie.compterDansJauges}).catch(()=>{})}}
+    if(o.regie){REG=Array.isArray(o.regie.etats)?o.regie.etats:[];saveReg();REGD=Array.isArray(o.regie.depenses)?o.regie.depenses:[];saveRegD();if(o.regie.parametres){RGCFG=o.regie.parametres;LS.set("ab-regcfg",RGCFG)}if(typeof o.regie.compterDansJauges==="boolean"){LS.set("ab-regon",o.regie.compterDansJauges);if(DB)DB.doc("prefs/regie").set({on:o.regie.compterDansJauges}).catch(()=>{})}}
     if(o.tri)LS.set("ab-sort",o.tri);
   }
   setDate();renderSet();
@@ -1561,24 +1573,41 @@ $("cflist").addEventListener("click",async e=>{const r=e.target.closest("[data-c
 
 // ===== Page régie : saisie des dépenses =====
 let RGE=null; // dépense en cours de modification (id) ou "new"
-const rgAccs=()=>{const m=new Map();DATA.rows.forEach(r=>{if(r[1]&&!m.has(r[1]))m.set(r[1],r[2])});
+let RGCFG=LS.get("ab-regcfg",{type:"avances"});   // {type, acc:[comptes autorisés]} ; acc absent = choix par défaut
+const rgFileAccs=()=>{const s=new Set();REG.forEach(e=>{Object.keys(e.byAcc||{}).forEach(k=>s.add(k));(e.lines||[]).forEach(l=>l[2]&&s.add(String(l[2])))});return s};
+function rgAllowed(){if(Array.isArray(RGCFG.acc))return new Set(RGCFG.acc);const f=rgFileAccs();REGD.forEach(d=>d.compte&&f.add(d.compte));return f.size?f:new Set(rgAccsAll().map(a=>a[0]))}
+function saveRgCfg(){LS.set("ab-regcfg",RGCFG);cfDirty()}
+function renderRgCfg(){const t=RGCFG.type||"avances",A=rgAllowed(),acc=rgAccsAll();
+  document.querySelectorAll("#rgty [data-rgt]").forEach(b=>{const on=b.dataset.rgt===t;b.classList.toggle("on",on);b.setAttribute("aria-checked",on)});
+  $("rgcs").textContent={avances:"régie d'avances",recettes:"régie de recettes",mixte:"avances et recettes"}[t]+` · ${acc.filter(a=>A.has(a[0])).length} compte${acc.filter(a=>A.has(a[0])).length>1?"s":""}`;
+  $("rgacl").innerHTML=acc.map(([k,v])=>`<label class="rgac"><span>${esc(v)} <small>${esc(k)}</small></span><span class="sw psw"><input type="checkbox" data-rga="${esc(k)}"${A.has(k)?" checked":""} aria-label="Autoriser ${esc(v)}"><i></i></span></label>`).join("")}
+$("rgty").onclick=e=>{const b=e.target.closest("[data-rgt]");if(!b)return;RGCFG={...RGCFG,type:b.dataset.rgt};saveRgCfg();renderRgCfg()};
+$("rgacl").onchange=e=>{const k=e.target.dataset.rga;if(!k)return;const A=rgAllowed();e.target.checked?A.add(k):A.delete(k);RGCFG={...RGCFG,acc:[...A]};saveRgCfg();renderRgCfg()};
+// suggestions : fournisseurs et activités déjà saisis (dépenses et fichiers de régie), les plus fréquents d'abord
+function rgSuggest(){const cnt=i=>{const m=new Map(),add=v=>{v=String(v||"").trim();if(v)m.set(v,(m.get(v)||0)+1)};
+    REGD.forEach(d=>add(i===1?d.tiers:d.objet));REG.forEach(e=>(e.lines||[]).forEach(l=>add(l[i])));return [...m].sort((a,b)=>b[1]-a[1]).map(x=>x[0])};
+  $("dltiers").innerHTML=cnt(1).map(v=>`<option value="${esc(v)}">`).join("");$("dlobjet").innerHTML=cnt(3).map(v=>`<option value="${esc(v)}">`).join("")}
+const rgAccs=()=>{const A=rgAllowed();return rgAccsAll().filter(a=>A.has(a[0]))};
+const rgAccsAll=()=>{const m=new Map();DATA.rows.forEach(r=>{if(r[1]&&!m.has(r[1]))m.set(r[1],r[2])});
   REG.forEach(e=>Object.entries(e.labels||{}).forEach(([k,v])=>{if(!m.has(k))m.set(k,v)}));REGD.forEach(d=>{if(d.compte&&!m.has(d.compte))m.set(d.compte,"Compte "+d.compte)});
   return [...m]};   // ordre de la situation budgétaire
 const perName=id=>{const p=PH.find(x=>x.id===id);return p?p.name:""};
-function renderRg(){
+function renderRg(){renderRgCfg();
   const tot=REGD.reduce((s,d)=>s+(+d.montant||0),0),na=REGD.filter(d=>!d.per).reduce((s,d)=>s+(+d.montant||0),0);
   $("rgtot").innerHTML=REGD.length?`<span>${REGD.length} dépense${REGD.length>1?"s":""}</span><b>${f(tot)}</b>${na>0.004?`<small>dont ${f(na)} non affecté${na>1?"s":""} à une période</small>`:""}`:"";
   const L=REGD.slice().sort((a,b)=>(b.date||"").localeCompare(a.date||"")||b.id.localeCompare(a.id));
   $("rgl").innerHTML=L.length?L.map(d=>`<button type="button" class="rgd${RGE===d.id?" on":""}" data-rge="${d.id}">
       <span class="rgd1"><b>${esc(d.tiers||d.objet||"Dépense")}</b><span class="rgm">${f(+d.montant||0)}</span></span>
-      <span class="rgd2">${d.date?fd(d.date):"sans date"}${d.piece?` · pièce ${esc(d.piece)}`:""}${d.objet&&d.tiers?` · ${esc(d.objet)}`:""}</span>
+      <span class="rgd2">${d.date?fd(d.date):"sans date"}${d.piece?` · pièce ${esc(d.piece)}`:""}${d.objet&&d.tiers?` · ${esc(d.objet)}`:""} · ${esc(d.user||"Administrateur")}</span>
       <span class="rgd3"><span>${esc(nameOf(d.compte))} <small>${esc(d.compte)}</small></span>${d.per?`<i class="rgp">${esc(perName(d.per)||"période supprimée")}</i>`:'<i class="rgp no">non affectée</i>'}</span></button>`).join("")
     :'<div class="note">Aucune dépense saisie. Appuie sur « Nouvelle dépense » pour commencer.</div>';
 }
 function rgOpen(id){RGE=id;const d=id==="new"?{date:new Date().toISOString().slice(0,10)}:REGD.find(x=>x.id===id)||{};const F=$("rgf");
   const acc=rgAccs();F.compte.innerHTML='<option value="">— choisir —</option>'+acc.map(([k,v])=>`<option value="${esc(k)}">${esc(k)} · ${esc(v)}</option>`).join("")+'<option value="__autre">Autre compte…</option>';
-  F.per.innerHTML='<option value="">Non affectée</option>'+PH.map(p=>`<option value="${p.id}">${PHSEL.has(p.id)?"✓ ":""}${esc(p.name||"Période")}</option>`).join("");
+  F.per.innerHTML='<option value="">Non affectée</option>'+PH.filter(p=>!PHSEL.has(p.id)||p.id===d.per).map(p=>`<option value="${p.id}">${esc(p.name||"Période")}${PHSEL.has(p.id)?" (terminée)":""}</option>`).join("");
+  rgSuggest();$("rgus").innerHTML=`Saisie par <b>${esc(d.user||"Administrateur")}</b>`;
   F.date.value=d.date||"";F.piece.value=d.piece||"";F.tiers.value=d.tiers||"";F.objet.value=d.objet||"";F.montant.value=d.montant??"";F.per.value=d.per||"";
+  if(d.compte&&!acc.some(a=>a[0]===d.compte)){const all=rgAccsAll().find(a=>a[0]===d.compte);if(all){acc.push(all);F.compte.insertAdjacentHTML("afterbegin",`<option value="${esc(all[0])}">${esc(all[0])} · ${esc(all[1])}</option>`)}}
   F.compte.value=d.compte&&acc.some(a=>a[0]===d.compte)?d.compte:(d.compte?"__autre":"");F.autre.value=F.compte.value==="__autre"?d.compte:"";$("rgfo").hidden=F.compte.value!=="__autre";
   $("rgft").textContent=id==="new"?"Nouvelle dépense":"Modifier la dépense";$("rgdel").hidden=id==="new";$("rgerr").textContent="";
   $("rgfc").hidden=false;renderRg();$("rgfc").scrollIntoView({behavior:"smooth",block:"start"})}
@@ -1592,7 +1621,9 @@ $("rgf").onsubmit=e=>{e.preventDefault();const F=e.target,m=Math.round(parseFloa
   const compte=F.compte.value==="__autre"?F.autre.value.trim():F.compte.value;
   if(!(m>0)){$("rgerr").textContent="Indique un montant supérieur à 0.";F.montant.focus();return}
   if(!compte||(F.compte.value==="__autre"&&!/^\d{3,7}$/.test(compte))){$("rgerr").textContent=F.compte.value==="__autre"?"Le numéro de compte doit comporter 3 à 7 chiffres.":"Choisis le compte de la dépense.";return}
-  const d={id:RGE==="new"?Date.now().toString(36)+Math.random().toString(36).slice(2,6):RGE,date:F.date.value||"",tiers:F.tiers.value.trim(),objet:F.objet.value.trim(),compte,montant:m,piece:F.piece.value.trim(),per:F.per.value||""};
+  const old=REGD.find(x=>x.id===RGE);
+  if(F.per.value&&PHSEL.has(F.per.value)&&(!old||old.per!==F.per.value)){$("rgerr").textContent="Cette période est terminée : choisis une période en cours.";return}
+  const d={user:old&&old.user||"Administrateur",id:RGE==="new"?Date.now().toString(36)+Math.random().toString(36).slice(2,6):RGE,date:F.date.value||"",tiers:F.tiers.value.trim(),objet:F.objet.value.trim(),compte,montant:m,piece:F.piece.value.trim(),per:F.per.value||""};
   if(RGE==="new")REGD.push(d);else{const k=REGD.findIndex(x=>x.id===RGE);if(k>=0)REGD[k]=d;else REGD.push(d)}
   saveRegD();setDate();rgClose()};
 $("rgdel").onclick=()=>{const d=REGD.find(x=>x.id===RGE);if(!d)return;
@@ -1601,17 +1632,31 @@ $("rgdel").onclick=()=>{const d=REGD.find(x=>x.id===RGE);if(!d)return;
 
 // ===== Navigation : principal, régie, paramètres =====
 const PAGE=()=>location.hash==="#parametres"?"set":location.hash==="#regie"&&!RO?"reg":"home";
-function go(v){location.hash=v==="parametres"?"parametres":v==="regie"?"regie":"";route()}
-function route(){
-  const pg=PAGE();
-  $("v-home").hidden=pg!=="home";$("v-set").hidden=pg!=="set";$("v-rg").hidden=pg!=="reg";
-  $("nav").innerHTML=pg==="home"?'Paramètres'+CHR:CHL+'Principal';
-  $("nav2").innerHTML='Régie';$("nav2").hidden=!!RO||pg==="reg";
-  pg==="set"?renderSet():pg==="reg"?renderRg():renderHome();
-}
+const PORD=()=>RO?["home","set"]:["home","reg","set"],PLAB={home:"Principal",reg:"Régie",set:"Paramètres"};
+const PICO={home:'<path d="M4 11.5 12 5l8 6.5"/><path d="M6.5 10v9h11v-9"/>',reg:'<path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/>',set:'<circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/>'};
+const nlab=k=>`<span class="nl">${PLAB[k]}</span><svg class="ni" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="${PLAB[k]}">${PICO[k]}</svg>`;
+function go(v){location.hash=v==="set"||v==="parametres"?"parametres":v==="reg"||v==="regie"?"regie":"";route()}
 const CHL=`<svg class="chv" viewBox="0 0 12 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4l-6 8 6 8"/></svg>`,CHR=`<svg class="chv" viewBox="0 0 12 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4l6 8-6 8"/></svg>`;
-$("nav").onclick=()=>{go(PAGE()==="home"?"parametres":"home");scrollTo(0,0)};
-$("nav2").onclick=()=>{go("regie");scrollTo(0,0)};
+// page précédente à gauche (‹), page suivante à droite (›), séparées par un trait
+function route(){
+  const pg=PAGE(),O=PORD(),k=O.indexOf(pg),pv=O[k-1],nx=O[k+1];
+  $("v-home").hidden=pg!=="home";$("v-set").hidden=pg!=="set";$("v-rg").hidden=pg!=="reg";
+  $("nav2").hidden=!pv;$("nav2").innerHTML=pv?CHL+nlab(pv):"";$("nav2").dataset.go=pv||"";
+  $("nav").hidden=!nx;$("nav").innerHTML=nx?nlab(nx)+CHR:"";$("nav").dataset.go=nx||"";
+  $("nsep").hidden=!(pv&&nx);
+  pg==="set"?renderSet():pg==="reg"?renderRg():renderHome();
+  setTimeout(hdrFit);
+}
+$("nav").onclick=e=>{go(e.currentTarget.dataset.go);scrollTo(0,0)};
+// boutons en bas à droite de la bande : le titre garde toute la largeur ; le n° de version s'efface s'ils le recouvrent
+// trop serré : texte réduit, puis pictogrammes à la place des noms de page
+function hdrFit(){const h=document.querySelector("h1"),v=h&&h.querySelector(".ver"),hb=h&&h.querySelector(".hb"),lg=h&&h.querySelector(".ti svg");if(!v||!hb||!lg)return;
+  h.classList.remove("hc1","hc2");v.classList.remove("hid");
+  const fits=()=>hb.getBoundingClientRect().left>lg.getBoundingClientRect().right+12;
+  if(!fits())h.classList.add("hc1");if(!fits()){h.classList.remove("hc1");h.classList.add("hc2")}
+  if(v.getBoundingClientRect().right+10>hb.getBoundingClientRect().left)v.classList.add("hid")}
+addEventListener("resize",hdrFit);new ResizeObserver(hdrFit).observe(document.querySelector("h1 .hb"));
+$("nav2").onclick=e=>{go(e.currentTarget.dataset.go);scrollTo(0,0)};
 
 addEventListener("hashchange",route);
 setDate();route();
