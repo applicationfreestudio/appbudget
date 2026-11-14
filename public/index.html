@@ -98,12 +98,12 @@ select{font:inherit;font-size:.85rem;padding:7px 8px;border-radius:10px;border:1
 /* indicateur du budget voté : petite barre arrondie glissée sous la bande, la bande passant dessus comme un ruban */
 .mkb{z-index:0;top:-6px;bottom:-6px}
 .gw .mkp{z-index:2}
-.mkb{top:-9px;bottom:-9px}
-.mkb::after{content:"";position:absolute;left:-5.5px;top:0;bottom:0;width:11px;border-radius:6px;background:linear-gradient(90deg,color-mix(in srgb,var(--tx) 55%,#fff) 0,var(--tx) 38%,color-mix(in srgb,var(--tx) 80%,#000) 75%,#000 100%);box-shadow:0 2px 3px rgba(0,0,0,.4),inset 1px 0 0 rgba(255,255,255,.25)}
-/* bosse du ruban au-dessus du bâton : lumière au sommet, ombres de part et d'autre */
+.mkb{z-index:3!important;top:-5px;bottom:-5px}
+.mkb::after{content:"";position:absolute;left:-4.5px;top:0;bottom:0;width:9px;border-radius:5px;background:linear-gradient(90deg,color-mix(in srgb,var(--tx) 60%,#fff) 0,var(--tx) 40%,color-mix(in srgb,var(--tx) 80%,#000) 80%,#000 100%);box-shadow:0 1px 2px rgba(0,0,0,.45),0 0 0 1px rgba(0,0,0,.08)}
+/* le bâton s'enfonce légèrement dans le ruban : creux ombré de part et d'autre */
 .mkh{z-index:2;top:0;bottom:0}
-.mkh::before{content:"";position:absolute;left:-13px;width:26px;top:0;bottom:0;border-radius:0;box-shadow:none;background:linear-gradient(90deg,rgba(0,0,0,0) 0,rgba(0,0,0,.2) 22%,rgba(255,255,255,.08) 38%,rgba(255,255,255,.55) 50%,rgba(255,255,255,.08) 62%,rgba(0,0,0,.25) 80%,rgba(0,0,0,0) 100%)}
-.mkh::after{content:"";position:absolute;left:-13px;width:26px;top:-2px;height:4px;border-radius:50%;background:radial-gradient(ellipse at 50% 100%,rgba(0,0,0,.18),transparent 70%)}
+.mkh::before{content:"";position:absolute;left:-12px;width:24px;top:0;bottom:0;border-radius:0;box-shadow:none;background:linear-gradient(90deg,rgba(0,0,0,0) 0,rgba(0,0,0,.08) 35%,rgba(0,0,0,.32) 50%,rgba(0,0,0,.08) 65%,rgba(0,0,0,0) 100%)}
+.mkh::after{content:"";position:absolute;left:-12px;width:24px;top:0;bottom:0;background:linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,0) 30%,rgba(0,0,0,0) 70%,rgba(255,255,255,.18))}
 .gw .hg{z-index:1;box-shadow:0 1px 1.5px rgba(0,0,0,.22),0 3px 6px rgba(0,0,0,.12)}
 .gw .hg::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,0) 45%,rgba(0,0,0,.07))}
 .mkp em{color:var(--tx);opacity:.75;margin-bottom:4px}
@@ -240,12 +240,13 @@ select{font:inherit;font-size:.85rem;padding:7px 8px;border-radius:10px;border:1
 .pcw .pn .ck{margin-right:.35em}
 .pbar.pbg{height:6px;margin:14px 0 8px}
 .pslw2{position:relative;margin-top:6px}
-.pslw2.thr::after{content:"";position:absolute;left:var(--m);top:50%;width:3px;height:22px;margin:-11px 0 0 -1.5px;background:var(--tx);border-radius:2px;pointer-events:none;opacity:.8}
+.pslw2.thr::after{content:"";position:absolute;left:var(--m);top:50%;width:5px;height:14px;margin:-7px 0 0 -2.5px;box-sizing:border-box;background:var(--card);border:1.5px solid var(--bl);border-radius:3px;box-shadow:0 1px 2px rgba(0,0,0,.25);pointer-events:none}
+.pslz{min-height:52px;display:flex;flex-direction:column;justify-content:center}.pslz .pbar.pbg{margin:0}.pslz .psl.psle{margin:10px 0 4px}
 .psl.psle{height:8px;border-radius:4px;margin:14px 0 4px;background:linear-gradient(90deg,var(--bl) 0 var(--c,0%),var(--h) var(--c,0%) var(--v,0%),var(--ln) var(--v,0%))}
 .psl.psle::-webkit-slider-thumb{width:26px;height:26px;border-width:2.5px;box-shadow:0 2px 5px rgba(0,0,0,.3)}.psl.psle::-moz-range-thumb{width:24px;height:24px;border-width:2.5px}
-.psls{position:relative;display:flex;justify-content:space-between;font-size:.72rem;color:var(--mu);font-variant-numeric:tabular-nums;height:1.2em}
+.psls{position:relative;height:1.2em;font-size:.72rem;color:var(--mu);font-variant-numeric:tabular-nums;height:1.2em}
 .psls .pslt{position:absolute;top:0;transform:translateX(-50%);white-space:nowrap;color:var(--tx);font-weight:600}
-.phh .phti{font-size:1.25rem;margin:0}.phh .phti .si{color:var(--a)}
+.phh .phti{font-size:1.25rem;margin:0}.phh #phn{font-size:1rem;color:var(--mu);font-weight:600}.phh .phti .si{color:var(--a)}
 .arth{align-items:center}.arth h2{margin:0;font-size:1.25rem}.arth .si{color:var(--a)}.arth select{width:auto;max-width:58%}
 .pbtt{border-top:2px solid var(--ln)!important;margin-top:2px;font-weight:700}.pbck{font-size:.75rem;color:var(--mu);text-align:right;margin:-2px 0 4px}
 .pcw.big .pam small{font-size:.75rem}.pcw.big .pam b{font-size:1.5rem}
@@ -268,7 +269,9 @@ select{font:inherit;font-size:.85rem;padding:7px 8px;border-radius:10px;border:1
 .phvs{flex:none;width:20px;position:relative;border-radius:10px;background:color-mix(in srgb,var(--mu) 14%,var(--card));touch-action:none;cursor:ns-resize}
 .phvs i{position:absolute;left:3px;right:3px;top:0;border-radius:7px;background:color-mix(in srgb,var(--a) 70%,var(--card))}.phvs.drag i{background:var(--a)}
 .phr .plb{padding:6px 8px;display:grid;place-items:center}.phr .plb[aria-pressed="true"]{color:#b85c00;background:color-mix(in srgb,#f08a24 22%,var(--card));border-color:#e2861f}
-.phr.plkd input:not([type=checkbox]){opacity:.65}.grip.off{opacity:.25;cursor:not-allowed}
+.phr.plkd input:not([type=checkbox]){background:color-mix(in srgb,var(--mu) 14%,var(--card))!important;color:var(--mu)!important;border-color:transparent}
+.phr.plkd [data-k=name]{font-weight:800;color:var(--tx)!important}
+.phr.plkd .sl{filter:grayscale(1);opacity:.45}.phr.plkd .eub:disabled{opacity:.45}.grip.off{opacity:.25;cursor:not-allowed}
 .phr .l4{display:flex;align-items:center;gap:10px;margin-top:6px;padding-left:32px;min-height:30px}
 .phr .fxl{display:flex;align-items:center;gap:6px;margin:0;font-size:.8rem;color:var(--tx);cursor:pointer}.phr .fxl input{width:18px;height:18px;margin:0;accent-color:var(--a)}
 .phr .plt{flex:1;min-width:0;font-size:1.02rem;font-weight:600;color:var(--tx);line-height:1.2;padding-left:2px}
@@ -460,7 +463,7 @@ details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-righ
 :root[data-theme="dark"] .frise .pcw>button.on.good{color:#0d1b2a}
 </style></head>
 <body><main>
-<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.32</small></span></span>
+<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.33</small></span></span>
   <span class="hb"><button class="tbtn" id="nav">⚙ Paramètres</button><button class="tbtn" id="fs" aria-label="Plein écran" title="Plein écran"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button></span>
 </h1>
 <div class="sub"><div id="org"></div><div>Dépenses <span id="yr"></span> · situation au <b id="dt"></b></div></div>
@@ -481,8 +484,8 @@ details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-righ
     <div class="sel" id="selinfo" hidden></div>
   </div>
 
+  <div class="bar-h phh"><h2 class="h2i phti"><svg class="si" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4M7 13.5h3M7 17h3M14 13.5h3"/></svg>Périodes</h2><b id="phn"></b></div>
   <div class="card phc" id="phc">
-    <div class="phh"><h2 class="h2i phti"><svg class="si" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4M7 13.5h3M7 17h3M14 13.5h3"/></svg>Périodes</h2><b id="phn"></b></div>
     <div id="phb"></div>
   </div>
 
@@ -827,8 +830,8 @@ function renderPhase(){
     const pmax=(+x.pct)+C.L.reduce((s,y,j)=>s+(j!==i&&!C.sel[j]&&!y.fix?+y.pct:0),0)-.1*C.L.filter((y,j)=>j!==i&&!C.sel[j]&&!y.fix).length,
       vM=Math.max(Math.round(+x.pct*10),Math.floor(Math.min(pmax,Math.max(2*x.pct,+x.pct+10))*10)),vV=Math.round(+x.pct*10);
     return `<div class="pcw big ${cls}" data-pw="${x.id}">${lb}${hd}
-      ${pas?`<div class="pbar pbg"><i style="width:100%;background:var(--w)"></i></div>`:(()=>{const A=Math.max(0,C.adj[i]),S=pslS(cons,A),vv=Math.round(cons),pp=vv/S*100,tt=Math.min(100,A/S*100);
-        return `<div class="pslw2${tt<99.5?" thr":""}" style="--m:${tt}%"><input type="range" class="psl psle"${off?" disabled":""} min="0" max="${S}" step="1" value="${vv}" data-av="${x.id}" data-env="${env[i]}" data-adj="${A}" style="--v:${pp}%;--c:${Math.min(pp,tt)}%;--sc:${vv>A+0.5?"var(--h)":"var(--bl)"}" aria-label="Dépense de la période en euros : ${esc(x.name||"période")}"></div><div class="psls"><span>0 €</span><span class="pslt" style="left:${Math.min(80,Math.max(20,tt))}%">${tt<99.5?"prévu "+f0(A):""}</span><span>${f0(S)}</span></div>`})()}
+      <div class="pslz">${pas?`<div class="pbar pbg"><i style="width:100%;background:var(--w)"></i></div>`:(()=>{const A=Math.max(0,C.adj[i]),S=pslS(cons,A),vv=Math.round(cons),pp=vv/S*100,tt=Math.min(100,A/S*100);
+        return `<div class="pslw2${tt<99.5?" thr":""}" style="--m:${tt}%"><input type="range" class="psl psle"${off?" disabled":""} min="0" max="${S}" step="1" value="${vv}" data-av="${x.id}" data-env="${env[i]}" data-adj="${A}" style="--v:${pp}%;--c:${Math.min(pp,tt)}%;--sc:${vv>A+0.5?"var(--h)":"var(--bl)"}" aria-label="Dépense de la période en euros : ${esc(x.name||"période")}"></div><div class="psls"><span class="pslt" style="left:${Math.min(80,Math.max(20,tt))}%">${tt<99.5?"prévu "+f0(A):""}</span></div>`})()}</div>
       <div class="pdn pfx"><span>Montant bloqué</span><button type="button" class="tbtn plb eub" data-fxb="${x.id}" aria-pressed="${!!x.fix}" aria-label="Bloquer le montant de la période" title="Bloquer le montant de la période">€</button></div>
       <label class="pdn"><span>Période terminée</span><input type="checkbox" data-done="${x.id}"${pas?" checked":""}></label>
       <input type="range" class="pve" data-pe="${x.id}" min="1" max="${vM}" step="1" value="${vV}" style="--v:${(vV-1)/Math.max(1,vM-1)*100}%"${offE?" disabled":""} aria-orientation="vertical" aria-label="Enveloppe (part du budget) : ${esc(x.name||"période")}"></div>`};
@@ -871,7 +874,7 @@ const pslC=(av,rest)=>av>1.004||rest<-0.5?"var(--h)":av>=0.9?"var(--w)":"var(--b
 const pslS=(c,a)=>{const m=Math.max(a*1.25,c*1.4,50),k=Math.pow(10,Math.floor(Math.log10(m))-1)*5;return Math.ceil(m/k)*k};
 function pslPaintE(el){const M=+el.max,v=+el.value,a=+el.dataset.adj,pos=v/M*100,t=Math.min(100,a/M*100);
   el.style.setProperty("--v",pos+"%");el.style.setProperty("--c",Math.min(pos,t)+"%");el.style.setProperty("--sc",v>a+0.5?"var(--h)":"var(--bl)");
-  const w=el.parentNode;w.style.setProperty("--m",t+"%");w.classList.toggle("thr",t<99.5);const sc=w.nextElementSibling;if(sc&&sc.classList.contains("psls")){sc.lastElementChild.textContent=f0(M);const tl=sc.querySelector(".pslt");tl.style.left=Math.min(80,Math.max(20,t))+"%";tl.textContent=t<99.5?"prévu "+f0(a):""}}
+  const w=el.parentNode;w.style.setProperty("--m",t+"%");w.classList.toggle("thr",t<99.5);const sc=w.nextElementSibling;if(sc&&sc.classList.contains("psls")){const tl=sc.querySelector(".pslt");tl.style.left=Math.min(80,Math.max(20,t))+"%";tl.textContent=t<99.5?"prévu "+f0(a):""}}
 const pslMax=av=>av<=0.004?100:Math.min(300,Math.max(20,Math.ceil(av*100*1.5/10)*10));
 function pslPaint(el){const M=+el.max,v=+el.value,pos=v/M*100,cut=Math.min(pos,100/M*100),w=el.parentNode;
   el.style.setProperty("--v",pos+"%");el.style.setProperty("--c",cut+"%");w.style.setProperty("--m",100/M*100+"%");w.classList.toggle("ext",M>100)}
@@ -948,15 +951,13 @@ function renderPhSet(){
   $("phlist").innerHTML=PH.length?PH.map((p,i)=>{const lk=!!p.lock,pv=p.pct===""||p.pct==null?"":Math.round(p.pct*100)/100,
     lb=`<button type="button" class="tbtn plb" data-plk="${p.id}" aria-pressed="${lk}" aria-label="${lk?"Déverrouiller":"Verrouiller"} la période" title="${lk?"Période verrouillée (position, montant, intitulé)":"Verrouiller la position, le montant et l’intitulé"}">${lk?'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>':'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.5-1.9"/></svg>'}</button>`;
     // période verrouillée : affichage en texte, sans cadres, sans curseur ni suppression
-    if(lk)return `<div class="phr plkd" data-id="${p.id}">
-    <div class="l1"><span class="grip off" aria-hidden="true"><i></i><i></i><i></i></span><span class="plt">${p.name?phName(p.name):"Période "+(i+1)}</span>${lb}</div>
-    <div class="l2k"><span class="plp">${pv===""?"—":String(pv).replace(".",",")+" %"}</span><b class="eur" data-eur="${p.id}"></b>${p.fix?`<span class="fxt"><span class="tbtn plb eub" aria-pressed="true" aria-hidden="true">€</span>Montant bloqué</span>`:""}</div></div>`;
-    return `<div class="phr" data-id="${p.id}">
-    <div class="l1"><span class="grip" aria-label="Maintenir pour déplacer" title="Maintenir pour déplacer"><i></i><i></i><i></i></span>
-      <input data-k="name" value="${esc(p.name||"")}" placeholder="Intitulé de la période">
-      <div class="pct"><input type="number" inputmode="decimal" min="0" max="100" step="0.1" data-k="pct" value="${pv}"${p.fix?" readonly":""}><span>%</span></div>
-      <button class="tbtn" data-del="${p.id}" aria-label="Retirer">✕</button>${lb}</div>
-      <div class="l3r"><button type="button" class="tbtn plb eub" data-fx="${p.id}" aria-pressed="${!!p.fix}" aria-label="Bloquer le montant de la période" title="Bloquer le montant de la période">€</button><input type="range" class="sl" data-sl="${p.id}" min="0" max="100" step="0.1" value="${+p.pct||0}" aria-label="Pourcentage de la période"${p.fix?" disabled":""}><b class="eur" data-eur="${p.id}"></b></div>
+    // période verrouillée : même présentation, éléments grisés et non modifiables, titre en gras, sans suppression
+    return `<div class="phr${lk?" plkd":""}" data-id="${p.id}">
+    <div class="l1"><span class="grip${lk?" off":""}" aria-label="Maintenir pour déplacer" title="Maintenir pour déplacer"><i></i><i></i><i></i></span>
+      <input data-k="name" value="${esc(p.name||"")}" placeholder="Intitulé de la période"${lk?" readonly":""}>
+      <div class="pct"><input type="number" inputmode="decimal" min="0" max="100" step="0.1" data-k="pct" value="${pv}"${p.fix||lk?" readonly":""}><span>%</span></div>
+      ${lk?"":`<button class="tbtn" data-del="${p.id}" aria-label="Retirer">✕</button>`}${lb}</div>
+      <div class="l3r"><button type="button" class="tbtn plb eub" data-fx="${p.id}" aria-pressed="${!!p.fix}" aria-label="Bloquer le montant de la période" title="Bloquer le montant de la période"${lk?" disabled":""}>€</button><input type="range" class="sl" data-sl="${p.id}" min="0" max="100" step="0.1" value="${+p.pct||0}" aria-label="Pourcentage de la période"${p.fix||lk?" disabled":""}><b class="eur" data-eur="${p.id}"></b></div>
       ${p.fix?`<div class="l4"><small class="fxn">Montant bloqué</small></div>`:""}
     </div>`}).join(""):'<div class="note">Aucune période pour l\'instant.</div>';
   phSum();setTimeout(phvsUpd);
