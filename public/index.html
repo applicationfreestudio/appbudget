@@ -5,7 +5,7 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<script>try{const t=localStorage.getItem("ab-theme");const v=t&&JSON.parse(t);if(v==="light"||v==="dark")document.documentElement.setAttribute("data-theme",v)}catch(e){}</script>
+<script>try{const t=localStorage.getItem((/^\/recap\//.test(location.pathname)?"ro-":"")+"ab-theme");const v=t?JSON.parse(t):"light";if(v==="light"||v==="dark")document.documentElement.setAttribute("data-theme",v)}catch(e){document.documentElement.setAttribute("data-theme","light")}</script>
 <style>
 :root{--bl:#2a6fb0;--bg:#f6f5f1;--card:#fff;--tx:#1d1d1b;--mu:#6b6a64;--ln:#e2e0d8;--a:#2a6fb0;--e:#9cc3e6;--h:#c8473a;--w:#c9961a;color-scheme:light}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#171815;--card:#222320;--tx:#efeee8;--mu:#a09f97;--ln:#34352f;--a:#6aa9e6;--e:#2c4f73;--h:#f0877a;--w:#e6b84a;color-scheme:dark}}
@@ -453,7 +453,7 @@ html.lock,html.lock body{overflow:hidden}
 .cfst{margin-top:10px;padding:10px 12px;border-radius:10px;background:color-mix(in srgb,var(--a) 10%,var(--card));font-size:1rem;font-weight:700}.cfst:empty{display:none}.cfst .ok{color:#2f8f63}.cfst b{font-size:1.15rem}.bkr small{color:var(--mu);font-size:.76rem}
 #cf[open]{padding-bottom:14px}.rcpl input{width:100%;box-sizing:border-box;font:inherit;font-size:.82rem;padding:9px 10px;border:1px solid var(--ln);border-radius:10px;background:var(--bg);color:var(--tx)}#rcp .qa{display:flex;flex-wrap:wrap;gap:6px}#rcp a.tbtn{text-decoration:none;display:inline-flex;align-items:center}
 .robn{margin:-4px 0 12px;padding:8px 12px;border-radius:10px;background:color-mix(in srgb,var(--a) 10%,var(--card));color:var(--mu);font-size:.85rem;font-weight:600}
-.ro #urd{display:none!important}.ro #v-set>:not(#dper){display:none!important}
+.ro #urd{display:none!important}.ro #v-set>:not(#dper):not(#thc){display:none!important}
 .ro #dper .grip,.ro #dper [data-del],.ro #dper .phf3,.ro #dper #phadd,.ro #dper #phraz,.ro #dper .phla{display:none!important}
 .ro #phlist input,.ro #phlist label,.ro #phlist button,.ro .psl,.ro .pve,.ro .pdn{pointer-events:none}.cft{display:flex;flex-direction:column;line-height:1.2}.cft .dsm{margin-top:1px}.cfi .cfar,#cf.on .cfi .cfx{display:none}#cf.on .cfi .cfar{display:inline;stroke:#2f8f63;stroke-width:2.4}.cfi .cfx{stroke:var(--h);stroke-width:2.4}#cf>:last-child{margin-bottom:0}
 .bkr button,.bkr label.tbtn{flex:none;padding:8px 12px;margin:0;font-size:.85rem}
@@ -507,7 +507,7 @@ details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-righ
 :root[data-theme="dark"] .frise .pcw>button.on.good{color:#0d1b2a}
 </style></head>
 <body><main>
-<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.54</small></span></span>
+<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.55</small></span></span>
   <span class="hb"><span class="urd" id="urd" hidden><button type="button" class="sgb" id="undo" aria-label="Annuler la dernière modification" title="Annuler"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button><button type="button" class="sgb" id="redo" aria-label="Rétablir la modification" title="Rétablir"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg></button></span><span class="hbr"><button type="button" class="sgb" id="nav">Paramètres<svg class="chv" viewBox="0 0 12 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4l6 8-6 8"/></svg></button><button class="tbtn" id="fs" aria-label="Plein écran" title="Plein écran"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button></span></span>
 </h1>
 <div class="sub"><div id="org"></div><div>Dépenses <span id="yr"></span> · situation au <b id="dt"></b></div></div>
@@ -595,13 +595,16 @@ details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-righ
     <div id="cfst" class="cfst"></div>
     <div id="cfact" hidden>
       <div class="qa" style="margin-top:10px"><button class="tbtn" data-cfsave="full">Sauvegarde complète datée</button><button class="tbtn" data-cfsave="key">Sauvegarde des périodes</button></div>
-      <h3 class="h3s">Page de consultation</h3>
-      <p class="note" style="margin:2px 0 8px">Récapitulatif en lecture seule, accessible par un lien secret, mis à jour à chaque sauvegarde en ligne.</p>
-      <div id="rcp"></div>
       <div id="cflist"></div>
     </div>
   </details>
-  <div class="card up">
+  <details class="card up dsec" id="ext" hidden>
+    <summary><svg class="si" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-8.5 8.5"/><path d="M18 14v4.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 4 18.5v-11A1.5 1.5 0 0 1 5.5 6H10"/></svg><b>Accès extérieurs</b></summary>
+    <h3 class="h3s">Page de consultation</h3>
+    <p class="note" style="margin:2px 0 8px">Récapitulatif en lecture seule, accessible par un lien secret, mis à jour à chaque sauvegarde en ligne.</p>
+    <div id="rcp"></div>
+  </details>
+  <div class="card up" id="thc">
     <h2 class="h2i"><svg class="si" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18c1.4 0 2-1 2-2 0-.6-.3-1-.6-1.4-.3-.4-.5-.8-.5-1.3 0-1 .8-1.8 1.8-1.8H17a4 4 0 0 0 4-4c0-4.2-4-7.5-9-7.5Z"/><circle cx="7.5" cy="11" r="1.2" fill="currentColor"/><circle cx="10" cy="7" r="1.2" fill="currentColor"/><circle cx="15" cy="7.5" r="1.2" fill="currentColor"/></svg>Couleur du thème</h2>
     <div class="thm" id="thm" role="radiogroup" aria-label="Mode d'affichage"><button type="button" data-t="auto" role="radio" title="Selon le réglage de l'appareil">Système</button><button type="button" data-t="light" role="radio">Clair</button><button type="button" data-t="dark" role="radio">Sombre</button></div>
     <div class="acc" id="acc"></div>
@@ -730,7 +733,9 @@ const fd=iso=>new Date(iso+"T12:00:00").toLocaleDateString("fr-FR");
 const cap=t=>t?t.charAt(0).toUpperCase()+t.slice(1):t;
 // Page de consultation (/recap/<code>) : lecture seule, données venues du serveur, rien n'est lu ni écrit sur l'appareil
 const RO=(location.pathname.match(/^\/recap\/([A-Za-z0-9_-]{16,64})\/?$/)||[])[1]||"";
-const LS=RO?(()=>{const m=new Map();return {get(k,v){return m.has(k)?JSON.parse(m.get(k)):v},set(k,v){m.set(k,JSON.stringify(v))}}})()
+const LSP=/^ab-(theme|acc|acci|sbc)$/;   // en consultation, seuls les réglages d'affichage sont gardés sur l'appareil (clés « ro-… »)
+const LS=RO?(()=>{const m=new Map();return {get(k,v){if(LSP.test(k)){try{const x=localStorage.getItem("ro-"+k);return x==null?v:JSON.parse(x)}catch(e){return v}}return m.has(k)?JSON.parse(m.get(k)):v},
+    set(k,v){if(LSP.test(k)){try{localStorage.setItem("ro-"+k,JSON.stringify(v))}catch(e){}return}m.set(k,JSON.stringify(v))}}})()
   :{get(k,v){try{const x=localStorage.getItem(k);return x==null?v:JSON.parse(x)}catch(e){return v}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 
 // ===== État =====
@@ -1433,17 +1438,22 @@ const rcpUrl=()=>location.origin+"/recap/"+RCP;
 function rcpCode(){const a="ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789",b=crypto.getRandomValues(new Uint8Array(24));return [...b].map(x=>a[x%a.length]).join("")}
 async function rcpLoad(){try{const r=await cfFetch("files/partage/code.json");RCP=r.ok?((await r.json()).code||""):""}catch(_){RCP=""}rcpRender()}
 function rcpRender(){const el=$("rcp");if(!el)return;
+  if(!CF.auth){el.innerHTML='<p class="note" style="margin:0">Connecte d\'abord la sauvegarde en ligne (Cloudflare) pour gérer le lien.</p>';return}
   el.innerHTML=RCP?`<div class="rcpl"><input type="text" readonly value="${esc(rcpUrl())}" aria-label="Lien de consultation"></div>
-    <div class="qa" style="margin-top:8px"><button class="tbtn pri" data-rcp="copy">Copier le lien</button><a class="tbtn" href="${esc(rcpUrl())}" target="_blank" rel="noopener">Ouvrir</a><button class="tbtn" data-rcp="new">Nouveau lien</button><button class="tbtn" data-rcp="off">Désactiver</button></div>`
+    <div class="qa" style="margin-top:8px"><button class="tbtn pri" data-rcp="copy">Copier le lien</button><button class="tbtn" data-rcp="open">Ouvrir dans le navigateur</button><button class="tbtn" data-rcp="new">Nouveau lien</button><button class="tbtn" data-rcp="off">Désactiver</button></div>`
     :`<button class="tbtn pri" data-rcp="new">Créer un lien de consultation</button>`}
 async function rcpSet(code){try{if(code)await cfFetch("files/partage/code.json",{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify({code,at:new Date().toISOString()})});
     else await cfFetch("files/partage/code.json",{method:"DELETE"});RCP=code;rcpRender()}catch(e){$("cfst").innerHTML=`<span class="ko">${esc(e.message)}</span>`}}
 document.addEventListener("click",async e=>{const b=e.target.closest("[data-rcp]");if(!b)return;const k=b.dataset.rcp;
+  if(k==="open"){const u=rcpUrl(),app=matchMedia("(display-mode: standalone)").matches||matchMedia("(display-mode: fullscreen)").matches||navigator.standalone;
+    // application installée sur Android : on force l'ouverture dans Chrome (sinon le lien s'ouvrirait dans l'application)
+    if(app&&/Android/i.test(navigator.userAgent))location.href=`intent://${location.host}/recap/${RCP}#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=${encodeURIComponent(u)};end`;
+    else window.open(u,"_blank","noopener");return}
   if(k==="copy"){try{await navigator.clipboard.writeText(rcpUrl());b.textContent="Lien copié ✓";setTimeout(()=>b.textContent="Copier le lien",1600)}catch(_){$("rcp").querySelector("input").select()}}
   else if(k==="new"){if(RCP)openModal(`<h3>Créer un nouveau lien ?</h3><p class="note">L'ancien lien ne fonctionnera plus.</p><div class="mbt"><button class="tbtn" data-close>Non</button><button class="tbtn pri" id="mrcp">Oui, nouveau lien</button></div>`,()=>{$("mrcp").onclick=()=>{closeModal();rcpSet(rcpCode())}});else rcpSet(rcpCode())}
   else if(k==="off")openModal(`<h3>Désactiver la page de consultation ?</h3><p class="note">Le lien actuel ne fonctionnera plus.</p><div class="mbt"><button class="tbtn" data-close>Non</button><button class="tbtn pri" id="mrcp">Oui, désactiver</button></div>`,()=>{$("mrcp").onclick=()=>{closeModal();rcpSet("")}});
 });
-function cfIco(){const c=$("cf");if(c)c.classList.toggle("on",!!CF.auth)}
+function cfIco(){const c=$("cf");if(c)c.classList.toggle("on",!!CF.auth);rcpRender()}
 async function cfConnect(silent){try{await cfConnect0(silent)}finally{cfIco()}}
 async function cfConnect0(silent){
   if(!CF.tok){CF.auth=false;$("cfact").hidden=true;return}
@@ -1465,7 +1475,7 @@ $("cflist").addEventListener("click",async e=>{const r=e.target.closest("[data-c
 (async()=>{ // détection du Worker (inactif dans Claude)
   if(!/^https?:$/.test(location.protocol)||RO)return;
   try{const r=await fetch("/api/health",{cache:"no-store"});if(!r.ok)return;const j=await r.json();if(!j||j.app!=="appbudget")return;
-    CF.ok=true;$("cf").hidden=false;$("cftok").value=CF.tok;
+    CF.ok=true;$("cf").hidden=false;$("ext").hidden=false;rcpRender();$("cftok").value=CF.tok;
     if(!j.storage){$("cfst").innerHTML='<span class="ko">Le Worker répond mais le stockage R2 n\'est pas relié (binding FILES).</span>';return}
     if(!j.token){$("cfst").innerHTML='<span class="ko">Le secret APP_TOKEN n\'est pas défini dans Cloudflare.</span>';return}
     cfConnect(true)}catch(_){}
@@ -1547,7 +1557,7 @@ function adj(hex,k){if(!k)return hex;const n=parseInt(hex.slice(1),16);let r=(n>
   const f=(p,q,t)=>{if(t<0)t+=1;if(t>1)t-=1;return t<1/6?p+(q-p)*6*t:t<.5?q:t<2/3?p+(q-p)*(2/3-t)*6:p},q=L<.5?L*(1+S):L+S-L*S,p=2*L-q,hx=x=>Math.round(x*255).toString(16).padStart(2,"0");
   return "#"+hx(f(p,q,h+1/3))+hx(f(p,q,h))+hx(f(p,q,h-1/3))}
 function applyTheme(){
-  const t=LS.get("ab-theme","auto"),a=ACL[LS.get("ab-acc","budget")]?LS.get("ab-acc","budget"):"budget",k=(+LS.get("ab-acci",0)||0)/100;
+  const t=LS.get("ab-theme","light"),a=ACL[LS.get("ab-acc","budget")]?LS.get("ab-acc","budget"):"budget",k=(+LS.get("ab-acci",0)||0)/100;
   if(t==="light"||t==="dark")root.dataset.theme=t;else delete root.dataset.theme;
   const dk=isDark(),base=ACL[a][dk?1:0],c=adj(base,k);
   root.style.setProperty("--a",c);root.style.setProperty("--acl",adj(ACL[a][0],k));
