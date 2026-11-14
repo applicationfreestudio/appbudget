@@ -366,10 +366,10 @@ select{font:inherit;font-size:.85rem;padding:7px 8px;border-radius:10px;border:1
 .frise .ck{font-style:normal;margin-right:4px;font-weight:700}
 .frise .est{font-style:normal;opacity:.6;margin-right:2px}
 #phn.pos{color:var(--bl)}#phn.neg{color:var(--h)}
-#md{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.5);display:flex;align-items:flex-end;justify-content:center}
+#md{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;padding:16px;box-sizing:border-box}
 @media (min-width:600px){#md{align-items:center}}
 #md[hidden]{display:none}
-.mb{background:var(--card);width:min(560px,100%);max-height:86vh;overflow:auto;border-radius:16px 16px 0 0;padding:16px 16px calc(16px + env(safe-area-inset-bottom,0))}
+.mb{background:var(--card);width:min(560px,100%);max-height:86vh;overflow:auto;border-radius:16px;padding:16px;box-sizing:border-box;box-shadow:0 10px 30px rgba(0,0,0,.25)}
 @media (min-width:600px){.mb{border-radius:16px}}
 .mb h3{margin:2px 0 6px;font-size:1.15rem}
 .mh{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
@@ -451,7 +451,7 @@ html.lock,html.lock body{overflow:hidden}
 .bkr b{display:block;font-size:.95rem}
 .cfc{border:1.5px solid color-mix(in srgb,var(--a) 40%,var(--ln))}.cfh2{font-size:1.3rem!important;align-items:center}.cfh2 .si{color:var(--a)}.cfh2 span{display:flex;flex-direction:column;line-height:1.15}.cfh2 small{font-size:.8rem;font-weight:500;color:var(--mu)}
 .cfst{margin-top:10px;padding:10px 12px;border-radius:10px;background:color-mix(in srgb,var(--a) 10%,var(--card));font-size:1rem;font-weight:700}.cfst:empty{display:none}.cfst .ok{color:#2f8f63}.cfst b{font-size:1.15rem}.bkr small{color:var(--mu);font-size:.76rem}
-#cf[open]{padding-bottom:14px}#cf>:last-child{margin-bottom:0}
+#cf[open]{padding-bottom:14px}.cft{display:flex;flex-direction:column;line-height:1.2}.cft .dsm{margin-top:1px}.cfi .cfar,#cf.on .cfi .cfx{display:none}#cf.on .cfi .cfar{display:inline;stroke:#2f8f63;stroke-width:2.4}.cfi .cfx{stroke:var(--h);stroke-width:2.4}#cf>:last-child{margin-bottom:0}
 .bkr button,.bkr label.tbtn{flex:none;padding:8px 12px;margin:0;font-size:.85rem}
 details.dsec{padding:0}
 details.dsec>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:14px;-webkit-tap-highlight-color:transparent}
@@ -502,7 +502,7 @@ details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-righ
 :root[data-theme="dark"] .frise .pcw>button.on.good{color:#0d1b2a}
 </style></head>
 <body><main>
-<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.49</small></span></span>
+<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.50</small></span></span>
   <span class="hb"><span class="urd" id="urd" hidden><button type="button" class="sgb" id="undo" aria-label="Annuler la dernière modification" title="Annuler"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button><button type="button" class="sgb" id="redo" aria-label="Rétablir la modification" title="Rétablir"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg></button></span><span class="hbr"><button type="button" class="sgb" id="nav">Paramètres<svg class="chv" viewBox="0 0 12 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4l6 8-6 8"/></svg></button><button class="tbtn" id="fs" aria-label="Plein écran" title="Plein écran"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button></span></span>
 </h1>
 <div class="sub"><div id="org"></div><div>Dépenses <span id="yr"></span> · situation au <b id="dt"></b></div></div>
@@ -575,8 +575,7 @@ details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-righ
   <div id="setlist"></div>
   </details>
   <details class="card up dsec" id="bk">
-    <summary><svg class="si" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 18.5a4.5 4.5 0 0 1-.6-9 6 6 0 0 1 11.6 1.5 3.8 3.8 0 0 1-.5 7.5"/><path d="M12 12v8.5M8.8 15.2 12 12l3.2 3.2"/></svg><b>Sauvegarde</b><span class="dsm" id="bks"></span></summary>
-    <h3 class="h3s">Fichiers de sauvegarde locale</h3>
+    <summary><svg class="si" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3.5" width="18" height="15.5" rx="2.2"/><circle cx="12" cy="11.2" r="3.3"/><path d="M12 7.9v1.2M12 13.3v1.2M8.7 11.2h1.2M14.1 11.2h1.2M6.5 19v1.8M17.5 19v1.8"/></svg><b>Sauvegarde locale</b><span id="bks" hidden></span></summary>
     <div class="bkr"><div><b>Sauvegarde complète</b><small>Situation budgétaire, articles suivis, états de régie, périodes et clé de répartition</small></div><button class="tbtn pri" data-bk="full">Enregistrer</button></div>
     <div class="bkr"><div><b>Périodes et clé de répartition</b><small>Intitulés, ordre, pourcentages et périodes passées</small></div><button class="tbtn pri" data-bk="key">Enregistrer</button></div>
     <div class="bkr"><div><b>Restaurer un fichier</b><small>Sauvegarde complète ou périodes (.json)</small></div><label class="tbtn pri fl">Choisir le fichier<input type="file" id="bkin" accept=".json,application/json" hidden></label></div>
@@ -584,7 +583,7 @@ details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-righ
     <div id="bkst" class="note" style="margin-top:8px"></div>
   </details>
     <details class="card up dsec" id="cf" hidden>
-    <summary><svg class="si" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 18.5a4.5 4.5 0 0 1-.6-9 6 6 0 0 1 11.6 1.5 3.8 3.8 0 0 1-.5 7.5Z"/></svg><b>Sauvegarde en ligne</b><span class="dsm">Paramètres Cloudflare</span></summary>
+    <summary><svg class="si cfi" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 18.5a4.5 4.5 0 0 1-.6-9 6 6 0 0 1 11.6 1.5 3.8 3.8 0 0 1-.5 7.5"/><path class="cfar" d="M12 12v8.5M8.8 15.2 12 12l3.2 3.2"/><path class="cfx" d="M9.4 13.4l5.2 5.2M14.6 13.4l-5.2 5.2"/></svg><span class="cft"><b>Sauvegarde en ligne</b><span class="dsm">Paramètres Cloudflare</span></span></summary>
     <p class="note" style="margin:4px 0 10px">Les données sont enregistrées automatiquement dans le stockage R2 et retrouvées sur tous tes appareils. Les PDF et états de régie importés y sont archivés.</p>
     <div class="cfr"><input type="password" id="cftok" placeholder="Jeton d'accès (APP_TOKEN)" autocomplete="off"><button class="tbtn pri" id="cfgo">Connecter</button></div>
     <div id="cfst" class="cfst"></div>
@@ -1032,18 +1031,21 @@ function phSum(){const s=PH.reduce((a,p)=>a+(+p.pct||0),0),B=totals().b;
     const sl=document.querySelector(`[data-sl="${p.id}"]`);if(sl){sl.value=+p.pct||0;sl.style.setProperty("--v",Math.min(100,(+p.pct||0)/Math.max(.1,+sl.max)*100)+"%")}});
   const rs=Math.round((100-s)*10)/10;$("phsum").innerHTML=PH.length?`Réparti : <b class="${Math.abs(s-100)<.01?"ok":"ko"}">${s.toLocaleString("fr-FR",{maximumFractionDigits:1})} %</b>${B>0?` · ${f0(B*s/100)} sur ${f0(B)}`:""}${rs>0.05?`<br>Reste à répartir : <b>${rs.toLocaleString("fr-FR",{maximumFractionDigits:1})} %</b>${B>0?` · ${f0(B*rs/100)}`:""}`:""}`:"";}
 let slBase=null;
-// périodes que le système peut faire bouger : tout sauf montant figé (€) et période terminée ; le verrou n'empêche que la saisie manuelle
-function phAbs(i){return PH.map((x,j)=>j!==i&&!x.fix&&!PHSEL.has(x.id)?j:-1).filter(j=>j>=0)}
-// échelle du curseur : au moins la part de la période + ce qui reste à répartir ; la butée à 100 % est appliquée par slideTo
-function slMaxOf(i){const B=PH.map(x=>+x.pct||0),K=B.reduce((a,b,j)=>a+(j!==i?b:0),0);const R=Math.max(B[i],100-K);return Math.max(.1,Math.round(Math.min(100,Math.max(R,B[i]*1.5+5))*10)/10)}  // échelle un peu au-delà de la butée, pour que le curseur ne paraisse pas « plein »
+// périodes qui cèdent quand il n'y a plus rien à répartir : ni verrouillées, ni à montant figé (€), ni terminées
+function phAbs(i){return PH.map((x,j)=>j!==i&&!x.lock&&!x.fix&&!PHSEL.has(x.id)?j:-1).filter(j=>j>=0)}
+// échelle du curseur : au moins le maximum atteignable (part + reste à répartir + parts qui peuvent céder)
+function slMaxOf(i){const B=PH.map(x=>+x.pct||0),K=B.reduce((a,b,j)=>a+(j!==i?b:0),0),F=phAbs(i).reduce((a,j)=>a+B[j],0),R=B[i]+Math.max(0,100-K-B[i])+F;return Math.max(.1,Math.round(Math.min(100,Math.max(R,B[i]*1.5+5))*10)/10)}
 function slMaxUpd(){PH.forEach((p,i)=>{const sl=document.querySelector(`[data-sl="${p.id}"]`);if(sl){sl.max=slMaxOf(i);sl.value=+p.pct||0;sl.style.setProperty("--v",Math.min(100,(+p.pct||0)/Math.max(.1,+sl.max)*100)+"%")}})}
 function slideTo(id,v,exact){
   if(!slBase||slBase.id!==id)slBase={id,p:PH.map(x=>+x.pct||0)};
   const B=slBase.p,i=PH.findIndex(x=>x.id===id),r=x=>Math.round(x*10)/10,r4=x=>Math.round(x*1e4)/1e4;
-  // on puise dans la part non répartie ; une baisse la libère. Les autres périodes ne bougent pas.
-  const K=B.reduce((a,b,j)=>a+(j!==i?b:0),0);
-  v=(exact?r4:r)(Math.max(0,Math.min(v,r4(100-K))));
-  PH.forEach((x,j)=>{x.pct=j===i?v:B[j];const n=document.querySelector(`.phr[data-id="${x.id}"] [data-k=pct]`);if(n&&document.activeElement!==n)n.value=Math.round(x.pct*100)/100});
+  // hausse : d'abord le reste à répartir, puis prélèvement au prorata de la clé sur les périodes ni verrouillées ni figées
+  // baisse : la différence retourne dans le reste à répartir
+  const T=B.reduce((a,b)=>a+b,0),free=Math.max(0,100-T),E=phAbs(i),F=E.reduce((a,j)=>a+B[j],0);
+  v=(exact?r4:r)(Math.max(0,Math.min(v,r4(B[i]+free+F))));
+  const out=B.slice();out[i]=v;const take=r4(Math.max(0,v-B[i]-free));
+  if(take>0&&F>0){E.forEach(j=>out[j]=r(B[j]-take*B[j]/F));const fx=r4(F-take-E.reduce((a,j)=>a+out[j],0));if(fx){const k=E.slice().sort((a,b)=>out[b]-out[a]).find(j=>out[j]+fx>=0);if(k!=null)out[k]=r4(out[k]+fx)}}
+  PH.forEach((x,j)=>{x.pct=Math.max(0,out[j]);const n=document.querySelector(`.phr[data-id="${x.id}"] [data-k=pct]`);if(n&&document.activeElement!==n)n.value=Math.round(x.pct*100)/100});
   const sl=document.querySelector(`[data-sl="${id}"]`);if(sl&&+sl.value!==v)sl.value=v;
   LS.set("ab-phases",PH);phSum();
 }
@@ -1405,7 +1407,9 @@ async function cfList(){if(!CF.auth)return;
     const grp=[["Sauvegardes",x=>x.key.startsWith("sauvegardes/")],["Documents archivés",x=>x.key.startsWith("documents/")]];
     $("cflist").innerHTML=grp.map(([t,fn])=>{const l=fs.filter(fn);return l.length?`<div class="cfh">${t}</div>`+l.map(x=>`<div class="cff"><div class="n">${esc(x.key.split("/").pop())}<small>${new Date(x.uploaded).toLocaleString("fr-FR")} · ${(x.size/1024).toLocaleString("fr-FR",{maximumFractionDigits:0})} Ko</small></div>${x.key.endsWith(".json")?`<button class="tbtn" data-cfr="${esc(x.key)}">Restaurer</button>`:`<a class="tbtn" href="/api/files/${x.key.split("/").map(encodeURIComponent).join("/")}?token=${encodeURIComponent(CF.tok)}" target="_blank" rel="noopener">Ouvrir</a>`}<button class="tbtn" data-cfd="${esc(x.key)}" aria-label="Supprimer">✕</button></div>`).join(""):""}).join("")||'<div class="note" style="margin-top:8px">Aucun fichier enregistré pour l\'instant.</div>'}
   catch(e){$("cflist").innerHTML=`<div class="note ko">${esc(e.message)}</div>`}}
-async function cfConnect(silent){
+function cfIco(){const c=$("cf");if(c)c.classList.toggle("on",!!CF.auth)}
+async function cfConnect(silent){try{await cfConnect0(silent)}finally{cfIco()}}
+async function cfConnect0(silent){
   if(!CF.tok){CF.auth=false;$("cfact").hidden=true;return}
   try{const r=await cfFetch("files/etat/courant.json");CF.auth=true;LS.set("ab-cftoken",CF.tok);$("cfact").hidden=false;
     if(r.ok){const o=await r.json();if(o&&o.exportedAt&&o.exportedAt>(LS.get("ab-cfsync","")||"")){applyBackup(o);LS.set("ab-cfsync",o.exportedAt);route()}}
