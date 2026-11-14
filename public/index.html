@@ -459,6 +459,8 @@ html.lock,html.lock body{overflow:hidden}
 .rgg{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
 .rgac{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:7px 0;cursor:pointer}.rgac>span:first-child{min-width:0;font-size:.9rem}.rgac small{color:var(--mu);font-size:.75rem}.rgac .sw{flex:none!important;position:relative;display:inline-block;width:46px;height:28px}.rgac .sw i::after{width:22px;height:22px}.rgac .sw input:checked+i::after{left:21px}
 .rgus{font-size:.8rem;color:var(--mu)}
+.rgso{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 6px}.rgso[hidden]{display:none}.rgso span{font-size:.85rem;color:var(--mu)}.rgso select{font:inherit;font-size:.9rem;color:var(--tx);background:var(--bg);border:1px solid var(--ln);border-radius:10px;padding:8px 10px}
+.rgh{display:flex;justify-content:space-between;gap:10px;margin:12px 0 0;padding:6px 0 4px;border-bottom:1.5px solid var(--ln);font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--mu)}.rgh:first-child{margin-top:0}.rgh b{color:var(--h);font-variant-numeric:tabular-nums}
 .ocrb{margin:8px 0 4px}.ocrgo{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;box-sizing:border-box;padding:11px;font-weight:700;border-style:dashed;color:var(--a)}
 .ocrk{padding:10px 12px;border-radius:10px;background:color-mix(in srgb,var(--a) 7%,var(--card));border:1px dashed color-mix(in srgb,var(--a) 40%,var(--ln))}.ocrk .tbtn{width:100%;white-space:normal}
 .ocrp{margin-top:10px}.ocrbar{height:8px;border-radius:4px;background:var(--ln);overflow:hidden;position:relative}.ocrbar i{display:block;height:100%;width:0;background:var(--a);border-radius:4px;transition:width .25s}
@@ -526,7 +528,7 @@ details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-righ
 :root[data-theme="dark"] .frise .pcw>button.on.good{color:#0d1b2a}
 </style></head>
 <body><main>
-<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.61</small></span></span>
+<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.62</small></span></span>
   <span class="hb"><span class="urd" id="urd" hidden><button type="button" class="sgb" id="undo" aria-label="Annuler la dernière modification" title="Annuler"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button><button type="button" class="sgb" id="redo" aria-label="Rétablir la modification" title="Rétablir"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg></button></span><span class="hbr"><button type="button" class="sgb" id="nav2"></button><i class="nsep" id="nsep" aria-hidden="true"></i><button type="button" class="sgb" id="nav">Paramètres<svg class="chv" viewBox="0 0 12 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4l6 8-6 8"/></svg></button><button class="tbtn" id="fs" aria-label="Plein écran" title="Plein écran"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button></span></span>
 </h1>
 <div class="sub"><div id="org"></div><div>Dépenses <span id="yr"></span> · situation au <b id="dt"></b></div></div>
@@ -606,7 +608,7 @@ details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-righ
       <div class="mbt rgfb"><button type="button" class="tbtn rgdel" id="rgdel" hidden>Supprimer</button><button type="button" class="tbtn" id="rgcan">Annuler</button><button type="submit" class="tbtn pri">Enregistrer</button></div>
     </form>
   </div>
-  <div class="card up"><div id="rgl"></div></div>
+  <div class="card up"><div class="rgso"><span>Trier par</span><select id="rgsort" aria-label="Tri des dépenses"><option value="date">Date (récentes d'abord)</option><option value="tiers">Fournisseur</option><option value="per">Période</option></select></div><div id="rgl"></div></div>
 </section>
 
 <section id="v-set" hidden>
@@ -1676,11 +1678,16 @@ const perName=id=>{const p=PH.find(x=>x.id===id);return p?p.name:""};
 function renderRg(){renderRgCfg();
   const tot=REGD.reduce((s,d)=>s+(+d.montant||0),0),na=REGD.filter(d=>!d.per).reduce((s,d)=>s+(+d.montant||0),0);
   $("rgtot").innerHTML=REGD.length?`<span>${REGD.length} dépense${REGD.length>1?"s":""}</span><b>${f(tot)}</b>${na>0.004?`<small>dont ${f(na)} non affecté${na>1?"s":""} à une période</small>`:""}`:"";
-  const L=REGD.slice().sort((a,b)=>(b.date||"").localeCompare(a.date||"")||b.id.localeCompare(a.id));
-  $("rgl").innerHTML=L.length?L.map(d=>`<button type="button" class="rgd${RGE===d.id?" on":""}" data-rge="${d.id}">
+  // tri : date (récentes d'abord), fournisseur (A → Z) ou période (ordre de l'année, non affectées à la fin), avec sous-totaux par groupe
+  const so=LS.get("ab-rgsort","date"),pi=id=>{const k=PH.findIndex(p=>p.id===id);return k<0?1e9:k},byDate=(a,b)=>(b.date||"").localeCompare(a.date||"")||b.id.localeCompare(a.id);
+  $("rgsort").value=so;$("rgsort").closest(".rgso").hidden=REGD.length<2;
+  const L=REGD.slice().sort(so==="tiers"?(a,b)=>(a.tiers||"~").localeCompare(b.tiers||"~","fr",{sensitivity:"base"})||byDate(a,b):so==="per"?(a,b)=>pi(a.per||"~")-pi(b.per||"~")||byDate(a,b):byDate);
+  const gk=d=>so==="tiers"?(d.tiers||"Sans fournisseur"):so==="per"?(d.per?perName(d.per)||"Période supprimée":"Non affectée"):null;
+  const gt={};if(so!=="date")L.forEach(d=>{const k=gk(d);gt[k]=(gt[k]||0)+(+d.montant||0)});let last=null;
+  $("rgl").innerHTML=L.length?L.map(d=>{const k=gk(d),h=k!==null&&k!==last?`<div class="rgh"><span>${esc(k)}</span><b>${f(gt[k])}</b></div>`:"";last=k;return h+`<button type="button" class="rgd${RGE===d.id?" on":""}" data-rge="${d.id}">
       <span class="rgd1"><b>${esc(d.tiers||d.objet||"Dépense")}</b><span class="rgm">${f(+d.montant||0)}</span></span>
       <span class="rgd2">${d.date?fd(d.date):"sans date"}${d.piece?` · pièce ${esc(d.piece)}`:""}${d.objet&&d.tiers?` · ${esc(d.objet)}`:""} · ${esc(d.user||"Administrateur")}</span>
-      <span class="rgd3"><span>${esc(nameOf(d.compte))} <small>${esc(d.compte)}</small></span>${d.per?`<i class="rgp">${esc(perName(d.per)||"période supprimée")}</i>`:'<i class="rgp no">non affectée</i>'}</span></button>`).join("")
+      <span class="rgd3"><span>${esc(nameOf(d.compte))} <small>${esc(d.compte)}</small></span>${d.per?`<i class="rgp">${esc(perName(d.per)||"période supprimée")}</i>`:'<i class="rgp no">non affectée</i>'}</span></button>`}).join("")
     :'<div class="note">Aucune dépense saisie. Appuie sur « Nouvelle dépense » pour commencer.</div>';
 }
 function rgOpen(id){RGE=id;const d=id==="new"?{date:new Date().toISOString().slice(0,10)}:REGD.find(x=>x.id===id)||{};const F=$("rgf");
@@ -1695,6 +1702,7 @@ function rgOpen(id){RGE=id;const d=id==="new"?{date:new Date().toISOString().sli
 function rgClose(){RGE=null;$("rgfc").hidden=true;renderRg()}
 $("rgnew").onclick=()=>rgOpen("new");
 $("rgcan").onclick=rgClose;
+$("rgsort").onchange=e=>{LS.set("ab-rgsort",e.target.value);renderRg()};
 $("rgl").onclick=e=>{const b=e.target.closest("[data-rge]");if(b)rgOpen(b.dataset.rge)};
 $("rgf").addEventListener("input",()=>{$("rgerr").textContent=""});
 $("rgf").onsubmit=e=>{e.preventDefault();const F=e.target,m=Math.round(parseFloat(String(F.montant.value).replace(",","."))*100)/100;
