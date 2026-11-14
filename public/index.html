@@ -19,19 +19,21 @@ body::before{content:"";position:fixed;left:0;right:0;top:0;height:env(safe-area
 html:fullscreen body::before{background:transparent}
 /* barre de titre : mêmes proportions, boutons et alignements que App Hike */
 :root{--ti:1.8rem}
-h1{margin:-16px -16px 8px;padding:8px 16px;display:flex;justify-content:space-between;align-items:center;gap:6px;position:sticky;top:env(safe-area-inset-top,0px);z-index:30;
+html,body{overscroll-behavior:none}
+main{padding-top:calc(var(--h1h,64px) + 10px)!important}
+h1{margin:0;padding:calc(8px + env(safe-area-inset-top,0px)) max(16px,calc((100vw - 760px)/2 + 16px)) 8px;display:flex;justify-content:space-between;align-items:center;gap:6px;position:fixed;top:0;left:0;right:0;z-index:60;transform:none!important;
   background:var(--bg);background:color-mix(in srgb,var(--bg) 38%,transparent);-webkit-backdrop-filter:saturate(1.8) blur(8px);backdrop-filter:saturate(1.8) blur(8px);box-shadow:0 1px 0 var(--ln)}
-.ti{display:flex;align-items:center;gap:.4em;min-width:0;font-size:calc(var(--ti)*1.36);font-weight:700;line-height:1}
-.ti svg{flex:none;width:calc(1.65em + 2px);height:calc(1.65em + 2px)}
+.ti{display:flex;align-items:center;gap:9px;min-width:0;font-size:1.4rem;font-weight:700;line-height:1}
+.ti svg{flex:none;width:36px;height:36px}
 .tt{display:flex;flex-direction:column;line-height:1.1;min-width:0;white-space:nowrap}
 .tt #ttl{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ver{font-size:calc(.53em - 2px);font-weight:500;color:var(--mu);margin-top:2px;white-space:nowrap;font-variant-numeric:tabular-nums}
-@media (max-width:600px){.ti{font-size:calc(1.3rem*1.36)}}@media (max-width:380px){.ti{font-size:calc(1.3rem*1.08)}}
+.ver{font-size:.62rem;font-weight:500;color:var(--mu);margin-top:2px;white-space:nowrap;font-variant-numeric:tabular-nums}
+
 #th svg{display:block}
-.hb{display:flex;gap:6px;align-self:flex-end;align-items:flex-end;margin-bottom:calc(var(--ti)*.16)}
+.hb{display:flex;gap:6px;align-items:center}
 .hb .sgb{all:unset;box-sizing:border-box;display:inline-flex;align-items:flex-end;gap:4px;padding:0 10px;font:500 15px/1.15 Barlow,system-ui,sans-serif;color:var(--mu);cursor:pointer;white-space:nowrap;-webkit-tap-highlight-color:transparent}
 .urd{display:inline-flex;gap:0;margin-right:2px}.urd .sgb{padding:0 6px}
-@media (max-width:460px){h1:has(#urd:not([hidden])) .ti{font-size:calc(1.3rem*1.12)}.urd .sgb{padding:0 4px}}.urd .sgb:disabled{opacity:.3;cursor:default}
+@media (max-width:460px){.urd .sgb{padding:0 4px}}.urd .sgb:disabled{opacity:.3;cursor:default}
 .hb .sgb:hover{color:var(--tx)}.hb .sgb:focus-visible{outline:2px solid var(--a);outline-offset:2px}.hb .sgb .chv{width:.65em;height:1.15em;flex:none;opacity:.8}
 @media (max-width:460px){.hb .sgb{padding:0 7px;font-size:13.5px;gap:2px}}
 .hb #fs{width:auto;height:42px;min-width:42px;margin:0;padding:0;display:inline-flex;align-items:center;justify-content:center;background:var(--card);color:var(--tx);border:1px solid var(--ln);border-radius:8px;align-self:center}
@@ -250,17 +252,18 @@ select{font:inherit;font-size:.85rem;padding:7px 8px;border-radius:10px;border:1
 .pcw .pn .ck{margin-right:.35em}
 .pbar.pbg{height:6px;margin:14px 0 8px}
 .pslw2{position:relative;margin-top:6px}
-.pslw2.thr::after{content:"";position:absolute;left:calc(13px + (100% - 26px) * var(--mf,0));top:13px;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:var(--dc,var(--bl));box-shadow:0 0 0 2px var(--card);pointer-events:none;z-index:1}
+.pslw2.thr::after{content:"";position:absolute;left:calc(13px + (100% - 26px) * var(--mf,0));top:13px;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:var(--dc,var(--bl));pointer-events:none;z-index:1}
 .pslz{min-height:44px;display:flex;flex-direction:column;justify-content:center}.pslz .pbar.pbg{margin:0}.pcw.big .pslz .psl.psle{margin:10px 0 3px;height:6px;border-radius:3px;padding:0}
 .pcw.big .pslz .psl.psle::-webkit-slider-thumb{box-sizing:border-box;width:26px;height:26px;margin:0;border-width:4.5px;background:transparent;box-shadow:0 1px 3px rgba(0,0,0,.25),inset 0 0 0 .5px rgba(0,0,0,.1)}
 .pcw.big .pslz .psl.psle::-moz-range-thumb{box-sizing:border-box;width:26px;height:26px;border-width:4.5px;background:transparent}
 .psl.psle{height:8px;border-radius:4px;margin:14px 0 4px;background:linear-gradient(90deg,var(--bl) 0 var(--c,0%),var(--h) var(--c,0%) var(--v,0%),var(--ln) var(--v,0%))}
 .psl.psle::-webkit-slider-thumb{width:26px;height:26px;border-width:2.5px;box-shadow:0 2px 5px rgba(0,0,0,.3)}.psl.psle::-moz-range-thumb{width:24px;height:24px;border-width:2.5px}
-.psls{position:relative;height:calc(2.9em + 10px);font-size:.82rem;color:var(--mu);font-variant-numeric:tabular-nums}
-.psls .pslt{position:absolute;top:10px;left:clamp(24px,calc(13px + (100% - 26px) * var(--mf,0)),calc(100% - 24px));transform:translateX(-50%);white-space:nowrap;text-align:center;line-height:1.15;color:color-mix(in srgb,var(--a) 85%,var(--tx));font-weight:700}.psls .pslt small{display:block;font-size:.85em;font-weight:600;font-variant:small-caps;letter-spacing:.06em}
+.psls{position:relative;height:calc(1.26rem + .72rem + 16px);font-size:1.26rem;color:var(--mu);font-variant-numeric:tabular-nums}
+.psls .pslt{position:absolute;top:8px;left:clamp(44px,calc(13px + (100% - 26px) * var(--mf,0)),calc(100% - 44px));transform:translateX(-50%);white-space:nowrap;text-align:center;line-height:1.15;color:color-mix(in srgb,var(--a) 85%,var(--tx));font-weight:700}.psls .pslt small{display:block;font-size:.52em;font-weight:600;font-variant:small-caps;letter-spacing:.06em;margin-top:1px}
 .phh .phti{font-size:1.25rem;margin:0}.phh #phn{font-size:1rem;color:var(--mu);font-weight:600}.phh .phti .si{color:var(--a)}
 .arth{align-items:center}.arth h2{margin:0;font-size:1.25rem}.arth .si{color:var(--a)}.arth select{width:auto;max-width:58%}
-.pbtt{border-top:2px solid var(--ln)!important;margin-top:2px;font-weight:700}.pbck{font-size:.75rem;color:var(--mu);text-align:right;margin:-2px 0 4px}
+.pbtt{border-top:2px solid var(--ln)!important;margin-top:2px;font-weight:700;align-items:center!important}.pbtt span{font-size:1rem}.pbtt b{font-size:1.35rem}
+.fxb{display:inline-grid;place-items:center;width:18px;height:18px;margin-left:6px;border-radius:50%;font:800 11px/1 Barlow,system-ui,sans-serif;font-style:normal;color:#fff;background:color-mix(in srgb,var(--a) 72%,var(--card));vertical-align:1px}.pbck{font-size:.75rem;color:var(--mu);text-align:right;margin:-2px 0 4px}
 .pcw.big .pam small{font-size:.72rem}.pcw.big .pam b{font-size:1.4rem}
 .pcw.big .plk{width:34px;height:34px;border-radius:0 13px 0 11px}.pcw.big .plk svg{width:16px;height:16px}
 .pcw.big .pve{left:12px;top:14px;bottom:14px;width:26px}.pcw.big .pve::-webkit-slider-runnable-track{width:6px;border-radius:3px}.pcw.big .pve::-webkit-slider-thumb{box-sizing:border-box;width:26px;height:26px;margin-left:-10px;background:transparent;border:4.5px solid color-mix(in srgb,var(--a) 85%,var(--tx));box-shadow:0 1px 3px rgba(0,0,0,.25),inset 0 0 0 .5px rgba(0,0,0,.1)}.pcw.big .pve::-moz-range-track{width:6px;border-radius:3px}.pcw.big .pve::-moz-range-thumb{box-sizing:border-box;width:26px;height:26px;background:transparent;border:4.5px solid color-mix(in srgb,var(--a) 85%,var(--tx))}
@@ -483,7 +486,7 @@ details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-righ
 :root[data-theme="dark"] .frise .pcw>button.on.good{color:#0d1b2a}
 </style></head>
 <body><main>
-<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.42</small></span></span>
+<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.43</small></span></span>
   <span class="hb"><span class="urd" id="urd" hidden><button type="button" class="sgb" id="undo" aria-label="Annuler la dernière modification" title="Annuler"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button><button type="button" class="sgb" id="redo" aria-label="Rétablir la modification" title="Rétablir"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg></button></span><button type="button" class="sgb" id="nav">Paramètres<svg class="chv" viewBox="0 0 12 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4l6 8-6 8"/></svg></button><button class="tbtn" id="fs" aria-label="Plein écran" title="Plein écran"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button></span>
 </h1>
 <div class="sub"><div id="org"></div><div>Dépenses <span id="yr"></span> · situation au <b id="dt"></b></div></div>
@@ -859,7 +862,7 @@ function renderPhase(){
   const kind=x=>new RegExp(`(${MOIS})\\s*(?:[–—-]|→)\\s*(${MOIS})`,"i").test(x.name||"")?0:/vacances/i.test(x.name||"")?1:2;
   const rowsH=[0,1,2].map(k=>{const it=L.map((x,i)=>[x,i]).filter(([x])=>kind(x)===k);return it.length?`<div class="frow">${it.map(([x,i])=>chip(x,i)).join("")}</div>`:""}).join("");
   {const bi=BIG?L.findIndex(x=>x.id===BIG):-1;if(bi<0)BIG=null;
-    const oth=BIG?L.map((y,j)=>j!==bi&&!C.sel[j]?`<div class="pbr" data-pw="${y.id}"><span>${y.name?phName(y.name):"Période "+(j+1)}${y.fix?' <i class="fxm">bloqué</i>':""}</span><b class="${C.remain[j]<-0.5?"neg":"pos"}" data-pr>${Math.abs(C.remain[j])<0.5?"0 €":(C.remain[j]<0?"−\u2060\u200a\u2060":"+\u2060\u200a\u2060")+f0(Math.abs(C.remain[j]))}</b></div>`:"").join(""):"";
+    const oth=BIG?L.map((y,j)=>j!==bi&&!C.sel[j]?`<div class="pbr" data-pw="${y.id}"><span>${y.name?phName(y.name):"Période "+(j+1)}${y.fix?' <i class="fxb" title="Montant bloqué">€</i>':""}</span><b class="${C.remain[j]<-0.5?"neg":"pos"}" data-pr>${Math.abs(C.remain[j])<0.5?"0 €":(C.remain[j]<0?"−\u2060\u200a\u2060":"+\u2060\u200a\u2060")+f0(Math.abs(C.remain[j]))}</b></div>`:"").join(""):"";
     const tot=`<div class="pbr pbtt"><span>Total restant${C.sel[bi]?"":" (avec cette période)"}</span><b class="${C.restLeft<-0.5?"neg":"pos"}" data-ptot>${rfmt(C.restLeft)}</b></div><div class="pbck" data-pck>${Math.abs(C.restLeft-C.dispo)<1?"= disponible sur le budget global ✓":"Disponible sur le budget global : "+rfmt(C.dispo)}</div>`;
     var bigH=BIG?`<div class="pbo" id="pbo"><div class="pbw">${chip(L[bi],bi,true)}<div class="pbl">${oth?`<div class="pblh">Restant des autres périodes en cours</div>${oth}`:""}${tot}</div></div></div>`:"";
     document.documentElement.classList.toggle("lock",!!BIG)}
@@ -901,10 +904,12 @@ function pslPaint(el){const M=+el.max,v=+el.value,pos=v/M*100,cut=Math.min(pos,1
   el.style.setProperty("--v",pos+"%");el.style.setProperty("--c",cut+"%");w.style.setProperty("--m",100/M*100+"%");w.classList.toggle("ext",M>100)}
 const parseEur=v=>{const n=parseFloat(String(v).replace(/[\s\u00a0\u2060\u200a\u2060€]/g,"").replace(",","."));return isFinite(n)&&n>0?Math.round(n*100)/100:0};
 // Curseur d'avancement : 0 % → 100 % (= période terminée, entièrement consommée)
-$("phb").addEventListener("input",e=>{if(e.target.dataset.pe){{const el=e.target;el.style.setProperty("--v",(+el.value-+el.min)/Math.max(1,+el.max-+el.min)*100+"%")}pveSlide(e.target.dataset.pe,+e.target.value/10);return}const id=e.target.dataset.av;if(!id)return;const el=e.target,p=PH.find(x=>x.id===id);if(!p)return;
+$("phb").addEventListener("input",e=>{if(e.target.dataset.pe){{const el=e.target,id=el.dataset.pe;if(!PVB||PVB.id!==id){const C0=phCalc(),i=C0.L.findIndex(x=>x.id===id);el.dataset.k=i>=0&&+C0.L[i].pct>0?C0.adj[i]/+C0.L[i].pct:0;el.dataset.c=i>=0?C0.cons[i]:0}
+    const k=+el.dataset.k,c=+el.dataset.c;if(k>0&&c>0){const vs=c/k*10;if(Math.abs(+el.value-vs)<=(+el.max-+el.min)*.025)el.value=Math.round(vs)}   // effet collant sur la dépense déjà faite
+    el.style.setProperty("--v",(+el.value-+el.min)/Math.max(1,+el.max-+el.min)*100+"%");pveSlide(id,+el.value/10);return}}const id=e.target.dataset.av;if(!id)return;const el=e.target,p=PH.find(x=>x.id===id);if(!p)return;
   // curseur élastique : arrivé au bout, l'échelle s'agrandit de 25 % (jusqu'à 300 %)
   let v;
-  if(el.dataset.env){if(+el.value>=+el.max){const nv=+el.value;el.max=pslS(nv*1.2,+el.dataset.adj);el.value=nv}v=+el.dataset.env>0?+el.value/+el.dataset.env:0;pslPaintE(el)}
+  if(el.dataset.env){{const A=+el.dataset.adj;if(A>0&&Math.abs(+el.value-A)<=+el.max*.025)el.value=Math.round(A)}if(+el.value>=+el.max){const nv=+el.value;el.max=pslS(nv*1.2,+el.dataset.adj);el.value=nv}v=+el.dataset.env>0?+el.value/+el.dataset.env:0;pslPaintE(el)}
   else{if(+el.value>=+el.max&&+el.max<300){el.max=Math.min(300,Math.ceil(+el.max*1.5/10)*10);el.value=el.value}v=+el.value/100;pslPaint(el)}
   // recalcul complet en direct (sans enregistrer) : ce qui s'affiche pendant le glissement = ce qui restera au relâchement
   const old=p.av;p.av=v;XA=xAcc();const C=phCalc();renderHome(true);p.av=old;
@@ -1343,6 +1348,7 @@ async function cfFetch(path,opt={}){
   return r;
 }
 function cfDirty(){if(!CF.auth)return;clearTimeout(CF.t);CF.t=setTimeout(cfPush,1500)}
+{const h=document.querySelector("h1"),u=()=>document.documentElement.style.setProperty("--h1h",h.offsetHeight+"px");u();if(window.ResizeObserver)new ResizeObserver(u).observe(h);addEventListener("resize",u)}
 // ===== Annuler / rétablir (actif avec la sauvegarde en continu) =====
 const HS={s:[],i:-1,lock:false};
 const hsSnap=()=>({PH:JSON.stringify(PH),SEL:JSON.stringify([...PHSEL]),OFF:JSON.stringify([...OFF]),REG:JSON.stringify(REG),DATA});
@@ -1354,8 +1360,9 @@ function hsGo(d){const j=HS.i+d;if(j<0||j>=HS.s.length)return;HS.i=j;const o=HS.
   if(o.DATA!==DATA){DATA=o.DATA;LS.set("ab-data",DATA.source==="origine"?null:DATA)}
   BIG=null;savePH();saveOff();saveReg();setDate();route();hsUi()}
 $("undo").onclick=()=>hsGo(-1);$("redo").onclick=()=>hsGo(1);
-async function cfPush(){hsRec();const o=backup("full");
+async function cfPush(){const real=!HS.lock;hsRec();const o=backup("full");
   try{await cfFetch("files/etat/courant.json",{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(o)});LS.set("ab-cfsync",o.exportedAt);
+    if(real){const g=$("undo").querySelector("svg");try{g.animate([{transform:"rotate(0deg)"},{transform:"rotate(-360deg)"}],{duration:700,easing:"cubic-bezier(.4,0,.2,1)"})}catch(_){}}
     $("cfst").innerHTML=`<span class="ok">✓</span> Synchronisé à ${new Date().toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"})}`}
   catch(e){$("cfst").innerHTML=`<span class="ko">Synchronisation impossible</span> : ${esc(e.message)}`}}
 async function cfArchive(key,file){if(!CF.auth)return;
