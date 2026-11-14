@@ -86,6 +86,27 @@ async function api(request, env, url) {
   }
 }
 
+// Page de consultation en lecture seule : /recap/<code>
+// Le code est choisi depuis l'application (fichier R2 partage/code.json) ; un mauvais code donne une page introuvable.
+async function recap(request, env, url) {
+  const nf = () => new Response("Page introuvable.", { status: 404, headers: { "Content-Type": "text/plain; charset=utf-8", "X-Robots-Tag": "noindex" } });
+  const m = url.pathname.match(/^\/recap\/([A-Za-z0-9_-]{16,64})\/?$/);
+  if (!m || !env.FILES || request.method !== "GET") return nf();
+  const ref = await env.FILES.get("partage/code.json");
+  if (!ref) return nf();
+  let code = "";
+  try { code = (await ref.json()).code || ""; } catch (_) {}
+  if (!code || !sameToken(m[1], code)) return nf();
+  if (url.searchParams.has("data")) {
+    const obj = await env.FILES.get("etat/courant.json");
+    if (!obj) return json({ error: "aucune donnée enregistrée" }, 404);
+    return new Response(obj.body, { headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store", "X-Robots-Tag": "noindex" } });
+  }
+  const page = await env.ASSETS.fetch(new Request(new URL("/", url)));
+  const html = (await page.text()).replace("<head>", '<head><base href="/"><meta name="robots" content="noindex,nofollow">');
+  return new Response(html, { headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-store", "X-Robots-Tag": "noindex", "Referrer-Policy": "no-referrer" } });
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -95,6 +116,9 @@ export default {
       } catch (e) {
         return json({ error: "erreur interne", detail: String(e && e.message || e) }, 500);
       }
+    }
+    if (url.pathname.startsWith("/recap/")) {
+      try { return await recap(request, env, url); } catch (e) { return json({ error: "erreur interne" }, 500); }
     }
     return env.ASSETS.fetch(request);
   },
