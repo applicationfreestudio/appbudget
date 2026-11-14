@@ -91,7 +91,7 @@ select{font:inherit;font-size:.85rem;padding:7px 8px;border-radius:10px;border:1
 .rgl i{display:inline-block;width:14px;height:9px;border-radius:2px;vertical-align:middle;margin-right:5px;background:repeating-linear-gradient(-45deg,var(--mu) 0 2px,transparent 2px 4px)}
 .lgd{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:.74rem;color:var(--mu);margin-top:10px}
 .lgd i{display:inline-block;width:5px;height:14px;border-radius:3px;vertical-align:-2px;margin-right:6px}
-.lgd .lp{width:4px;background:#fff;box-shadow:0 0 0 1px var(--mu)}.lgd .lb{width:13px;height:13px;border-radius:50%;background:linear-gradient(var(--tx) 0 5px,var(--card) 5px 8px,var(--tx) 8px);vertical-align:-2px}.lgd .lo{width:14px;height:10px;border-radius:2px;background:var(--h);vertical-align:-1px}
+.lgd .lp{width:4px;background:#fff;box-shadow:0 0 0 1px var(--mu)}.lgd .lb{width:4px;height:13px;border-radius:1.5px;background:linear-gradient(90deg,#b8443a,#7a1f17);box-shadow:0 1px 2px rgba(0,0,0,.35);vertical-align:-2px}.lgd .lo{width:14px;height:10px;border-radius:2px;background:var(--h);vertical-align:-1px}
 .gw{position:relative;margin-top:12px}
 .mk{position:absolute;top:-5px;bottom:-5px;width:0;pointer-events:none}
 .mk::before{content:"";position:absolute;top:0;bottom:0;left:-2.5px;width:5px;border-radius:3px;box-shadow:0 0 0 2px var(--card)}
@@ -107,11 +107,11 @@ select{font:inherit;font-size:.85rem;padding:7px 8px;border-radius:10px;border:1
 .mkb{z-index:0;top:-6px;bottom:-6px}
 .gw .mkp{z-index:2}
 .mkb{z-index:3!important;top:-3px;bottom:-3px}
-.mkb::after{content:"";position:absolute;left:-3px;top:0;bottom:0;width:6px;border-radius:3px;background:linear-gradient(90deg,color-mix(in srgb,var(--tx) 60%,#fff) 0,var(--tx) 40%,color-mix(in srgb,var(--tx) 80%,#000) 80%,#000 100%);box-shadow:0 1px 2px rgba(0,0,0,.45),0 0 0 1px rgba(0,0,0,.08)}
+.mkb::after{content:"";position:absolute;left:-2px;top:0;bottom:0;width:4px;border-radius:1.5px;background:linear-gradient(90deg,#b8443a,#7a1f17);box-shadow:0 1px 2px rgba(0,0,0,.4)}
 /* le bâton s'enfonce légèrement dans le ruban : creux ombré de part et d'autre */
 .mkh{z-index:2;top:0;bottom:0}
-.mkh::before{content:"";position:absolute;left:-9px;width:18px;top:0;bottom:0;border-radius:0;box-shadow:none;background:linear-gradient(90deg,rgba(0,0,0,0) 0,rgba(0,0,0,.08) 35%,rgba(0,0,0,.32) 50%,rgba(0,0,0,.08) 65%,rgba(0,0,0,0) 100%)}
-.mkh::after{content:"";position:absolute;left:-9px;width:18px;top:0;bottom:0;background:linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,0) 30%,rgba(0,0,0,0) 70%,rgba(255,255,255,.18))}
+.mkh::before{content:none}
+.mkh::after{content:none}
 .gw .hg{z-index:1;box-shadow:0 1px 1.5px rgba(0,0,0,.22),0 3px 6px rgba(0,0,0,.12)}
 .gw .hg::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,0) 45%,rgba(0,0,0,.07))}
 .mkp em{color:var(--tx);opacity:.75;margin-bottom:4px}
@@ -480,7 +480,7 @@ details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-righ
 :root[data-theme="dark"] .frise .pcw>button.on.good{color:#0d1b2a}
 </style></head>
 <body><main>
-<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.40</small></span></span>
+<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.41</small></span></span>
   <span class="hb"><button type="button" class="sgb" id="nav">Paramètres<svg class="chv" viewBox="0 0 12 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4l6 8-6 8"/></svg></button><button class="tbtn" id="fs" aria-label="Plein écran" title="Plein écran"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button></span>
 </h1>
 <div class="sub"><div id="org"></div><div>Dépenses <span id="yr"></span> · situation au <b id="dt"></b></div></div>
