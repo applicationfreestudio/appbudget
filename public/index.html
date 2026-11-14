@@ -100,7 +100,7 @@ select{font:inherit;font-size:.85rem;padding:7px 8px;border-radius:10px;border:1
 .rgl i{display:inline-block;width:14px;height:9px;border-radius:2px;vertical-align:middle;margin-right:5px;background:repeating-linear-gradient(-45deg,var(--mu) 0 2px,transparent 2px 4px)}
 .lgd{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:.74rem;color:var(--mu);margin-top:10px}
 .lgd i{display:inline-block;width:5px;height:14px;border-radius:3px;vertical-align:-2px;margin-right:6px}
-.lgd .lp{width:4px;height:13px;border-radius:1.5px;background:linear-gradient(90deg,#fff,#d9d7cf);box-shadow:0 1px 2px rgba(0,0,0,.35),0 0 0 .5px rgba(0,0,0,.15);vertical-align:-2px}.lgd .lb{width:4px;height:13px;border-radius:1.5px;background:linear-gradient(90deg,#b8443a,#7a1f17);box-shadow:0 1px 2px rgba(0,0,0,.35);vertical-align:-2px}.lgd .lo{width:14px;height:10px;border-radius:2px;background:var(--h);vertical-align:-1px}
+.lgd .lp{width:4px;height:13px;border-radius:1.5px;background:linear-gradient(90deg,#fff,#d9d7cf);box-shadow:0 1px 2px rgba(0,0,0,.35),0 0 0 .5px rgba(0,0,0,.15);vertical-align:-2px}.lgd .lb{width:6px;height:13px;border-radius:1.5px;background:repeating-linear-gradient(135deg,#f2c12e 0 3px,#1c1c1a 3px 6px);box-shadow:0 1px 2px rgba(0,0,0,.35),0 0 0 .5px rgba(0,0,0,.35);vertical-align:-2px}.lgd .lo{width:14px;height:10px;border-radius:2px;background:var(--h);vertical-align:-1px}
 .gw{position:relative;margin-top:12px}
 .mk{position:absolute;top:-5px;bottom:-5px;width:0;pointer-events:none}
 .mk::before{content:"";position:absolute;top:0;bottom:0;left:-2.5px;width:5px;border-radius:3px;box-shadow:0 0 0 2px var(--card)}
@@ -116,7 +116,7 @@ select{font:inherit;font-size:.85rem;padding:7px 8px;border-radius:10px;border:1
 .mkb{z-index:0;top:-6px;bottom:-6px}
 .gw .mkp{z-index:2}
 .mkb{z-index:3!important;top:0;bottom:0}
-.mkb::after{content:"";position:absolute;left:-2px;top:0;bottom:0;width:4px;border-radius:1.5px;background:linear-gradient(90deg,#b8443a,#7a1f17);box-shadow:0 1px 2px rgba(0,0,0,.4)}
+.mkb::after{content:"";position:absolute;left:-3px;top:0;bottom:0;width:6px;border-radius:1.5px;background:repeating-linear-gradient(135deg,#f2c12e 0 3px,#1c1c1a 3px 6px);box-shadow:0 1px 2px rgba(0,0,0,.45),0 0 0 .5px rgba(0,0,0,.35)}
 /* le bâton s'enfonce légèrement dans le ruban : creux ombré de part et d'autre */
 .mkh{z-index:2;top:0;bottom:0}
 .mkh::before{content:none}
@@ -257,21 +257,24 @@ select{font:inherit;font-size:.85rem;padding:7px 8px;border-radius:10px;border:1
 .pcw .pn .ck{margin-right:.35em}
 .pbar.pbg{height:6px;margin:14px 0 8px}
 .pslw2{position:relative;margin-top:6px}
-.pslw2.thr::after{content:"";position:absolute;left:calc(13px + (100% - 26px) * var(--mf,0));top:13px;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:var(--dc,var(--bl));pointer-events:none;z-index:1}
+.pslw2.snp::after{display:none}.pcw.big .pslz .pslw2.snp .psl.psle::-webkit-slider-thumb{background:radial-gradient(circle at center,var(--bl) 7.5px,transparent 8px)}.pcw.big .pslz .pslw2.snp .psl.psle::-moz-range-thumb{background:radial-gradient(circle at center,var(--bl) 7.5px,transparent 8px)}
+.pve.snp+.pvd,.pvd.on{display:none}.pcw.big .pve.snp::-webkit-slider-thumb,.pcw.big .pve:has(+.pvd.on)::-webkit-slider-thumb{background:radial-gradient(circle at center,color-mix(in srgb,var(--a) 85%,var(--tx)) 7.5px,transparent 8px)}.pcw.big .pve.snp::-moz-range-thumb,.pcw.big .pve:has(+.pvd.on)::-moz-range-thumb{background:radial-gradient(circle at center,color-mix(in srgb,var(--a) 85%,var(--tx)) 7.5px,transparent 8px)}
+
+.pslw2.thr::after{content:"";position:absolute;left:calc(13px + (100% - 26px) * var(--mf,0));top:13px;width:15px;height:15px;margin:-7.5px 0 0 -7.5px;border-radius:50%;background:var(--dc,var(--bl));pointer-events:none;z-index:1}
 .pslz{min-height:44px;display:flex;flex-direction:column;justify-content:center}.pslz .pbar.pbg{margin:0}.pcw.big .pslz .psl.psle{margin:10px 0 3px;height:6px;border-radius:3px;padding:0}
 .pcw.big .pslz .psl.psle::-webkit-slider-thumb{box-sizing:border-box;width:26px;height:26px;margin:0;border-width:4.5px;background:transparent;box-shadow:0 1px 3px rgba(0,0,0,.25),inset 0 0 0 .5px rgba(0,0,0,.1)}
 .pcw.big .pslz .psl.psle::-moz-range-thumb{box-sizing:border-box;width:26px;height:26px;border-width:4.5px;background:transparent}
 .psl.psle{height:8px;border-radius:4px;margin:14px 0 4px;background:linear-gradient(90deg,var(--bl) 0 var(--c,0%),var(--h) var(--c,0%) var(--v,0%),var(--ln) var(--v,0%))}
 .psl.psle::-webkit-slider-thumb{width:26px;height:26px;border-width:2.5px;box-shadow:0 2px 5px rgba(0,0,0,.3)}.psl.psle::-moz-range-thumb{width:24px;height:24px;border-width:2.5px}
 .psls{position:relative;height:calc(1.4rem + .72rem + 18px);font-size:1.4rem;color:var(--mu);font-variant-numeric:tabular-nums}
-.psls .pslt{position:absolute;top:8px;left:clamp(48px,calc(13px + (100% - 26px) * var(--mf,0)),calc(100% - 48px));transform:translateX(-50%);white-space:nowrap;text-align:center;line-height:1.1;color:var(--bl);font-weight:800;font-variant-numeric:tabular-nums}.psls .pslt small{display:block;font-size:.72rem;font-weight:400;color:var(--mu);text-transform:uppercase;letter-spacing:.03em;margin-bottom:2px}
+.psls .pslt{position:absolute;top:8px;left:clamp(48px,calc(13px + (100% - 26px) * var(--mf,0)),calc(100% - 48px));transform:translateX(-50%);white-space:nowrap;text-align:center;line-height:1.1;color:var(--tx);font-weight:800;font-variant-numeric:tabular-nums}.psls .pslt small{display:block;font-size:.72rem;font-weight:400;color:var(--mu);text-transform:uppercase;letter-spacing:.03em;margin-bottom:2px}
 .phh .phti{font-size:1.25rem;margin:0}.phh #phn{font-size:1rem;color:var(--mu);font-weight:600}.phh .phti .si{color:var(--a)}
 .arth{align-items:center}.arth h2{margin:0;font-size:1.25rem}.arth .si{color:var(--a)}.arth select{width:auto;max-width:58%}
 .pbtt{border-top:2px solid var(--ln)!important;margin-top:2px;font-weight:700;align-items:center!important}.pbtt span{font-size:1rem}.pbtt b{font-size:1.35rem}
 .fxb{display:inline-grid;place-items:center;width:18px;height:18px;margin-left:6px;border-radius:50%;font:800 11px/1 Barlow,system-ui,sans-serif;font-style:normal;color:#fff;background:color-mix(in srgb,var(--a) 72%,var(--card));vertical-align:1px}.pbck{font-size:.75rem;color:var(--mu);text-align:right;margin:-2px 0 4px}
 .pcw.big .pam small{font-size:.72rem}.pcw.big .pam b{font-size:1.4rem}
 .pcw.big .plk{width:34px;height:34px;border-radius:0 13px 0 11px}.pcw.big .plk svg{width:16px;height:16px}
-.pcw.big .pve{left:12px;top:14px;bottom:14px;width:26px}.pcw.big .pve::-webkit-slider-runnable-track{width:6px;border-radius:3px}.pcw.big .pve::-webkit-slider-thumb{box-sizing:border-box;width:26px;height:26px;margin-left:-10px;background:transparent;border:4.5px solid color-mix(in srgb,var(--a) 85%,var(--tx));box-shadow:0 1px 3px rgba(0,0,0,.25),inset 0 0 0 .5px rgba(0,0,0,.1)}.pcw.big .pve::-moz-range-track{width:6px;border-radius:3px}.pcw.big .pve::-moz-range-thumb{box-sizing:border-box;width:26px;height:26px;background:transparent;border:4.5px solid color-mix(in srgb,var(--a) 85%,var(--tx))}
+.pcw.big .pve{left:12px;top:14px;bottom:14px;width:26px}.pvd{position:absolute;left:var(--pvx,25px);bottom:calc(27px + (100% - 54px) * var(--f,0));width:15px;height:15px;margin:0 0 -7.5px -7.5px;border-radius:50%;background:color-mix(in srgb,var(--a) 85%,var(--tx));pointer-events:none;z-index:1}.pcw.big .pve::-webkit-slider-runnable-track{width:6px;border-radius:3px}.pcw.big .pve::-webkit-slider-thumb{box-sizing:border-box;width:26px;height:26px;margin-left:-10px;background:transparent;border:4.5px solid color-mix(in srgb,var(--a) 85%,var(--tx));box-shadow:0 1px 3px rgba(0,0,0,.25),inset 0 0 0 .5px rgba(0,0,0,.1)}.pcw.big .pve::-moz-range-track{width:6px;border-radius:3px}.pcw.big .pve::-moz-range-thumb{box-sizing:border-box;width:26px;height:26px;background:transparent;border:4.5px solid color-mix(in srgb,var(--a) 85%,var(--tx))}
 .pcw.big .psl{height:5px;margin:12px 0 6px}.pcw.big .psl::-webkit-slider-thumb{width:24px;height:24px}.pcw.big .psl::-moz-range-thumb{width:22px;height:22px}
 .pdn{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:10px;border-top:1px solid var(--ln);font-weight:600;font-size:.95rem;cursor:pointer}
 .pdr{display:flex;flex-direction:column;gap:12px;padding-top:2px}.pdr .pdn{padding:0;border:0;font-size:.92rem;gap:8px}.pdr .eub{height:30px;min-width:32px}
@@ -413,9 +416,9 @@ html.lock,html.lock body{overflow:hidden}
 .phr .pct{position:relative}.phr .pct input{padding-right:20px;text-align:right}.phr .pct span{position:absolute;right:7px;top:50%;transform:translateY(-50%);font-size:.8rem;color:var(--mu)}
 .phr button{flex:none;font-size:.8rem;padding:6px 10px}
 .phr{position:relative;padding-left:26px!important}
-.grip{position:absolute;left:3px;top:6px;bottom:6px;display:flex;flex-direction:column;justify-content:center;gap:3px;width:14px;padding:0 3px;cursor:grab;touch-action:none;border-radius:5px;background:color-mix(in srgb,var(--mu) 10%,transparent)}
+.grip{position:absolute;left:3px;top:0;bottom:0;width:14px;box-sizing:border-box;padding:9px 3px;cursor:grab;touch-action:none;background:repeating-linear-gradient(to bottom,color-mix(in srgb,var(--mu) 70%,transparent) 0 2px,transparent 2px 5px) content-box}.grip i{display:none!important}
 .grip i{display:block;height:2px;border-radius:1px;background:var(--mu);opacity:.7}
-.grip:active{cursor:grabbing;background:var(--ln)}
+.grip:active{cursor:grabbing;opacity:.6}
 .phr.drag{position:relative;z-index:5;box-shadow:0 6px 18px rgba(0,0,0,.18);opacity:.95;transition:none}
 .dropbar{height:4px;border-radius:2px;background:color-mix(in srgb,var(--mu) 55%,transparent);margin:3px 6px}
 .mv{display:flex;flex-direction:column;gap:2px;flex:none}
@@ -499,7 +502,7 @@ details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-righ
 :root[data-theme="dark"] .frise .pcw>button.on.good{color:#0d1b2a}
 </style></head>
 <body><main>
-<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.47</small></span></span>
+<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.48</small></span></span>
   <span class="hb"><span class="urd" id="urd" hidden><button type="button" class="sgb" id="undo" aria-label="Annuler la dernière modification" title="Annuler"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button><button type="button" class="sgb" id="redo" aria-label="Rétablir la modification" title="Rétablir"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg></button></span><span class="hbr"><button type="button" class="sgb" id="nav">Paramètres<svg class="chv" viewBox="0 0 12 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4l6 8-6 8"/></svg></button><button class="tbtn" id="fs" aria-label="Plein écran" title="Plein écran"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button></span></span>
 </h1>
 <div class="sub"><div id="org"></div><div>Dépenses <span id="yr"></span> · situation au <b id="dt"></b></div></div>
@@ -867,9 +870,9 @@ function renderPhase(){
       vM=Math.max(Math.round(+x.pct*10),Math.floor(Math.min(pmax,Math.max(2*x.pct,+x.pct+10))*10)),vV=Math.round(+x.pct*10);
     return `<div class="pcw big ${cls}" data-pw="${x.id}">${lb}${hd}
       <div class="pslz">${pas?`<div class="pbar pbg"><i style="width:100%;background:var(--w)"></i></div>`:(()=>{const A=Math.max(0,C.adj[i]),S=pslS(cons,A),vv=Math.round(cons),pp=vv/S*100,tt=Math.min(100,A/S*100);
-        return `<div class="pslw2${tt<99.5?" thr":""}" style="--m:${tt}%;--mf:${tt/100};--dc:${vv>A+0.5?"var(--h)":"var(--bl)"}"><input type="range" class="psl psle"${off?" disabled":""} min="0" max="${S}" step="1" value="${vv}" data-av="${x.id}" data-env="${env[i]}" data-adj="${A}" style="--v:${pp}%;--c:${Math.min(pp,tt)}%;--sc:${vv>A+0.5?"var(--h)":"var(--bl)"}" aria-label="Dépense de la période en euros : ${esc(x.name||"période")}"></div><div class="psls" style="--mf:${tt/100}"><span class="pslt">${tt<99.5?"<small>Prévu</small>"+f0(A):""}</span></div>`})()}</div>
+        return `<div class="pslw2${tt<99.5?" thr":""}${tt<99.5&&Math.abs(vv-A)<0.5?" snp":""}" style="--m:${tt}%;--mf:${tt/100};--dc:${vv>A+0.5?"var(--h)":"var(--bl)"}"><input type="range" class="psl psle"${off?" disabled":""} min="0" max="${S}" step="1" value="${vv}" data-av="${x.id}" data-env="${env[i]}" data-adj="${A}" style="--v:${pp}%;--c:${Math.min(pp,tt)}%;--sc:${vv>A+0.5?"var(--h)":"var(--bl)"}" aria-label="Dépense de la période en euros : ${esc(x.name||"période")}"></div><div class="psls" style="--mf:${tt/100}"><span class="pslt">${tt<99.5?"<small>Prévu</small>"+f0(A):""}</span></div>`})()}</div>
       <div class="pdr"><label class="pdn"><span>Période terminée</span><input type="checkbox" data-done="${x.id}"${pas?" checked":""}></label><div class="pdn pfx"><span>Montant bloqué</span><label class="sw psw fxs" title="Bloquer le montant de la période"><input type="checkbox" data-fxb="${x.id}"${x.fix?" checked":""} aria-label="Bloquer le montant de la période"><i></i></label></div></div>
-      <input type="range" class="pve" data-pe="${x.id}" min="1" max="${vM}" step="1" value="${vV}" style="--v:${(vV-1)/Math.max(1,vM-1)*100}%"${offE?" disabled":""} aria-orientation="vertical" aria-label="Enveloppe (part du budget) : ${esc(x.name||"période")}"></div>`};
+      <input type="range" class="pve" data-pe="${x.id}" min="1" max="${vM}" step="1" value="${vV}" style="--v:${(vV-1)/Math.max(1,vM-1)*100}%"${offE?" disabled":""} aria-orientation="vertical" aria-label="Enveloppe (part du budget) : ${esc(x.name||"période")}">${(()=>{const A=C.adj[i];if(offE||!(cons>0.5)||!(A>0)||!(+x.pct>0))return"";const vs=cons*(+x.pct)/A*10;if(vs<1||vs>vM)return"";return `<i class="pvd${Math.abs(cons-A)<0.5?" on":""}" style="--f:${(vs-1)/Math.max(1,vM-1)}" title="Dépense en cours"></i>`})()}</div>`};
   const kind=x=>new RegExp(`(${MOIS})\\s*(?:[–—-]|→)\\s*(${MOIS})`,"i").test(x.name||"")?0:/vacances/i.test(x.name||"")?1:2;
   const rowsH=[0,1,2].map(k=>{const it=L.map((x,i)=>[x,i]).filter(([x])=>kind(x)===k);return it.length?`<div class="frow">${it.map(([x,i])=>chip(x,i)).join("")}</div>`:""}).join("");
   {const bi=BIG?L.findIndex(x=>x.id===BIG):-1;if(bi<0)BIG=null;
@@ -909,15 +912,16 @@ const pslC=(av,rest)=>av>1.004||rest<-0.5?"var(--h)":av>=0.9?"var(--w)":"var(--b
 const pslS=(c,a)=>{const m=Math.max(a*1.25,c*1.4,50),k=Math.pow(10,Math.floor(Math.log10(m))-1)*5;return Math.ceil(m/k)*k};
 function pslPaintE(el){const M=+el.max,v=+el.value,a=+el.dataset.adj,pos=v/M*100,t=Math.min(100,a/M*100);
   el.style.setProperty("--v",pos+"%");el.style.setProperty("--c",Math.min(pos,t)+"%");el.style.setProperty("--sc",v>a+0.5?"var(--h)":"var(--bl)");
-  const w=el.parentNode;w.style.setProperty("--m",t+"%");w.style.setProperty("--mf",t/100);w.classList.toggle("thr",t<99.5);w.style.setProperty("--dc",v>a+0.5?"var(--h)":"var(--bl)");const sc=w.nextElementSibling;if(sc&&sc.classList.contains("psls")){sc.style.setProperty("--mf",t/100);sc.querySelector(".pslt").innerHTML=t<99.5?"<small>Prévu</small>"+f0(a):""}}
+  const w=el.parentNode;w.style.setProperty("--m",t+"%");w.style.setProperty("--mf",t/100);w.classList.toggle("thr",t<99.5);w.classList.toggle("snp",t<99.5&&Math.abs(v-a)<0.5);w.style.setProperty("--dc",v>a+0.5?"var(--h)":"var(--bl)");const sc=w.nextElementSibling;if(sc&&sc.classList.contains("psls")){sc.style.setProperty("--mf",t/100);sc.querySelector(".pslt").innerHTML=t<99.5?"<small>Prévu</small>"+f0(a):""}}
 const pslMax=av=>av<=0.004?100:Math.min(300,Math.max(20,Math.ceil(av*100*1.5/10)*10));
 function pslPaint(el){const M=+el.max,v=+el.value,pos=v/M*100,cut=Math.min(pos,100/M*100),w=el.parentNode;
   el.style.setProperty("--v",pos+"%");el.style.setProperty("--c",cut+"%");w.style.setProperty("--m",100/M*100+"%");w.classList.toggle("ext",M>100)}
 const parseEur=v=>{const n=parseFloat(String(v).replace(/[\s\u00a0\u2060\u200a\u2060€]/g,"").replace(",","."));return isFinite(n)&&n>0?Math.round(n*100)/100:0};
 // Curseur d'avancement : 0 % → 100 % (= période terminée, entièrement consommée)
 $("phb").addEventListener("input",e=>{if(e.target.dataset.pe){{const el=e.target,id=el.dataset.pe;if(!PVB||PVB.id!==id){const C0=phCalc(),i=C0.L.findIndex(x=>x.id===id);el.dataset.k=i>=0&&+C0.L[i].pct>0?C0.adj[i]/+C0.L[i].pct:0;el.dataset.c=i>=0?C0.cons[i]:0}
-    const k=+el.dataset.k,c=+el.dataset.c;if(k>0&&c>0){const vs=c/k*10;if(Math.abs(+el.value-vs)<=(+el.max-+el.min)*.025)el.value=Math.round(vs)}   // effet collant sur la dépense déjà faite
-    el.style.setProperty("--v",(+el.value-+el.min)/Math.max(1,+el.max-+el.min)*100+"%");pveSlide(id,+el.value/10);return}}const id=e.target.dataset.av;if(!id)return;const el=e.target,p=PH.find(x=>x.id===id);if(!p)return;
+    const k=+el.dataset.k,c=+el.dataset.c;let pv=+el.value/10;if(k>0&&c>0){const vs=c/k*10;if(Math.abs(+el.value-vs)<=(+el.max-+el.min)*.03){el.value=Math.round(vs);pv=c/k}}
+    el.classList.toggle("snp",pv===c/k&&c>0);   // effet collant sur la dépense déjà faite : prévu = dépense, exactement
+    el.style.setProperty("--v",(+el.value-+el.min)/Math.max(1,+el.max-+el.min)*100+"%");pveSlide(id,pv);return}}const id=e.target.dataset.av;if(!id)return;const el=e.target,p=PH.find(x=>x.id===id);if(!p)return;
   // curseur élastique : arrivé au bout, l'échelle s'agrandit de 25 % (jusqu'à 300 %)
   let v;
   if(el.dataset.env){{const A=+el.dataset.adj;if(A>0&&Math.abs(+el.value-A)<=+el.max*.025)el.value=Math.round(A)}if(+el.value>=+el.max){const nv=+el.value;el.max=pslS(nv*1.2,+el.dataset.adj);el.value=nv}v=+el.dataset.env>0?+el.value/+el.dataset.env:0;pslPaintE(el)}
@@ -974,9 +978,9 @@ function pveSlide(id,v){
   if(!PVB||PVB.id!==id)PVB={id,p:new Map(PH.map(x=>[x.id,+x.pct||0])),a:new Map(PH.map(x=>[x.id,+x.av||0])),o:PH.filter(x=>x.id!==id&&!PHSEL.has(x.id)&&!x.fix&&(+x.pct||0)>0).map(x=>x.id)};
   const b0=PVB.p.get(id),O=PVB.o.reduce((s,k)=>s+PVB.p.get(k),0),r2=x=>Math.round(x*100)/100;
   v=Math.max(.1,PVB.o.length?Math.min(b0+O-.1*PVB.o.length,v):b0);const d=v-b0;
-  PH.forEach(x=>{if(x.id===id){x.pct=r2(v);if(x.fix)x.fixAmt=Math.round(totals().b*x.pct)/100;const a=PVB.a.get(id);if(a>0)x.av=Math.min(3,a*b0/v)}else if(PVB.o.includes(x.id)){const b=PVB.p.get(x.id),n=O>0?Math.max(.1,b-d*b/O):b,a=PVB.a.get(x.id);x.pct=r2(n);if(a>0)x.av=Math.min(3,a*b/n)}});
-  const tgt=r2(b0+O),got=r2(PH.reduce((s,x)=>s+(x.id===id||PVB.o.includes(x.id)?+x.pct:0),0)),k=PVB.o.slice().sort((a,b)=>PVB.p.get(b)-PVB.p.get(a))[0],q=k&&PH.find(x=>x.id===k);
-  if(q&&Math.abs(tgt-got)>=.005)q.pct=r2(q.pct+tgt-got);
+  PH.forEach(x=>{if(x.id===id){x.pct=Math.round(v*1e6)/1e6;if(x.fix)x.fixAmt=Math.round(totals().b*x.pct)/100;const a=PVB.a.get(id);if(a>0)x.av=Math.min(3,a*b0/v)}else if(PVB.o.includes(x.id)){const b=PVB.p.get(x.id),n=O>0?Math.max(.1,b-d*b/O):b,a=PVB.a.get(x.id);x.pct=r2(n);if(a>0)x.av=Math.min(3,a*b/n)}});
+  const r6=x=>Math.round(x*1e6)/1e6,tgt=r6(b0+O),got=r6(PH.reduce((s,x)=>s+(x.id===id||PVB.o.includes(x.id)?+x.pct:0),0)),k=PVB.o.slice().sort((a,b)=>PVB.p.get(b)-PVB.p.get(a))[0],q=k&&PH.find(x=>x.id===k);
+  if(q&&Math.abs(tgt-got)>=1e-6)q.pct=r6(q.pct+tgt-got);
   // tableau des paramètres mis à jour en direct (pourcentages et montants)
   PH.forEach(x=>{const r=document.querySelector(`.phr[data-id="${x.id}"]`);if(!r)return;const n=r.querySelector("[data-k=pct]");if(n)n.value=Math.round(x.pct*100)/100;const fa=r.querySelector("[data-fa]");if(fa&&x.fix)fa.value=Math.round(+x.fixAmt)});phSum();
   XA=xAcc();const C=phCalc();renderHome(true);phLive(C,id)}
@@ -1029,27 +1033,26 @@ function phSum(){const s=PH.reduce((a,p)=>a+(+p.pct||0),0),B=totals().b;
   $("phsum").innerHTML=PH.length?`Total : <b class="${Math.abs(s-100)<.01?"ok":"ko"}">${s.toLocaleString("fr-FR",{maximumFractionDigits:1})} %</b>${B>0?` · ${f0(B*s/100)} sur ${f0(B)}`:""}`:"";}
 // Curseur : la variation est reportée sur les périodes NON VERROUILLÉES, au prorata de leur part actuelle
 let slBase=null;
-// maximum atteignable par le curseur : sa part + la part non répartie + celles des périodes non verrouillées
+// maximum atteignable par le curseur : 100 % moins les parts qui ne peuvent pas céder (verrouillées, bloquées, terminées)
 function phAbs(i){return PH.map((x,j)=>j!==i&&!x.lock&&!x.fix&&!PHSEL.has(x.id)?j:-1).filter(j=>j>=0)}   // périodes qui absorbent : ni verrouillées, ni à montant bloqué, ni terminées
-function slMaxOf(i){const B=PH.map(x=>+x.pct||0),F=phAbs(i).reduce((a,j)=>a+B[j],0),T=B.reduce((a,b)=>a+b,0);return Math.max(.1,Math.round((B[i]+Math.max(0,100-T)+F)*10)/10)}
+function slMaxOf(i){const B=PH.map(x=>+x.pct||0),E=phAbs(i);if(!E.length)return Math.max(.1,B[i]);const K=B.reduce((a,b,j)=>a+(j!==i&&!E.includes(j)?b:0),0);return Math.max(.1,Math.round(Math.max(B[i],100-K)*10)/10)}
 function slMaxUpd(){PH.forEach((p,i)=>{const sl=document.querySelector(`[data-sl="${p.id}"]`);if(sl){sl.max=slMaxOf(i);sl.value=+p.pct||0;sl.style.setProperty("--v",Math.min(100,(+p.pct||0)/Math.max(.1,+sl.max)*100)+"%")}})}
-function slideTo(id,v){
+function slideTo(id,v,exact){
   if(!slBase||slBase.id!==id)slBase={id,p:PH.map(x=>+x.pct||0)};
   const B=slBase.p,i=PH.findIndex(x=>x.id===id),r=x=>Math.round(x*10)/10;
-  // hausse : d'abord la part non répartie du budget, puis prélèvement sur les périodes non verrouillées (au prorata)
-  // baisse : le montant libéré est redistribué sur les périodes non verrouillées (au prorata) ; s'il n'y en a pas, il reste disponible
-  const E=phAbs(i),F=E.reduce((a,j)=>a+B[j],0),T=B.reduce((a,b)=>a+b,0),free=Math.max(0,100-T);
-  v=Math.max(0,Math.min(v,B[i]+free+F));
-  const d=v-B[i],out=B.slice();out[i]=r(v);let want=F;
-  if(d>0){const take=Math.min(F,Math.max(0,d-free));if(take>0){want=F-take;E.forEach(j=>out[j]=r(B[j]-take*B[j]/F))}}
-  else if(d<0&&E.length){want=F-d;E.forEach(j=>out[j]=r(F>0?B[j]-d*B[j]/F:-d/E.length))}
-  if(E.length){const got=E.reduce((a,j)=>a+out[j],0),fx=r(r(want)-r(got));if(fx){const k=E.slice().sort((a,b)=>out[b]-out[a]).find(j=>out[j]+fx>=0);if(k!=null)out[k]=r(out[k]+fx)}}
+  // la répartition reste toujours à 100 % : l'écart est pris sur (ou rendu aux) périodes non verrouillées,
+  // sans montant bloqué et non terminées, au prorata de leur part. Sans période pour compenser, rien ne bouge.
+  const E=phAbs(i);if(!E.length){const n=document.querySelector(`[data-sl="${id}"]`);if(n)n.value=B[i];return}
+  const K=B.reduce((a,b,j)=>a+(j!==i&&!E.includes(j)?b:0),0),F=E.reduce((a,j)=>a+B[j],0);
+  const r4=x=>Math.round(x*1e4)/1e4;v=(exact?r4:r)(Math.max(0,Math.min(v,100-K)));const T=r4(100-K-v),out=B.slice();out[i]=v;
+  E.forEach(j=>out[j]=r(F>0?B[j]*T/F:T/E.length));
+  const fx=r4(T-E.reduce((a,j)=>a+out[j],0));if(fx){const k=E.slice().sort((a,b)=>out[b]-out[a]).find(j=>out[j]+fx>=0);if(k!=null)out[k]=r(out[k]+fx)}
   PH.forEach((x,j)=>{x.pct=Math.max(0,out[j]);const n=document.querySelector(`.phr[data-id="${x.id}"] [data-k=pct]`);if(n&&document.activeElement!==n)n.value=Math.round(x.pct*100)/100});
   LS.set("ab-phases",PH);phSum();
 }
 let phT=null;
 $("phlist").addEventListener("input",e=>{
-  if(e.target.dataset.fa){const p=PH.find(x=>x.id===e.target.dataset.fa),B=totals().b;if(!p||!(B>0))return;p.fixAmt=Math.max(0,+e.target.value||0);p.pct=Math.round(p.fixAmt/B*1e6)/1e4;
+  if(e.target.dataset.fa){const p=PH.find(x=>x.id===e.target.dataset.fa),B=totals().b;if(!p||!(B>0))return;const fa=Math.max(0,+e.target.value||0);slideTo(p.id,fa/B*100,true);p.fixAmt=Math.round(B*p.pct)/100;
     const n=e.target.closest(".phr").querySelector("[data-k=pct]");if(n)n.value=Math.round(p.pct*100)/100;LS.set("ab-phases",PH);phSum();clearTimeout(phT);phT=setTimeout(()=>{savePH();setDate()},600);return}
   if(e.target.dataset.sl){slideTo(e.target.dataset.sl,+e.target.value);clearTimeout(phT);phT=setTimeout(()=>{savePH();setDate()},500);return}
   const k=e.target.dataset.k;if(!k)return;
@@ -1058,7 +1061,7 @@ $("phlist").addEventListener("input",e=>{
   p[k]=k==="pct"?(e.target.value===""?"":+e.target.value):e.target.value;
   LS.set("ab-phases",PH);phSum();clearTimeout(phT);phT=setTimeout(()=>{savePH();setDate()},600)});
 $("phlist").addEventListener("change",e=>{if(e.target.dataset.plk){const q=PH.find(x=>x.id===e.target.dataset.plk);if(q){phLock(q,e.target.checked);savePH();setDate();renderPhSet()}return}
-  if(e.target.dataset.sl||e.target.dataset.k==="pct"){slBase=null;slMaxUpd();savePH();setDate()}
+  if(e.target.dataset.sl||e.target.dataset.fa||e.target.dataset.k==="pct"){slBase=null;slMaxUpd();savePH();setDate()}
 });
 $("phlist").addEventListener("click",e=>{
   const fx=e.target.closest("[data-fx]");if(fx){const q=PH.find(x=>x.id===fx.dataset.fx);if(q){phFixSet(q,!q.fix);savePH();setDate();renderPhSet()}return}
