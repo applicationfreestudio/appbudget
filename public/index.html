@@ -503,7 +503,7 @@ details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-righ
 :root[data-theme="dark"] .frise .pcw>button.on.good{color:#0d1b2a}
 </style></head>
 <body><main>
-<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.51</small></span></span>
+<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.52</small></span></span>
   <span class="hb"><span class="urd" id="urd" hidden><button type="button" class="sgb" id="undo" aria-label="Annuler la dernière modification" title="Annuler"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button><button type="button" class="sgb" id="redo" aria-label="Rétablir la modification" title="Rétablir"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg></button></span><span class="hbr"><button type="button" class="sgb" id="nav">Paramètres<svg class="chv" viewBox="0 0 12 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4l6 8-6 8"/></svg></button><button class="tbtn" id="fs" aria-label="Plein écran" title="Plein écran"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button></span></span>
 </h1>
 <div class="sub"><div id="org"></div><div>Dépenses <span id="yr"></span> · situation au <b id="dt"></b></div></div>
@@ -584,7 +584,8 @@ details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-righ
     <div id="bkst" class="note" style="margin-top:8px"></div>
   </details>
     <details class="card up dsec" id="cf" hidden>
-    <summary><svg class="si cfi" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 18.5a4.5 4.5 0 0 1-.6-9 6 6 0 0 1 11.6 1.5 3.8 3.8 0 0 1-.5 7.5"/><path class="cfar" d="M12 12v8.5M8.8 15.2 12 12l3.2 3.2"/><path class="cfx" d="M9.4 13.4l5.2 5.2M14.6 13.4l-5.2 5.2"/></svg><span class="cft"><b>Sauvegarde en ligne</b><span class="dsm">Paramètres Cloudflare</span></span></summary>
+    <summary><svg class="si cfi" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 18.5a4.5 4.5 0 0 1-.6-9 6 6 0 0 1 11.6 1.5 3.8 3.8 0 0 1-.5 7.5"/><path class="cfar" d="M12 12v8.5M8.8 15.2 12 12l3.2 3.2"/><path class="cfx" d="M9.4 13.4l5.2 5.2M14.6 13.4l-5.2 5.2"/></svg><b>Sauvegarde en ligne</b></summary>
+    <h3 class="h3s">Paramètres Cloudflare</h3>
     <p class="note" style="margin:4px 0 10px">Les données sont enregistrées automatiquement dans le stockage R2 et retrouvées sur tous tes appareils. Les PDF et états de régie importés y sont archivés.</p>
     <div class="cfr"><input type="password" id="cftok" placeholder="Jeton d'accès (APP_TOKEN)" autocomplete="off"><button class="tbtn pri" id="cfgo">Connecter</button></div>
     <div id="cfst" class="cfst"></div>
@@ -1057,7 +1058,10 @@ let phT=null;
 $("phlist").addEventListener("input",e=>{
   if(e.target.dataset.fa){const p=PH.find(x=>x.id===e.target.dataset.fa),B=totals().b;if(!p||!(B>0))return;const fa=Math.max(0,+e.target.value||0);slideTo(p.id,fa/B*100,true);p.fixAmt=Math.round(B*p.pct)/100;
     const n=e.target.closest(".phr").querySelector("[data-k=pct]");if(n)n.value=Math.round(p.pct*100)/100;LS.set("ab-phases",PH);phSum();clearTimeout(phT);phT=setTimeout(()=>{savePH();setDate()},600);return}
-  if(e.target.dataset.sl){slideTo(e.target.dataset.sl,+e.target.value);clearTimeout(phT);phT=setTimeout(()=>{savePH();setDate()},500);return}
+  if(e.target.dataset.sl){const id=e.target.dataset.sl,i=PH.findIndex(x=>x.id===id),B=slBase&&slBase.id===id?slBase.p:PH.map(x=>+x.pct||0);let v=+e.target.value;
+    const cap=Math.round((100-B.reduce((a,b,j)=>a+(j!==i?b:0),0))*10)/10;   // valeur qui amène la répartition à 100 %
+    if(cap>0&&Math.abs(v-cap)<=Math.max(.3,+e.target.max*.03)){v=cap;e.target.value=cap}   // effet collant
+    slideTo(id,v);clearTimeout(phT);phT=setTimeout(()=>{savePH();setDate()},500);return}
   const k=e.target.dataset.k;if(!k)return;
   const p=PH.find(x=>x.id===e.target.closest(".phr").dataset.id);
   if(k==="pct"&&p&&e.target.value!==""&&isFinite(+e.target.value)){slideTo(p.id,+e.target.value);clearTimeout(phT);phT=setTimeout(()=>{savePH();setDate()},600);return}
@@ -1323,8 +1327,8 @@ function saveReg(){cfDirty();
   if(DB)DB.doc("regie/etats").set({list:JSON.stringify(REG),at:Date.now()}).catch(()=>{$("rgst").textContent="Enregistré sur cet appareil (synchronisation impossible)."});
 }
 function renderRegList(){
-  $("rglist").innerHTML=REG.length?REG.map(x=>`<div class="rgi"><div><b>${esc(x.file.replace(/\.(ods|xlsx?|csv)$/i,""))}</b><small>${x.from?`${fd(x.from)} → ${fd(x.to)} · `:""}${x.lines.length} lignes</small><span class="rgm">${f(x.total)}</span></div><div class="rga"><label class="rgo" title="Pris en compte dans la jauge"><span>Dans la jauge</span><span class="sw psw"><input type="checkbox" data-rgon="${x.id}"${x.on!==false?" checked":""}><i></i></span></label><button class="tbtn" data-del="${x.id}">Retirer</button></div></div>`).join("")
-    +`<div class="note" style="padding-top:8px">Total régie en cours : <b class="rgm">${f(REG.reduce((s,x)=>s+x.total,0))}</b>. Retire un état dès qu'il apparaît dans la situation budgétaire PDF.</div>`:"";
+  $("rglist").innerHTML=REG.length?REG.map(x=>`<div class="rgi"><div><b>${esc(x.file.replace(/\.(ods|xlsx?|csv)$/i,""))}</b><small>${x.from?`${fd(x.from)} → ${fd(x.to)} · `:""}${x.lines.length} lignes</small><span class="rgm">${f(x.total)}</span></div><div class="rga"><label class="rgo" title="Décompter cet état de la jauge principale"><span class="sw psw"><input type="checkbox" data-rgon="${x.id}"${x.on!==false?" checked":""}><i></i></span></label><button class="tbtn" data-del="${x.id}">Retirer</button></div></div>`).join("")
+    +`<div class="note" style="padding-top:8px">Total régie en cours : <b class="rgm">${f(REG.reduce((s,x)=>s+x.total,0))}</b>. Retire un état dès qu'il apparaît dans la situation budgétaire PDF.<br>Les états sélectionnés sont décomptés de la jauge principale.</div>`:"";
 }
 $("rglist").onclick=e=>{const id=e.target.dataset.del;if(!id)return;const x=REG.find(r=>r.id===id);if(!x)return;
   openModal(`<h3>Retirer cet état de régie ?</h3><p class="note">${esc(x.file)} · ${f(x.total)}</p><div class="mbt"><button class="tbtn" data-close>Non</button><button class="tbtn pri" id="mrdel">Oui, retirer</button></div>`,
@@ -1337,23 +1341,25 @@ if(LS.get("ab-regon",true)===false&&!LS.get("ab-regmig",false)){REG.forEach(x=>x
 const stamp=()=>{const d=new Date();return d.toISOString().slice(0,10)};
 function backup(kind){
   const base={app:"App Budget",format:1,type:kind==="full"?"sauvegarde-complete":"periodes-cle",exportedAt:new Date().toISOString()};
-  const per={periodes:PH.map(p=>({id:p.id,nom:p.name,pct:+p.pct||0,avancement:+p.av||0})),periodesPassees:[...PHSEL]};
+  const per={periodes:PH.map(p=>({id:p.id,nom:p.name,pct:+p.pct||0,avancement:+p.av||0,...(p.lock?{verrou:true}:{}),...(p.fix?{fige:true,montantFige:+p.fixAmt||0}:{})})),periodesPassees:[...PHSEL]};
   if(kind!=="full")return {...base,...per};
   return {...base,situation:DATA,articlesNonSuivis:[...OFF],regie:{etats:REG},...per,tri:LS.get("ab-sort","code")};
 }
 async function saveFile(name,text){
   try{const dl=window.claude&&claude.use?await claude.use("downloads"):null;
     if(dl){await dl.save({filename:name,data:text});return "ok"}}catch(e){if(e&&e.code==="declined")return "declined"}
+  // fichier téléchargé par le navigateur (application installée, site Cloudflare)
+  try{const u=URL.createObjectURL(new Blob([text],{type:"application/json"})),a=document.createElement("a");a.href=u;a.download=name;a.rel="noopener";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000);return "ok"}catch(_){}
   try{await navigator.clipboard.writeText(text);return "copied"}catch(_){return "fail"}
 }
 document.querySelectorAll("[data-bk]").forEach(b=>b.onclick=async()=>{
   const k=b.dataset.bk,j=JSON.stringify(backup(k),null,2);
   const name=k==="full"?`appbudget-sauvegarde-${stamp()}.json`:`appbudget-periodes-${stamp()}.json`;
   const r=await saveFile(name,j);
-  $("bkst").innerHTML=r==="ok"?`<span class="ok">✓</span> ${name} enregistré.`:r==="copied"?"Téléchargement indisponible ici : le contenu a été copié dans le presse-papiers.":r==="declined"?"Enregistrement annulé.":`<span class="ko">Impossible d'enregistrer le fichier.</span>`;
+  $("bkst").innerHTML=r==="ok"?`<span class="ok">✓</span> ${name} téléchargé.`:r==="copied"?"Téléchargement indisponible ici : le contenu a été copié dans le presse-papiers.":r==="declined"?"Enregistrement annulé.":`<span class="ko">Impossible d'enregistrer le fichier.</span>`;
 });
 function applyBackup(o){
-  if(o.periodes){PH=o.periodes.map(p=>({id:p.id||Math.random().toString(36).slice(2,10),name:fixName(p.nom??p.name),pct:+(p.pct)||0,av:+p.avancement||0}));PHSEL=new Set((o.periodesPassees||[]).filter(id=>PH.some(p=>p.id===id)));savePH()}
+  if(o.periodes){PH=o.periodes.map(p=>({id:p.id||Math.random().toString(36).slice(2,10),name:fixName(p.nom??p.name),pct:+(p.pct)||0,av:+p.avancement||0,...(p.verrou?{lock:true}:{}),...(p.fige?{fix:true,fixAmt:+p.montantFige||0}:{})}));PHSEL=new Set((o.periodesPassees||[]).filter(id=>PH.some(p=>p.id===id)));savePH()}
   if(o.type==="sauvegarde-complete"){
     if(o.situation&&Array.isArray(o.situation.rows)){DATA=o.situation;LS.set("ab-data",DATA.source==="origine"?null:DATA);
       if(DB)DB.doc("budget/current").set(DATA.source==="origine"?{reset:true,at:Date.now()}:{...DATA,rows:JSON.stringify(DATA.rows)}).catch(()=>{})}
