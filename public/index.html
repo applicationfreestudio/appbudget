@@ -459,6 +459,12 @@ html.lock,html.lock body{overflow:hidden}
 .rgg{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
 .rgac{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:7px 0;cursor:pointer}.rgac>span:first-child{min-width:0;font-size:.9rem}.rgac small{color:var(--mu);font-size:.75rem}.rgac .sw{flex:none!important;position:relative;display:inline-block;width:46px;height:28px}.rgac .sw i::after{width:22px;height:22px}.rgac .sw input:checked+i::after{left:21px}
 .rgus{font-size:.8rem;color:var(--mu)}
+.ocrb{margin:8px 0 4px}.ocrgo{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;box-sizing:border-box;padding:11px;font-weight:700;border-style:dashed;color:var(--a)}
+.ocrk{padding:10px 12px;border-radius:10px;background:color-mix(in srgb,var(--a) 7%,var(--card));border:1px dashed color-mix(in srgb,var(--a) 40%,var(--ln))}.ocrk .tbtn{width:100%;white-space:normal}
+.ocrp{margin-top:10px}.ocrbar{height:8px;border-radius:4px;background:var(--ln);overflow:hidden;position:relative}.ocrbar i{display:block;height:100%;width:0;background:var(--a);border-radius:4px;transition:width .25s}
+.ocrbar i.ind{position:absolute;animation:ocrind 1.1s ease-in-out infinite}@keyframes ocrind{0%{left:-35%}100%{left:100%}}.ocrp span{display:block;margin-top:5px;font-size:.8rem;color:var(--mu)}
+.ocrr{margin-top:10px;font-size:.85rem;padding:9px 11px;border-radius:10px;background:var(--bg)}.ocrt summary{cursor:pointer;color:var(--mu);margin-top:6px;font-size:.8rem}.ocrt pre{white-space:pre-wrap;font-size:.75rem;max-height:200px;overflow:auto;margin:6px 0 0}
+.ocrtips{margin:6px 0 4px;padding-left:20px;font-size:.92rem;line-height:1.5}.ocrtips li{margin-bottom:4px}.mbt label.tbtn{display:inline-flex;align-items:center;cursor:pointer}.ocrbt{display:flex;flex-direction:column-reverse;align-items:stretch;gap:8px}.ocrbt>*{justify-content:center;text-align:center;margin:0!important;padding:11px!important}
 .rgerr{color:var(--h);font-size:.85rem;font-weight:600}.rgerr:empty{display:none}
 .rgfb{display:flex;gap:8px;justify-content:flex-end;margin-top:2px}.rgfb .rgdel{margin-right:auto;color:var(--h);border-color:color-mix(in srgb,var(--h) 40%,var(--ln))}
 .rgd{all:unset;box-sizing:border-box;display:flex;flex-direction:column;gap:3px;width:100%;padding:11px 2px;border-bottom:1px solid var(--ln);cursor:pointer}.rgd:last-child{border-bottom:0}.rgd.on{background:color-mix(in srgb,var(--a) 8%,transparent);border-radius:8px;padding-left:8px;padding-right:8px}
@@ -520,7 +526,7 @@ details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-righ
 :root[data-theme="dark"] .frise .pcw>button.on.good{color:#0d1b2a}
 </style></head>
 <body><main>
-<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.59</small></span></span>
+<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.61</small></span></span>
   <span class="hb"><span class="urd" id="urd" hidden><button type="button" class="sgb" id="undo" aria-label="Annuler la dernière modification" title="Annuler"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button><button type="button" class="sgb" id="redo" aria-label="Rétablir la modification" title="Rétablir"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg></button></span><span class="hbr"><button type="button" class="sgb" id="nav2"></button><i class="nsep" id="nsep" aria-hidden="true"></i><button type="button" class="sgb" id="nav">Paramètres<svg class="chv" viewBox="0 0 12 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4l6 8-6 8"/></svg></button><button class="tbtn" id="fs" aria-label="Plein écran" title="Plein écran"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button></span></span>
 </h1>
 <div class="sub"><div id="org"></div><div>Dépenses <span id="yr"></span> · situation au <b id="dt"></b></div></div>
@@ -573,6 +579,15 @@ details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-righ
   </div>
   <div class="card up" id="rgfc" hidden>
     <h2 class="h2i" id="rgft">Nouvelle dépense</h2>
+    <div class="ocrb" id="ocrb">
+      <button type="button" class="tbtn ocrgo" id="ocrgo"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-2.5h6L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>Lire un ticket ou une facture (photo)</button>
+      <div class="ocrk" id="ocrk" hidden>
+        <p class="note" style="margin:0 0 8px">La lecture par photo fonctionne sur l'appareil, sans envoyer l'image. Elle a besoin d'un kit de reconnaissance (environ 5 Mo), téléchargé une seule fois.</p>
+        <button type="button" class="tbtn pri" id="ocrdl">Télécharger le kit de reconnaissance par photo</button>
+      </div>
+      <div class="ocrp" id="ocrp" hidden><div class="ocrbar"><i id="ocrbi"></i></div><span id="ocrpt"></span></div>
+      <div class="ocrr" id="ocrr" hidden></div>
+    </div>
     <form id="rgf" class="rgf" novalidate>
       <div class="rgg">
         <label>Date<input type="date" name="date" required></label>
@@ -1586,6 +1601,69 @@ function renderRgCfg(){const t=RGCFG.type||"avances",A=rgAllowed(),acc=rgAccsAll
   $("rgacl").innerHTML=acc.map(([k,v])=>`<label class="rgac"><span>${esc(v)} <small>${esc(k)}</small></span><span class="sw psw"><input type="checkbox" data-rga="${esc(k)}"${A.has(k)?" checked":""} aria-label="Autoriser ${esc(v)}"><i></i></span></label>`).join("")}
 $("rgty").onclick=e=>{const b=e.target.closest("[data-rgt]");if(!b)return;RGCFG={...RGCFG,type:b.dataset.rgt};saveRgCfg();renderRgCfg()};
 $("rgacl").onchange=e=>{const k=e.target.dataset.rga;if(!k)return;const A=rgAllowed();e.target.checked?A.add(k):A.delete(k);RGCFG={...RGCFG,acc:[...A]};saveRgCfg();renderRgCfg()};
+// ----- lecture d'un ticket ou d'une facture par photo (Tesseract.js, hébergé dans /ocr/, tout se passe sur l'appareil) -----
+const OCR={w:null,busy:false};
+const ocrBase=()=>new URL("/ocr/",location.origin).href;
+function ocrProg(on,frac,txt){$("ocrp").hidden=!on;if(!on)return;const b=$("ocrbi");b.classList.toggle("ind",frac==null);b.style.width=frac==null?"35%":Math.round(frac*100)+"%";$("ocrpt").textContent=txt||""}
+async function ocrWorker(){if(OCR.w)return OCR.w;
+  if(!window.Tesseract)await loadScript(ocrBase()+"tesseract.min.js");
+  ocrProg(true,0,"Préparation…");
+  OCR.w=await Tesseract.createWorker("fra",1,{workerPath:ocrBase()+"worker.min.js",corePath:ocrBase(),langPath:ocrBase(),gzip:true,
+    logger:m=>{if(m.status==="loading tesseract core")ocrProg(true,m.progress>0&&m.progress<1?null:.1+.5*m.progress,"Moteur de reconnaissance…");
+      else if(m.status==="loading language traineddata")ocrProg(true,.6+.3*(m.progress||0),"Dictionnaire français…");
+      else if(m.status==="initializing api"||m.status==="initialized api")ocrProg(true,.95,"Initialisation…");
+      else if(m.status==="recognizing text")ocrProg(true,m.progress||0,"Lecture du document… "+Math.round((m.progress||0)*100)+" %")}});
+  LS.set("ab-ocrkit",true);return OCR.w}
+function ocrUi(){const kit=!!LS.get("ab-ocrkit",false);$("ocrgo").hidden=!kit;$("ocrk").hidden=kit}
+$("ocrdl").onclick=async()=>{if(OCR.busy)return;OCR.busy=true;$("ocrdl").disabled=true;
+  try{await ocrWorker();ocrProg(true,1,"Kit installé ✓");setTimeout(()=>ocrProg(false),1200);ocrUi()}
+  catch(e){ocrProg(false);$("ocrr").hidden=false;$("ocrr").innerHTML=`<span class="ko">Téléchargement impossible</span> : ${esc(e.message||String(e))}. La lecture par photo n'est disponible que dans l'application en ligne (Cloudflare).`}
+  finally{OCR.busy=false;$("ocrdl").disabled=false}};
+$("ocrgo").onclick=()=>openModal(`<h3>Photographier le justificatif</h3>
+  <ol class="ocrtips"><li>Pose le ticket ou la facture <b>à plat sur une feuille A4 blanche</b>, bien collé, sans pli.</li><li>Place-toi dans un endroit <b>bien éclairé</b>, sans ombre ni reflet.</li><li>Cadre tout le document, bien droit, en remplissant l'écran.</li></ol>
+  <div class="mbt ocrbt"><button class="tbtn" data-close>Annuler</button><label class="tbtn">Choisir une image<input type="file" accept="image/*" id="ocrpick" hidden></label><label class="tbtn pri">Prendre la photo<input type="file" accept="image/*" capture="environment" id="ocrcam" hidden></label></div>`,
+  ()=>{["ocrcam","ocrpick"].forEach(k=>$(k).onchange=e=>{const f=e.target.files[0];closeModal();if(f)ocrRun(f)})});
+// image allégée et contrastée (niveaux de gris) pour une meilleure lecture
+async function ocrPrep(file){const img=await createImageBitmap(file),k=Math.min(1,2000/Math.max(img.width,img.height)),c=document.createElement("canvas");
+  c.width=Math.round(img.width*k);c.height=Math.round(img.height*k);const x=c.getContext("2d");x.drawImage(img,0,0,c.width,c.height);
+  const d=x.getImageData(0,0,c.width,c.height),a=d.data;let mn=255,mx=0;const g=new Uint8ClampedArray(a.length/4);
+  for(let i=0,j=0;i<a.length;i+=4,j++){const v=.299*a[i]+.587*a[i+1]+.114*a[i+2];g[j]=v;if(v<mn)mn=v;if(v>mx)mx=v}
+  const sp=Math.max(1,mx-mn);for(let i=0,j=0;i<a.length;i+=4,j++){const v=Math.max(0,Math.min(255,(g[j]-mn)*255/sp));a[i]=a[i+1]=a[i+2]=v}
+  x.putImageData(d,0,0);return c}
+async function ocrRun(file){if(OCR.busy)return;OCR.busy=true;$("ocrr").hidden=true;
+  try{const w=await ocrWorker();ocrProg(true,0,"Lecture du document…");const c=await ocrPrep(file);
+    const {data}=await w.recognize(c);ocrProg(false);ocrFill(ocrParse(data.text||""),data.text||"")}
+  catch(e){ocrProg(false);$("ocrr").hidden=false;$("ocrr").innerHTML=`<span class="ko">Lecture impossible</span> : ${esc(e.message||String(e))}`}
+  finally{OCR.busy=false}}
+// extraction : date, montant total, fournisseur, nature
+function ocrParse(t){const L=t.split(/\n/).map(x=>x.trim()).filter(Boolean),N=x=>x.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toUpperCase();
+  const r={};
+  // date : jj/mm/aaaa, jj-mm-aa, jj.mm.aaaa (la plus plausible : pas dans le futur)
+  const today=new Date();for(const m of t.matchAll(/\b([0-3]?\d)[\/.\-]([01]?\d)[\/.\-](\d{4}|\d{2})\b/g)){let [_,d,mo,y]=m;y=+y<100?2000+ +y:+y;const dt=new Date(y,+mo-1,+d);
+    if(+mo>=1&&+mo<=12&&+d>=1&&+d<=31&&y>=2000&&dt<=today){r.date=`${y}-${String(mo).padStart(2,"0")}-${String(d).padStart(2,"0")}`;break}}
+  // montant : ligne « total / net à payer / TTC », sinon le plus grand montant lu
+  const amt=x=>[...x.matchAll(/(\d{1,3}(?:[ .\u00a0]\d{3})*|\d+)[,.](\d{2})(?!\d)/g)].map(m=>+(m[1].replace(/[ .\u00a0]/g,"")+"."+m[2]));
+  const keys=[/NET\s*A\s*PAYER/,/TOTAL\s*T\.?T\.?C/,/MONTANT\s*T\.?T\.?C/,/\bTOTAL\b/,/A\s*PAYER/,/\bCB\b|CARTE|ESPECES/];
+  for(const k of keys){const ln=L.filter(l=>k.test(N(l))&&!/SOUS.?TOTAL|TVA|HT\b/.test(N(l)));const v=ln.flatMap(amt).filter(v=>v>0&&v<100000);if(v.length){r.montant=Math.max(...v);break}}
+  if(r.montant==null){const v=amt(t).filter(v=>v>0&&v<100000);if(v.length)r.montant=Math.max(...v)}
+  // fournisseur : un fournisseur déjà connu présent dans le texte, sinon la première ligne « nom »
+  const known=new Map();REGD.forEach(d=>d.tiers&&known.set(d.tiers,(known.get(d.tiers)||0)+1));REG.forEach(e=>(e.lines||[]).forEach(l=>l[1]&&known.set(String(l[1]),(known.get(String(l[1]))||0)+1)));
+  const T=N(t);r.tiers=[...known.keys()].sort((a,b)=>b.length-a.length).find(k=>k.length>=3&&T.includes(N(k)));
+  if(!r.tiers){const l=L.slice(0,6).find(l=>(l.match(/[A-Za-zÀ-ÿ]/g)||[]).length>=3&&!/\d{2}[\/.]\d{2}|TEL|SIRET|WWW|HTTP|@/i.test(l));if(l)r.tiers=l.replace(/[^\p{L}\p{N}&'’ .-]/gu,"").replace(/\s+/g," ").trim().slice(0,40)}
+  // nature : le compte le plus utilisé pour ce fournisseur (parmi les comptes autorisés)
+  if(r.tiers){const A=rgAllowed(),c=new Map(),add=(ti,k)=>{if(N(ti)===N(r.tiers)&&A.has(k))c.set(k,(c.get(k)||0)+1)};
+    REGD.forEach(d=>add(d.tiers||"",d.compte));REG.forEach(e=>(e.lines||[]).forEach(l=>add(String(l[1]||""),String(l[2]))));
+    const b=[...c].sort((a,b)=>b[1]-a[1])[0];if(b)r.compte=b[0]}
+  return r}
+function ocrFill(r,text){const F=$("rgf"),got=[];
+  if(r.date){F.date.value=r.date;got.push("date")}
+  if(r.montant!=null){F.montant.value=r.montant.toFixed(2);got.push("montant")}
+  if(r.tiers){F.tiers.value=r.tiers;got.push("fournisseur")}
+  if(r.compte&&[...F.compte.options].some(o=>o.value===r.compte)){F.compte.value=r.compte;got.push("nature")}
+  $("ocrr").hidden=false;
+  $("ocrr").innerHTML=(got.length?`<span class="ok">✓</span> Rempli depuis la photo : <b>${got.join(", ")}</b>. Vérifie avant d'enregistrer.`:`<span class="ko">Rien de sûr n'a été trouvé.</span> Reprends la photo (feuille blanche, bonne lumière) ou saisis à la main.`)
+    +`<details class="ocrt"><summary>Texte lu</summary><pre>${esc(text.trim()||"(vide)")}</pre></details>`}
+
 // suggestions : fournisseurs et activités déjà saisis (dépenses et fichiers de régie), les plus fréquents d'abord
 function rgSuggest(){const cnt=i=>{const m=new Map(),add=v=>{v=String(v||"").trim();if(v)m.set(v,(m.get(v)||0)+1)};
     REGD.forEach(d=>add(i===1?d.tiers:d.objet));REG.forEach(e=>(e.lines||[]).forEach(l=>add(l[i])));return [...m].sort((a,b)=>b[1]-a[1]).map(x=>x[0])};
@@ -1608,7 +1686,7 @@ function renderRg(){renderRgCfg();
 function rgOpen(id){RGE=id;const d=id==="new"?{date:new Date().toISOString().slice(0,10)}:REGD.find(x=>x.id===id)||{};const F=$("rgf");
   const acc=rgAccs();F.compte.innerHTML='<option value="">— choisir —</option>'+acc.map(([k,v])=>`<option value="${esc(k)}">${esc(k)} · ${esc(v)}</option>`).join("");
   F.per.innerHTML='<option value="">Non affectée</option>'+PH.filter(p=>!PHSEL.has(p.id)||p.id===d.per).map(p=>`<option value="${p.id}">${esc(p.name||"Période")}${PHSEL.has(p.id)?" (terminée)":""}</option>`).join("");
-  rgSuggest();$("rgus").innerHTML=`Saisie par <b>${esc(d.user||"Administrateur")}</b>`;
+  ocrUi();$("ocrr").hidden=true;rgSuggest();$("rgus").innerHTML=`Saisie par <b>${esc(d.user||"Administrateur")}</b>`;
   F.date.value=d.date||"";F.piece.value=d.piece||"";F.tiers.value=d.tiers||"";F.objet.value=d.objet||"";F.montant.value=d.montant??"";F.per.value=d.per||"";
   if(d.compte&&!acc.some(a=>a[0]===d.compte)){const all=rgAccsAll().find(a=>a[0]===d.compte);if(all){acc.push(all);F.compte.insertAdjacentHTML("afterbegin",`<option value="${esc(all[0])}">${esc(all[0])} · ${esc(all[1])}</option>`)}}
   F.compte.value=d.compte&&acc.some(a=>a[0]===d.compte)?d.compte:"";
