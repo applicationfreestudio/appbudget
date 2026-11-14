@@ -330,7 +330,7 @@ select{font:inherit;font-size:.85rem;padding:7px 8px;border-radius:10px;border:1
 .psl::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--card);border:1.5px solid var(--sc,var(--bl));box-shadow:0 1px 2px rgba(0,0,0,.2);cursor:pointer}
 .psl::-moz-range-thumb{width:13px;height:13px;border-radius:50%;background:var(--card);border:1.5px solid var(--sc,var(--bl));cursor:pointer}
 .rgm{display:block;font-size:1.3rem;font-weight:800;color:var(--h);font-variant-numeric:tabular-nums;margin-top:2px}.note .rgm{display:inline;font-size:1.1rem}
-.rga{display:flex;align-items:center;gap:10px;flex:none}.rgo{display:flex;flex-direction:column;align-items:center;gap:2px;margin:0;font-size:.65rem;color:var(--mu);cursor:pointer}.rgo .sw,.phla .sw{flex:none!important;position:relative;display:inline-block;width:40px;height:24px}.rgo .sw i::after,.phla .sw i::after{width:18px;height:18px}.rgo .sw input:checked+i::after,.phla .sw input:checked+i::after{left:19px}
+.rga{display:flex;align-items:center;gap:10px;flex:none}.rgo{display:flex;flex-direction:column;align-items:center;gap:2px;margin:0;font-size:.65rem;color:var(--mu);cursor:pointer}.rgo .sw,.phla .sw{flex:none!important;position:relative;display:inline-block;width:46px;height:28px}.rgo .sw i::after,.phla .sw i::after{width:22px;height:22px}.rgo .sw input:checked+i::after,.phla .sw input:checked+i::after{left:21px}
 .kvd{grid-column:1/-1}.kvd>summary{list-style:none;display:flex;justify-content:space-between;align-items:baseline;cursor:pointer}.kvd>summary::-webkit-details-marker{display:none}.kvd>summary span::after{content:"▾";display:inline-block;margin-left:6px;font-size:.8em;color:var(--mu);transition:transform .2s}.kvd:not([open])>summary span::after{transform:rotate(-90deg)}
 .kv .kvl{margin:6px 0 2px 10px;padding-left:10px;border-left:2px solid var(--ln);display:flex;flex-direction:column;justify-content:flex-start;gap:3px}.kv .kvl div{display:flex;justify-content:space-between;gap:10px;font-size:.85rem;color:var(--mu)}.kvl b{font-weight:600;color:var(--tx);font-variant-numeric:tabular-nums;white-space:nowrap}
 .kv .dsp{margin-top:4px;padding-top:8px;border-top:1px solid var(--ln);align-items:baseline}.kv .dsp span{font-size:1rem;color:var(--tx);font-weight:600}.kv .dsp b{font-size:1.7rem;font-weight:800}
@@ -436,19 +436,20 @@ html.lock,html.lock body{overflow:hidden}
 .vopt .vw [data-v]{margin-top:6px;padding:7px 12px}
 .phf{display:flex;justify-content:flex-end;align-items:center;gap:8px;margin-top:8px;flex-wrap:wrap}
 .phf #phsum{margin-right:auto}
-.phf3{flex-wrap:nowrap;justify-content:stretch;gap:6px}.phf3 .tbtn{flex:1 1 0;min-width:0;padding:8px 6px;font-size:.8rem;line-height:1.15;white-space:normal}
-.phaddb{display:block;box-sizing:border-box;width:100%;margin-top:10px;padding:11px;font-weight:700;color:var(--a)!important;background:color-mix(in srgb,var(--a) 14%,var(--card))!important;border-color:color-mix(in srgb,var(--a) 35%,var(--ln))!important}
-.phla{display:flex;align-items:center;gap:8px;margin:0;font-size:.85rem;font-weight:600;cursor:pointer}.phla .psw{position:relative;display:inline-block;width:40px;height:24px}
+.phf3{flex-wrap:nowrap;justify-content:stretch;align-items:stretch;gap:6px}.phf3 .tbtn{flex:1 1 0;min-width:0;padding:8px 6px;font-size:.8rem;line-height:1.15;white-space:normal}
+.phaddb{display:block;box-sizing:border-box;width:calc(100% - 28px);margin-top:10px;padding:11px;font-weight:700;color:var(--a)!important;background:color-mix(in srgb,var(--a) 14%,var(--card))!important;border-color:color-mix(in srgb,var(--a) 35%,var(--ln))!important}
+.phla{display:flex;align-items:center;gap:8px;margin:0;font-size:.85rem;font-weight:600;cursor:pointer}.phla .psw{position:relative;display:inline-block;width:46px;height:28px}
 .cfr{display:flex;gap:8px}.cfr input{flex:1;min-width:0;font:inherit;font-size:.9rem;padding:9px 10px;border-radius:10px;border:1px solid var(--ln);background:var(--bg);color:var(--tx)}
 .cff{display:flex;align-items:center;gap:8px;padding:8px 0;border-top:1px solid var(--ln);font-size:.85rem}
 .cff .n{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cff small{color:var(--mu);font-size:.72rem;display:block}
 .cff button{flex:none;font-size:.78rem;padding:5px 9px}
 .cfh{font-size:.75rem;font-weight:700;color:var(--a);margin-top:12px;text-transform:uppercase;letter-spacing:.05em}
-.bkr{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-top:1px solid var(--ln)}
+.bkr{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0}
 .bkr b{display:block;font-size:.95rem}
 .cfc{border:1.5px solid color-mix(in srgb,var(--a) 40%,var(--ln))}.cfh2{font-size:1.3rem!important;align-items:center}.cfh2 .si{color:var(--a)}.cfh2 span{display:flex;flex-direction:column;line-height:1.15}.cfh2 small{font-size:.8rem;font-weight:500;color:var(--mu)}
 .cfst{margin-top:10px;padding:10px 12px;border-radius:10px;background:color-mix(in srgb,var(--a) 10%,var(--card));font-size:1rem;font-weight:700}.cfst:empty{display:none}.cfst .ok{color:#2f8f63}.cfst b{font-size:1.15rem}.bkr small{color:var(--mu);font-size:.76rem}
-.bkr button,.bkr label.tbtn{flex:none;padding:8px 12px;margin:0}
+#cf[open]{padding-bottom:14px}#cf>:last-child{margin-bottom:0}
+.bkr button,.bkr label.tbtn{flex:none;padding:8px 12px;margin:0;font-size:.85rem}
 details.dsec{padding:0}
 details.dsec>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:14px;-webkit-tap-highlight-color:transparent}
 details.dsec>summary::-webkit-details-marker{display:none}
@@ -498,7 +499,7 @@ details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-righ
 :root[data-theme="dark"] .frise .pcw>button.on.good{color:#0d1b2a}
 </style></head>
 <body><main>
-<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.46</small></span></span>
+<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.47</small></span></span>
   <span class="hb"><span class="urd" id="urd" hidden><button type="button" class="sgb" id="undo" aria-label="Annuler la dernière modification" title="Annuler"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button><button type="button" class="sgb" id="redo" aria-label="Rétablir la modification" title="Rétablir"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg></button></span><span class="hbr"><button type="button" class="sgb" id="nav">Paramètres<svg class="chv" viewBox="0 0 12 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4l6 8-6 8"/></svg></button><button class="tbtn" id="fs" aria-label="Plein écran" title="Plein écran"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button></span></span>
 </h1>
 <div class="sub"><div id="org"></div><div>Dépenses <span id="yr"></span> · situation au <b id="dt"></b></div></div>
@@ -539,7 +540,7 @@ details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-righ
     <summary><svg class="si" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4M7 13.5h3M7 17h3M14 13.5h3"/></svg><b>Périodes de l'année</b><span class="dsm" id="dpers"></span></summary>
     <p class="note" style="margin:4px 0 6px">Les périodes se succèdent dans l'ordre de la liste. Le pourcentage est la part du budget prévue pour chaque période.</p>
     <div id="phlist"></div>
-    <div class="phf"><span id="phsum" class="note"></span><label class="phla"><span>Bloquer toutes les périodes</span><span class="sw psw"><input type="checkbox" id="phlkall"><i></i></span></label></div>
+    <div class="phf"><span id="phsum" class="note"></span><label class="phla" title="Bloquer toutes les périodes"><span class="sw psw"><input type="checkbox" id="phlkall" aria-label="Bloquer toutes les périodes"><i></i></span></label></div>
     <div class="phf phf3"><button class="tbtn" id="phvent">Ventiler les %</button><button class="tbtn" id="phround">Arrondir à la dizaine</button><button class="tbtn" id="phbase">Réinitialiser les périodes</button></div>
     <button class="tbtn phaddb" id="phadd">+ Ajouter une période</button>
   </details>
@@ -572,16 +573,15 @@ details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-righ
   </details>
   <details class="card up dsec" id="bk">
     <summary><svg class="si" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 18.5a4.5 4.5 0 0 1-.6-9 6 6 0 0 1 11.6 1.5 3.8 3.8 0 0 1-.5 7.5"/><path d="M12 12v8.5M8.8 15.2 12 12l3.2 3.2"/></svg><b>Sauvegarde</b><span class="dsm" id="bks"></span></summary>
-    <h3 class="h3s">Fichiers de sauvegarde</h3>
-    <p class="note" style="margin:4px 0 10px">Fichiers .json à garder (ou à déposer sur GitHub) pour restaurer l'application.</p>
+    <h3 class="h3s">Fichiers de sauvegarde locale</h3>
     <div class="bkr"><div><b>Sauvegarde complète</b><small>Situation budgétaire, articles suivis, états de régie, périodes et clé de répartition</small></div><button class="tbtn pri" data-bk="full">Enregistrer</button></div>
     <div class="bkr"><div><b>Périodes et clé de répartition</b><small>Intitulés, ordre, pourcentages et périodes passées</small></div><button class="tbtn pri" data-bk="key">Enregistrer</button></div>
     <div class="bkr"><div><b>Restaurer un fichier</b><small>Sauvegarde complète ou périodes (.json)</small></div><label class="tbtn pri fl">Choisir le fichier<input type="file" id="bkin" accept=".json,application/json" hidden></label></div>
+    <p class="note" style="margin:6px 0 0">Fichiers .json enregistrés sur l'appareil, à garder (ou à déposer sur GitHub) pour restaurer l'application.</p>
     <div id="bkst" class="note" style="margin-top:8px"></div>
-  
   </details>
-    <div class="card up cfc" id="cf" hidden>
-    <h2 class="h2i cfh2"><svg class="si" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 18.5a4.5 4.5 0 0 1-.6-9 6 6 0 0 1 11.6 1.5 3.8 3.8 0 0 1-.5 7.5Z"/></svg><span>Sauvegarde en ligne<small>Paramètres Cloudflare</small></span></h2>
+    <details class="card up dsec" id="cf" hidden>
+    <summary><svg class="si" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 18.5a4.5 4.5 0 0 1-.6-9 6 6 0 0 1 11.6 1.5 3.8 3.8 0 0 1-.5 7.5Z"/></svg><b>Sauvegarde en ligne</b><span class="dsm">Paramètres Cloudflare</span></summary>
     <p class="note" style="margin:4px 0 10px">Les données sont enregistrées automatiquement dans le stockage R2 et retrouvées sur tous tes appareils. Les PDF et états de régie importés y sont archivés.</p>
     <div class="cfr"><input type="password" id="cftok" placeholder="Jeton d'accès (APP_TOKEN)" autocomplete="off"><button class="tbtn pri" id="cfgo">Connecter</button></div>
     <div id="cfst" class="cfst"></div>
@@ -589,8 +589,7 @@ details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-righ
       <div class="qa" style="margin-top:10px"><button class="tbtn" data-cfsave="full">Sauvegarde complète datée</button><button class="tbtn" data-cfsave="key">Sauvegarde des périodes</button></div>
       <div id="cflist"></div>
     </div>
-  
-    </div>
+  </details>
   <div class="card up">
     <h2 class="h2i"><svg class="si" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18c1.4 0 2-1 2-2 0-.6-.3-1-.6-1.4-.3-.4-.5-.8-.5-1.3 0-1 .8-1.8 1.8-1.8H17a4 4 0 0 0 4-4c0-4.2-4-7.5-9-7.5Z"/><circle cx="7.5" cy="11" r="1.2" fill="currentColor"/><circle cx="10" cy="7" r="1.2" fill="currentColor"/><circle cx="15" cy="7.5" r="1.2" fill="currentColor"/></svg>Couleur du thème</h2>
     <div class="thm" id="thm" role="radiogroup" aria-label="Mode d'affichage"><button type="button" data-t="auto" role="radio" title="Selon le réglage de l'appareil">Système</button><button type="button" data-t="light" role="radio">Clair</button><button type="button" data-t="dark" role="radio">Sombre</button></div>
@@ -957,6 +956,20 @@ addEventListener("keydown",e=>{if(e.key==="Escape"&&BIG)bigClose()});
 // Curseur vertical (période en cours sans consommation) : modifie la part de budget de la période ;
 // l'écart est reporté sur les autres périodes en cours, au prorata de leur pourcentage initial.
 let PVB=null;var BIG=null;document.addEventListener("toggle",e=>{if(e.target.id==="phx")window.PHXO=e.target.open},true);
+// Curseur d'enveloppe (vertical) piloté au doigt : glisser n'importe où sur la barre, sans devoir attraper le rond
+// (la saisie native des curseurs verticaux est peu fiable au toucher, notamment sur iPhone)
+(()=>{let D=null;
+  const cur=()=>D&&(D.el.isConnected?D.el:(D.el=document.querySelector(`.pve[data-pe="${D.id}"]`)||D.el));
+  document.addEventListener("touchstart",e=>{if(e.target.closest&&e.target.closest(".pve"))e.preventDefault()},{passive:false});
+  document.addEventListener("pointerdown",e=>{const el=e.target.closest&&e.target.closest(".pve");if(!el||el.disabled)return;e.preventDefault();
+    const r=el.getBoundingClientRect();D={el,id:el.dataset.pe,pid:e.pointerId,y0:e.clientY,v0:+el.value,h:Math.max(40,r.height-26),mv:false}},{passive:false});
+  document.addEventListener("pointermove",e=>{if(!D||e.pointerId!==D.pid)return;e.preventDefault();const el=cur();
+    const mn=+el.min,mx=+el.max,v=Math.round(Math.max(mn,Math.min(mx,D.v0+(D.y0-e.clientY)/D.h*(mx-mn))));
+    if(Math.abs(e.clientY-D.y0)>2)D.mv=true;if(+el.value!==v){el.value=v;el.dispatchEvent(new Event("input",{bubbles:true}))}},{passive:false});
+  const end=e=>{if(!D||e.pointerId!==D.pid)return;const el=cur(),mv=D.mv;D=null;if(mv)el.dispatchEvent(new Event("change",{bubbles:true}))};
+  document.addEventListener("pointerup",end);document.addEventListener("pointercancel",end);
+  document.addEventListener("click",e=>{if(e.target.closest&&e.target.closest(".pve"))e.stopPropagation()},true);
+})();
 function pveSlide(id,v){
   if(!PVB||PVB.id!==id)PVB={id,p:new Map(PH.map(x=>[x.id,+x.pct||0])),a:new Map(PH.map(x=>[x.id,+x.av||0])),o:PH.filter(x=>x.id!==id&&!PHSEL.has(x.id)&&!x.fix&&(+x.pct||0)>0).map(x=>x.id)};
   const b0=PVB.p.get(id),O=PVB.o.reduce((s,k)=>s+PVB.p.get(k),0),r2=x=>Math.round(x*100)/100;
@@ -1014,23 +1027,23 @@ function phSum(){const s=PH.reduce((a,p)=>a+(+p.pct||0),0),B=totals().b;
   PH.forEach(p=>{const el=document.querySelector(`[data-eur="${p.id}"]`);if(el)el.textContent=B>0?f0(B*(+p.pct||0)/100):"";
     const sl=document.querySelector(`[data-sl="${p.id}"]`);if(sl){sl.value=+p.pct||0;sl.style.setProperty("--v",Math.min(100,(+p.pct||0)/Math.max(.1,+sl.max)*100)+"%")}});
   $("phsum").innerHTML=PH.length?`Total : <b class="${Math.abs(s-100)<.01?"ok":"ko"}">${s.toLocaleString("fr-FR",{maximumFractionDigits:1})} %</b>${B>0?` · ${f0(B*s/100)} sur ${f0(B)}`:""}`:"";}
-// Curseur : la variation est reportée sur les périodes SUIVANTES, au prorata de leur part actuelle
+// Curseur : la variation est reportée sur les périodes NON VERROUILLÉES, au prorata de leur part actuelle
 let slBase=null;
-// maximum atteignable par le curseur d'une période : sa part + celles des périodes suivantes qui peuvent céder
-function slMaxOf(i){const B=PH.map(x=>+x.pct||0),E=PH.map((x,j)=>j>i&&!x.fix&&!PHSEL.has(x.id)?j:-1).filter(j=>j>=0),F=E.reduce((a,j)=>a+B[j],0),fixed=B.reduce((a,b,j)=>a+(j!==i&&!E.includes(j)?b:0),0);return Math.max(.1,Math.round((E.length?B[i]+F:100-fixed)*10)/10)}
+// maximum atteignable par le curseur : sa part + la part non répartie + celles des périodes non verrouillées
+function phAbs(i){return PH.map((x,j)=>j!==i&&!x.lock&&!x.fix&&!PHSEL.has(x.id)?j:-1).filter(j=>j>=0)}   // périodes qui absorbent : ni verrouillées, ni à montant bloqué, ni terminées
+function slMaxOf(i){const B=PH.map(x=>+x.pct||0),F=phAbs(i).reduce((a,j)=>a+B[j],0),T=B.reduce((a,b)=>a+b,0);return Math.max(.1,Math.round((B[i]+Math.max(0,100-T)+F)*10)/10)}
+function slMaxUpd(){PH.forEach((p,i)=>{const sl=document.querySelector(`[data-sl="${p.id}"]`);if(sl){sl.max=slMaxOf(i);sl.value=+p.pct||0;sl.style.setProperty("--v",Math.min(100,(+p.pct||0)/Math.max(.1,+sl.max)*100)+"%")}})}
 function slideTo(id,v){
   if(!slBase||slBase.id!==id)slBase={id,p:PH.map(x=>+x.pct||0)};
   const B=slBase.p,i=PH.findIndex(x=>x.id===id),r=x=>Math.round(x*10)/10;
-  // les périodes suivantes absorbent l'écart, sauf celles terminées ou à montant bloqué (le verrou n'empêche que la saisie)
-  const E=PH.map((x,j)=>j>i&&!x.fix&&!PHSEL.has(x.id)?j:-1).filter(j=>j>=0),F=E.reduce((a,j)=>a+B[j],0),fixed=B.reduce((a,b,j)=>a+(j!==i&&!E.includes(j)?b:0),0);
-  const max=Math.max(0,E.length?B[i]+F:100-fixed);
-  v=Math.max(0,Math.min(v,max));
-  const delta=B[i]-v,out=B.slice();out[i]=r(v);
-  if(E.length){
-    if(F>0)E.forEach(j=>out[j]=r(B[j]+delta*B[j]/F));else E.forEach(j=>out[j]=r(delta/E.length));
-    const want=r(F+delta),got=r(E.reduce((a,j)=>a+out[j],0)),fix=r(want-got);
-    if(fix){const k=E.slice().reverse().find(j=>out[j]+fix>=0);if(k!=null)out[k]=r(out[k]+fix)}
-  }
+  // hausse : d'abord la part non répartie du budget, puis prélèvement sur les périodes non verrouillées (au prorata)
+  // baisse : le montant libéré est redistribué sur les périodes non verrouillées (au prorata) ; s'il n'y en a pas, il reste disponible
+  const E=phAbs(i),F=E.reduce((a,j)=>a+B[j],0),T=B.reduce((a,b)=>a+b,0),free=Math.max(0,100-T);
+  v=Math.max(0,Math.min(v,B[i]+free+F));
+  const d=v-B[i],out=B.slice();out[i]=r(v);let want=F;
+  if(d>0){const take=Math.min(F,Math.max(0,d-free));if(take>0){want=F-take;E.forEach(j=>out[j]=r(B[j]-take*B[j]/F))}}
+  else if(d<0&&E.length){want=F-d;E.forEach(j=>out[j]=r(F>0?B[j]-d*B[j]/F:-d/E.length))}
+  if(E.length){const got=E.reduce((a,j)=>a+out[j],0),fx=r(r(want)-r(got));if(fx){const k=E.slice().sort((a,b)=>out[b]-out[a]).find(j=>out[j]+fx>=0);if(k!=null)out[k]=r(out[k]+fx)}}
   PH.forEach((x,j)=>{x.pct=Math.max(0,out[j]);const n=document.querySelector(`.phr[data-id="${x.id}"] [data-k=pct]`);if(n&&document.activeElement!==n)n.value=Math.round(x.pct*100)/100});
   LS.set("ab-phases",PH);phSum();
 }
@@ -1041,10 +1054,11 @@ $("phlist").addEventListener("input",e=>{
   if(e.target.dataset.sl){slideTo(e.target.dataset.sl,+e.target.value);clearTimeout(phT);phT=setTimeout(()=>{savePH();setDate()},500);return}
   const k=e.target.dataset.k;if(!k)return;
   const p=PH.find(x=>x.id===e.target.closest(".phr").dataset.id);
+  if(k==="pct"&&p&&e.target.value!==""&&isFinite(+e.target.value)){slideTo(p.id,+e.target.value);clearTimeout(phT);phT=setTimeout(()=>{savePH();setDate()},600);return}
   p[k]=k==="pct"?(e.target.value===""?"":+e.target.value):e.target.value;
   LS.set("ab-phases",PH);phSum();clearTimeout(phT);phT=setTimeout(()=>{savePH();setDate()},600)});
 $("phlist").addEventListener("change",e=>{if(e.target.dataset.plk){const q=PH.find(x=>x.id===e.target.dataset.plk);if(q){phLock(q,e.target.checked);savePH();setDate();renderPhSet()}return}
-  if(e.target.dataset.sl){slBase=null;savePH();setDate()}
+  if(e.target.dataset.sl||e.target.dataset.k==="pct"){slBase=null;slMaxUpd();savePH();setDate()}
 });
 $("phlist").addEventListener("click",e=>{
   const fx=e.target.closest("[data-fx]");if(fx){const q=PH.find(x=>x.id===fx.dataset.fx);if(q){phFixSet(q,!q.fix);savePH();setDate();renderPhSet()}return}
@@ -1452,8 +1466,7 @@ function route(){
   const set=location.hash==="#parametres";
   $("v-home").hidden=set;$("v-set").hidden=!set;
   $("nav").innerHTML=set?'<svg class="chv" viewBox="0 0 12 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4l-6 8 6 8"/></svg>Principal':'Paramètres<svg class="chv" viewBox="0 0 12 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4l6 8-6 8"/></svg>';
-  $("ttl").textContent=set?"Paramètres":"App Budget";
-  set?renderSet():renderHome();
+    set?renderSet():renderHome();
 }
 $("nav").onclick=()=>{go(location.hash==="#parametres"?"home":"parametres");scrollTo(0,0)};
 
