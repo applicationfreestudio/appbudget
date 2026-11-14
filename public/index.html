@@ -495,7 +495,7 @@ details.rgsub>summary .si{width:19px;height:19px;color:var(--mu)}details.rgsub>:
 .rgimp{border-top:1px solid var(--ln);padding-top:10px}.rgimh{display:flex;align-items:center;justify-content:space-between;gap:10px}.rgimh b{font-size:.95rem}.rgimh .tbtn{flex:none;padding:7px 12px;font-size:.85rem}
 .rgexp summary{cursor:pointer;font-size:.8rem;color:var(--mu);margin:6px 0 2px}.rgexp p{margin:4px 0 0!important}#rgst:not(:empty){margin-top:8px}
 .rgfh{flex-wrap:wrap}.rgtall{margin-left:auto;padding:7px 11px!important;font-size:.82rem!important}.rgtall:disabled{opacity:.45}
-.rgfp{padding:8px!important;gap:6px!important;font-size:.85rem;box-sizing:border-box;width:100%;max-width:100%;overflow:hidden}.rgfp .rgfl{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px}.rgfp .rgfl label{min-width:0;font-size:.7rem}.rgfp input,.rgfp select{width:100%;box-sizing:border-box;min-width:0;font-size:.82rem!important;padding:6px 5px!important}
+.rgfp{padding:8px!important;gap:6px!important;font-size:.85rem;box-sizing:border-box;width:100%;max-width:100%;overflow:visible}.rgfp .rgfl{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px}.rgfp .rgfl label{min-width:0;font-size:.7rem}.rgfp input,.rgfp select{width:100%;box-sizing:border-box;min-width:0;font-size:.82rem!important;padding:6px 5px!important}
 .rgfp .rgfs{grid-template-columns:minmax(0,1fr) auto;align-items:end}.rgfp .rgfs .tbtn{padding:6px 12px;font-size:.82rem}
 .rgfck{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:.82rem}.rgfck label{display:inline-flex;align-items:center;gap:5px;cursor:pointer}.rgfck input{width:17px;height:17px;margin:0;accent-color:var(--a)}.nfc.sm{width:20px;height:20px;border-radius:6px}.nfc.sm .nfs{width:13px;height:13px}
 .nfb{width:auto!important;height:auto!important;display:inline-flex!important;align-items:center;gap:6px;padding:8px 11px!important;margin-right:auto;font:700 .85rem/1 inherit!important;font-family:inherit!important;color:#b5483d!important;background:color-mix(in srgb,#c8473a 7%,var(--card))!important;border:1.5px solid color-mix(in srgb,#c8473a 45%,var(--ln))!important;border-radius:12px!important}
@@ -518,6 +518,33 @@ details.rgsub>summary .si{width:19px;height:19px;color:var(--mu)}details.rgsub>:
 .rgnat{border:1px solid var(--ln);border-radius:9px;background:var(--card);font-size:.8rem}.rgnat summary{cursor:pointer;padding:6px 9px;color:var(--mu)}.rgnat summary b{color:var(--tx)}#rgnatl{display:flex;flex-direction:column;gap:5px;padding:2px 9px 8px;max-height:180px;overflow:auto}#rgnatl label{display:flex;align-items:center;gap:7px;cursor:pointer}#rgnatl input{position:absolute;opacity:0;pointer-events:none}
 .rgsrt{display:flex;align-items:center;gap:8px;font-size:.75rem;font-weight:600;color:var(--mu)}.rgsrt select{flex:1;min-width:0;font:inherit;font-size:.8rem;color:var(--tx);background:var(--card);border:1px solid var(--ln);border-radius:8px;padding:5px 4px}
 .hmn{gap:4px!important}.hmn .sgb{padding:5px 11px!important;border-radius:9px;font-size:15px!important;color:var(--mu)}.hmn .sgb.cur{color:var(--tx);font-weight:700;background:color-mix(in srgb,var(--a) 14%,transparent);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--a) 30%,transparent)}.hmn .sgb[hidden]{display:none!important}
+/* cases à cocher de l'application : petite case arrondie dans le thème */
+input[type=checkbox]:not(:is(.sw,.psw) input):not([hidden]){-webkit-appearance:none;appearance:none;width:19px;height:19px;flex:none;margin:0;border-radius:6px;border:1.5px solid color-mix(in srgb,var(--mu) 55%,var(--ln));background:var(--card);cursor:pointer;display:inline-grid;place-items:center;transition:background .15s,border-color .15s;vertical-align:middle}
+input[type=checkbox]:not(:is(.sw,.psw) input):not([hidden]):checked{background:var(--a);border-color:var(--a)}
+input[type=checkbox]:not(:is(.sw,.psw) input):not([hidden]):checked::after{content:"";width:5px;height:9px;border:solid #fff;border-width:0 2.2px 2.2px 0;transform:translate(0,-1px) rotate(45deg)}
+input[type=checkbox]:not(:is(.sw,.psw) input):not([hidden]):indeterminate{background:color-mix(in srgb,var(--a) 35%,var(--card));border-color:var(--a)}
+input[type=checkbox]:not(:is(.sw,.psw) input):not([hidden]):indeterminate::after{content:"";width:9px;height:2.2px;background:#fff;border-radius:1px}
+input[type=checkbox]:disabled{opacity:.45;cursor:default}
+/* boutons d'action */
+.tbtn.act{font-weight:700;transition:background .15s,color .15s}.tbtn.act.go{background:var(--a)!important;color:#fff!important;border-color:var(--a)!important;opacity:1}
+.tbtn.act.wait{background:color-mix(in srgb,var(--a) 10%,var(--card))!important;color:color-mix(in srgb,var(--a) 75%,var(--mu))!important;border:1.5px dashed color-mix(in srgb,var(--a) 45%,var(--ln))!important;opacity:1}
+.tbtn.act.off{background:var(--bg)!important;color:color-mix(in srgb,var(--mu) 70%,var(--card))!important;border-color:var(--ln)!important;opacity:1}
+#rgnew{width:100%;margin-top:10px;padding:11px}
+/* dépenses en cours repliables */
+details.rgdl>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;margin-bottom:8px}details.rgdl>summary::-webkit-details-marker{display:none}details.rgdl>summary .rgst{margin:0}
+.rgcnt{font-size:1.02rem;font-weight:700;color:var(--mu)}details.rgdl>summary::after{content:"";margin-left:auto;width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:8px solid var(--mu);transition:transform .2s}details.rgdl[open]>summary::after{transform:rotate(180deg)}
+/* filtre : 3 colonnes */
+.rgf3{grid-template-rows:auto auto auto!important}.rgf3 .rgrad{grid-row:1/4!important;gap:11px!important;padding-left:10px!important}
+.rgrad.all .rdo{border:5px solid color-mix(in srgb,var(--mu) 45%,var(--ln))!important}.rgrad.all label:first-child .rdo{border-color:var(--a)!important}.rgrad.all .rgnfr2 .nfc{opacity:.75;filter:grayscale(.3)}
+.rgdd{position:relative;border:1px solid var(--ln);border-radius:8px;background:var(--card);font-size:.75rem;min-width:0}.rgdd>summary{list-style:none;cursor:pointer;padding:5px 6px;display:flex;flex-direction:column;color:var(--mu);font-size:.68rem;font-weight:600}.rgdd>summary::-webkit-details-marker{display:none}
+.rgdd>summary b{color:var(--tx);font-size:.78rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-right:12px}.rgdd>summary::after{content:"";position:absolute;right:7px;top:50%;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid var(--mu)}
+.rgddl{position:absolute;z-index:5;left:-1px;top:calc(100% + 3px);width:max-content;max-width:240px;max-height:240px;overflow:auto;background:var(--card);border:1px solid var(--ln);border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,.15);padding:8px 10px;display:flex;flex-direction:column;gap:10px!important;font-size:.8rem}
+#rgsrtd .rgddl{left:auto;right:-1px}.rgddl label{display:flex;align-items:center;gap:8px;cursor:pointer;position:relative}.rgddl input{position:absolute;left:0;top:0;width:1px!important;height:1px!important;opacity:0;pointer-events:none}.rgddl input:checked+.rdo{border:5px solid var(--a)}
+/* fiche : 4 boutons sur une ligne */
+.rgfb{flex-wrap:nowrap!important;gap:6px!important}.rgfb>*{flex:none}.rgfb>.tbtn{padding:9px 10px!important;font-size:.82rem}.rgfb .nfb{padding:8px 9px!important;font-size:.8rem!important;gap:5px}.rgfb .rgdel{padding:8px 9px!important;display:grid;place-items:center}.rgfb>[type=submit]{margin-left:auto}
+/* menu */
+.hmn{gap:0!important;align-items:stretch!important}.hmn .sgb{border-radius:7px!important;padding:5px 9px!important;background:none;box-shadow:none!important}.hmn .sgb.cur{background:color-mix(in srgb,var(--tx) 9%,transparent)!important;color:var(--tx);font-weight:700}
+.hmn .sgb+.sgb:not([hidden])::before{content:"";position:absolute;left:-1px;top:22%;bottom:22%;width:1.5px;background:color-mix(in srgb,var(--mu) 40%,transparent);border-radius:1px}.hmn .sgb{position:relative}
 .rgmx{display:flex;align-items:center;gap:8px;font-size:.9rem;margin:4px 0 4px}.rgmx input{width:110px;font:inherit;padding:7px 8px;border:1px solid var(--ln);border-radius:9px;background:var(--bg);color:var(--tx);margin-left:auto}
 .rgav{display:grid;gap:6px;margin:4px 0 8px;font-size:.88rem}.rgav label{display:flex;align-items:center;justify-content:space-between;gap:8px;color:var(--mu)}.rgav input{width:110px;font:inherit;padding:6px 8px;border:1px solid var(--ln);border-radius:9px;background:var(--bg);color:var(--tx);text-align:right}.rgav div{display:flex;justify-content:space-between}
 .rgcf{display:grid;gap:6px;margin:6px 0 10px}.rgcf div{display:flex;justify-content:space-between;gap:10px}.rgcf span{color:var(--mu)}.rgcf .rgm{color:var(--h);font-size:1.15rem}
@@ -591,7 +618,7 @@ details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-righ
 :root[data-theme="dark"] .frise .pcw>button.on.good{color:#0d1b2a}
 </style></head>
 <body><main>
-<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.69</small></span></span>
+<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.70</small></span></span>
   <span class="hb"><span class="urd" id="urd" hidden><button type="button" class="sgb" id="undo" aria-label="Annuler la dernière modification" title="Annuler"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button><button type="button" class="sgb" id="redo" aria-label="Rétablir la modification" title="Rétablir"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg></button></span><span class="hbr hmn"><button type="button" class="sgb" data-pg="home">Principal</button><button type="button" class="sgb" data-pg="reg">Régie</button><button type="button" class="sgb" data-pg="set">Paramètres</button><button type="button" class="sgb" id="nav2" hidden></button><i class="nsep" id="nsep" hidden></i><button type="button" class="sgb" id="nav" hidden>Paramètres<svg class="chv" viewBox="0 0 12 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4l6 8-6 8"/></svg></button><button class="tbtn" id="fs" aria-label="Plein écran" title="Plein écran"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button></span></span>
 </h1>
 <div class="sub"><div id="org"></div><div>Dépenses <span id="yr"></span> · situation au <b id="dt"></b></div></div>
@@ -639,13 +666,12 @@ details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-righ
   <div class="card up rgcard" id="rgdep">
     <h2 class="h2i rgh2"><svg class="si" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6M9 16h3"/></svg>Dépenses de régie</h2>
     <div class="rgsect">
-      <h3 class="rgst">Récapitulatif</h3>
       <div class="rgtot" id="rgtot"></div>
       <p class="note rgexpl">Dépenses payées en régie qui ne figurent pas encore dans la situation budgétaire : elles sont déduites de la jauge principale et, si elles sont affectées à une période, de son restant.</p>
-      <button class="tbtn phaddb" id="rgnew">+ Nouvelle dépense</button>
+      <button class="tbtn act go" id="rgnew">+ Nouvelle dépense</button>
     </div>
-    <div class="rgsect">
-      <h3 class="rgst">Dépenses en cours<span class="dsm" id="rgls"></span></h3>
+    <details class="rgsect rgdl" id="rgdl" open>
+      <summary><span class="rgst">Dépenses en cours</span><span class="rgcnt" id="rgls"></span></summary>
       <div class="rgfh"><label class="rgallb" title="Tout cocher / tout décocher"><input type="checkbox" id="rgall" aria-label="Tout cocher"></label><button type="button" class="tbtn rgfb2" id="rgfbt" aria-expanded="false"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16l-6 7.5V19l-4-2v-4.5z"/></svg>Filtrer<span class="rgfn" id="rgfn"></span></button><button type="button" class="rgxb" id="rgfx" hidden title="Effacer le filtre" aria-label="Effacer le filtre"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
       <div class="rgfp" id="rgfp" hidden>
         <div class="rgf3">
@@ -657,13 +683,15 @@ details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-righ
             <label class="rgnfr2"><input type="radio" name="rgcat" value="nf"><i class="nfc sm"><svg class="nfs" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 4.2 2.9 17.1a2 2 0 0 0 1.7 3h14.8a2 2 0 0 0 1.7-3L13.7 4.2a2 2 0 0 0-3.4 0Z"/><path d="M12 9.5v4.2"/><circle cx="12" cy="16.9" r=".6" fill="currentColor"/></svg></i>Sans facture</label>
           </div>
           <label>Pièce n° de<input type="number" id="rgpa" min="0" inputmode="numeric"></label><label>à<input type="number" id="rgpb" min="0" inputmode="numeric"></label>
+          <details class="rgdd rgnat" id="rgnatd"><summary>Nature<b id="rgnatt">toutes</b></summary><div id="rgnatl" class="rgddl"></div></details>
+          <details class="rgdd" id="rgsrtd"><summary>Tri<b id="rgsrtt"></b></summary><div id="rgsrtl" class="rgddl"></div></details>
+          <select id="rgsort" hidden><option value="date">Date ↓ (récentes d'abord)</option><option value="dateasc">Date ↑ (anciennes d'abord)</option><option value="piece">N° de pièce ↑ (croissant)</option><option value="piecedesc">N° de pièce ↓ (décroissant)</option><option value="tiers">Fournisseur (A → Z)</option><option value="per">Période</option></select>
         </div>
-        <details class="rgnat" id="rgnatd"><summary>Nature : <b id="rgnatt">toutes</b></summary><div id="rgnatl"></div></details>
-        <label class="rgsrt">Trier par<select id="rgsort" aria-label="Tri des dépenses"><option value="date">Date ↓ (récentes d'abord)</option><option value="dateasc">Date ↑ (anciennes d'abord)</option><option value="piece">N° de pièce ↑ (croissant)</option><option value="piecedesc">N° de pièce ↓ (décroissant)</option><option value="tiers">Fournisseur (A → Z)</option><option value="per">Période</option></select></label>
+        
       </div>
       <div id="rgl" class="zeb"></div>
-      <button type="button" class="tbtn pri rggen" id="rggen" disabled>Générer un état de régie</button>
-    </div>
+      <button type="button" class="tbtn act off rggen" id="rggen" disabled>Générer un état de régie</button>
+    </details>
   </div>
   <div class="card up rgcard" id="rgsec">
     <h2 class="h2i rgh2"><svg class="si" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h5M10 16h5"/></svg>États de régie<span class="dsm" id="rgsecs"></span></h2>
@@ -701,7 +729,7 @@ details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-righ
       <input type="checkbox" name="nf" hidden>
       <div class="rgg">
         <label>Date<input type="date" name="date" required></label>
-        <label>Utilisateur<input type="text" name="user" list="dluser" autocomplete="off"></label>
+        <label>Montant (€)<input type="number" name="montant" step="0.01" min="0" inputmode="decimal" required></label>
       </div>
       <label>Fournisseur (tiers)<input type="text" name="tiers" list="dltiers" autocomplete="off" placeholder="Magasin, prestataire…"></label>
       <label>Activité (objet)<input type="text" name="objet" list="dlobjet" autocomplete="off" placeholder="Sortie, atelier, goûter…"></label>
@@ -715,11 +743,11 @@ details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-righ
         <label id="rgchq" hidden>N° du chèque<input type="text" name="cheque" inputmode="numeric" autocomplete="off"></label>
       </div>
       <div class="rgg">
-        <label>Montant (€)<input type="number" name="montant" step="0.01" min="0" inputmode="decimal" required></label>
+        <label>Utilisateur<input type="text" name="user" list="dluser" autocomplete="off"></label>
         <label>Période<select name="per"></select></label>
       </div>
             <div class="rgerr" id="rgerr"></div>
-      <div class="mbt rgfb"><button type="button" class="nfb" id="rgnfb" aria-pressed="false" title="Dépense sans facture"><svg class="nfs" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 4.2 2.9 17.1a2 2 0 0 0 1.7 3h14.8a2 2 0 0 0 1.7-3L13.7 4.2a2 2 0 0 0-3.4 0Z"/><path d="M12 9.5v4.2"/><circle cx="12" cy="16.9" r=".6" fill="currentColor"/></svg><span id="rgnft">Sans facture</span></button><button type="button" class="tbtn rgdel" id="rgdel" hidden>Supprimer</button><button type="button" class="tbtn" id="rgcan">Annuler</button><button type="submit" class="tbtn pri">Enregistrer</button></div>
+      <div class="mbt rgfb"><button type="button" class="nfb" id="rgnfb" aria-pressed="false" title="Dépense sans facture"><svg class="nfs" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 4.2 2.9 17.1a2 2 0 0 0 1.7 3h14.8a2 2 0 0 0 1.7-3L13.7 4.2a2 2 0 0 0-3.4 0Z"/><path d="M12 9.5v4.2"/><circle cx="12" cy="16.9" r=".6" fill="currentColor"/></svg><span id="rgnft">Sans facture</span></button><button type="button" class="tbtn rgdel" id="rgdel" hidden title="Supprimer la dépense" aria-label="Supprimer la dépense"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12.5A1.5 1.5 0 0 0 8.5 21h7a1.5 1.5 0 0 0 1.5-1.5L18 7M9 7V4.5h6V7"/></svg></button><button type="button" class="tbtn" id="rgcan">Annuler</button><button type="submit" class="tbtn pri">Enregistrer</button></div>
     </form>
   </div></div>
 </section>
@@ -1648,7 +1676,7 @@ document.addEventListener("click",async e=>{const b=e.target.closest("[data-rcp]
 function cfIco(){const c=$("cf");if(c)c.classList.toggle("on",!!CF.auth);rcpRender();const b=$("cfforce");if(b)b.hidden=!CF.auth}
 $("cfforce").onclick=async()=>{const b=$("cfforce");clearTimeout(CF.t);b.disabled=true;b.textContent="Sauvegarde…";try{await cfPush()}finally{b.disabled=false;b.textContent="Forcer la sauvegarde"}};
 // fichiers de régie archivés : période et numéros de pièce de l'état correspondant
-function rgInfo(key){const n=key.split("/").pop();const e=RGET.find(r=>r.file===n||r.pdf===n);if(!e)return "";const L=REGD.filter(d=>d.etat===e.id);
+function rgInfo(key){const n=key.split("/").pop();const e=RGET.find(r=>r.file===n||r.pdf===n);if(!e)return "";const L=REGD.filter(d=>d.etat===e.id).sort((a,b)=>String(a.piece).localeCompare(String(b.piece),"fr",{numeric:true}));
   return `<span class="cfri">${e.from?`du ${fd(e.from)} au ${fd(e.to)}`:"période inconnue"} · ${L.length} pièce${L.length>1?"s":""}${L.length?` (n° ${esc(L[0].piece)}${L.length>1?" à "+esc(L[L.length-1].piece):""})`:""}${e.arch?" · archivé":""}</span>`}
 async function cfConnect(silent){try{await cfConnect0(silent)}finally{cfIco()}}
 async function cfConnect0(silent){
@@ -1812,13 +1840,17 @@ const rgVis=()=>rgLive().filter(d=>{const pn=parseInt(d.piece);
   return (!RGF.from||(d.date||"")>=RGF.from)&&(!RGF.to||(d.date||"")<=RGF.to)&&(!RGF.cat||RGF.cat===cat)&&(!RGF.nat.length||RGF.nat.includes(d.nature||""))
     &&(RGF.pa===""||(!isNaN(pn)&&pn>=+RGF.pa))&&(RGF.pb===""||(!isNaN(pn)&&pn<=+RGF.pb))});
 const rgFcount=()=>["from","to","pa","pb","cat"].filter(k=>RGF[k]!=="").length+(RGF.nat.length?1:0);
+// boutons d'action : « off » inactif, « wait » possible mais il manque une sélection, « go » prêt
+function btnSt(b,st){b.classList.remove("off","wait","go");b.classList.add("act",st);b.disabled=st!=="go"}
 function renderRg(){renderRgCfg();
   regMigrate();const LV=rgLive(),tot=LV.reduce((s,d)=>s+(+d.montant||0),0),hs=LV.filter(d=>!d.etat),ht=hs.reduce((s,d)=>s+(+d.montant||0),0),na=LV.filter(d=>!d.per).reduce((s,d)=>s+(+d.montant||0),0);
   $("rgtot").innerHTML=LV.length?`<span>Régie en cours</span><b>${f(tot)}</b><div class="rgt2"><span>Pas encore dans un état · ${hs.length} dépense${hs.length>1?"s":""}</span><b>${f(ht)}</b></div>${na>0.004?`<small>dont ${f(na)} sans période (déduits du budget global)</small>`:""}`:"";
   // tri : date (récentes d'abord), fournisseur (A → Z) ou période (ordre de l'année, non affectées à la fin), avec sous-totaux par groupe
   const so=LS.get("ab-rgsort","date"),pi=id=>{const k=PH.findIndex(p=>p.id===id);return k<0?1e9:k},byDate=(a,b)=>(b.date||"").localeCompare(a.date||"")||b.id.localeCompare(a.id);
   $("rgsort").value=so;$("rgsort").closest(".rgfl")&&0;$("rgdf").value=RGF.from;$("rgdt").value=RGF.to;$("rgpa").value=RGF.pa;$("rgpb").value=RGF.pb;
-  document.querySelectorAll("[name=rgcat]").forEach(c=>c.checked=c.value===RGF.cat);
+  document.querySelectorAll("[name=rgcat]").forEach(c=>c.checked=c.value===RGF.cat);document.querySelector(".rgrad").classList.toggle("all",!RGF.cat);
+  {const o=[...$("rgsort").options];$("rgsrtt").textContent=(o.find(x=>x.value===so)||o[0]).textContent;
+   $("rgsrtl").innerHTML=o.map(x=>`<label><input type="radio" name="rgsrt" value="${x.value}"${x.value===so?" checked":""}><i class="rdo"></i>${esc(x.textContent)}</label>`).join("")}
   {const N=[...new Set(rgLive().map(d=>d.nature||"").filter(Boolean))].sort((a,b)=>a.localeCompare(b,"fr",{numeric:true}));RGF.nat=RGF.nat.filter(n=>N.includes(n));
    $("rgnatl").innerHTML=N.map(n=>`<label><input type="checkbox" data-rgn="${esc(n)}"${RGF.nat.includes(n)?" checked":""}><i class="ckb"></i>${esc(n)}</label>`).join("")||'<span class="note">Aucune nature.</span>';
    $("rgnatt").textContent=RGF.nat.length?`${RGF.nat.length} sélectionnée${RGF.nat.length>1?"s":""}`:"toutes"}
@@ -1830,34 +1862,36 @@ function renderRg(){renderRgCfg();
   const gk=d=>so==="tiers"?(d.tiers||"Sans fournisseur"):so==="per"?(d.per?perName(d.per)||"Période supprimée":"Non affectée"):null;
   const gt={};if(so!=="date")L.forEach(d=>{const k=gk(d);gt[k]=(gt[k]||0)+(+d.montant||0)});let last=null;
   const free=L.filter(d=>!d.etat&&!d.nf),allOn=free.length>0&&free.every(d=>RGSEL.has(d.id));$("rgall").checked=allOn;$("rgall").indeterminate=!allOn&&free.some(d=>RGSEL.has(d.id));$("rgall").disabled=!free.length;
-  $("rgls").textContent=L.length?`${L.length} · ${f(L.reduce((s,d)=>s+(+d.montant||0),0))}`:"";
+  $("rgls").textContent=`${L.length} facture${L.length>1?"s":""}`;
   $("rgl").innerHTML=L.length?L.map(d=>{const k=gk(d),h=k!==null&&k!==last?`<div class="rgh"><span>${esc(k)}</span><b>${f(gt[k])}</b></div>`:"";last=k;return h+`<div class="rgrow">${d.etat?`<span class="rgck rgn" title="Pièce n° ${esc(d.piece)}">n° ${esc(d.piece)}</span>`:d.nf?`<span class="rgck" title="Dépense sans facture : ne peut pas entrer dans un état"><i class="nfc"><svg class="nfs" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 4.2 2.9 17.1a2 2 0 0 0 1.7 3h14.8a2 2 0 0 0 1.7-3L13.7 4.2a2 2 0 0 0-3.4 0Z"/><path d="M12 9.5v4.2"/><circle cx="12" cy="16.9" r=".6" fill="currentColor"/></svg></i></span>`:`<label class="rgck"><input type="checkbox" data-rgs="${d.id}"${RGSEL.has(d.id)?" checked":""} aria-label="Sélectionner pour un état"></label>`}<button type="button" class="rgd${RGE===d.id?" on":""}" data-rge="${d.id}">
       <span class="rgd1"><b>${d.nf?'':""}${esc(d.tiers||d.objet||"Dépense")}</b><span class="rgm">${f(+d.montant||0)}</span></span>
       <span class="rgd2">${d.date?fd(d.date):"sans date"}${d.objet&&d.tiers?` · ${esc(d.objet)}`:""} · ${esc(d.user||"Administrateur")}</span>
       <span class="rgd3"><span>${esc(nameOf(d.compte))} <small>${esc(d.compte)}</small></span>${d.per?`<i class="rgp">${esc(perName(d.per)||"période supprimée")}</i>`:'<i class="rgp no">non affectée</i>'}</span></button></div>`}).join("")
     :`<div class="note">${REGD.length?"Aucune dépense dans ces dates.":"Aucune dépense saisie. Appuie sur « Nouvelle dépense » pour commencer."}</div>`;
   const sel=REGD.filter(d=>RGSEL.has(d.id)),st=sel.reduce((s,d)=>s+(+d.montant||0),0);
-  $("rggen").disabled=!sel.length;$("rggen").textContent=sel.length?`Générer un état de régie · ${sel.length} dépense${sel.length>1?"s":""} · ${f(st)}`:"Générer un état de régie";
+  btnSt($("rggen"),!free.length&&!sel.length?"off":sel.length?"go":"wait");$("rggen").textContent=sel.length?`Générer un état de régie · ${sel.length} dépense${sel.length>1?"s":""} · ${f(st)}`:"Générer un état de régie";
   // états : actifs (en cours) et archivés, avec cases à cocher et total
   const sumE=e=>REGD.filter(d=>d.etat===e.id).reduce((s,d)=>s+(+d.montant||0),0);
-  const row=e=>{const n=REGD.filter(d=>d.etat===e.id),ps=n.map(d=>d.piece),pa=ps[0],pb=ps[ps.length-1];
+  const row=e=>{const n=REGD.filter(d=>d.etat===e.id),ps=n.map(d=>String(d.piece)).sort((a,b)=>a.localeCompare(b,"fr",{numeric:true})),pa=ps[0],pb=ps[ps.length-1];
     return `<div class="rget"><label class="rgck"><input type="checkbox" data-rges="${e.id}"${RGESEL.has(e.id)?" checked":""} aria-label="Sélectionner l'état"></label><div class="rgeti"><b>${e.from?`Du ${fd(e.from)} au ${fd(e.to)}`:"État"}</b><small>${e.src==="import"?`importé (${esc(e.file||"fichier")})`:`créé le ${fd(e.at.slice(0,10))}`} · ${n.length} pièce${n.length>1?"s":""}${n.length?` (n° ${esc(pa)}${n.length>1?" à "+esc(pb):""})`:""}</small></div><span class="rgm">${f(sumE(e))}</span>
       <div class="rgeta"><button type="button" class="tbtn rgrfb${e.renf?" on":""}" data-rgrf="${e.id}" title="Montant reversé sur le compte de la carte bancaire">${e.renf?`✓ Renfloué le ${fd(e.renf)}`:"Renfloué"}</button><button class="tbtn" data-rgdl="${e.id}">Tableau .ods</button><button class="tbtn" data-rgpdf="${e.id}">PDF</button>${e.src==="import"||e.arch?"":`<button class="tbtn rgdel" data-rgx="${e.id}">Supprimer</button>`}</div></div>`};
   const act=RGET.filter(e=>!e.arch).slice().sort((a,b)=>(b.to||"").localeCompare(a.to||"")),arc=RGET.filter(e=>e.arch).slice().sort((a,b)=>(b.to||"").localeCompare(a.to||""));
   [...RGESEL].forEach(id=>{if(!RGET.some(e=>e.id===id))RGESEL.delete(id)});
   const ta=act.reduce((s,e)=>s+sumE(e),0),tr=arc.reduce((s,e)=>s+sumE(e),0),sa=act.filter(e=>RGESEL.has(e.id)).length,sr=arc.filter(e=>RGESEL.has(e.id)).length;
-  $("rgets").textContent=act.length?`${act.length} · ${f(ta)}`:"";const nr=act.filter(e=>!e.renf).length;$("rgsecs").textContent=act.length?`${act.length} en cours${nr?` · ${nr} à renflouer`:""}`:"";
+  $("rgets").textContent=act.length?`${act.length} · ${f(ta)}`:"";const nra=act.filter(e=>!e.renf).length,nrr=arc.filter(e=>!e.renf).length,nr=nra+nrr;   // à renflouer : tout état (en cours ou archivé) pas encore marqué renfloué
+  $("rgsecs").textContent=[act.length?`${act.length} en cours`:"",nr?`${nr} à renflouer${nrr?` (dont ${nrr} archivé${nrr>1?"s":""})`:""}`:""].filter(Boolean).join(" · ");
   $("rgetl").innerHTML=act.length?act.map(row).join(""):'<div class="note">Aucun état en cours. Coche des dépenses puis « Générer un état de régie », ou importe un tableau.</div>';
-  $("rgetf").innerHTML=act.length?`<div class="rgett"><span>Total des états de régie</span><b>${f(ta)}</b></div><button type="button" class="tbtn phaddb" id="rgarch"${sa?"":" disabled"}>Archiver${sa?` (${sa})`:""}</button>`:"";
+  $("rgetf").innerHTML=act.length?`<div class="rgett"><span>Total des états de régie</span><b>${f(ta)}</b></div><button type="button" class="tbtn act ${sa?"go":"wait"}" id="rgarch"${sa?"":" disabled"}>Archiver${sa?` (${sa})`:""}</button>`:"";
   $("rgarc").hidden=false;$("rgars").textContent=arc.length?`${arc.length} · ${f(tr)}`:"";
   $("rgarl").innerHTML=arc.length?arc.map(row).join(""):'<div class="note">Aucun état archivé.</div>';
-  $("rgarf").innerHTML=arc.length?`<div class="rgett"><span>Total archivé</span><b>${f(tr)}</b></div><button type="button" class="tbtn phaddb" id="rgunarch"${sr?"":" disabled"}>Sortir de l'archive${sr?` (${sr})`:""}</button>`:"";
+  $("rgarf").innerHTML=arc.length?`<div class="rgett"><span>Total archivé</span><b>${f(tr)}</b></div><button type="button" class="tbtn act ${sr?"go":"wait"}" id="rgunarch"${sr?"":" disabled"}>Sortir de l'archive${sr?` (${sr})`:""}</button>`:"";
 }
 $("rgl").addEventListener("change",e=>{const id=e.target.dataset.rgs;if(!id)return;e.target.checked?RGSEL.add(id):RGSEL.delete(id);renderRg()});
 $("rgall").onchange=e=>{const on=e.target.checked;rgVis().filter(d=>!d.etat&&!d.nf).forEach(d=>on?RGSEL.add(d.id):RGSEL.delete(d.id));renderRg()};
 [["rgdf","from"],["rgdt","to"],["rgpa","pa"],["rgpb","pb"]].forEach(([id,k])=>$(id).onchange=e=>{RGF[k]=e.target.value;renderRg()});
 $("rgfp").addEventListener("change",e=>{const t=e.target;
   if(t.name==="rgcat"){RGF.cat=t.value;renderRg()}
+  else if(t.name==="rgsrt"){LS.set("ab-rgsort",t.value);$("rgsrtd").open=false;renderRg()}
   else if(t.dataset.rgn!=null){const S=new Set(RGF.nat);t.checked?S.add(t.dataset.rgn):S.delete(t.dataset.rgn);RGF.nat=[...S];renderRg()}});
 $("rgfbt").onclick=()=>{const p=$("rgfp");p.hidden=!p.hidden;$("rgfbt").setAttribute("aria-expanded",!p.hidden)};
 $("rgfx").onclick=()=>{RGF={from:"",to:"",pa:"",pb:"",cat:"",nat:[]};renderRg()};
@@ -1940,7 +1974,7 @@ async function rgPdf(id){const e=RGET.find(r=>r.id===id);if(!e)throw new Error("
   if(!window.jspdf)await loadScript(new URL("/lib/jspdf.umd.min.js",location.origin).href);
   if(!window.jspdf.jsPDF.API.autoTable)await loadScript(new URL("/lib/jspdf.plugin.autotable.min.js",location.origin).href);
   if(e.max==null)e.max=RGCFG.max??9000;if(e.deja==null)e.deja=rgDeja(e.from);
-  const L=REGD.filter(d=>d.etat===id).sort((a,b)=>a.piece-b.piece),r2=v=>Math.round(v*100)/100,tot=r2(L.reduce((s,d)=>s+(+d.montant||0),0));
+  const L=REGD.filter(d=>d.etat===id).sort((a,b)=>String(a.piece).localeCompare(String(b.piece),"fr",{numeric:true})),r2=v=>Math.round(v*100)/100,tot=r2(L.reduce((s,d)=>s+(+d.montant||0),0));
   const eu=v=>eurF(v).replace(/[  ]/g," "),m=e.from||e.at.slice(0,10),y=m.slice(0,4),mo=+m.slice(5,7)-1,dd=t=>t?t.slice(8,10)+"/"+t.slice(5,7)+"/"+t.slice(2,4):"";
   const doc=new window.jspdf.jsPDF({orientation:"landscape",unit:"mm",format:"a4"}),W=doc.internal.pageSize.getWidth(),H=doc.internal.pageSize.getHeight();
   const head=()=>{doc.setFont("helvetica","normal");doc.setFontSize(9);doc.setTextColor(60);doc.text("Régie Espace jeunes de Selles-sur-Cher",12,9);doc.text(`${MOISF[mo]} ${y}`,W-12,9,{align:"right"});doc.setTextColor(0)};
@@ -1964,7 +1998,7 @@ async function rgPdf(id){const e=RGET.find(r=>r.id===id);if(!e)throw new Error("
   if(CF.auth)cfFetch("files/documents/regie-etats/"+name,{method:"PUT",headers:{"Content-Type":"application/pdf"},body:blob}).catch(()=>{});return name}
 async function rgDownload(id){const e=RGET.find(r=>r.id===id);if(!e)throw new Error("état introuvable");
   if(e.max==null)e.max=RGCFG.max??9000;if(e.deja==null)e.deja=rgDeja(e.from);
-  const L=REGD.filter(d=>d.etat===id).sort((a,b)=>a.piece-b.piece),{blob,name}=rgOds(e,L);
+  const L=REGD.filter(d=>d.etat===id).sort((a,b)=>String(a.piece).localeCompare(String(b.piece),"fr",{numeric:true})),{blob,name}=rgOds(e,L);
   dlBlob(blob,name);
   if(e.file!==name){e.file=name;saveRgEt()}
   if(CF.auth)cfFetch("files/documents/regie-etats/"+name,{method:"PUT",headers:{"Content-Type":blob.type},body:blob}).catch(()=>{});
