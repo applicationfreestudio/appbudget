@@ -366,7 +366,7 @@ select{font:inherit;font-size:.85rem;padding:7px 8px;border-radius:10px;border:1
 .frise .ck{font-style:normal;margin-right:4px;font-weight:700}
 .frise .est{font-style:normal;opacity:.6;margin-right:2px}
 #phn.pos{color:var(--bl)}#phn.neg{color:var(--h)}
-#md{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;padding:16px;box-sizing:border-box}
+#md{position:fixed;inset:0;z-index:90;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;padding:16px;box-sizing:border-box}
 @media (min-width:600px){#md{align-items:center}}
 #md[hidden]{display:none}
 .mb{background:var(--card);width:min(560px,100%);max-height:86vh;overflow:auto;border-radius:16px;padding:16px;box-sizing:border-box;box-shadow:0 10px 30px rgba(0,0,0,.25)}
@@ -520,7 +520,7 @@ details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-righ
 :root[data-theme="dark"] .frise .pcw>button.on.good{color:#0d1b2a}
 </style></head>
 <body><main>
-<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.58</small></span></span>
+<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261113.59</small></span></span>
   <span class="hb"><span class="urd" id="urd" hidden><button type="button" class="sgb" id="undo" aria-label="Annuler la dernière modification" title="Annuler"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button><button type="button" class="sgb" id="redo" aria-label="Rétablir la modification" title="Rétablir"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg></button></span><span class="hbr"><button type="button" class="sgb" id="nav2"></button><i class="nsep" id="nsep" aria-hidden="true"></i><button type="button" class="sgb" id="nav">Paramètres<svg class="chv" viewBox="0 0 12 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4l6 8-6 8"/></svg></button><button class="tbtn" id="fs" aria-label="Plein écran" title="Plein écran"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button></span></span>
 </h1>
 <div class="sub"><div id="org"></div><div>Dépenses <span id="yr"></span> · situation au <b id="dt"></b></div></div>
@@ -562,7 +562,7 @@ details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-righ
     <h3 class="h3s">Type de régie</h3>
     <div class="thm" id="rgty" role="radiogroup" aria-label="Type de régie" style="margin-top:6px"><button type="button" data-rgt="avances" role="radio">Avances</button><button type="button" data-rgt="recettes" role="radio">Recettes</button><button type="button" data-rgt="mixte" role="radio">Avances et recettes</button></div>
     <h3 class="h3s">Dépenses autorisées</h3>
-    <p class="note" style="margin:2px 0 6px">Comptes proposés dans le formulaire. Au départ, seuls ceux présents dans les fichiers de régie importés sont activés.</p>
+    <p class="note" style="margin:2px 0 6px">Seuls les comptes activés sont proposés dans le formulaire. Au départ, seuls ceux présents dans les fichiers de régie importés sont activés.</p>
     <div id="rgacl"></div>
   </details>
   <div class="card up">
@@ -582,7 +582,6 @@ details.dsec>p.note,details.dsec>label.fl{margin-left:14px!important;margin-righ
       <label>Activité (objet)<input type="text" name="objet" list="dlobjet" autocomplete="off" placeholder="Sortie, atelier, goûter…"></label>
       <datalist id="dltiers"></datalist><datalist id="dlobjet"></datalist>
       <label>Compte (nature)<select name="compte"></select></label>
-      <label id="rgfo" hidden>Numéro de compte<input type="text" name="autre" inputmode="numeric" autocomplete="off" placeholder="6064"></label>
       <div class="rgg">
         <label>Montant (€)<input type="number" name="montant" step="0.01" min="0" inputmode="decimal" required></label>
         <label>Période<select name="per"></select></label>
@@ -1061,7 +1060,11 @@ function pveSlide(id,v){
   // tableau des paramètres mis à jour en direct (pourcentages et montants)
   PH.forEach(x=>{const r=document.querySelector(`.phr[data-id="${x.id}"]`);if(!r)return;const n=r.querySelector("[data-k=pct]");if(n)n.value=Math.round(x.pct*100)/100;const fa=r.querySelector("[data-fa]");if(fa&&x.fix)fa.value=Math.round(+x.fixAmt)});phSum();
   XA=xAcc();const C=phCalc();renderHome(true);phLive(C,id)}
-$("phb").addEventListener("change",e=>{if(e.target.dataset.done){const id=e.target.dataset.done;if(e.target.checked)PHSEL.add(id);else PHSEL.delete(id);savePH();setDate();renderHome();return}if(e.target.dataset.pe){PVB=null;savePH();setDate();renderHome();return}const id=e.target.dataset.av;if(!id)return;const p=PH.find(x=>x.id===id);if(!p)return;const el=e.target,v=el.dataset.env?(+el.dataset.env>0?Math.max(0,+el.value-(+el.dataset.rg||0))/+el.dataset.env:0):+el.value/100;
+$("phb").addEventListener("change",e=>{if(e.target.dataset.done){const id=e.target.dataset.done;
+    // règle : une période ne peut pas être terminée tant que des dépenses de régie y sont affectées
+    if(e.target.checked){const rd=REGD.filter(d=>d.per===id);if(rd.length){e.target.checked=false;const t=rd.reduce((s,d)=>s+(+d.montant||0),0);
+      openModal(`<h3>Période impossible à terminer</h3><p class="note">${rd.length} dépense${rd.length>1?"s":""} de régie en cours (${f(t)}) ${rd.length>1?"sont affectées":"est affectée"} à cette période. Supprime-${rd.length>1?"les":"la"} ou affecte-${rd.length>1?"les":"la"} ailleurs depuis la page Régie quand ${rd.length>1?"elles apparaissent":"elle apparaît"} dans la situation budgétaire.</p><div class="mbt"><button class="tbtn" data-close>Fermer</button><button class="tbtn pri" id="mgorg">Voir la régie</button></div>`,()=>{$("mgorg").onclick=()=>{closeModal();if(typeof bigClose==="function")bigClose();go("reg");scrollTo(0,0)}});return}}
+    if(e.target.checked)PHSEL.add(id);else PHSEL.delete(id);savePH();setDate();renderHome();return}if(e.target.dataset.pe){PVB=null;savePH();setDate();renderHome();return}const id=e.target.dataset.av;if(!id)return;const p=PH.find(x=>x.id===id);if(!p)return;const el=e.target,v=el.dataset.env?(+el.dataset.env>0?Math.max(0,+el.value-(+el.dataset.rg||0))/+el.dataset.env:0):+el.value/100;
   p.av=v;savePH();setDate();renderHome()});
 function periodDetail(id){
   const C=phCalc(),L=C.L,i=L.findIndex(x=>x.id===id),p=L[i],passed=C.sel[i];
@@ -1603,24 +1606,23 @@ function renderRg(){renderRgCfg();
     :'<div class="note">Aucune dépense saisie. Appuie sur « Nouvelle dépense » pour commencer.</div>';
 }
 function rgOpen(id){RGE=id;const d=id==="new"?{date:new Date().toISOString().slice(0,10)}:REGD.find(x=>x.id===id)||{};const F=$("rgf");
-  const acc=rgAccs();F.compte.innerHTML='<option value="">— choisir —</option>'+acc.map(([k,v])=>`<option value="${esc(k)}">${esc(k)} · ${esc(v)}</option>`).join("")+'<option value="__autre">Autre compte…</option>';
+  const acc=rgAccs();F.compte.innerHTML='<option value="">— choisir —</option>'+acc.map(([k,v])=>`<option value="${esc(k)}">${esc(k)} · ${esc(v)}</option>`).join("");
   F.per.innerHTML='<option value="">Non affectée</option>'+PH.filter(p=>!PHSEL.has(p.id)||p.id===d.per).map(p=>`<option value="${p.id}">${esc(p.name||"Période")}${PHSEL.has(p.id)?" (terminée)":""}</option>`).join("");
   rgSuggest();$("rgus").innerHTML=`Saisie par <b>${esc(d.user||"Administrateur")}</b>`;
   F.date.value=d.date||"";F.piece.value=d.piece||"";F.tiers.value=d.tiers||"";F.objet.value=d.objet||"";F.montant.value=d.montant??"";F.per.value=d.per||"";
   if(d.compte&&!acc.some(a=>a[0]===d.compte)){const all=rgAccsAll().find(a=>a[0]===d.compte);if(all){acc.push(all);F.compte.insertAdjacentHTML("afterbegin",`<option value="${esc(all[0])}">${esc(all[0])} · ${esc(all[1])}</option>`)}}
-  F.compte.value=d.compte&&acc.some(a=>a[0]===d.compte)?d.compte:(d.compte?"__autre":"");F.autre.value=F.compte.value==="__autre"?d.compte:"";$("rgfo").hidden=F.compte.value!=="__autre";
+  F.compte.value=d.compte&&acc.some(a=>a[0]===d.compte)?d.compte:"";
   $("rgft").textContent=id==="new"?"Nouvelle dépense":"Modifier la dépense";$("rgdel").hidden=id==="new";$("rgerr").textContent="";
   $("rgfc").hidden=false;renderRg();$("rgfc").scrollIntoView({behavior:"smooth",block:"start"})}
 function rgClose(){RGE=null;$("rgfc").hidden=true;renderRg()}
 $("rgnew").onclick=()=>rgOpen("new");
 $("rgcan").onclick=rgClose;
 $("rgl").onclick=e=>{const b=e.target.closest("[data-rge]");if(b)rgOpen(b.dataset.rge)};
-$("rgf").compte.onchange=e=>{$("rgfo").hidden=e.target.value!=="__autre"};
 $("rgf").addEventListener("input",()=>{$("rgerr").textContent=""});
 $("rgf").onsubmit=e=>{e.preventDefault();const F=e.target,m=Math.round(parseFloat(String(F.montant.value).replace(",","."))*100)/100;
-  const compte=F.compte.value==="__autre"?F.autre.value.trim():F.compte.value;
+  const compte=F.compte.value;
   if(!(m>0)){$("rgerr").textContent="Indique un montant supérieur à 0.";F.montant.focus();return}
-  if(!compte||(F.compte.value==="__autre"&&!/^\d{3,7}$/.test(compte))){$("rgerr").textContent=F.compte.value==="__autre"?"Le numéro de compte doit comporter 3 à 7 chiffres.":"Choisis le compte de la dépense.";return}
+  if(!compte){$("rgerr").textContent="Choisis le compte de la dépense.";return}
   const old=REGD.find(x=>x.id===RGE);
   if(F.per.value&&PHSEL.has(F.per.value)&&(!old||old.per!==F.per.value)){$("rgerr").textContent="Cette période est terminée : choisis une période en cours.";return}
   const d={user:old&&old.user||"Administrateur",id:RGE==="new"?Date.now().toString(36)+Math.random().toString(36).slice(2,6):RGE,date:F.date.value||"",tiers:F.tiers.value.trim(),objet:F.objet.value.trim(),compte,montant:m,piece:F.piece.value.trim(),per:F.per.value||""};
