@@ -87,6 +87,23 @@ export async function recapAcces(request, env, url, rest, ctx) {
     ctx.waitUntil(notifyAll(env, { title: "Nouvelle dépense", body: `${d.prenom} ${d.nom} : ${dep.tiers || dep.objet || "dépense"} · ${montant.toLocaleString("fr-FR", { style: "currency", currency: "EUR" })}`, url: "/#regie", tag: "saisie" }, subject(url)));
     return json({ ok: true, key: key.split("/").pop() });
   }
+  // demande d'augmentation du prévisionnel d'une période (dépense bloquée)
+  if (rest === "prev" && request.method === "POST") {
+    const d = await delegate(request, env);
+    if (!d) return json({ error: "accès non reconnu" }, 401);
+    if (d.status !== "active") return json({ error: "accès pas accordé" }, 403);
+    let b;
+    try { b = await readBody(request, 2048); } catch (_) { return json({ error: "demande invalide" }, 400); }
+    const montant = Math.round(Number(b.montant) * 100) / 100, reste = Math.round(Number(b.reste) * 100) / 100;
+    const o = { by: { id: d.id, nom: d.nom, prenom: d.prenom, email: d.email }, at: new Date().toISOString(), per: str(b.per, 40), nom: str(b.nom, 120), montant: montant > 0 ? montant : 0, reste: isFinite(reste) ? reste : 0, tiers: str(b.tiers, 120) };
+    if (!o.per) return json({ error: "période manquante" }, 400);
+    const list = await env.FILES.list({ prefix: "acces/prev/" });
+    if (list.objects.length >= 100) return json({ error: "trop de demandes en attente" }, 429);
+    await put(env, `acces/prev/${Date.now()}-${d.id}-${rid(6)}.json`, o);
+    const eur = (x) => x.toLocaleString("fr-FR", { style: "currency", currency: "EUR" });
+    ctx.waitUntil(notifyAll(env, { title: "Prévisionnel à augmenter", body: `${d.prenom} ${d.nom} : ${o.nom}, dépense de ${eur(o.montant)} bloquée (reste ${eur(o.reste)}).`, url: "/#parametres", tag: "prev" }, subject(url)));
+    return json({ ok: true });
+  }
   return null;
 }
 
