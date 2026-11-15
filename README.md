@@ -20,6 +20,9 @@ L'application tient dans un seul fichier, `public/index.html`. Elle est servie p
 - Jauge globale et jauges par article (bleu : disponible, or : 90 à 100 %, rouge : dépassement).
 - Import de la « Situation budgétaire détaillée par analytique » (PDF), avec un contrôle des totaux par chapitre.
 - Import des états de régie (.ods / .xlsx) pour les dépenses pas encore mandatées.
+- Dépenses en cours : carte bancaire, espèces, chèque et virement (ils entrent dans les états de régie), ainsi que les engagements (bons administratifs), comptés à part jusqu'à leur rapprochement.
+- Rapprochement des engagements avec les lignes de la situation budgétaire (à l'import d'une nouvelle situation, depuis « Opérations sur les dépenses », ou à la main dans la fiche de l'engagement). Un engagement rapproché est considéré comme intégré à la situation à sa date d'import.
+- Saisie de dépenses par d'autres personnes : depuis la page de consultation, une personne demande l'accès (nom, prénom, adresse mail) ; l'administrateur accepte, refuse ou révoque dans Paramètres → Accès partagés. Notifications sur le téléphone de l'administrateur (Web Push).
 - Choix des articles suivis.
 - Périodes de l'année avec une clé de répartition (%). Les écarts des périodes passées sont reportés sur les suivantes.
 - Sauvegarde et restauration au format JSON (Paramètres → Sauvegarde et restauration).
@@ -48,6 +51,19 @@ L'application tient dans un seul fichier, `public/index.html`. Elle est servie p
 | GET | `/api/health` | État du Worker : R2 relié et secret défini (sans jeton) |
 | GET | `/api/files?prefix=` | Liste des fichiers |
 | GET / PUT / DELETE | `/api/files/<chemin>` | Lire, écrire ou supprimer un fichier (25 Mo maximum) |
+| GET | `/api/acces` | Demandes d'accès à la saisie de dépenses |
+| POST | `/api/acces/<id>` | `{"action": "accepter" \| "refuser" \| "revoquer" \| "supprimer"}` |
+| GET | `/api/push/key` | Clé publique VAPID (créée au premier appel, gardée dans `acces/vapid.json`) |
+| POST / DELETE | `/api/push/sub` | Abonner ou désabonner un appareil aux notifications |
+| POST | `/api/push/test` | Envoyer une notification de test |
+
+Routes publiques, valables seulement avec le code du lien de consultation (`/recap/<code>/…`) :
+
+| Méthode | Chemin | Rôle |
+|---|---|---|
+| POST | `acces` | Demande d'accès : `{nom, prenom, email, k}` ; `k` est un secret aléatoire gardé par le navigateur (le serveur n'en garde que l'empreinte) |
+| GET | `acces/<id>` | État de sa demande (en-tête `Authorization: Bearer <id>.<k>`) |
+| POST | `saisie` | Envoi d'une dépense par une personne autorisée (même en-tête) ; elle attend dans `acces/saisies/` que l'application l'intègre |
 
 ## Restaurer une configuration
 

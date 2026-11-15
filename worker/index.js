@@ -3,6 +3,8 @@
 // - expose /api/* pour stocker les fichiers dans R2 (binding FILES)
 // Authentification : en-tête "Authorization: Bearer <APP_TOKEN>" (ou ?token= pour ouvrir un fichier).
 
+import { recapAcces, apiAcces } from "./acces.js";
+
 const json = (data, status = 200) =>
   new Response(JSON.stringify(data), {
     status,
@@ -32,7 +34,7 @@ function cleanKey(raw) {
 
 const MAX_SIZE = 25 * 1024 * 1024; // 25 Mo par fichier
 
-async function api(request, env, url) {
+async function api(request, env, url, ctx) {
   const path = url.pathname.replace(/^\/api\/?/, "");
 
   if (path === "health") {
@@ -43,6 +45,10 @@ async function api(request, env, url) {
   if (!env.FILES) return json({ error: "stockage R2 non relié (binding FILES)" }, 503);
   if (!env.APP_TOKEN) return json({ error: "secret APP_TOKEN non défini" }, 503);
   if (!authorized(request, env, url)) return json({ error: "non autorisé" }, 401);
+
+  // demandes d'accès et notifications
+  const ac = await apiAcces(request, env, url, path, ctx);
+  if (ac) return ac;
 
   // Liste : GET /api/files?prefix=...
   if (path === "files" && request.method === "GET") {
@@ -88,15 +94,19 @@ async function api(request, env, url) {
 
 // Page de consultation en lecture seule : /recap/<code>
 // Le code est choisi depuis l'application (fichier R2 partage/code.json) ; un mauvais code donne une page introuvable.
-async function recap(request, env, url) {
+async function recap(request, env, url, ctx) {
   const nf = () => new Response("Page introuvable.", { status: 404, headers: { "Content-Type": "text/plain; charset=utf-8", "X-Robots-Tag": "noindex" } });
-  const m = url.pathname.match(/^\/recap\/([A-Za-z0-9_-]{16,64})\/?$/);
-  if (!m || !env.FILES || request.method !== "GET") return nf();
+  const m = url.pathname.match(/^\/recap\/([A-Za-z0-9_-]{16,64})(?:\/(.*))?$/);
+  if (!m || !env.FILES) return nf();
+  const rest = (m[2] || "").replace(/\/+$/, "");
+  if (!rest && request.method !== "GET") return nf();
   const ref = await env.FILES.get("partage/code.json");
   if (!ref) return nf();
   let code = "";
   try { code = (await ref.json()).code || ""; } catch (_) {}
   if (!code || !sameToken(m[1], code)) return nf();
+  // demandes d'accès et saisie de dépenses par les personnes autorisées
+  if (rest) return (await recapAcces(request, env, url, rest, ctx)) || nf();
   if (url.searchParams.has("data")) {
     const obj = await env.FILES.get("etat/courant.json");
     if (!obj) return json({ error: "aucune donnée enregistrée" }, 404);
@@ -108,17 +118,17 @@ async function recap(request, env, url) {
 }
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
     if (url.pathname === "/api" || url.pathname.startsWith("/api/")) {
       try {
-        return await api(request, env, url);
+        return await api(request, env, url, ctx);
       } catch (e) {
         return json({ error: "erreur interne", detail: String(e && e.message || e) }, 500);
       }
     }
     if (url.pathname.startsWith("/recap/")) {
-      try { return await recap(request, env, url); } catch (e) { return json({ error: "erreur interne" }, 500); }
+      try { return await recap(request, env, url, ctx); } catch (e) { return json({ error: "erreur interne" }, 500); }
     }
     return env.ASSETS.fetch(request);
   },
