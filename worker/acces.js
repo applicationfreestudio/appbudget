@@ -78,6 +78,12 @@ export async function recapAcces(request, env, url, rest, ctx) {
       date: String(x.date), montant, tiers: str(x.tiers, 200), objet: str(x.objet, 200), compte: str(x.compte, 20), nature: str(x.nature, 200),
       pay: str(x.pay, 40), cheque: str(x.cheque, 40), per: str(x.per, 40), nf: !!x.nf,
     };
+    // ventilation par nature (2 à 10 lignes dont la somme fait le montant)
+    if (Array.isArray(x.vt) && x.vt.length > 1 && x.vt.length <= 10) {
+      const vt = x.vt.map((p) => ({ compte: str(p.compte, 20), nature: str(p.nature, 200), montant: Math.round(Number(p.montant) * 100) / 100 }));
+      const tot = Math.round(vt.reduce((s, p) => s + p.montant, 0) * 100) / 100;
+      if (vt.every((p) => p.compte && p.montant > 0) && Math.abs(tot - montant) < 0.01) dep.vt = vt;
+    }
     if (!dep.compte) return json({ error: "compte manquant" }, 400);
     const at = new Date().toISOString();
     const key = `acces/saisies/${Date.now()}-${d.id}-${rid(6)}.json`;
