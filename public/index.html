@@ -659,7 +659,7 @@ h1.hpad{padding-bottom:28px!important}
 .hmn .sgb{position:relative}.hmn .nbdg{position:absolute;top:-7px;right:-4px;min-width:18px;height:18px;font-size:.7rem;padding:0 5px;z-index:2}
 .dgf label{display:flex;flex-direction:column;gap:4px;margin:8px 0;font-weight:600}.dgf input{font:inherit;padding:9px 10px;border:1px solid var(--ln);border-radius:10px;background:var(--card);color:inherit}
 .dgst{padding:10px 12px;border-radius:10px;background:color-mix(in srgb,var(--mu) 7%,var(--card));margin:6px 0 10px}.dgst b{display:block}
-.ro.dlg #rgcfg,.ro.dlg #rgsec,.ro.dlg #rgrsec,.ro.dlg #rgops,.ro.dlg #rggen,.ro.dlg .rgallb,.ro.dlg #rgdep .rgck input,.ro.dlg #rgdel,.ro.dlg #ocrb,.ro.dlg #rgcam{display:none!important}
+.ro.dlg #rgcfg,.ro.dlg #rgsec,.ro.dlg #rgops,.ro.dlg #rggen,.ro.dlg .rgallb,.ro.dlg #rgdep .rgck input,.ro.dlg #rgdel,.ro.dlg #ocrb,.ro.dlg #rgcam{display:none!important}
 .rgatt{color:var(--bl,#2a6fb0);font-weight:700}
 .nfb.noeng{display:none!important}
 #pbhost .pbo{z-index:88}
@@ -799,9 +799,20 @@ details.rgdl>summary .rgst::before,details.rgsub>summary .rgst::before{display:i
 details.rgdl[open]>summary,details.rgsub[open]>summary{background:color-mix(in srgb,var(--mu) 9%,var(--card));border-color:color-mix(in srgb,var(--mu) 28%,transparent)!important;box-shadow:none!important;margin-bottom:10px!important}
 details.rgdl>summary::after,details.rgsub>summary::after{margin-right:2px}
 details.rgsub[open]{border-top-color:transparent!important}
+/* flèches des sous-sections : triangle plein aux coins arrondis, partout */
+details.rgdl>summary::after,details.rgsub>summary::after{content:""!important;margin-left:auto!important;flex:none;width:13px!important;height:10px!important;border:0!important;background:var(--mu)!important;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 10'%3E%3Cpath d='M2.2 1.6h9.6L7 8.2z' fill='%23000' stroke='%23000' stroke-width='2.2' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 10'%3E%3Cpath d='M2.2 1.6h9.6L7 8.2z' fill='%23000' stroke='%23000' stroke-width='2.2' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;transform:none!important;transition:transform .2s!important}
+details.rgdl[open]>summary::after,details.rgsub[open]>summary::after{transform:rotate(180deg)!important}
+details.rgsub,details.rgdl{margin:0!important}
+details.rgdl[open]>summary .rgst,details.rgsub[open]>summary .rgst{padding:0!important;margin:0!important}
+#rgsec>details.rgsub:last-child,#rgsec>details.rgsub:last-child>:last-child{margin-bottom:0!important}
+.rzbl{display:flex!important;flex-direction:row!important;gap:8px;align-items:flex-start;font-size:.9rem;margin:6px 0}.rzbl input{margin-top:3px;accent-color:var(--h,#c8473a)}
+#rgrls{line-height:1.35;display:block!important;font-size:1rem!important}
+details.rgsub>summary,details.rgdl>summary{min-height:45px;box-sizing:border-box}
+#rgsec{padding-bottom:4px!important}
+#rgls::before,#rgets::before,#rgars::before,#rgrls::before{margin-right:10px!important;vertical-align:-.17em!important}
 </style></head>
 <body><main>
-<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261116.91</small></span></span>
+<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261116.92</small></span></span>
   <span class="hb"><span class="urd" id="urd" hidden><button type="button" class="sgb" id="undo" aria-label="Annuler la dernière modification" title="Annuler"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button><button type="button" class="sgb" id="redo" aria-label="Rétablir la modification" title="Rétablir"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg></button></span><span class="hbr hmn"><button type="button" class="sgb" data-pg="home">Principal</button><button type="button" class="sgb" data-pg="reg">Dépenses</button><button type="button" class="sgb" data-pg="set">Paramètres</button><button type="button" class="sgb" id="nav2" hidden></button><i class="nsep" id="nsep" hidden></i><button type="button" class="sgb" id="nav" hidden>Paramètres<svg class="chv" viewBox="0 0 12 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4l6 8-6 8"/></svg></button><button class="tbtn" id="fs" aria-label="Plein écran" title="Plein écran"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button></span></span>
 </h1>
 <div class="sub"><div id="org"></div><div>Dépenses <span id="yr"></span> · situation au <b id="dt"></b></div></div>
@@ -877,8 +888,8 @@ details.rgsub[open]{border-top-color:transparent!important}
     </details>
   </div>
   <div class="card up rgcard" id="rgsec">
-    <h2 class="h2i rgh2"><svg class="si" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h5M10 16h5"/></svg>États de régie<span id="rgsecs" hidden></span></h2>
-    <details class="rginfo"><summary>Information</summary><p class="note">Un état archivé est considéré comme intégré à la dernière situation budgétaire : ses dépenses ne sont plus comptées dans la régie en cours (ni dans la jauge, ni dans les dépenses de l'année). Sors-le de l'archive pour le compter à nouveau.</p></details>
+    <h2 class="h2i rgh2"><svg class="si" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h5M10 16h5"/></svg>États de dépense<span id="rgsecs" hidden></span></h2>
+    <details class="rginfo"><summary>Information</summary><p class="note">Un état archivé est considéré comme intégré à la dernière situation budgétaire : ses dépenses ne sont plus comptées dans la régie en cours (ni dans la jauge, ni dans les dépenses de l'année). Sors-le de l'archive pour le compter à nouveau.</p><p class="note">Engagements rapprochés d'une ligne de la situation budgétaire : ils sont considérés comme intégrés à cette situation et ne sont plus comptés dans les dépenses en cours. Appuie sur un engagement pour l'ouvrir ; décoche « Rapproché » pour le compter à nouveau.</p></details>
     <details class="rgsub" id="rgetc">
       <summary><b class="rgst" id="rgets">En cours</b></summary>
       <div id="rgetl" class="zeb"></div>
@@ -889,11 +900,7 @@ details.rgsub[open]{border-top-color:transparent!important}
       <div id="rgarl" class="zeb"></div>
       <div class="rgetf" id="rgarf"></div>
     </details>
-  </div>
-  <div class="card up rgcard" id="rgrsec">
-    <h2 class="h2i rgh2"><svg class="si" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 2.5h9l4 4v15h-13z"/><path d="M14.5 2.5v4h4"/><path d="m8.5 14 2.5 2.5 4.5-5"/></svg>Engagements rapprochés</h2>
-    <details class="rginfo"><summary>Information</summary><p class="note">Engagements rapprochés d'une ligne de la situation budgétaire : ils sont considérés comme intégrés à cette situation et ne sont plus comptés dans les dépenses en cours. Appuie sur un engagement pour l'ouvrir ; décoche « Rapproché » pour le compter à nouveau.</p></details>
-    <details class="rgsect rgdl" id="rgrdl">
+    <details class="rgsub" id="rgrdl">
       <summary><span class="rgst" id="rgrls"></span></summary>
       <div class="rgfh"><button type="button" class="tbtn rgfb2" id="rgrfbt" aria-expanded="false"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16l-6 7.5V19l-4-2v-4.5z"/></svg>Filtrer<span class="rgfn" id="rgrfn"></span></button></div>
       <div class="rgfp" id="rgrfp" hidden>
@@ -1767,6 +1774,7 @@ $("rzgo").onclick=()=>{const code=String(Math.floor(1000+Math.random()*9000)),nD
     <p class="note">Seront effacés : la consommation des articles, ${nD} dépense${nD>1?"s":""} (régie et engagements), ${nE} état${nE>1?"s":""} de régie, les périodes terminées et les montants bloqués. Les périodes repartent de la clé 2026.</p>
     <p class="note"><b>Conservés :</b> les personnes autorisées, les paramètres de la régie, les natures, le lien de consultation, la sauvegarde en ligne et le thème.</p>
     <p class="note">${CF.auth?"Une sauvegarde complète est d'abord enregistrée en ligne (Sauvegardes complètes).":'<span class="ko">Pas de sauvegarde en ligne connectée : fais une sauvegarde avant de continuer.</span>'}</p>
+    <label class="rzbl"><input type="checkbox" id="rzbud"> Mettre aussi les budgets votés à zéro (sinon ils sont gardés et restent disponibles)</label>
     <div class="rzk"><span>Pour confirmer, saisis le code</span><b class="rzcode" aria-label="Code ${code.split("").join(" ")}">${code}</b><input id="rzin" inputmode="numeric" maxlength="4" autocomplete="off" aria-label="Code de confirmation"></div>
     <div class="rgerr" id="rzerr"></div>
     <div class="mbt"><button class="tbtn" data-close>Annuler</button><button class="tbtn rzb" id="rzok" disabled>Remettre à zéro</button></div>`,()=>{
@@ -1776,7 +1784,7 @@ $("rzgo").onclick=()=>{const code=String(Math.floor(1000+Math.random()*9000)),nD
           const r=await cfFetch("files/"+name,{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(backup("full"),null,2)});if(!r.ok)throw new Error("erreur "+r.status)}
         catch(err){$("rzerr").textContent="Sauvegarde impossible ("+err.message+") : remise à zéro annulée.";ok.disabled=false;ok.textContent="Remettre à zéro";return}}
       const today=new Date().toISOString().slice(0,10);
-      applyData({...BASE,source:"zero",date:today,importedAt:new Date().toISOString(),rows:BASE.rows.map(r=>[r[0],r[1],r[2],r[3],0,0])},true);
+      const zb=$("rzbud")&&$("rzbud").checked;applyData({...DATA,source:"zero",date:today,importedAt:new Date().toISOString(),rows:DATA.rows.map(r=>[r[0],r[1],r[2],zb?0:r[3],0,0])},true);
       REGD=[];saveRegD();REG=[];LS.set("ab-regie",REG);RGET=[];LS.set("ab-regetats",RGET);RGSEL.clear();
       PH=phKey2026();PHSEL=new Set();savePH();XA=xAcc();setDate();cfDirty();closeModal();route();renderSet();
       openModal(`<h3>Situation remise à zéro</h3><p class="note">Tu peux importer une nouvelle situation budgétaire (PDF) dans Paramètres.${CF.auth?" La sauvegarde d'avant est dans la sauvegarde en ligne.":""}</p><div class="mbt"><button class="tbtn pri" data-close>OK</button></div>`)}})};
@@ -2438,8 +2446,7 @@ const RGR={from:"",to:"",sit:[]};
 function rgrRender(){const all=REGD.filter(d=>isEng(d)&&d.rap),sits=[...new Set(all.map(d=>d.rap.date||""))].sort().reverse();
   RGR.sit=RGR.sit.filter(x=>sits.includes(x));
   const L=all.filter(d=>(!RGR.from||(d.date||"")>=RGR.from)&&(!RGR.to||(d.date||"")<=RGR.to)&&(!RGR.sit.length||RGR.sit.includes(d.rap.date||""))).sort((a,b)=>(b.date||"").localeCompare(a.date||""));
-  $("rgrsec").hidden=!all.length;
-  $("rgrls").innerHTML=`${L.length} engagement${L.length>1?"s":""} : <span class="rgmt">${f(L.reduce((s,d)=>s+(+d.montant||0),0))}</span>`;
+  $("rgrls").innerHTML=all.length?`${L.length} engagement${L.length>1?"s":""} rapproché${L.length>1?"s":""} : <span class="rgmt">${f(L.reduce((s,d)=>s+(+d.montant||0),0))}</span>`:"Engagements rapprochés";$("rgrfbt").parentNode.hidden=!all.length;
   const n=(RGR.from?1:0)+(RGR.to?1:0)+(RGR.sit.length?1:0);$("rgrfn").textContent=n||"";$("rgrfbt").classList.toggle("on",!!n);
   $("rgrsit").innerHTML=sits.map(x=>`<button type="button" data-rgrs="${esc(x)}" class="${RGR.sit.includes(x)?"on":""}">${x?"Situation du "+fd(x):"Sans date"}</button>`).join("")||'<span class="note">—</span>';
   $("rgrl").innerHTML=L.length?L.map(d=>`<div class="rgrow eng"><span class="rgck rgeng"></span><button type="button" class="rgd" data-rge="${d.id}">
@@ -2560,7 +2567,7 @@ function pkSelect(sel){if(!sel||sel.disabled||sel.multiple)return;let host=$("pk
   const lab=sel.getAttribute("aria-label")||((sel.closest("label")||{}).childNodes?[...sel.closest("label").childNodes].filter(n=>n.nodeType===3).map(n=>n.textContent).join(" ").trim():"")||"Choisir";
   const items=[];[...sel.children].forEach(c=>{if(c.tagName==="OPTGROUP"){items.push({g:c.label});[...c.children].forEach(o=>items.push({o}))}else items.push({o:c})});
   const many=items.filter(x=>x.o).length>8;
-  const list=q=>{const n=pkNorm(q).trim();let out="",g=null;items.forEach(x=>{if(x.g!=null){g=x.g;return}const o=x.o;if(o.hidden||(n&&!pkNorm(o.textContent).includes(n)))return;
+  const list=q=>{const n=pkNorm(q).trim();let out="",g=null;items.forEach(x=>{if(x.g!=null){g=x.g;return}const o=x.o;if(o.hidden||(o.value===""&&/choisir/i.test(o.textContent))||(n&&!pkNorm(o.textContent).includes(n)))return;
       if(g!=null){out+=`<div class="pkgh"><b>${esc(g)}</b></div>`;g=null}
       out+=`<button type="button" class="pki${o.value===sel.value?" on":""}"${o.disabled?" disabled":""} data-v="${esc(o.value)}"><span>${esc(o.textContent.trim()||"—")}</span></button>`});return out||'<p class="pke">Aucun choix.</p>'};
   host.innerHTML=`<div class="pkc" role="dialog" aria-modal="true" aria-label="${esc(lab)}"><div class="pkhd"><b>${esc(lab)}</b><button type="button" class="pkx" aria-label="Fermer">✕</button></div>${many?'<input type="search" class="pks" placeholder="Rechercher…" autocomplete="off">':""}<div class="pkl2">${list("")}</div></div>`;
