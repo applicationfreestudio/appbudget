@@ -746,7 +746,7 @@ details.rgdl{--rgb0:13px}#rgsec details.rgsub{--rgb0:14px}
 .pcw.big .pve.snpt::-moz-range-thumb{background:radial-gradient(circle at center,var(--h,#c8473a) 7.5px,transparent 8px)}
 .ptg i{width:12px!important;height:12px!important;border-radius:50%!important}
 .rgfb>[type=submit]{margin-left:0!important}
-.vtw{margin:2px 0 8px}.vtgo{all:unset;cursor:pointer;font-size:.85rem;font-weight:700;color:var(--acl,#2a6fb0);padding:4px 2px}
+.vtw{margin:2px 0 8px}.vtlab{font-size:.85rem;font-weight:600;color:var(--mu);margin:0 0 6px}.vtr.one{grid-template-columns:0 minmax(0,1fr) 0 0!important;gap:0;border-bottom:0;padding:0}.vtr.one input,.vtr.one .vtd0{display:none}#vtl{background:none!important;border:0!important;padding:0!important}#vtl .vtr:not(.one){border-bottom:1px solid var(--ln)}.vtgo{all:unset;cursor:pointer;font-size:.85rem;font-weight:700;color:var(--acl,#2a6fb0);padding:4px 2px}
 .rgf.vton .rgnc{display:none}
 #vtl{border:1px solid var(--ln);border-radius:12px;padding:8px 10px;background:color-mix(in srgb,var(--mu) 4%,var(--card))}
 .vth{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}.vth b{font-size:.92rem}.vtx{all:unset;cursor:pointer;font-size:.78rem;color:var(--mu);text-decoration:underline}
@@ -755,9 +755,17 @@ details.rgdl{--rgb0:13px}#rgsec details.rgsub{--rgb0:14px}
 .vtr input{width:100%;box-sizing:border-box;font:inherit;padding:8px;border:1px solid var(--ln);border-radius:10px;background:var(--card);color:inherit;text-align:right}
 .vtd{all:unset;cursor:pointer;color:var(--mu);text-align:center}.vtf{display:flex;align-items:center;justify-content:space-between;gap:8px;padding-top:8px;flex-wrap:wrap}
 .vts{font-size:.82rem;font-weight:700}.vts.ok{color:#2f8f63}.vts.ko{color:var(--h,#c8473a)}
+/* drapeau des sous-sections : fond grisé, tour léger, jusqu'au bord gauche ; le trait vertical prolonge son bord gauche */
+details.rgdl::before,details.rgsub::before{left:0!important}
+details.rgdl>summary .rgst,details.rgsub>summary .rgst{margin-left:-16px!important;padding:6px 14px 6px 16px!important;border:1px solid transparent!important;border-left:0!important;border-radius:0 10px 10px 0!important}
+details.rgdl[open]>summary .rgst,details.rgsub[open]>summary .rgst{background:color-mix(in srgb,var(--mu) 11%,var(--card));border-color:color-mix(in srgb,var(--a) 38%,var(--ln))!important;box-shadow:inset 3px 0 0 var(--a)}
+details.rgdl[open]::before,details.rgsub[open]::before{width:3px!important}
+/* fiche : nature seule (le compte suit la nature) */
+.rgf .rgnc{display:none!important}.vtc{display:none!important}.vtr{grid-template-columns:20px minmax(0,1fr) 96px 26px!important}
+.vtr input:disabled{background:transparent;border-color:transparent;color:var(--tx);font-weight:700;opacity:1}
 </style></head>
 <body><main>
-<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261116.83</small></span></span>
+<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261116.84</small></span></span>
   <span class="hb"><span class="urd" id="urd" hidden><button type="button" class="sgb" id="undo" aria-label="Annuler la dernière modification" title="Annuler"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button><button type="button" class="sgb" id="redo" aria-label="Rétablir la modification" title="Rétablir"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg></button></span><span class="hbr hmn"><button type="button" class="sgb" data-pg="home">Principal</button><button type="button" class="sgb" data-pg="reg">Dépenses</button><button type="button" class="sgb" data-pg="set">Paramètres</button><button type="button" class="sgb" id="nav2" hidden></button><i class="nsep" id="nsep" hidden></i><button type="button" class="sgb" id="nav" hidden>Paramètres<svg class="chv" viewBox="0 0 12 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4l6 8-6 8"/></svg></button><button class="tbtn" id="fs" aria-label="Plein écran" title="Plein écran"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button></span></span>
 </h1>
 <div class="sub"><div id="org"></div><div>Dépenses <span id="yr"></span> · situation au <b id="dt"></b></div></div>
@@ -899,7 +907,7 @@ details.rgdl{--rgb0:13px}#rgsec details.rgsub{--rgb0:14px}
         <label class="pkl">Nature de la dépense<select name="nature" class="pkh" tabindex="-1" aria-hidden="true"></select><button type="button" class="pkb" data-pk="nature"><span>— choisir —</span></button></label>
         <label class="pkl">Compte<select name="compte" class="pkh" tabindex="-1" aria-hidden="true"></select><button type="button" class="pkb" data-pk="compte"><span>— choisir —</span></button></label>
       </div>
-      <div class="vtw" id="vtw"><button type="button" class="vtgo" id="vtgo">Ventiler sur plusieurs natures</button><div id="vtl" hidden></div></div>
+      <div class="vtw" id="vtw"><div class="vtlab">Nature de la dépense</div><button type="button" class="vtgo" id="vtgo" hidden></button><div id="vtl"></div></div>
       <div class="rgg">
         <label>Type de dépense<select name="pay"><option>Carte bancaire</option><option>Espèces</option><option>Chèque</option><option>Virement</option><option value="Engagement">Engagement</option></select></label>
         <label class="pkl">Utilisateur<input type="text" name="user" class="pkh" tabindex="-1" aria-hidden="true" autocomplete="off"><button type="button" class="pkb" data-pk="user"><span>Administrateur</span></button></label>
@@ -1275,7 +1283,8 @@ function totals(){const rows=chosen();return rows.reduce((s,r)=>{const v=V(r);re
 // barre de dépense : bleu = consommé / (consommé + restant) ; au-delà du restant initial, rouge pour le dépassement
 const pbW=(c,a,r)=>{if(c<=0.5)return[0,0];const P=Math.max(0,Math.min(a,c+r));if(c<=P+0.5)return[c/Math.max(c,c+Math.max(0,r))*100,0];const b=P/c*100;return[b,100-b]};
 const rfmt=r=>Math.abs(r)<0.5?"0 €":(r<0?"−\u2060\u200a\u2060":"+\u2060\u200a\u2060")+f0(Math.abs(r));
-const phPmax=(C,i)=>{const x=C.L[i],O=C.L.filter((y,j)=>j!==i&&!C.sel[j]&&!y.fix&&!y.lock&&(+y.pct||0)>0);return (+x.pct)+Math.max(0,100-C.L.reduce((s,y)=>s+(+y.pct||0),0))+O.reduce((s,y)=>s+(+y.pct),0)-.1*O.length};
+// prévisionnel maximal (en % du budget) : tout le restant des autres périodes en cours (hors montants bloqués, verrouillées, terminées)
+const phPmax=(C,i)=>{const x=C.L[i],B=C.T.b||1;return (+x.pct)+Math.max(0,100-C.L.reduce((s,y)=>s+(+y.pct||0),0))+C.L.reduce((s,y,j)=>s+(j!==i&&!C.sel[j]&&!y.fix&&!y.lock&&(+y.pct||0)>0?Math.max(0,(+y.pct)-Math.max(1e-4,(C.cons[j]||0)/B*100)):0),0)};
 let BIGT=null,BIGF=false;   // BIGF : carte ouverte depuis la fiche d'une dépense (pas de « Période terminée » ici)
    // cible du prévisionnel quand la carte est ouverte depuis une dépense bloquée : {id, need (enveloppe à atteindre)}
 function phgHtml(C){return C.dispo<-0.5&&C.nRest?`<div class="note ko" style="margin-top:8px">Les dépenses dépassent le budget de ${f0(-C.dispo)} : les enveloppes des périodes en cours sont négatives.</div>`:""}
@@ -1418,19 +1427,21 @@ let PVB=null;var BIG=null;document.addEventListener("toggle",e=>{if(e.target.id=
 function pveSlide(id,v){
   // hausse : d'abord le reste à répartir, puis prise au prorata (part d'avant) sur les périodes ni verrouillées, ni figées (€), ni terminées
   // baisse : la différence est redistribuée sur ces mêmes périodes, au prorata
-  if(!PVB||PVB.id!==id){PVB={id,p:new Map(PH.map(x=>[x.id,+x.pct||0])),a:new Map(PH.map(x=>[x.id,+x.av||0])),o:PH.filter(x=>x.id!==id&&!PHSEL.has(x.id)&&!x.fix&&!x.lock&&(+x.pct||0)>0).map(x=>x.id)};PVB.f=Math.max(0,100-[...PVB.p.values()].reduce((s,b)=>s+b,0))}
-  const b0=PVB.p.get(id),O=PVB.o.reduce((s,k)=>s+PVB.p.get(k),0),r2=x=>Math.round(x*100)/100;
-  v=Math.max(.1,Math.min(b0+PVB.f+(PVB.o.length?O-.1*PVB.o.length:0),v));const fu=Math.max(0,Math.min(v-b0,PVB.f)),d=v-b0-fu;
-  PH.forEach(x=>{if(x.id===id){x.pct=Math.round(v*1e6)/1e6;if(x.fix)x.fixAmt=Math.round(totals().b*x.pct)/100;const a=PVB.a.get(id);if(a>0)x.av=Math.min(3,a*b0/v)}else if(PVB.o.includes(x.id)){const b=PVB.p.get(x.id),n=O>0?Math.max(.1,b-d*b/O):b,a=PVB.a.get(x.id);x.pct=r2(n);if(a>0)x.av=Math.min(3,a*b/n)}});
+  if(!PVB||PVB.id!==id){PVB={id,p:new Map(PH.map(x=>[x.id,+x.pct||0])),a:new Map(PH.map(x=>[x.id,+x.av||0])),o:PH.filter(x=>x.id!==id&&!PHSEL.has(x.id)&&!x.fix&&!x.lock&&(+x.pct||0)>0).map(x=>x.id)};PVB.f=Math.max(0,100-[...PVB.p.values()].reduce((s,b)=>s+b,0));
+    // plancher de chaque autre période : sa part déjà consommée (son restant tombe à 0, pas en dessous)
+    {const C=phCalc(),B=C.T.b||1;PVB.fl=new Map(PVB.o.map(k=>{const i=C.L.findIndex(x=>x.id===k);return [k,Math.min(PVB.p.get(k),Math.max(1e-4,(C.cons[i]||0)/B*100))]}))}}
+  const b0=PVB.p.get(id),O=PVB.o.reduce((s,k)=>s+PVB.p.get(k),0),Rd=PVB.o.reduce((s,k)=>s+PVB.p.get(k)-PVB.fl.get(k),0),r2=x=>Math.round(x*100)/100;
+  v=Math.max(.1,Math.min(b0+PVB.f+Rd,v));const fu=Math.max(0,Math.min(v-b0,PVB.f)),d=v-b0-fu;
+  PH.forEach(x=>{if(x.id===id){x.pct=Math.round(v*1e6)/1e6;if(x.fix)x.fixAmt=Math.round(totals().b*x.pct)/100;const a=PVB.a.get(id);if(a>0)x.av=Math.min(3,a*b0/v)}else if(PVB.o.includes(x.id)){const b=PVB.p.get(x.id),fl=PVB.fl.get(x.id),n=d>0?(Rd>0?Math.max(fl,b-d*(b-fl)/Rd):b):(O>0?b-d*b/O:b),a=PVB.a.get(x.id);x.pct=Math.round(n*1e6)/1e6;if(a>0)x.av=Math.min(3,a*b/n)}});
   const r6=x=>Math.round(x*1e6)/1e6,tgt=r6(b0+O+fu),got=r6(PH.reduce((s,x)=>s+(x.id===id||PVB.o.includes(x.id)?+x.pct:0),0)),k=PVB.o.slice().sort((a,b)=>PVB.p.get(b)-PVB.p.get(a))[0],q=k&&PH.find(x=>x.id===k);
   if(q&&Math.abs(tgt-got)>=1e-6)q.pct=r6(q.pct+tgt-got);
   // tableau des paramètres mis à jour en direct (pourcentages et montants)
   PH.forEach(x=>{const r=document.querySelector(`.phr[data-id="${x.id}"]`);if(!r)return;const n=r.querySelector("[data-k=pct]");if(n)n.value=Math.round(x.pct*100)/100;const fa=r.querySelector("[data-fa]");if(fa&&x.fix)fa.value=Math.round(+x.fixAmt)});phSum();
   XA=xAcc();const C=phCalc();renderHome(true);phLive(C,id)}
 phOn("change",e=>{if(e.target.dataset.done){const id=e.target.dataset.done;
-    // règle : une période ne peut pas être terminée tant que des dépenses de régie y sont affectées
-    if(e.target.checked){const rd=REGD.filter(d=>d.per===id);if(rd.length){e.target.checked=false;const t=rd.reduce((s,d)=>s+(+d.montant||0),0);
-      openModal(`<h3>Période impossible à terminer</h3><p class="note">${rd.length} dépense${rd.length>1?"s":""} de régie en cours (${f(t)}) ${rd.length>1?"sont affectées":"est affectée"} à cette période. Supprime-${rd.length>1?"les":"la"} ou affecte-${rd.length>1?"les":"la"} ailleurs depuis la page Dépenses quand ${rd.length>1?"elles apparaissent":"elle apparaît"} dans la situation budgétaire.</p><div class="mbt"><button class="tbtn" data-close>Fermer</button><button class="tbtn pri" id="mgorg">Voir la régie</button></div>`,()=>{$("mgorg").onclick=()=>{closeModal();if(typeof bigClose==="function")bigClose();go("reg");scrollTo(0,0)}});return}}
+    // règle : une période ne peut être terminée que si toutes ses dépenses sont sur des états numérotés ou des engagements rapprochés
+    if(e.target.checked){const rd=REGD.filter(d=>d.per===id&&!d.etat&&!(isEng(d)&&d.rap));if(rd.length){e.target.checked=false;const t=rd.reduce((s,d)=>s+(+d.montant||0),0);
+      openModal(`<h3>Période impossible à terminer</h3><p class="note">${rd.length} dépense${rd.length>1?"s":""} (${f(t)}) de cette période ${rd.length>1?"ne sont":"n'est"} ni sur un état de régie numéroté, ni ${rd.length>1?"des engagements rapprochés":"un engagement rapproché"}. Génère l'état de régie ou rapproche les engagements, puis termine la période.</p><div class="mbt"><button class="tbtn" data-close>Fermer</button><button class="tbtn pri" id="mgorg">Voir la régie</button></div>`,()=>{$("mgorg").onclick=()=>{closeModal();if(typeof bigClose==="function")bigClose();go("reg");scrollTo(0,0)}});return}}
     if(e.target.checked)PHSEL.add(id);else PHSEL.delete(id);savePH();setDate();renderHome();return}if(e.target.dataset.pe){const el=e.target,id=el.dataset.pe,sn=el.dataset.snap;
     // l'enveloppe d'une période ne varie pas tout à fait en proportion de sa part : on ajuste pour qu'elle tombe pile sur le repère
     if(sn&&PVB&&PVB.id===id)for(let it=0;it<5;it++){const C=phCalc(),i=C.L.findIndex(x=>x.id===id),want=sn==="dep"?C.cons[i]:BIGT&&BIGT.id===id?BIGT.need:0,A=C.adj[i];
@@ -2307,7 +2318,7 @@ function rgOpen(id){if(RO&&(id!=="new"||!dgActive()))return;RGE=id;const d=id===
   // dépense numérotée (comprise dans un état) : consultation seulement
   const ro=!!d.etat;F.querySelectorAll("input,select").forEach(el=>el.disabled=ro);$("rgdel").hidden=id==="new"||ro;F.querySelector("[type=submit]").hidden=ro;$("rgcan").textContent=ro?"Fermer":"Annuler";$("ocrb").hidden=ro;
   if(ro)$("rgpc").innerHTML+=`<br><small>Dépense numérotée : elle n'est plus modifiable (supprime l'état pour la modifier).</small>`;
-  F.rap.checked=!!d.rap;payUi();pkSync();VT=Array.isArray(d.vt)&&d.vt.length>1?d.vt.map(p=>({...p})):null;vtRender();if(d.etat){$("vtgo").hidden=true}rgPerUi();
+  F.rap.checked=!!d.rap;payUi();pkSync();VT=Array.isArray(d.vt)&&d.vt.length>1?d.vt.map(p=>({...p})):[{compte:d.compte||"",nature:d.nature||"",montant:+d.montant||""}];vtRender();rgPerUi();
   $("rgov").hidden=false;document.documentElement.classList.add("lock");$("rgfc").scrollTop=0;renderRg()}
 function rgClose(){RGE=null;$("rgov").hidden=true;document.documentElement.classList.remove("lock");renderRg()}
 $("rgov").onclick=e=>{if(e.target.id==="rgov")rgClose()};
@@ -2446,7 +2457,7 @@ $("rgpg").addEventListener("click",async e=>{
 function pkSync(){const F=$("rgf");document.querySelectorAll("#rgf .pkb[data-pk]").forEach(b=>{const sel=F[b.dataset.pk],o=sel.selectedOptions&&sel.selectedOptions[0],v=sel.value;
   if(b.dataset.pk==="user"){b.querySelector("span").textContent=v||"— choisir —";b.disabled=RO;b.classList.toggle("empty",!v);return}
   b.querySelector("span").textContent=!v||v==="__new"?"— choisir —":b.dataset.pk==="compte"?v:(o?o.textContent:v);b.classList.toggle("empty",!v||v==="__new")})}
-{const o=rgNat;rgNat=function(c){o(c);pkSync()}}
+{const o=rgNat;rgNat=function(c){o(c);pkSync();const F=$("rgf");if(VT&&VT.length===1&&F.nature.value&&F.nature.value!=="__new"&&(VT[0].nature!==F.nature.value||VT[0].compte!==F.compte.value)){VT[0].compte=F.compte.value;VT[0].nature=F.nature.value;vtRender()}}}
 const pkNorm=t=>String(t||"").normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
 // utilisateurs proposés : administrateur, personnes ayant demandé l'accès (non supprimées), et noms déjà utilisés
 const rgUsers=()=>{const S=new Set(["Administrateur"]);(DLG.list||[]).forEach(d=>S.add(`${d.prenom} ${d.nom}`.trim()));REGD.forEach(d=>{if(d.user)S.add(d.user)});return [...S].filter(Boolean)};
@@ -2454,7 +2465,7 @@ function pkOpen(kind,cb){const F=$("rgf"),A=rgAccs(),cur=cb?"":F[kind].value;let
   const list=q=>{const n=pkNorm(q).trim();
     if(kind==="user"){const U=rgUsers().filter(u=>!n||pkNorm(u).includes(n)),st=Object.fromEntries((DLG.list||[]).map(d=>[`${d.prenom} ${d.nom}`.trim(),d.status]));
       const lab={active:"accès actif",attente:"demande en attente",refusee:"accès refusé",revoquee:"accès révoqué"};
-      return U.map(u=>`<button type="button" class="pki${u===cur?" on":""}" data-v="${esc(u)}"><span>${esc(u)}</span>${st[u]?`<small class="pkst">${lab[st[u]]||""}</small>`:""}</button>`).join("")+(q.trim()&&!U.some(u=>pkNorm(u)===n)?`<button type="button" class="pki pkn" data-v="${esc(q.trim())}"><span>Utiliser « ${esc(q.trim())} »</span></button>`:"")||'<p class="pke">Aucun utilisateur.</p>'}
+      return U.map(u=>`<button type="button" class="pki" data-v="${esc(u)}"><span>${esc(u)}</span>${st[u]?`<small class="pkst">${lab[st[u]]||""}</small>`:""}</button>`).join("")+(q.trim()&&!U.some(u=>pkNorm(u)===n)?`<button type="button" class="pki pkn" data-v="${esc(q.trim())}"><span>Utiliser « ${esc(q.trim())} »</span></button>`:"")||'<p class="pke">Aucun utilisateur.</p>'}
     if(kind==="compte")return A.filter(([k,v])=>!n||pkNorm(k+" "+v).includes(n)).map(([k,v])=>`<button type="button" class="pki${k===cur?" on":""}" data-v="${esc(k)}"><b>${esc(k)}</b><span>${esc(v)}</span></button>`).join("")||'<p class="pke">Aucun compte.</p>';
     const H=A.map(([k,v])=>{const N=rgNats(k).filter(x=>!n||pkNorm(x+" "+k+" "+v).includes(n));if(!N.length)return"";
       return `<div class="pkg"><div class="pkgh"><b>${esc(k)}</b><span>${esc(v)}</span></div>${N.map(x=>`<button type="button" class="pki${natTxt(k,x)===cur?" on":""}" data-k="${esc(k)}" data-v="${esc(natTxt(k,x))}"><span>${esc(x)}</span></button>`).join("")}${n?"":`<button type="button" class="pki pkn" data-new="${esc(k)}"><span>+ Nouvelle désignation…</span></button>`}</div>`}).join("");
@@ -2512,22 +2523,22 @@ function rgPayFill(cur){const F=$("rgf");if(!F)return;const v=cur??F.pay.value,L
 let VT=null;   // lignes en cours d'édition : [{compte,nature,montant}] ou null
 const vtM=()=>Math.round((parseFloat(String($("rgf").montant.value).replace(",","."))||0)*100)/100;
 const vtSum=()=>Math.round((VT||[]).reduce((s,p)=>s+(+p.montant||0),0)*100)/100;
-function vtRender(){const F=$("rgf"),on=!!VT;$("vtl").hidden=!on;$("vtgo").hidden=on;F.classList.toggle("vton",on);if(!on){$("vtl").innerHTML="";return}
-  const reste=Math.round((vtM()-vtSum())*100)/100;
-  $("vtl").innerHTML=`<div class="vth"><b>Ventilation par nature</b><button type="button" class="vtx" id="vtoff">Annuler la ventilation</button></div>`
-    +VT.map((p,j)=>`<div class="vtr"><span class="vtk">${String.fromCharCode(65+j)}</span><button type="button" class="pkb vtn${p.nature?"":" empty"}" data-vtn="${j}"><span>${p.nature?esc(p.nature.replace(/^\d+\.\s*/,"")):"— nature —"}</span></button><span class="vtc">${esc(p.compte||"")}</span><input type="number" step="0.01" min="0" inputmode="decimal" data-vtm="${j}" value="${p.montant===""||p.montant==null?"":p.montant}" aria-label="Montant ${String.fromCharCode(65+j)}">${VT.length>2?`<button type="button" class="vtd" data-vtd="${j}" aria-label="Retirer la ligne">✕</button>`:'<span class="vtd0"></span>'}</div>`).join("")
-    +`<div class="vtf"><button type="button" class="tbtn" id="vtadd">+ Ajouter une nature</button><span class="vts ${Math.abs(reste)<0.005?"ok":"ko"}">${Math.abs(reste)<0.005?"✓ Ventilé en totalité":`Reste à ventiler : <b>${f(reste)}</b>`}</span></div>`}
-$("vtgo").onclick=()=>{const F=$("rgf"),m=vtM();VT=[{compte:F.compte.value,nature:F.nature.value&&F.nature.value!=="__new"?F.nature.value:"",montant:m||""},{compte:"",nature:"",montant:""}];vtRender()};
+function vtRender(){const F=$("rgf");if(!VT||!VT.length)VT=[{compte:F.compte.value,nature:F.nature.value&&F.nature.value!=="__new"?F.nature.value:"",montant:""}];
+  const one=VT.length===1,ro=!!(REGD.find(x=>x.id===RGE)||{}).etat;if(one)VT[0].montant=vtM()||"";
+  const reste=Math.round((vtM()-vtSum())*100)/100;F.classList.toggle("vton",!one);
+  $("vtl").innerHTML=VT.map((p,j)=>`<div class="vtr${one?" one":""}"><span class="vtk">${one?"":String.fromCharCode(65+j)}</span><button type="button" class="pkb vtn${p.nature?"":" empty"}" data-vtn="${j}"${ro?" disabled":""}><span>${p.nature?esc(p.nature.replace(/^\d+\.\s*/,"")):"— choisir la nature —"}</span></button><input type="number" step="0.01" min="0" inputmode="decimal" data-vtm="${j}" value="${p.montant===""||p.montant==null?"":p.montant}"${one||ro?" disabled":""} aria-label="Montant ${String.fromCharCode(65+j)}">${!one&&!ro?`<button type="button" class="vtd" data-vtd="${j}" aria-label="Retirer la ligne">✕</button>`:'<span class="vtd0"></span>'}</div>`).join("")
+    +(ro?"":`<div class="vtf"><button type="button" class="tbtn" id="vtadd">+ Ajouter une nature</button>${one?"":`<span class="vts ${Math.abs(reste)<0.005?"ok":"ko"}">${Math.abs(reste)<0.005?"✓ Ventilé en totalité":`Reste à ventiler : <b>${f(reste)}</b>`}</span>`}</div>`)}
 $("vtl").addEventListener("click",e=>{const t=e.target;
-  if(t.closest("#vtoff")){const F=$("rgf"),a=VT&&VT.find(p=>p.compte);VT=null;if(a){F.compte.value=a.compte;rgNat(a.nature)}vtRender();return}
-  if(t.closest("#vtadd")){const r=Math.round((vtM()-vtSum())*100)/100;VT.push({compte:"",nature:"",montant:r>0?r:""});vtRender();return}
+  if(t.closest("#vtadd")){if(VT.length===1)VT[0].montant=vtM()||"";const r=Math.round((vtM()-vtSum())*100)/100;VT.push({compte:"",nature:"",montant:r>0?r:""});vtRender();return}
   const d=t.closest("[data-vtd]");if(d){VT.splice(+d.dataset.vtd,1);vtRender();return}
   const n=t.closest("[data-vtn]");if(n){const j=+n.dataset.vtn;pkOpen("nature",(k,v)=>{VT[j].compte=k;VT[j].nature=v;if(j===0){$("rgf").compte.value=k;rgNat(v)}vtRender()})}});
 $("vtl").addEventListener("input",e=>{const j=e.target.dataset.vtm;if(j==null)return;VT[+j].montant=e.target.value===""?"":Math.round((+e.target.value||0)*100)/100;
+  // une seule autre ligne sans montant : elle reçoit d'office le reste à ventiler
+  {const E=VT.map((p,k)=>k).filter(k=>k!==+j&&(VT[k].montant===""||VT[k].montant==null));if(E.length===1){const r=Math.round((vtM()-vtSum())*100)/100;if(r>0){VT[E[0]].montant=r;const i=$("vtl").querySelector(`[data-vtm='${E[0]}']`);if(i)i.value=r}}}
   const r=Math.round((vtM()-vtSum())*100)/100,s=$("vtl").querySelector(".vts");if(s){s.className="vts "+(Math.abs(r)<0.005?"ok":"ko");s.innerHTML=Math.abs(r)<0.005?"✓ Ventilé en totalité":`Reste à ventiler : <b>${f(r)}</b>`}});
-$("rgf").montant.addEventListener("input",()=>{if(VT)vtRender()});
+$("rgf").montant.addEventListener("input",()=>{if(VT&&VT.length===1){VT[0].montant=vtM()||"";const i=$("vtl").querySelector("[data-vtm='0']");if(i)i.value=VT[0].montant}else if(VT){const r=Math.round((vtM()-vtSum())*100)/100,s2=$("vtl").querySelector(".vts");if(s2){s2.className="vts "+(Math.abs(r)<0.005?"ok":"ko");s2.innerHTML=Math.abs(r)<0.005?"✓ Ventilé en totalité":`Reste à ventiler : <b>${f(r)}</b>`}}});
 $("rgf").onsubmit=e=>{e.preventDefault();const F=e.target,m=Math.round(parseFloat(String(F.montant.value).replace(",","."))*100)/100;
-  if(VT&&VT[0]&&VT[0].compte){F.compte.value=VT[0].compte;rgNat(VT[0].nature)}
+  if(VT&&VT[0]&&VT[0].compte&&(F.compte.value!==VT[0].compte||F.nature.value!==VT[0].nature)){F.compte.value=VT[0].compte;rgNat(VT[0].nature)}
   const compte=F.compte.value;
   if(!(m>0)){$("rgerr").textContent="Indique un montant supérieur à 0.";F.montant.focus();return}
   if(!compte){$("rgerr").textContent="Choisis le compte de la dépense.";return}
@@ -2538,7 +2549,7 @@ $("rgf").onsubmit=e=>{e.preventDefault();const F=e.target,m=Math.round(parseFloa
   if(!F.nature.value||F.nature.value==="__new"){$("rgerr").textContent="Choisis la nature de la dépense.";return}
   if(RGE==="new"&&!F.per.value){$("rgerr").textContent="Choisis d'abord la période.";return}
   {const P=rgPerUi();if(P&&(P.full||P.over)){$("rgerr").textContent=P.done?"La période est terminée : choisis une autre période.":RO?"La période n'a plus assez de prévisionnel : demande une augmentation à l'administrateur.":"La période n'a plus assez de prévisionnel : appuie sur la jauge pour l'ajuster.";return}}
-  if(VT){if(VT.some(p=>!p.nature||!p.compte)){$("rgerr").textContent="Choisis la nature de chaque ligne de la ventilation.";return}
+  if(VT&&VT.length>1){if(VT.some(p=>!p.nature||!p.compte)){$("rgerr").textContent="Choisis la nature de chaque ligne de la ventilation.";return}
     if(VT.some(p=>!(+p.montant>0))){$("rgerr").textContent="Indique un montant pour chaque ligne de la ventilation.";return}
     if(Math.abs(vtSum()-m)>0.005){$("rgerr").textContent=`La ventilation (${f(vtSum())}) ne correspond pas au montant (${f(m)}).`;return}}
   if(F.pay.value==="Chèque"&&!F.cheque.value.trim()){$("rgerr").textContent="Indique le numéro du chèque.";return}
