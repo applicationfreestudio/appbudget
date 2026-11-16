@@ -810,11 +810,15 @@ details.rgdl[open]>summary .rgst,details.rgsub[open]>summary .rgst{padding:0!imp
 details.rgsub>summary,details.rgdl>summary{min-height:45px;box-sizing:border-box}
 #rgsec{padding-bottom:4px!important}
 #rgls::before,#rgets::before,#rgars::before,#rgrls::before{margin-right:10px!important;vertical-align:-.17em!important}
+.mns{display:inline-block!important;transform:scaleX(.72);margin:0 -.08em!important;padding:0!important;color:inherit!important;font:inherit!important;background:none!important;border:0!important;flex:none!important;width:auto!important}.mns::before,.mns::after{content:none!important;display:none!important}
+h1{position:relative}.yrsel{position:absolute;right:12px;top:14px;margin:0;font:inherit;font-weight:800;font-size:1rem;padding:5px 28px 5px 12px;border:1px solid var(--ln);border-radius:10px;background:var(--card);color:var(--tx)}
+.sitl{display:flex;flex-direction:column;gap:6px;margin:4px 0 10px}.sitr{display:flex;align-items:center;gap:10px;padding:9px 12px;border:1px solid var(--ln);border-radius:12px}.sitr>span{flex:1;min-width:0;display:flex;flex-direction:column}.sitr small{color:var(--mu);font-size:.8rem}.sitr i{font-style:normal;font-weight:800;color:var(--acl,#2a6fb0)}.sitr.on{border-color:color-mix(in srgb,var(--acl,#2a6fb0) 45%,var(--ln))}.sitdel{flex:none;padding:6px 12px!important;color:var(--h,#c8473a)!important;font-weight:700}
+#sits{margin-left:auto;font-size:.8rem;font-weight:600;color:var(--mu);white-space:nowrap}
 </style></head>
 <body><main>
-<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261116.93</small></span></span>
+<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261116.94</small></span></span>
   <span class="hb"><span class="urd" id="urd" hidden><button type="button" class="sgb" id="undo" aria-label="Annuler la dernière modification" title="Annuler"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button><button type="button" class="sgb" id="redo" aria-label="Rétablir la modification" title="Rétablir"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg></button></span><span class="hbr hmn"><button type="button" class="sgb" data-pg="home">Principal</button><button type="button" class="sgb" data-pg="reg">Dépenses</button><button type="button" class="sgb" data-pg="set">Paramètres</button><button type="button" class="sgb" id="nav2" hidden></button><i class="nsep" id="nsep" hidden></i><button type="button" class="sgb" id="nav" hidden>Paramètres<svg class="chv" viewBox="0 0 12 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4l6 8-6 8"/></svg></button><button class="tbtn" id="fs" aria-label="Plein écran" title="Plein écran"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button></span></span>
-</h1>
+<select id="yrsel" class="yrsel" aria-label="Année de travail" hidden></select></h1>
 <div class="sub"><div id="org"></div><div>Dépenses <span id="yr"></span> · <span id="dtw">situation au <b id="dt"></b></span></div></div>
 
 <!-- ===== Tableau de bord ===== -->
@@ -849,16 +853,6 @@ details.rgsub>summary,details.rgdl>summary{min-height:45px;box-sizing:border-box
 
 <!-- ===== Paramètres ===== -->
 <section id="v-rg" hidden>
-  <details class="card up dsec" id="rgcfg">
-    <summary><svg class="si" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg><b>Paramètres de la régie</b><span id="rgcs" hidden></span></summary>
-    <h3 class="h3s">Avance</h3>
-    <label class="rgmx">Montant maximal de l'avance<input type="number" id="rgmax" min="0" step="1" inputmode="decimal"> €</label>
-    <h3 class="h3s">Moyens de paiement autorisés</h3>
-    <div id="rgpay"></div>
-    <h3 class="h3s">Dépenses autorisées</h3>
-    <p class="note" style="margin:2px 0 6px">Seuls les comptes activés sont proposés dans le formulaire, avec leurs désignations (nature de la dépense). Au départ, seuls ceux présents dans les fichiers de régie importés sont activés.</p>
-    <div id="rgacl"></div>
-  </details>
   <div class="card up rgcard" id="rgdep">
     <h2 class="h2i rgh2"><svg class="si" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6M9 16h3"/></svg>Dépenses en cours<b class="rgh2t" id="rgtot"></b></h2>
     <details class="rginfo"><summary>Information</summary><p class="note">Les dépenses en cours sont celles qui ne sont pas encore intégrées dans la situation du budget principal. Elles sont déjà déduites de la jauge principale et, si elles sont affectées à une période, de son restant.</p></details>
@@ -977,15 +971,29 @@ details.rgsub>summary,details.rgdl>summary{min-height:45px;box-sizing:border-box
     <button class="tbtn phaddb" id="phadd">+ Ajouter une période</button>
     <label class="phopt"><span class="sw psw"><input type="checkbox" id="phdecl"><i></i></span><span>Déclarer des dépenses sur les cartes de période<small>Curseur de dépense de la carte agrandie. Décoché, seules les dépenses enregistrées (régie et engagements) comptent sur les périodes.</small></span></label>
   </details>
-  <div class="card up">
-    <h2 class="h2i"><svg class="si" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2.5H6.5A2.5 2.5 0 0 0 4 5v14a2.5 2.5 0 0 0 2.5 2.5h11A2.5 2.5 0 0 0 20 19V8.5Z"/><path d="M14 2.5v6h6"/><path d="M14.5 12.6a3 3 0 1 0 0 3.8M9 13.7h4M9 15.3h4"/></svg>Mise à jour des données budgétaires</h2>
+  <details class="card up dsec" id="dsit">
+    <summary><svg class="si" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2.5H6.5A2.5 2.5 0 0 0 4 5v14a2.5 2.5 0 0 0 2.5 2.5h11A2.5 2.5 0 0 0 20 19V8.5Z"/><path d="M14 2.5v6h6"/><path d="M14.5 12.6a3 3 0 1 0 0 3.8M9 13.7h4M9 15.3h4"/></svg><b>Mise à jour des données budgétaires</b><span id="sits" hidden></span></summary>
     <p class="note" style="margin:4px 0 10px">Envoie la « Situation budgétaire détaillée par analytique » (PDF) la plus récente.</p>
     <label class="tbtn pri fl">📄 Choisir le PDF<input type="file" id="pdf" accept="application/pdf,.pdf" hidden></label>
     <div id="upst" class="note" style="margin-top:10px"></div>
     <div id="prev" hidden></div>
-    <div class="note" style="margin-top:10px">Données actuelles : <span id="curw">situation au <b id="cur"></b></span><span id="resetw"> · <a href="#parametres" id="reset" style="color:inherit">revenir à une situation vide</a></span></div>
+    <h3 class="h3s">Situations enregistrées</h3>
+    <div id="sitl" class="sitl"></div>
     <div class="note nsrc">Consommé = mandaté + engagé non mandaté (« Réalisé total » du document). Source : « Situation budgétaire détaillée par analytique » (M57)<span id="dt2"></span><span id="src"></span>. Le chapitre 012 (personnel) est absent de ce type d'export. Recettes non affichées.</div>
-  </div>
+  </details>
+  <details class="card up dsec" id="rgcfg">
+    <summary><svg class="si" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg><b>Paramètres de la régie</b><span id="rgcs" hidden></span></summary>
+    <h3 class="h3s">Avance</h3>
+    <label class="rgmx">Montant maximal de l'avance<input type="number" id="rgmax" min="0" step="1" inputmode="decimal"> €</label>
+    <h3 class="h3s">Pièces de dépense</h3>
+    <label class="rgmx">Dernier numéro de pièce de dépense en régie<input type="number" id="rglp" min="0" step="1" inputmode="numeric"></label>
+    <p class="note" style="margin:2px 0 6px">Les dépenses des prochains états de régie sont numérotées à partir du numéro suivant.</p>
+    <h3 class="h3s">Moyens de paiement autorisés</h3>
+    <div id="rgpay"></div>
+    <h3 class="h3s">Dépenses autorisées</h3>
+    <p class="note" style="margin:2px 0 6px">Seuls les comptes activés sont proposés dans le formulaire, avec leurs désignations (nature de la dépense). Au départ, seuls ceux présents dans les fichiers de régie importés sont activés.</p>
+    <div id="rgacl"></div>
+  </details>
   
   <details class="card up dsec" id="dart">
   <summary><svg class="si" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11"/><path d="m3.5 6 1.2 1.2L7 4.8M3.5 12l1.2 1.2L7 10.8M3.5 18l1.2 1.2L7 16.8"/></svg><b>Articles suivis</b><span class="dsm" id="darts"></span></summary>
@@ -1155,12 +1163,12 @@ const NICE={"61358":"Locations – autres","61551":"Entretien matériel roulant"
 
 const $=id=>document.getElementById(id);
 const f=n=>n.toLocaleString("fr-FR",{minimumFractionDigits:2,maximumFractionDigits:2})+" €";
-const fs=n=>(n<0?"−\u2060\u200a\u2060":"")+f0(Math.abs(n));
+const fs=n=>(n<0?"<span class=\"mns\">−</span>\u2060\u200a\u2060":"")+f0(Math.abs(n));
 const f0=n=>Math.round(n).toLocaleString("fr-FR")+" €";
 // montant signé : + bleu si disponible, − rouge si dépassé
 // dépense : en rouge, signe moins devant (espace fine)
-const neg0=v=>Math.abs(v)<0.5?f0(0):`−\u2060\u200a\u2060${f0(Math.abs(v))}`;
-const sgn=(v,fmt)=>{const r=Math.round(v*100)/100;return r<0?`<b class="neg">−\u2060\u200a\u2060${fmt(-r)}</b>`:`<b class="pos">${fmt(r)}</b>`};
+const neg0=v=>Math.abs(v)<0.5?f0(0):`<span class=\"mns\">−</span>\u2060\u200a\u2060${f0(Math.abs(v))}`;
+const sgn=(v,fmt)=>{const r=Math.round(v*100)/100;return r<0?`<b class="neg"><span class=\"mns\">−</span>\u2060\u200a\u2060${fmt(-r)}</b>`:`<b class="pos">${fmt(r)}</b>`};
 const pc=(c,b)=>b>0?c/b*100:(c>0?Infinity:0);
 const ps=p=>p===Infinity?"∞":Math.round(p).toLocaleString("fr-FR")+" %";
 const ps1=p=>p===Infinity?"hors budget":p.toLocaleString("fr-FR",{maximumFractionDigits:1})+" %";
@@ -1175,6 +1183,14 @@ const LS=RO?(()=>{const m=new Map();return {get(k,v){if(LSP.test(k)){try{const x
 
 // ===== État =====
 let DATA=LS.get("ab-data",null)||BASE;if(DATA.source==="zero"){DATA=BASE;LS.set("ab-data",null)}
+// situations budgétaires enregistrées (une par date) ; la situation de travail est la plus récente de l'année choisie
+let SITS=LS.get("ab-sits",null);if(!Array.isArray(SITS)){SITS=DATA.source!=="origine"&&DATA.date?[DATA]:[];LS.set("ab-sits",SITS)}
+let YEAR=+LS.get("ab-year",0)||0;
+const sitYear=x=>+String(x&&x.date||"").slice(0,4)||0;
+const sitYears=()=>[...new Set(SITS.map(sitYear))].filter(Boolean).sort((a,b)=>a-b);
+function sitPick(){SITS.sort((a,b)=>String(a.date).localeCompare(String(b.date)));const ys=sitYears();if(!ys.includes(YEAR))YEAR=ys.length?ys[ys.length-1]:new Date().getFullYear();
+  const L=SITS.filter(x=>sitYear(x)===YEAR);DATA=L.length?L[L.length-1]:BASE;LS.set("ab-data",DATA.source==="origine"?null:DATA);LS.set("ab-year",YEAR);LS.set("ab-sits",SITS)}
+sitPick();
 // lignes de la situation budgétaire actuelle (pour le rapprochement des engagements)
 const sitLines=()=>Array.isArray(DATA.lines)?DATA.lines:[];
 let OFF=new Set(LS.get("ab-off",null)||[]);
@@ -1201,7 +1217,7 @@ const regPerK=()=>{const o={rg:{},eng:{}};for(const d of rgLive())if(d.per){cons
 const rgArch=()=>new Set((typeof RGET!=="undefined"?RGET:[]).filter(e=>e.arch).map(e=>e.id));
 const isEng=d=>d&&d.pay==="Engagement";
 // dépense « en cours » : pas dans un état archivé, et engagement pas encore rapproché de la situation budgétaire
-const rgLive=()=>{const A=rgArch();return REGD.filter(d=>!(d.etat&&A.has(d.etat))&&!(isEng(d)&&d.rap))};
+const rgLive=()=>{const A=rgArch(),yf=sitYears().length>1;return REGD.filter(d=>!(d.etat&&A.has(d.etat))&&!(isEng(d)&&d.rap)&&(!yf||!d.date||+d.date.slice(0,4)===YEAR))};
 // logos : régie (carte et pièces) ou engagement (bon administratif)
 const ICO_RG='<svg class="rgic" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-label="Régie (carte, espèces, chèque, virement)" role="img"><rect x="2" y="4.5" width="15" height="10" rx="2"/><path d="M2 8.2h15M5 11.5h3"/><circle cx="17.3" cy="15.8" r="4.7" fill="var(--card,#fff)"/><path d="M19.1 14.1a2.3 2.3 0 1 0 0 3.4M15.2 15.3h2.7"/></svg>';
 const ICO_ENG='<svg class="rgic eng" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-label="Engagement (bon administratif)" role="img"><path d="M5.5 2.5h9l4 4v15h-13z"/><path d="M14.5 2.5v4h4M8.5 9h4.5M8.5 12.2h7"/><circle cx="13" cy="17.2" r="2.4"/><path d="M8.5 17.2h2"/></svg>';
@@ -1283,8 +1299,8 @@ function savePH(){PHAT=Date.now();LS.set("ab-phases",PH);LS.set("ab-phsel3",[...
 function setDate(){
   const hasD=!!DATA.date,d=hasD?new Date(DATA.date+"T12:00:00"):new Date(),y0=new Date(d.getFullYear(),0,1),y1=new Date(d.getFullYear()+1,0,1);
   YA=PHSEL.size&&phList().some(p=>PHSEL.has(p.id))?expectedPct()/100:(d-y0)/(y1-y0);
-  $("dt2").textContent=hasD?" du "+fd(DATA.date):"";if(!hasD){$("dtw").textContent="aucune situation importée";$("curw").textContent="aucune situation importée"}else{$("dtw").innerHTML=`situation au <b id="dt">${fd(DATA.date)}</b>`;$("curw").innerHTML=`situation au <b id="cur">${fd(DATA.date)}</b>`}$("resetw").hidden=DATA.source==="origine";
-  $("yr").textContent=d.getFullYear();
+  $("dt2").textContent=hasD?" du "+fd(DATA.date):"";if(!hasD){$("dtw").textContent="aucune situation importée";}else{$("dtw").innerHTML=`situation au <b id="dt">${fd(DATA.date)}</b>`;}
+  $("yr").textContent=hasD?d.getFullYear():YEAR;{const ys=sitYears(),ys2=ys.includes(YEAR)?ys:[...ys,YEAR].sort();$("yrsel").innerHTML=ys2.map(y=>`<option value="${y}"${y===YEAR?" selected":""}>${y}</option>`).join("");$("yrsel").hidden=ys.length<2||PAGE()!=="home"}
   $("org").textContent=`${DATA.title} · ana. ${DATA.ana}`;
   $("ya").textContent=Math.round(YA*100)+" %";
   $("src").textContent=DATA.source==="origine"?"":` · ${DATA.source==="zero"?"remise à zéro":"importée"} le ${fd(String(DATA.importedAt||DATA.date).slice(0,10))}`;
@@ -1330,7 +1346,7 @@ addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("md").hidden)closeModal()
 function totals(){const rows=chosen();return rows.reduce((s,r)=>{const v=V(r);return {b:s.b+v.b,t:s.t+v.t}},{b:0,t:0})}
 // barre de dépense : bleu = consommé / (consommé + restant) ; au-delà du restant initial, rouge pour le dépassement
 const pbW=(c,a,r)=>{if(c<=0.5)return[0,0];const P=Math.max(0,Math.min(a,c+r));if(c<=P+0.5)return[c/Math.max(c,c+Math.max(0,r))*100,0];const b=P/c*100;return[b,100-b]};
-const rfmt=r=>Math.abs(r)<0.5?"0 €":(r<0?"−\u2060\u200a\u2060":"")+f0(Math.abs(r));
+const rfmt=r=>Math.abs(r)<0.5?"0 €":(r<0?"<span class=\"mns\">−</span>\u2060\u200a\u2060":"")+f0(Math.abs(r));
 // prévisionnel maximal (en % du budget) : tout le restant des autres périodes en cours (hors montants bloqués, verrouillées, terminées)
 const phPmax=(C,i)=>{const x=C.L[i],B=C.T.b||1;return (+x.pct)+Math.max(0,100-C.L.reduce((s,y)=>s+(+y.pct||0),0))+C.L.reduce((s,y,j)=>s+(j!==i&&!C.sel[j]&&!y.fix&&!y.lock&&(+y.pct||0)>0?Math.max(0,(+y.pct)-Math.max(1e-4,(C.cons[j]||0)/B*100)):0),0)};
 let BIGT=null,BIGF=false;   // BIGF : carte ouverte depuis la fiche d'une dépense (pas de « Période terminée » ici)
@@ -1346,7 +1362,7 @@ function renderPhase(){
     const cls=pas?(rest<-0.5?"done bad":"done good"):(av>0?(rest<-0.5?"neg-f":"rest"):"");
     const lb=x.fix&&!big?`<span class="plk fxe" title="Montant bloqué" aria-label="Montant bloqué">€</span>`:"";
     const hd=`<div class="pch"><span class="pn">${pas?'<i class="ck">✓</i>':""}${x.name?phName(x.name):"Période "+(i+1)}</span>
-      <div class="pam"><span><small>Consommé</small><b class="neg" data-pc>${neg0(cons)}</b></span><span><small data-pl>Restant</small><b class="${rest<-0.5?"neg":"pos"}" data-pr>${Math.abs(rest)<0.5?"0 €":(rest<0?"−\u2060\u200a\u2060":"")+f0(Math.abs(rest))}</b></span></div>${(C.rg[i]||0)>0.004?`<div class="prg prk">${(RK.rg[x.id]||0)>0.004?`<span title="Régie">${ICO_RG}${neg0(RK.rg[x.id])}</span>`:""}${(RK.eng[x.id]||0)>0.004?`<span title="Engagements">${ICO_ENG}${neg0(RK.eng[x.id])}</span>`:""}</div>`:""}</div>`;
+      <div class="pam"><span><small>Consommé</small><b class="neg" data-pc>${neg0(cons)}</b></span><span><small data-pl>Restant</small><b class="${rest<-0.5?"neg":"pos"}" data-pr>${Math.abs(rest)<0.5?"0 €":(rest<0?"<span class=\"mns\">−</span>\u2060\u200a\u2060":"")+f0(Math.abs(rest))}</b></span></div>${(C.rg[i]||0)>0.004?`<div class="prg prk">${(RK.rg[x.id]||0)>0.004?`<span title="Régie">${ICO_RG}${neg0(RK.rg[x.id])}</span>`:""}${(RK.eng[x.id]||0)>0.004?`<span title="Engagements">${ICO_ENG}${neg0(RK.eng[x.id])}</span>`:""}</div>`:""}</div>`;
     if(!big){const bw=pbW(cons,C.adj[i],rest);   // carte de base : dépense (bleu = prévu, rouge = au-delà de l'alloué), or si terminée
       return `<div class="pcw ${cls}" data-pw="${x.id}">${lb}${hd}<div class="pbar">${pas?`<i style="width:100%;background:var(--w)"></i>`:`<i class="pbf" style="width:${bw[0]}%"></i><i class="pbx" style="width:${bw[1]}%"></i>`}</div></div>`}
     // carte agrandie : curseur de dépense (horizontal) et curseur d'enveloppe (vertical, à gauche)
@@ -1366,7 +1382,7 @@ function renderPhase(){
   const kind=x=>new RegExp(`(${MOIS})\\s*(?:[–—-]|→)\\s*(${MOIS})`,"i").test(x.name||"")?0:/vacances/i.test(x.name||"")?1:2;
   const rowsH=[0,1,2].map(k=>{const it=L.map((x,i)=>[x,i]).filter(([x])=>kind(x)===k);return it.length?`<div class="frow">${it.map(([x,i])=>chip(x,i)).join("")}</div>`:""}).join("");
   {const bi=BIG?L.findIndex(x=>x.id===BIG):-1;if(bi<0)BIG=null;
-    const oth=BIG?L.map((y,j)=>j!==bi&&!C.sel[j]?`<div class="pbr" data-pw="${y.id}"><span>${y.name?phName(y.name):"Période "+(j+1)}${y.fix?' <i class="fxb" title="Montant bloqué">€</i>':""}</span><b class="${C.remain[j]<-0.5?"neg":"pos"}" data-pr>${Math.abs(C.remain[j])<0.5?"0 €":(C.remain[j]<0?"−\u2060\u200a\u2060":"")+f0(Math.abs(C.remain[j]))}</b></div>`:"").join(""):"";
+    const oth=BIG?L.map((y,j)=>j!==bi&&!C.sel[j]?`<div class="pbr" data-pw="${y.id}"><span>${y.name?phName(y.name):"Période "+(j+1)}${y.fix?' <i class="fxb" title="Montant bloqué">€</i>':""}</span><b class="${C.remain[j]<-0.5?"neg":"pos"}" data-pr>${Math.abs(C.remain[j])<0.5?"0 €":(C.remain[j]<0?"<span class=\"mns\">−</span>\u2060\u200a\u2060":"")+f0(Math.abs(C.remain[j]))}</b></div>`:"").join(""):"";
     const tot=`<div class="pbr pbtt"><span>Total restant${C.sel[bi]?"":" (avec cette période)"}</span><b class="${C.restLeft<-0.5?"neg":"pos"}" data-ptot>${rfmt(C.restLeft)}</b></div><div class="pbck" data-pck>${Math.abs(C.restLeft-C.dispo)<1?"= disponible sur le budget global ✓":"Disponible sur le budget global : "+rfmt(C.dispo)}</div>`;
     var bigH=BIG?`<div class="pbo" id="pbo"><div class="pbw">${chip(L[bi],bi,true)}<div class="pbl">${oth?`<div class="pblh">Restant des autres périodes en cours</div>${oth}`:""}${tot}</div></div></div>`:"";
     document.documentElement.classList.toggle("lock",!!BIG||!$("rgov").hidden)}
@@ -1428,13 +1444,13 @@ phOn("input",e=>{if(e.target.dataset.pe){{const el=e.target,id=el.dataset.pe;if(
 // mise à jour en direct des cartes et du bloc sous le calendrier
 function phLive(C,id){
   C.L.forEach((x,i)=>document.querySelectorAll(`#phb [data-pw="${x.id}"],#pbhost [data-pw="${x.id}"]`).forEach(w=>{if(C.sel[i]&&x.id!==id)return;
-    const r=C.remain[i];{const pc=w.querySelector("[data-pc]");if(pc)pc.textContent=neg0(C.cons[i])}
+    const r=C.remain[i];{const pc=w.querySelector("[data-pc]");if(pc)pc.innerHTML=neg0(C.cons[i])}
     {const bf=w.querySelector(".pbf"),bx=w.querySelector(".pbx");if(bf&&!C.sel[i]){const q=pbW(C.cons[i],C.adj[i],r);bf.style.width=q[0]+"%";if(bx)bx.style.width=q[1]+"%"}}
-    const pr=w.querySelector("[data-pr]");if(!pr)return;pr.textContent=Math.abs(r)<0.5?"0 €":(r<0?"−\u2060\u200a\u2060":"")+f0(Math.abs(r));pr.className=r<-0.5?"neg":"pos";
+    const pr=w.querySelector("[data-pr]");if(!pr)return;pr.innerHTML=Math.abs(r)<0.5?"0 €":(r<0?"<span class=\"mns\">−</span>\u2060\u200a\u2060":"")+f0(Math.abs(r));pr.className=r<-0.5?"neg":"pos";
     if(w.classList.contains("pcw"))w.classList.toggle("bad",C.sel[i]&&r<-0.5);
     {const se=w.querySelector(".psle");if(se&&!C.sel[i]){se.dataset.adj=Math.max(0,C.adj[i]);se.dataset.env=C.env[i];pslPaintE(se)}}
     const sl=w.querySelector(".psl:not(.psle)");if(sl){if(x.id!==id&&!sl.matches(":active")){sl.value=Math.round(C.av[i]*100);pslPaint(sl)}sl.style.setProperty("--sc",pslC(C.av[i],r));sl.style.setProperty("--s1",C.av[i]>1.004?"var(--bl)":pslC(C.av[i],r))}}));
-  {const t=document.querySelector("[data-ptot]");if(t){t.textContent=rfmt(C.restLeft);t.className=C.restLeft<-0.5?"neg":"pos";const k=document.querySelector("[data-pck]");if(k)k.textContent=Math.abs(C.restLeft-C.dispo)<1?"= disponible sur le budget global ✓":"Disponible sur le budget global : "+rfmt(C.dispo)}}
+  {const t=document.querySelector("[data-ptot]");if(t){t.innerHTML=rfmt(C.restLeft);t.className=C.restLeft<-0.5?"neg":"pos";const k=document.querySelector("[data-pck]");if(k)k.innerHTML=Math.abs(C.restLeft-C.dispo)<1?"= disponible sur le budget global ✓":"Disponible sur le budget global : "+rfmt(C.dispo)}}
   {const g=$("phgw");if(g)g.innerHTML=phgHtml(C)}fnavPaint(C);
 }
 // Cadenas : verrouille / déverrouille, rien d'autre. Appui sur une carte déverrouillée : carte agrandie.
@@ -1685,7 +1701,7 @@ function renderHome(live){
 so.onchange=()=>{LS.set("ab-sort",so.value);renderHome()};
 
 // ===== Paramètres : articles suivis =====
-function renderSet(){
+function renderSet(){renderSits();try{renderRgCfg()}catch(_){}
   RA=regAcc();renderRegList();renderPhSet();
   $("setlist").innerHTML=ORDER().map(k=>{
     const rr=A().filter(r=>r[0]===k),n=rr.filter(r=>!OFF.has(r[1])).length,on=rr.filter(r=>!OFF.has(r[1]));
@@ -1757,15 +1773,22 @@ $("pdf").onchange=async e=>{
   }catch(err){$("upst").innerHTML=`<span class="ko">Import impossible</span> : ${String(err.message||err).replace(/</g,"&lt;")}`}
 };
 function applyData(d,save){
-  DATA=d;PENDING=null;LS.set("ab-data",d.source==="origine"?null:d);if(save){cfDirty();if(PDFFILE)cfArchive("documents/situations/"+d.date+"-"+PDFFILE.name,PDFFILE)}
+  if(d.source==="origine"){SITS=[];sitPick()}else if(save&&d.date){SITS=SITS.filter(x=>x.date!==d.date);SITS.push(d);YEAR=sitYear(d);sitPick()}else{DATA=d;LS.set("ab-data",d.source==="origine"?null:d)}
+  PENDING=null;if(save){cfDirty();if(PDFFILE)cfArchive("documents/situations/"+d.date+"-"+PDFFILE.name,PDFFILE)}
   if(save&&DB)DB.doc("budget/current").set(d.source==="origine"?{reset:true,at:Date.now()}:{...d,rows:JSON.stringify(d.rows)}).catch(()=>{$("upst").textContent="Données appliquées sur cet appareil (synchronisation impossible)."});
   $("prev").hidden=true;
   $("upst").innerHTML=save?`<span class="ok">✓</span> Données mises à jour : situation au ${fd(d.date)}.`:"";
   setDate();renderSet();
 }
-$("reset").onclick=e=>{e.preventDefault();if(DATA.source==="origine")return;applyData(BASE,true)};
 
 
+// ===== Situations enregistrées : liste, suppression de la plus récente =====
+function renderSits(){const el=$("sitl");if(!el)return;const L=[...SITS].sort((a,b)=>String(b.date).localeCompare(String(a.date)));
+  el.innerHTML=L.length?L.map((x,i)=>`<div class="sitr${x===DATA?" on":""}"><span><b>Situation au ${fd(x.date)}</b><small>${x===DATA?"<i>en cours</i> · ":""}budget ${f0(x.rows.reduce((s,r)=>s+(+r[3]||0),0))} · importée le ${fd(String(x.importedAt||x.date).slice(0,10))}</small></span>${i===0?'<button type="button" class="tbtn sitdel" id="sitdel" aria-label="Supprimer la situation la plus récente">Supprimer</button>':""}</div>`).join(""):'<p class="note">Aucune situation enregistrée : l\'application est à zéro.</p>';
+  $("sits").hidden=!L.length;$("sits").textContent=L.length?`${L.length} situation${L.length>1?"s":""}`:"";
+  const b=$("sitdel");if(b)b.onclick=()=>{const x=L[0];openModal(`<h3>Supprimer la situation au ${fd(x.date)} ?</h3><p class="note">${L.length>1?`La situation au ${fd(L[1].date)} redevient la plus récente${sitYear(L[1])!==sitYear(x)?` (année ${sitYear(L[1])})`:""}.`:"Il ne restera aucune situation : les montants reviennent à zéro."} Les dépenses saisies ne sont pas touchées.</p><div class="mbt"><button class="tbtn" data-close>Annuler</button><button class="tbtn rzb" id="sitok">Supprimer</button></div>`,()=>{$("sitok").onclick=()=>{
+    SITS=SITS.filter(y=>y!==x);if(sitYear(x)===YEAR&&!SITS.some(y=>sitYear(y)===YEAR))YEAR=0;sitPick();cfDirty();closeModal();setDate();route()}})}}
+$("yrsel").onchange=e=>{YEAR=+e.target.value;sitPick();cfDirty();setDate();route()};
 // ===== Remise à zéro de la situation budgétaire (code de confirmation) =====
 $("rzgo").onclick=()=>{const code=String(Math.floor(1000+Math.random()*9000)),nD=REGD.length,nE=RGET.length+REG.length;
   openModal(`<h3>Remettre à zéro la situation budgétaire ?</h3>
@@ -1873,7 +1896,7 @@ function backup(kind){
   const base={app:"App Budget",format:1,type:kind==="full"?"sauvegarde-complete":"periodes-cle",exportedAt:new Date().toISOString()};
   const per={periodes:PH.map(p=>({id:p.id,nom:p.name,pct:+p.pct||0,avancement:+p.av||0,...(p.lock?{verrou:true}:{}),...(p.fix?{fige:true,montantFige:+p.fixAmt||0}:{})})),periodesPassees:[...PHSEL]};
   if(kind!=="full")return {...base,...per};
-  return {...base,situation:DATA,articlesNonSuivis:[...OFF],regie:{etats:REG,depenses:REGD,parametres:RGCFG,etatsGeneres:RGET},...per,tri:LS.get("ab-sort","code")};
+  return {...base,situation:DATA,situations:SITS,annee:YEAR,articlesNonSuivis:[...OFF],regie:{etats:REG,depenses:REGD,parametres:RGCFG,etatsGeneres:RGET},...per,tri:LS.get("ab-sort","code")};
 }
 async function saveFile(name,text){
   try{const dl=window.claude&&claude.use?await claude.use("downloads"):null;
@@ -1891,7 +1914,7 @@ document.querySelectorAll("[data-bk]").forEach(b=>b.onclick=async()=>{
 function applyBackup(o){
   if(o.periodes){PH=o.periodes.map(p=>({id:p.id||Math.random().toString(36).slice(2,10),name:fixName(p.nom??p.name),pct:+(p.pct)||0,av:+p.avancement||0,...(p.verrou?{lock:true}:{}),...(p.fige?{fix:true,fixAmt:+p.montantFige||0}:{})}));PHSEL=new Set((o.periodesPassees||[]).filter(id=>PH.some(p=>p.id===id)));savePH()}
   if(o.type==="sauvegarde-complete"){
-    if(o.situation&&Array.isArray(o.situation.rows)){DATA=o.situation.source==="zero"?BASE:o.situation;LS.set("ab-data",DATA.source==="origine"?null:DATA);
+    if(Array.isArray(o.situations)||(o.situation&&Array.isArray(o.situation.rows))){const sit=o.situation&&o.situation.source!=="zero"&&o.situation.source!=="origine"&&o.situation.date?o.situation:null;SITS=Array.isArray(o.situations)?o.situations.filter(x=>x&&x.date&&Array.isArray(x.rows)&&x.source!=="zero"):sit?[sit]:[];if(+o.annee)YEAR=+o.annee;else if(sit)YEAR=sitYear(sit);sitPick();
       if(DB)DB.doc("budget/current").set(DATA.source==="origine"?{reset:true,at:Date.now()}:{...DATA,rows:JSON.stringify(DATA.rows)}).catch(()=>{})}
     if(Array.isArray(o.articlesNonSuivis)){OFF=new Set(o.articlesNonSuivis);saveOff()}
     if(o.regie){REG=Array.isArray(o.regie.etats)?o.regie.etats:[];saveReg();REGD=Array.isArray(o.regie.depenses)?o.regie.depenses:[];saveRegD();if(o.regie.parametres){RGCFG=o.regie.parametres;LS.set("ab-regcfg",RGCFG)}if(Array.isArray(o.regie.etatsGeneres)){RGET=o.regie.etatsGeneres;LS.set("ab-regetats",RGET)}if(typeof o.regie.compterDansJauges==="boolean"){LS.set("ab-regon",o.regie.compterDansJauges);if(DB)DB.doc("prefs/regie").set({on:o.regie.compterDansJauges}).catch(()=>{})}}
@@ -2113,7 +2136,8 @@ const rgFileAccs=()=>new Set(REGD.filter(d=>d.imp&&d.compte).map(d=>String(d.com
 function rgAllowed(){if(Array.isArray(RGCFG.acc))return new Set(RGCFG.acc);const f=rgFileAccs();try{JSON.parse($("odskit").textContent).comptes.forEach(c=>{const k=String(c);if(rgAccsAll().some(a=>a[0]===k))f.add(k)})}catch(_){}REGD.forEach(d=>d.compte&&f.add(d.compte));return f.size?f:new Set(rgAccsAll().map(a=>a[0]))}
 function saveRgCfg(){LS.set("ab-regcfg",RGCFG);cfDirty()}
 $("rgmax").onchange=e=>{RGCFG={...RGCFG,max:Math.max(0,+e.target.value||0)};saveRgCfg()};
-function renderRgCfg(){$("rgmax").value=RGCFG.max??9000;rgPayRender();const t=RGCFG.type||"avances",A=rgAllowed(),acc=rgAccsAll();
+$("rglp").onchange=e=>{const v=e.target.value.trim();RGCFG={...RGCFG,lastPiece:v===""?null:Math.max(0,parseInt(v)||0)};saveRgCfg();rgRenum();saveRegD();if(PAGE()==="reg")renderRg()};
+function renderRgCfg(){$("rgmax").value=RGCFG.max??9000;$("rglp").value=RGCFG.lastPiece??"";rgPayRender();const t=RGCFG.type||"avances",A=rgAllowed(),acc=rgAccsAll();
   $("rgcs").textContent="régie d'avances"+` · ${acc.filter(a=>A.has(a[0])).length} compte${acc.filter(a=>A.has(a[0])).length>1?"s":""}`;
   $("rgacl").innerHTML=acc.map(([k,v])=>`<div class="rgacw"><label class="rgac"><span><b>${esc(k)}</b> ${esc(v)}</span><span class="sw psw"><input type="checkbox" data-rga="${esc(k)}"${A.has(k)?" checked":""} aria-label="Autoriser ${esc(v)}"><i></i></span></label>${A.has(k)?`<div class="rgnl">${rgNats(k).map((n,j)=>`<span class="rgnc">${esc(n)}<button type="button" data-nx="${esc(k)}" data-nj="${j}" aria-label="Retirer ${esc(n)}">✕</button></span>`).join("")}<button type="button" class="rgna" data-na="${esc(k)}">+ désignation</button></div>`:""}</div>`).join("")}
 $("rgacl").addEventListener("click",e=>{const x=e.target.closest("[data-nx]"),a=e.target.closest("[data-na]");
@@ -2207,7 +2231,7 @@ let RGET=LS.get("ab-regetats",[]),RGSEL=new Set(),RGF={from:"",to:"",pa:"",pb:""
 function saveRgEt(){LS.set("ab-regetats",RGET);cfDirty()}
 // numérotation continue : états dans l'ordre de création, dépenses classées par date dans chaque état ; supprimer un état renumérote les suivants
 function rgRenum(){const ok=new Set(RGET.map(e=>e.id)),imp=new Set(RGET.filter(e=>e.src==="import").map(e=>e.id));REGD.forEach(d=>{if(!d.etat||!ok.has(d.etat)){delete d.etat;delete d.piece}});
-  const base=REGD.filter(d=>imp.has(d.etat)).reduce((m,d)=>Math.max(m,parseInt(d.piece)||0),0);
+  const base=REGD.filter(d=>imp.has(d.etat)).reduce((m,d)=>Math.max(m,parseInt(d.piece)||0),Math.max(0,parseInt(RGCFG.lastPiece)||0));
   const ix=id=>RGET.findIndex(e=>e.id===id);   // états dans l'ordre de création, dépenses par date à l'intérieur de chaque état
   REGD.filter(d=>d.etat&&!imp.has(d.etat)).sort((a,b)=>ix(a.etat)-ix(b.etat)||(a.date||"").localeCompare(b.date||"")||a.id.localeCompare(b.id)).forEach((d,i)=>d.piece=base+i+1)}
 const rgVis=()=>rgLive().filter(d=>{const pn=parseInt(d.piece);
@@ -2275,7 +2299,7 @@ $("rgfx").onclick=()=>{RGF={from:"",to:"",pa:"",pb:"",cat:"",nat:[]};renderRg()}
 $("rggen").onclick=()=>{const sel=REGD.filter(d=>RGSEL.has(d.id)).sort((a,b)=>(a.date||"").localeCompare(b.date||"")||a.id.localeCompare(b.id));if(!sel.length)return;
   const tot=sel.reduce((s,d)=>s+(+d.montant||0),0),ds=sel.map(d=>d.date).filter(Boolean).sort(),from=ds[0]||"",to=ds[ds.length-1]||"";
   const byA={};sel.forEach(d=>byA[d.compte]=(byA[d.compte]||0)+(+d.montant||0));
-  const n0=REGD.filter(d=>d.etat).length;
+  const n0=(()=>{const imp=new Set(RGET.filter(e=>e.src==="import").map(e=>e.id));return REGD.filter(d=>imp.has(d.etat)).reduce((m,d)=>Math.max(m,parseInt(d.piece)||0),Math.max(0,parseInt(RGCFG.lastPiece)||0))+REGD.filter(d=>d.etat&&!imp.has(d.etat)).length})();
   openModal(`<h3>Créer l'état de régie ?</h3>
     <div class="rgcf"><div><span>Période</span><b>${from?`du ${fd(from)} au ${fd(to)}`:"—"}</b></div><div><span>Dépenses</span><b>${sel.length}</b></div><div><span>Montant total</span><b class="rgm">${f(tot)}</b></div></div>
     <table class="rgct">${Object.entries(byA).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`<tr><td>${esc(nameOf(k))} <small>${esc(k)}</small></td><td>${f(v)}</td></tr>`).join("")}</table>
@@ -2384,7 +2408,7 @@ function rgOpen(id){if(RO&&(id!=="new"||!dgActive()))return;RGE=id;const d=id===
   const acc=rgAccs();F.compte.innerHTML='<option value="">— choisir —</option>'+acc.map(([k,v])=>`<option value="${esc(k)}">${esc(k)}</option>`).join("");
   {const C=phCalc(),ow=id!=="new"&&rgLive().includes(d)?(+d.montant||0):0;
   F.per.innerHTML='<option value="">— choisir la période —</option>'+PH.filter(p=>!PHSEL.has(p.id)||p.id===d.per).map(p=>{const i=C.L.findIndex(x=>x.id===p.id),r=i<0?0:(C.sel[i]?0:C.remain[i])+(p.id===d.per?ow:0);
-    return `<option value="${p.id}">${esc(p.name||"Période")}${PHSEL.has(p.id)?" (terminée)":` · disponible ${rfmt(r)}`}</option>`}).join("")}
+    return `<option value="${p.id}">${esc(p.name||"Période")}${PHSEL.has(p.id)?" (terminée)":` · disponible ${rfmt(r).replace(/<[^>]+>/g,"")}`}</option>`}).join("")}
   ocrUi();$("ocrr").hidden=true;rgSuggest();F.user.value=d.user||"Administrateur";if(RO){const o=dgGet();F.user.value=o?`${o.prenom} ${o.nom}`:"";F.user.readOnly=true}
   const et=d.etat&&RGET.find(e=>e.id===d.etat);$("rgpc").hidden=!d.piece;$("rgpc").innerHTML=d.piece?`Pièce n° <b>${d.piece}</b>${et?` · état de régie du ${fd(et.at.slice(0,10))}`:""}`:"";
   F.nf.checked=!!d.nf;nfUi();F.date.value=d.date||"";rgPayFill(d.pay||(rgPays().find(p=>p.on&&p.n==="Carte bancaire")?"Carte bancaire":rgPays().find(p=>p.on).n));F.cheque.value=d.cheque||"";$("rgchq").hidden=F.pay.value!=="Chèque";F.tiers.value=d.tiers||"";F.objet.value=d.objet||"";F.montant.value=d.montant??"";F.per.value=d.per||"";
@@ -2582,7 +2606,7 @@ function pkSelect(sel){if(!sel||sel.disabled||sel.multiple)return;let host=$("pk
   document.addEventListener("keydown",e=>{const sel=e.target.closest&&e.target.closest("select");if(sel&&!sel.classList.contains("pkh")&&!sel.disabled&&(e.key===" "||e.key==="Enter"||e.key==="ArrowDown"&&e.altKey)){e.preventDefault();pkSelect(sel)}},true)}
 
 // ===== Moyens de paiement autorisés (régie) : de base + ajoutés ; l'engagement est toujours proposé =====
-const PAY_BASE=["Espèces","Carte bancaire","Chèque","Virement"],PAY_LAB={"Espèces":"Numéraire (espèces)"};
+const PAY_BASE=["Espèces","Carte bancaire","Chèque","Virement"],PAY_LAB={"Espèces":"Numéraire"};
 const rgPays=()=>{const L=Array.isArray(RGCFG.pays)?RGCFG.pays:[];const o=PAY_BASE.map(n=>({n,on:true,base:true}));L.forEach(p=>{const b=o.find(x=>x.n===p.n);if(b)b.on=p.on!==false;else if(p.n)o.push({n:p.n,on:p.on!==false})});return o};
 function rgPayRender(){const el=$("rgpay");if(!el)return;el.innerHTML=rgPays().map(p=>`<label class="rgpy"><input type="checkbox" data-py="${esc(p.n)}"${p.on?" checked":""}><span>${esc(PAY_LAB[p.n]||p.n)}</span>${p.base?"":`<button type="button" class="rgpyx" data-pyx="${esc(p.n)}" aria-label="Supprimer ${esc(p.n)}">✕</button>`}</label>`).join("")
   +`<div class="rgpya"><input type="text" id="rgpyn" maxlength="40" placeholder="Autre moyen de paiement…" autocomplete="off"><button type="button" class="tbtn" id="rgpyb">Ajouter</button></div>`}
@@ -2663,7 +2687,7 @@ const CHL=`<svg class="chv" viewBox="0 0 12 24" fill="none" stroke="currentColor
 // page précédente à gauche (‹), page suivante à droite (›), séparées par un trait
 function route(){
   const pg=PAGE(),O=PORD(),n=O.length,k=O.indexOf(pg),nx=O[(k+1)%n],pv=n>2?O[(k-1+n)%n]:null;   // en boucle : précédente ‹ | suivante ›
-  $("v-home").hidden=pg!=="home";$("v-set").hidden=pg!=="set";$("v-rg").hidden=pg!=="reg";
+  $("v-home").hidden=pg!=="home";$("yrsel").hidden=pg!=="home"||sitYears().length<2;$("v-set").hidden=pg!=="set";$("v-rg").hidden=pg!=="reg";
   // menu : page courante mise en évidence ; pas de page Régie en consultation
   document.querySelectorAll(".hmn [data-pg]").forEach(b=>{b.hidden=!O.includes(b.dataset.pg);b.classList.toggle("cur",b.dataset.pg===pg);b.setAttribute("aria-current",b.dataset.pg===pg?"page":"false")});
   pg==="set"?renderSet():pg==="reg"?renderRg():renderHome();
