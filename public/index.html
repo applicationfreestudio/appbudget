@@ -781,9 +781,14 @@ details.rgdl[open]::before,details.rgsub[open]::before{top:calc(var(--rgb0,13px)
 .rgl1,.rgl3{font-size:.8rem;color:var(--mu)}.rgl3{align-items:center}
 .rgl2 b{font-size:.98rem}.rgl2 b .rgic{vertical-align:-3px;margin-right:6px;color:var(--mu)}.rgl2 b .rgic.eng{color:var(--acl,#2a6fb0)}
 .rgl2 .rgm{margin:0;font-size:1.1rem}
+.rgl5{font-size:.82rem;color:var(--tx)}.rgl1{align-items:center}.rgcpt{font-variant-numeric:tabular-nums;font-weight:700;color:var(--mu);margin-right:2px}
+.pkcpt{font-variant-numeric:tabular-nums;font-weight:800;color:var(--mu);margin-right:6px;font-size:.85em}
+.vterr{border-color:var(--h,#c8473a)!important;box-shadow:0 0 0 2px color-mix(in srgb,var(--h,#c8473a) 35%,transparent)!important;animation:vtsh .35s 2}
+.vts.vterr{box-shadow:none!important;padding:2px 6px;border-radius:6px;background:color-mix(in srgb,var(--h,#c8473a) 12%,transparent)}
+@keyframes vtsh{0%,100%{transform:translateX(0)}25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
 </style></head>
 <body><main>
-<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261116.87</small></span></span>
+<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261116.88</small></span></span>
   <span class="hb"><span class="urd" id="urd" hidden><button type="button" class="sgb" id="undo" aria-label="Annuler la dernière modification" title="Annuler"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button><button type="button" class="sgb" id="redo" aria-label="Rétablir la modification" title="Rétablir"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg></button></span><span class="hbr hmn"><button type="button" class="sgb" data-pg="home">Principal</button><button type="button" class="sgb" data-pg="reg">Dépenses</button><button type="button" class="sgb" data-pg="set">Paramètres</button><button type="button" class="sgb" id="nav2" hidden></button><i class="nsep" id="nsep" hidden></i><button type="button" class="sgb" id="nav" hidden>Paramètres<svg class="chv" viewBox="0 0 12 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4l6 8-6 8"/></svg></button><button class="tbtn" id="fs" aria-label="Plein écran" title="Plein écran"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button></span></span>
 </h1>
 <div class="sub"><div id="org"></div><div>Dépenses <span id="yr"></span> · situation au <b id="dt"></b></div></div>
@@ -1128,6 +1133,8 @@ const f=n=>n.toLocaleString("fr-FR",{minimumFractionDigits:2,maximumFractionDigi
 const fs=n=>(n<0?"−\u2060\u200a\u2060":"")+f0(Math.abs(n));
 const f0=n=>Math.round(n).toLocaleString("fr-FR")+" €";
 // montant signé : + bleu si disponible, − rouge si dépassé
+// dépense : en rouge, signe moins devant (espace fine)
+const neg0=v=>Math.abs(v)<0.5?f0(0):`−\u2060\u200a\u2060${f0(Math.abs(v))}`;
 const sgn=(v,fmt)=>{const r=Math.round(v*100)/100;return r<0?`<b class="neg">−\u2060\u200a\u2060${fmt(-r)}</b>`:`<b class="pos">+\u2060\u200a\u2060${fmt(r)}</b>`};
 const pc=(c,b)=>b>0?c/b*100:(c>0?Infinity:0);
 const ps=p=>p===Infinity?"∞":Math.round(p).toLocaleString("fr-FR")+" %";
@@ -1285,8 +1292,8 @@ function summary(live){
   $("tg").innerHTML=hbar(T.b,T.c,1,T.g);
   const D=rows.reduce((s,r)=>{const v=V(r);return {m:s.m+r[5],e:s.e+r[4],g:s.g+v.g,x:s.x+v.x}},{m:0,e:0,g:0,x:0}),KD=$("kv").querySelector("details"),op=KD&&KD.open;
   $("kv").innerHTML=`<div><span>Budget</span><b>${f0(T.b)}</b></div>
-    <details class="kvd"${op?" open":""}><summary><span>Consommé</span><b>${f0(t)}</b></summary>
-      <div class="kvl"><div><span>Engagement</span><b>${f0(D.m+D.e)}</b></div><div><span>Dépenses en cours</span><b>${f0(D.g)}</b></div>${(()=>{const ch=new Set(rows.map(r=>r[1])),L=rgLive(),sm=d=>rgParts(d).reduce((s,p)=>s+(ch.has(p.compte)?p.montant:0),0),a=L.filter(d=>d.etat).reduce((s,d)=>s+sm(d),0),b=L.filter(d=>!d.etat).reduce((s,d)=>s+sm(d),0);return a+b>0.5?`<div class="kvs"><span>dont états de régie</span><b>${f0(a)}</b></div><div class="kvs"><span>dont dépenses pas encore numérotées</span><b>${f0(b)}</b></div>`:""})()}<div><span>Dépenses déclarées sur les périodes en cours</span><b>${f0(D.x)}</b></div></div></details>
+    <details class="kvd"${op?" open":""}><summary><span>Consommé</span><b class="neg">${neg0(t)}</b></summary>
+      <div class="kvl"><div><span>Engagement</span><b class="neg">${neg0(D.m+D.e)}</b></div><div><span>Dépenses en cours</span><b class="neg">${neg0(D.g)}</b></div>${(()=>{const ch=new Set(rows.map(r=>r[1])),L=rgLive(),sm=d=>rgParts(d).reduce((s,p)=>s+(ch.has(p.compte)?p.montant:0),0),a=L.filter(d=>d.etat).reduce((s,d)=>s+sm(d),0),b=L.filter(d=>!d.etat).reduce((s,d)=>s+sm(d),0);return a+b>0.5?`<div class="kvs"><span>dont états de régie</span><b class="neg">${neg0(a)}</b></div><div class="kvs"><span>dont dépenses pas encore numérotées</span><b class="neg">${neg0(b)}</b></div>`:""})()}<div><span>Dépenses déclarées sur les périodes en cours</span><b class="neg">${neg0(D.x)}</b></div></div></details>
     <div class="dsp"><span>${T.b-t<0?"Dépassement":"Disponible"}</span>${sgn(T.b-t,f0)}</div>`;
 }
 
@@ -1316,7 +1323,7 @@ function renderPhase(){
     const cls=pas?(rest<-0.5?"done bad":"done good"):(av>0?(rest<-0.5?"neg-f":"rest"):"");
     const lb=x.fix&&!big?`<span class="plk fxe" title="Montant bloqué" aria-label="Montant bloqué">€</span>`:"";
     const hd=`<div class="pch"><span class="pn">${pas?'<i class="ck">✓</i>':""}${x.name?phName(x.name):"Période "+(i+1)}</span>
-      <div class="pam"><span><small>Consommé</small><b class="neg" data-pc>${f0(cons)}</b></span><span><small data-pl>Restant</small><b class="${rest<-0.5?"neg":"pos"}" data-pr>${Math.abs(rest)<0.5?"0 €":(rest<0?"−\u2060\u200a\u2060":"+\u2060\u200a\u2060")+f0(Math.abs(rest))}</b></span></div>${(C.rg[i]||0)>0.004?`<div class="prg prk">${(RK.rg[x.id]||0)>0.004?`<span title="Régie">${ICO_RG}${f0(RK.rg[x.id])}</span>`:""}${(RK.eng[x.id]||0)>0.004?`<span title="Engagements">${ICO_ENG}${f0(RK.eng[x.id])}</span>`:""}</div>`:""}</div>`;
+      <div class="pam"><span><small>Consommé</small><b class="neg" data-pc>${neg0(cons)}</b></span><span><small data-pl>Restant</small><b class="${rest<-0.5?"neg":"pos"}" data-pr>${Math.abs(rest)<0.5?"0 €":(rest<0?"−\u2060\u200a\u2060":"+\u2060\u200a\u2060")+f0(Math.abs(rest))}</b></span></div>${(C.rg[i]||0)>0.004?`<div class="prg prk">${(RK.rg[x.id]||0)>0.004?`<span title="Régie">${ICO_RG}${neg0(RK.rg[x.id])}</span>`:""}${(RK.eng[x.id]||0)>0.004?`<span title="Engagements">${ICO_ENG}${neg0(RK.eng[x.id])}</span>`:""}</div>`:""}</div>`;
     if(!big){const bw=pbW(cons,C.adj[i],rest);   // carte de base : dépense (bleu = prévu, rouge = au-delà de l'alloué), or si terminée
       return `<div class="pcw ${cls}" data-pw="${x.id}">${lb}${hd}<div class="pbar">${pas?`<i style="width:100%;background:var(--w)"></i>`:`<i class="pbf" style="width:${bw[0]}%"></i><i class="pbx" style="width:${bw[1]}%"></i>`}</div></div>`}
     // carte agrandie : curseur de dépense (horizontal) et curseur d'enveloppe (vertical, à gauche)
@@ -1398,7 +1405,7 @@ phOn("input",e=>{if(e.target.dataset.pe){{const el=e.target,id=el.dataset.pe;if(
 // mise à jour en direct des cartes et du bloc sous le calendrier
 function phLive(C,id){
   C.L.forEach((x,i)=>document.querySelectorAll(`#phb [data-pw="${x.id}"],#pbhost [data-pw="${x.id}"]`).forEach(w=>{if(C.sel[i]&&x.id!==id)return;
-    const r=C.remain[i];{const pc=w.querySelector("[data-pc]");if(pc)pc.textContent=f0(C.cons[i])}
+    const r=C.remain[i];{const pc=w.querySelector("[data-pc]");if(pc)pc.textContent=neg0(C.cons[i])}
     {const bf=w.querySelector(".pbf"),bx=w.querySelector(".pbx");if(bf&&!C.sel[i]){const q=pbW(C.cons[i],C.adj[i],r);bf.style.width=q[0]+"%";if(bx)bx.style.width=q[1]+"%"}}
     const pr=w.querySelector("[data-pr]");if(!pr)return;pr.textContent=Math.abs(r)<0.5?"0 €":(r<0?"−\u2060\u200a\u2060":"+\u2060\u200a\u2060")+f0(Math.abs(r));pr.className=r<-0.5?"neg":"pos";
     if(w.classList.contains("pcw"))w.classList.toggle("bad",C.sel[i]&&r<-0.5);
@@ -1437,8 +1444,12 @@ let PVB=null;var BIG=null;document.addEventListener("toggle",e=>{if(e.target.id=
     let v=Math.max(mn,Math.min(mx,raw));
     // arrivé en haut : l'échelle grandit en continu (jusqu'à vider les autres périodes en cours), le rond redescend un peu pour continuer
     if(raw>mx-0.01&&mx<P-0.01){const nm=Math.min(P,Math.max(mx*1.02,raw));el.max=nm;v=Math.min(raw,nm);D.v0=v;D.y0=e.clientY}
+    // doigt maintenu en haut (bord de l'écran) : l'enveloppe continue de monter toute seule, jusqu'à tout le disponible
+    if(raw>=+el.max-0.01&&+el.max<P-0.01){if(!D.tm){D.tm=setInterval(()=>{if(!D){return}const e2=cur(),P2=+e2.dataset.pmax||+e2.max;if(+e2.max>=P2-0.01){clearInterval(D.tm);D.tm=null;return}
+        const nm=Math.min(P2,Math.max(+e2.max*1.04,+e2.max+1));e2.max=nm;e2.value=nm;D.v0=nm;D.mv=true;e2.dispatchEvent(new Event("input",{bubbles:true}))},70)}}
+    else if(D.tm){clearInterval(D.tm);D.tm=null}
     v=Math.round(v*100)/100;if(+el.value!==v||+el.max!==mx){el.value=v;el.dispatchEvent(new Event("input",{bubbles:true}))}},{passive:false});
-  const end=e=>{if(!D||e.pointerId!==D.pid)return;const el=cur(),mv=D.mv;D=null;if(mv)el.dispatchEvent(new Event("change",{bubbles:true}))};
+  const end=e=>{if(!D||e.pointerId!==D.pid)return;if(D.tm)clearInterval(D.tm);const el=cur(),mv=D.mv;D=null;if(mv)el.dispatchEvent(new Event("change",{bubbles:true}))};
   document.addEventListener("pointerup",end);document.addEventListener("pointercancel",end);
   document.addEventListener("click",e=>{if(e.target.closest&&e.target.closest(".pve"))e.stopPropagation()},true);
 })();
@@ -2112,13 +2123,16 @@ function ocrParse(t){const L=t.split(/\n/).map(x=>x.trim()).filter(Boolean),N=x=
     if(+mo>=1&&+mo<=12&&+d>=1&&+d<=31&&y>=2000&&dt<=today){r.date=`${y}-${String(mo).padStart(2,"0")}-${String(d).padStart(2,"0")}`;break}}
   // montant : ligne « total / net à payer / TTC », sinon le plus grand montant lu
   const amt=x=>[...x.matchAll(/(\d{1,3}(?:[ .\u00a0]\d{3})*|\d+)[,.](\d{2})(?!\d)/g)].map(m=>+(m[1].replace(/[ .\u00a0]/g,"")+"."+m[2]));
-  const keys=[/NET\s*A\s*PAYER/,/TOTAL\s*T\.?T\.?C/,/MONTANT\s*T\.?T\.?C/,/\bTOTAL\b/,/A\s*PAYER/,/\bCB\b|CARTE|ESPECES/];
-  for(const k of keys){const ln=L.filter(l=>k.test(N(l))&&!/SOUS.?TOTAL|TVA|HT\b/.test(N(l)));const v=ln.flatMap(amt).filter(v=>v>0&&v<100000);if(v.length){r.montant=Math.max(...v);break}}
+  // priorité au montant TTC
+  const keys=[/TOTAL\s*T\.?T\.?C/,/MONTANT\s*T\.?T\.?C/,/\bT\.?T\.?C\b/,/NET\s*A\s*PAYER/,/\bTOTAL\b/,/A\s*PAYER/,/\bCB\b|CARTE|ESPECES/];
+  for(const [ki,k] of keys.entries()){const ln=L.filter(l=>k.test(N(l))&&!/SOUS.?TOTAL/.test(N(l))&&(ki<3||!/TVA|HT\b/.test(N(l))));const v=ln.flatMap(amt).filter(v=>v>0&&v<100000);if(v.length){r.montant=Math.max(...v);break}}
   if(r.montant==null){const v=amt(t).filter(v=>v>0&&v<100000);if(v.length)r.montant=Math.max(...v)}
   // fournisseur : un fournisseur déjà connu présent dans le texte, sinon la première ligne « nom »
   const known=new Map();REGD.forEach(d=>d.tiers&&known.set(d.tiers,(known.get(d.tiers)||0)+1));REG.forEach(e=>(e.lines||[]).forEach(l=>l[1]&&known.set(String(l[1]),(known.get(String(l[1]))||0)+1)));
-  const T=N(t);r.tiers=[...known.keys()].sort((a,b)=>b.length-a.length).find(k=>k.length>=3&&T.includes(N(k)));
+  // fournisseur : priorité à la première ligne du ticket (ou à un fournisseur connu présent dans les 3 premières lignes)
+  const KS=[...known.keys()].sort((a,b)=>b.length-a.length),H=N(L.slice(0,3).join(" "));r.tiers=KS.find(k=>k.length>=3&&H.includes(N(k)));
   if(!r.tiers){const l=L.slice(0,6).find(l=>(l.match(/[A-Za-zÀ-ÿ]/g)||[]).length>=3&&!/\d{2}[\/.]\d{2}|TEL|SIRET|WWW|HTTP|@/i.test(l));if(l)r.tiers=l.replace(/[^\p{L}\p{N}&'’ .-]/gu,"").replace(/\s+/g," ").trim().slice(0,40)}
+  if(!r.tiers){const T=N(t);r.tiers=KS.find(k=>k.length>=3&&T.includes(N(k)))}
   {const T2=N(t);r.pay=/ESPECES|ESP\b/.test(T2)?"Espèces":/CHEQUE/.test(T2)?"Chèque":/\bCB\b|CARTE|VISA|MASTERCARD|SANS CONTACT/.test(T2)?"Carte bancaire":null}
   // nature : le compte le plus utilisé pour ce fournisseur (parmi les comptes autorisés)
   if(r.tiers){const A=rgAllowed(),c=new Map(),add=(ti,k)=>{if(N(ti)===N(r.tiers)&&A.has(k))c.set(k,(c.get(k)||0)+1)};
@@ -2182,9 +2196,10 @@ function renderRg(){renderRgCfg();ocrUi();rapUi();rgrRender();
   const free=L.filter(d=>!d.etat&&!d.nf&&!isEng(d)),allOn=free.length>0&&free.every(d=>RGSEL.has(d.id));$("rgall").checked=allOn;$("rgall").indeterminate=!allOn&&free.some(d=>RGSEL.has(d.id));$("rgall").disabled=!free.length;
   $("rgls").innerHTML=`${L.length} dépense${L.length>1?"s":""} : <span class="rgmt">${f(L.reduce((s,d)=>s+(+d.montant||0),0))}</span>`;
   $("rgl").innerHTML=L.length?L.map(d=>{const k=gk(d),h=k!==null&&k!==last?`<div class="rgh"><span>${esc(k)}</span><b>${f(gt[k])}</b></div>`:"";last=k;return h+`<div class="rgrow${isEng(d)?" eng":""}">${isEng(d)?`<span class="rgck rgeng" title="Engagement : n'entre pas dans un état de régie"></span>`:d.etat?`<span class="rgck rgn" title="Pièce n° ${esc(d.piece)}">n° ${esc(d.piece)}</span>`:d.nf?`<span class="rgck" title="Dépense sans facture : ne peut pas entrer dans un état"><i class="nfc"><svg class="nfs" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 4.2 2.9 17.1a2 2 0 0 0 1.7 3h14.8a2 2 0 0 0 1.7-3L13.7 4.2a2 2 0 0 0-3.4 0Z"/><path d="M12 9.5v4.2"/><circle cx="12" cy="16.9" r=".6" fill="currentColor"/></svg></i></span>`:`<label class="rgck"><input type="checkbox" data-rgs="${d.id}"${RGSEL.has(d.id)?" checked":""} aria-label="Sélectionner pour un état"></label>`}<button type="button" class="rgd${RGE===d.id?" on":""}" data-rge="${d.id}">
-      <span class="rgln rgl1"><span>${d.att?'<b class="rgatt">envoyée</b> · ':""}${d.date?fd(d.date):"sans date"}</span><span>${esc(d.user||"Administrateur")}</span></span>
+      <span class="rgln rgl1"><span>${d.att?'<b class="rgatt">envoyée</b> · ':""}${d.date?fd(d.date):"sans date"}</span>${d.per?`<i class="rgp">${esc(perName(d.per)||"période supprimée")}</i>`:'<i class="rgp no">non affectée</i>'}</span>
       <span class="rgln rgl2"><b>${isEng(d)?ICO_ENG:ICO_RG}${esc(d.tiers||d.objet||"Dépense")}</b><span class="rgm">${f(+d.montant||0)}</span></span>
-      <span class="rgln rgl3"><span>${rgParts(d).length>1?`${rgParts(d).length} natures`:esc((d.nature||nameOf(d.compte)||"").replace(/^\d+\.\s*/,""))}</span>${d.per?`<i class="rgp">${esc(perName(d.per)||"période supprimée")}</i>`:'<i class="rgp no">non affectée</i>'}</span></button></div>`}).join("")
+      ${d.objet&&d.tiers?`<span class="rgln rgl5"><span>${esc(d.objet)}</span></span>`:""}
+      <span class="rgln rgl3"><span>${rgParts(d).length>1?`${rgParts(d).length} natures <small>${[...new Set(rgParts(d).map(p=>p.compte))].map(esc).join(" · ")}</small>`:`<small class="rgcpt">${esc(d.compte||"")}</small> ${esc((d.nature||nameOf(d.compte)||"").replace(/^\d+\.\s*/,""))}`}</span><span>${esc(d.user||"Administrateur")}</span></span></button></div>`}).join("")
     :`<div class="note">${REGD.length?"Aucune dépense dans ces dates.":"Aucune dépense saisie. Appuie sur « Nouvelle dépense » pour commencer."}</div>`;
   const sel=REGD.filter(d=>RGSEL.has(d.id)),st=sel.reduce((s,d)=>s+(+d.montant||0),0);
   btnSt($("rggen"),!free.length&&!sel.length?"off":sel.length?"go":"wait");$("rggen").textContent=sel.length?`Générer un état de régie · ${sel.length} dépense${sel.length>1?"s":""} · ${f(st)}`:"Générer un état de régie";
@@ -2390,9 +2405,10 @@ function rgrRender(){const all=REGD.filter(d=>isEng(d)&&d.rap),sits=[...new Set(
   const n=(RGR.from?1:0)+(RGR.to?1:0)+(RGR.sit.length?1:0);$("rgrfn").textContent=n||"";$("rgrfbt").classList.toggle("on",!!n);
   $("rgrsit").innerHTML=sits.map(x=>`<button type="button" data-rgrs="${esc(x)}" class="${RGR.sit.includes(x)?"on":""}">${x?"Situation du "+fd(x):"Sans date"}</button>`).join("")||'<span class="note">—</span>';
   $("rgrl").innerHTML=L.length?L.map(d=>`<div class="rgrow eng"><span class="rgck rgeng"></span><button type="button" class="rgd" data-rge="${d.id}">
-      <span class="rgln rgl1"><span>${d.date?fd(d.date):"sans date"}</span><span>situation du ${fd(d.rap.date)}</span></span>
+      <span class="rgln rgl1"><span>${d.date?fd(d.date):"sans date"}</span>${d.per?`<i class="rgp">${esc(perName(d.per)||"période supprimée")}</i>`:'<i class="rgp no">non affectée</i>'}</span>
       <span class="rgln rgl2"><b>${ICO_ENG}${esc(d.tiers||d.objet||"Engagement")}</b><span class="rgm">${f(+d.montant||0)}</span></span>
-      <span class="rgln rgl3"><span>${rgParts(d).length>1?`${rgParts(d).length} natures`:esc((d.nature||nameOf(d.compte)||"").replace(/^\d+\.\s*/,""))}</span>${d.per?`<i class="rgp">${esc(perName(d.per)||"période supprimée")}</i>`:'<i class="rgp no">non affectée</i>'}</span></button></div>`).join("")
+      ${d.objet&&d.tiers?`<span class="rgln rgl5"><span>${esc(d.objet)}</span></span>`:""}
+      <span class="rgln rgl3"><span>${rgParts(d).length>1?`${rgParts(d).length} natures <small>${[...new Set(rgParts(d).map(p=>p.compte))].map(esc).join(" · ")}</small>`:`<small class="rgcpt">${esc(d.compte||"")}</small> ${esc((d.nature||nameOf(d.compte)||"").replace(/^\d+\.\s*/,""))}`}</span><span>situation du ${fd(d.rap.date)}</span></span></button></div>`).join("")
     :`<div class="note">Aucun engagement rapproché avec ces critères.</div>`}
 $("rgrfbt").onclick=()=>{const p=$("rgrfp");p.hidden=!p.hidden;$("rgrfbt").setAttribute("aria-expanded",!p.hidden)};
 $("rgrdf").onchange=e=>{RGR.from=e.target.value;rgrRender()};$("rgrdt").onchange=e=>{RGR.to=e.target.value;rgrRender()};
@@ -2486,7 +2502,7 @@ function pkOpen(kind,cb){const F=$("rgf"),A=rgAccs(),cur=cb?"":F[kind].value;let
       return U.map(u=>`<button type="button" class="pki" data-v="${esc(u)}"><span>${esc(u)}</span>${st[u]?`<small class="pkst">${lab[st[u]]||""}</small>`:""}</button>`).join("")+(q.trim()&&!U.some(u=>pkNorm(u)===n)?`<button type="button" class="pki pkn" data-v="${esc(q.trim())}"><span>Utiliser « ${esc(q.trim())} »</span></button>`:"")||'<p class="pke">Aucun utilisateur.</p>'}
     if(kind==="compte")return A.filter(([k,v])=>!n||pkNorm(k+" "+v).includes(n)).map(([k,v])=>`<button type="button" class="pki${k===cur?" on":""}" data-v="${esc(k)}"><b>${esc(k)}</b><span>${esc(v)}</span></button>`).join("")||'<p class="pke">Aucun compte.</p>';
     const H=A.map(([k,v])=>{const N=rgNats(k).filter(x=>!n||pkNorm(x+" "+k+" "+v).includes(n));if(!N.length)return"";
-      return `<div class="pkg"><div class="pkgh"><b>${esc(k)}</b><span>${esc(v)}</span></div>${N.map(x=>`<button type="button" class="pki${natTxt(k,x)===cur?" on":""}" data-k="${esc(k)}" data-v="${esc(natTxt(k,x))}"><span>${esc(x)}</span></button>`).join("")}${n?"":`<button type="button" class="pki pkn" data-new="${esc(k)}"><span>+ Nouvelle désignation…</span></button>`}</div>`}).join("");
+      return `<div class="pkg"><div class="pkgh"><b>${esc(k)}</b><span>${esc(v)}</span></div>${N.map(x=>`<button type="button" class="pki${natTxt(k,x)===cur?" on":""}" data-k="${esc(k)}" data-v="${esc(natTxt(k,x))}"><span><small class="pkcpt">${esc(k)}</small> ${esc(x)}</span></button>`).join("")}</div>`}).join("");
     return H||'<p class="pke">Aucune nature ne correspond.</p>'};
   host.innerHTML=`<div class="pkc" role="dialog" aria-modal="true" aria-label="${{compte:"Choisir le compte",user:"Choisir l'utilisateur"}[kind]||"Choisir la nature de la dépense"}"><div class="pkhd"><b>${{compte:"Compte",user:"Utilisateur"}[kind]||"Nature de la dépense"}</b><button type="button" class="pkx" aria-label="Fermer">✕</button></div>
     <input type="search" class="pks" placeholder="${{compte:"Rechercher un compte…",user:"Rechercher ou saisir un nom…"}[kind]||"Rechercher une nature…"}" autocomplete="off"><div class="pkl2">${list("")}</div></div>`;
@@ -2544,22 +2560,31 @@ const vtSum=()=>Math.round((VT||[]).reduce((s,p)=>s+(+p.montant||0),0)*100)/100;
 function vtRender(){const F=$("rgf");if(!VT||!VT.length)VT=[{compte:F.compte.value,nature:F.nature.value&&F.nature.value!=="__new"?F.nature.value:"",montant:""}];
   const one=VT.length===1,ro=!!(REGD.find(x=>x.id===RGE)||{}).etat;if(one)VT[0].montant=vtM()||"";
   const reste=Math.round((vtM()-vtSum())*100)/100;F.classList.toggle("vton",!one);
-  $("vtl").innerHTML=VT.map((p,j)=>`<div class="vtr${one?" one":""}"><span class="vtk">${one?"":String.fromCharCode(65+j)}</span><button type="button" class="pkb vtn${p.nature?"":" empty"}" data-vtn="${j}"${ro?" disabled":""}><span>${p.nature?esc(p.nature.replace(/^\d+\.\s*/,"")):"— choisir la nature —"}</span></button><input type="number" step="0.01" min="0" inputmode="decimal" data-vtm="${j}" value="${p.montant===""||p.montant==null?"":p.montant}"${one||ro?" disabled":""} aria-label="Montant ${String.fromCharCode(65+j)}">${!one&&!ro?`<button type="button" class="vtd" data-vtd="${j}" aria-label="Retirer la ligne">✕</button>`:'<span class="vtd0"></span>'}</div>`).join("")
+  $("vtl").innerHTML=VT.map((p,j)=>`<div class="vtr${one?" one":""}"><span class="vtk">${one?"":String.fromCharCode(65+j)}</span><button type="button" class="pkb vtn${p.nature?"":" empty"}" data-vtn="${j}"${ro?" disabled":""}><span>${p.nature?`<small class="pkcpt">${esc(p.compte)}</small> ${esc(p.nature.replace(/^\d+\.\s*/,""))}`:"— choisir la nature —"}</span></button><input type="number" step="0.01" min="0" inputmode="decimal" data-vtm="${j}" value="${p.montant===""||p.montant==null?"":p.montant}"${one||ro?" disabled":""} aria-label="Montant ${String.fromCharCode(65+j)}">${!one&&!ro?`<button type="button" class="vtd" data-vtd="${j}" aria-label="Retirer la ligne">✕</button>`:'<span class="vtd0"></span>'}</div>`).join("")
     +(ro?"":`<div class="vtf"><button type="button" class="tbtn" id="vtadd">+ Ajouter une nature</button>${one?"":`<span class="vts ${Math.abs(reste)<0.005?"ok":"ko"}">${Math.abs(reste)<0.005?"✓ Ventilé en totalité":`Reste à ventiler : <b>${f(reste)}</b>`}</span>`}</div>`)}
 $("vtl").addEventListener("click",e=>{const t=e.target;
-  if(t.closest("#vtadd")){if(VT.length===1)VT[0].montant=vtM()||"";const r=Math.round((vtM()-vtSum())*100)/100;VT.push({compte:"",nature:"",montant:r>0?r:""});vtRender();setTimeout(()=>{const i=$("vtl").querySelector("[data-vtm='0']");if(i){try{i.focus({preventScroll:true})}catch(_){i.focus()}i.select()}},30);return}
+  if(t.closest("#vtadd")){
+    // passage à plusieurs lignes : la 1re ligne est vidée (à saisir), la nouvelle reçoit le total moins les lignes du dessus
+    const was1=VT.length===1;if(was1)VT[0].montant="";const r=Math.round((vtM()-vtSum())*100)/100;VT.push({compte:"",nature:"",montant:r>0?r:""});vtRender();
+    const i=$("vtl").querySelector(was1?"[data-vtm='0']":`[data-vtm='${VT.length-1}']`);if(i){try{i.focus({preventScroll:true})}catch(_){i.focus()}i.select();
+      // le clavier s'ouvre : on remonte la ligne dans la partie visible
+      [80,350,700].forEach(ms=>setTimeout(()=>{try{i.scrollIntoView({block:"center",behavior:"smooth"})}catch(_){}},ms))}return}
   const d=t.closest("[data-vtd]");if(d){VT.splice(+d.dataset.vtd,1);vtRender();return}
   const n=t.closest("[data-vtn]");if(n){const j=+n.dataset.vtn;pkOpen("nature",(k,v)=>{VT[j].compte=k;VT[j].nature=v;if(j===0){$("rgf").compte.value=k;rgNat(v)}vtRender()})}});
 $("vtl").addEventListener("input",e=>{const j=e.target.dataset.vtm;if(j==null)return;VT[+j].montant=e.target.value===""?"":Math.round((+e.target.value||0)*100)/100;
-  // une seule autre ligne sans montant : elle reçoit d'office le reste à ventiler
-  {const E=VT.map((p,k)=>k).filter(k=>k!==+j&&(VT[k].montant===""||VT[k].montant==null));if(E.length===1){const r=Math.round((vtM()-vtSum())*100)/100;if(r>0){VT[E[0]].montant=r;const i=$("vtl").querySelector(`[data-vtm='${E[0]}']`);if(i)i.value=r}}}
+  // la ligne du dessous reçoit le total moins toutes les lignes du dessus
+  {const n=+j+1;if(n<VT.length){const up=VT.slice(0,n).reduce((s,p)=>s+(+p.montant||0),0),r=Math.round((vtM()-up)*100)/100;VT[n].montant=r>0?r:"";const i=$("vtl").querySelector(`[data-vtm='${n}']`);if(i)i.value=VT[n].montant}}
   const r=Math.round((vtM()-vtSum())*100)/100,s=$("vtl").querySelector(".vts");if(s){s.className="vts "+(Math.abs(r)<0.005?"ok":"ko");s.innerHTML=Math.abs(r)<0.005?"✓ Ventilé en totalité":`Reste à ventiler : <b>${f(r)}</b>`}});
 $("rgf").montant.addEventListener("input",()=>{if(VT&&VT.length===1){VT[0].montant=vtM()||"";const i=$("vtl").querySelector("[data-vtm='0']");if(i)i.value=VT[0].montant}else if(VT){const r=Math.round((vtM()-vtSum())*100)/100,s2=$("vtl").querySelector(".vts");if(s2){s2.className="vts "+(Math.abs(r)<0.005?"ok":"ko");s2.innerHTML=Math.abs(r)<0.005?"✓ Ventilé en totalité":`Reste à ventiler : <b>${f(r)}</b>`}}});
 $("rgf").onsubmit=e=>{e.preventDefault();const F=e.target,m=Math.round(parseFloat(String(F.montant.value).replace(",","."))*100)/100;
   if(VT&&VT[0]&&VT[0].compte&&(F.compte.value!==VT[0].compte||F.nature.value!==VT[0].nature)){F.compte.value=VT[0].compte;rgNat(VT[0].nature)}
   const compte=F.compte.value;
   if(!(m>0)){$("rgerr").textContent="Indique un montant supérieur à 0.";F.montant.focus();return}
-  if(!compte){$("rgerr").textContent="Choisis le compte de la dépense.";return}
+  // chaque ligne de nature doit avoir sa nature (et, en ventilation, son montant) : lignes signalées, sans message
+  if(VT&&VT.length){const bad=VT.map((p,j)=>(!p.nature||!p.compte?"n":"")+(VT.length<2||+p.montant>0?"":"m")),sumKo=VT.length>1&&Math.abs(vtSum()-m)>0.005;
+    if(bad.some(Boolean)||sumKo){$("rgerr").textContent="";vtRender();bad.forEach((b,j)=>{const r=$("vtl").querySelectorAll(".vtr")[j];if(!r)return;if(b.includes("n"))r.querySelector(".vtn").classList.add("vterr");if(b.includes("m"))r.querySelector("input").classList.add("vterr")});
+      if(sumKo){const st=$("vtl").querySelector(".vts");if(st)st.classList.add("vterr")}const e1=$("vtl").querySelector(".vterr");if(e1)e1.scrollIntoView({block:"center",behavior:"smooth"});return}}
+  if(!compte){$("rgerr").textContent="Choisis la nature de la dépense.";return}
   if(!F.per.value){$("rgerr").textContent="Choisis la période de la dépense.";return}
   const old=REGD.find(x=>x.id===RGE);
   if(F.per.value&&PHSEL.has(F.per.value)&&(!old||old.per!==F.per.value)){$("rgerr").textContent="Cette période est terminée : choisis une période en cours.";return}
@@ -2567,9 +2592,7 @@ $("rgf").onsubmit=e=>{e.preventDefault();const F=e.target,m=Math.round(parseFloa
   if(!F.nature.value||F.nature.value==="__new"){$("rgerr").textContent="Choisis la nature de la dépense.";return}
   if(RGE==="new"&&!F.per.value){$("rgerr").textContent="Choisis d'abord la période.";return}
   {const P=rgPerUi();if(P&&(P.full||P.over)){$("rgerr").textContent=P.done?"La période est terminée : choisis une autre période.":RO?"La période n'a plus assez de prévisionnel : demande une augmentation à l'administrateur.":"La période n'a plus assez de prévisionnel : appuie sur la jauge pour l'ajuster.";return}}
-  if(VT&&VT.length>1){if(VT.some(p=>!p.nature||!p.compte)){$("rgerr").textContent="Choisis la nature de chaque ligne de la ventilation.";return}
-    if(VT.some(p=>!(+p.montant>0))){$("rgerr").textContent="Indique un montant pour chaque ligne de la ventilation.";return}
-    if(Math.abs(vtSum()-m)>0.005){$("rgerr").textContent=`La ventilation (${f(vtSum())}) ne correspond pas au montant (${f(m)}).`;return}}
+
   if(F.pay.value==="Chèque"&&!F.cheque.value.trim()){$("rgerr").textContent="Indique le numéro du chèque.";return}
   if(old&&old.etat){rgClose();return}
   const eng=F.pay.value==="Engagement",rap=eng&&F.rap.checked?(old&&old.rap)||{date:DATA.date,at:new Date().toISOString(),manuel:true}:null;
