@@ -852,9 +852,16 @@ html.drg main>section.pgx{transition:none!important}
 #dfic .tbtn{display:inline-flex;text-decoration:none;margin-top:4px}
 .dglk{margin-top:12px;border-top:1px solid var(--ln);padding-top:8px}.dglk summary{cursor:pointer;font-weight:700;color:var(--a)}
 .dglk input{width:100%;box-sizing:border-box;font:inherit;font-size:.82rem;padding:8px 10px;border:1px solid var(--ln);border-radius:9px;background:var(--bg);color:var(--tx);margin:6px 0}
+.rgrad{min-width:calc(8.5em + 30px)}
+.rgrad .rgc{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:7px;cursor:pointer;white-space:nowrap;padding:2px 0;color:var(--mu);-webkit-tap-highlight-color:transparent}
+.rgrad .rgc.on{color:var(--tx);font-weight:700}.rgrad .rgc:focus-visible{outline:2px solid var(--a);outline-offset:2px;border-radius:6px}
+.rgpu{flex:none;position:relative;width:16px;height:16px;border-radius:50%;border:2px solid color-mix(in srgb,var(--mu) 45%,var(--ln));box-sizing:border-box;background:var(--card)}
+.rgc.on .rgpu{border-color:var(--a);background:var(--a);box-shadow:inset 0 0 0 3px var(--card)}
+.rgc.st2 .rgpu{background:var(--card);box-shadow:none}.rgc.st2 .rgpu::after{content:"";position:absolute;left:50%;top:-2px;bottom:-2px;width:2px;background:var(--a);transform:translateX(-50%) rotate(45deg)}
+.rgcnf .nfc{opacity:.55;filter:grayscale(.6)}.rgcnf.on .nfc{opacity:1;filter:none;color:#fff;background:#d63a2b;border-color:#b52a1d}
 </style></head>
 <body><main>
-<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261117.14</small></span></span>
+<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261117.15</small></span></span>
   <span class="hb"><span class="urd" id="urd" hidden><button type="button" class="sgb" id="undo" aria-label="Annuler la dernière modification" title="Annuler"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button><button type="button" class="sgb" id="redo" aria-label="Rétablir la modification" title="Rétablir"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg></button></span><span class="hbr hmn"><button type="button" class="sgb" data-pg="home">Suivi</button><button type="button" class="sgb" data-pg="reg">Budget</button><button type="button" class="sgb" data-pg="set">Paramètres</button><button type="button" class="sgb" id="nav2" hidden></button><i class="nsep" id="nsep" hidden></i><button type="button" class="sgb" id="nav" hidden>Paramètres<svg class="chv" viewBox="0 0 12 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4l6 8-6 8"/></svg></button><button class="tbtn" id="fs" aria-label="Plein écran" title="Plein écran"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button></span></span>
 </h1>
 <div class="sub"><div id="org"></div><div>Dépenses <span id="yr"></span> · <span id="dtw">situation au <b id="dt"></b></span><span id="tsti" hidden> · <b class="tsti"></b></span></div></div>
@@ -901,13 +908,10 @@ html.drg main>section.pgx{transition:none!important}
       <div class="rgfp" id="rgfp" hidden>
         <div class="rgf3">
           <label>Du<input type="date" id="rgdf"></label><label>au<input type="date" id="rgdt"></label>
-          <div class="rgrad" role="radiogroup" aria-label="Type de dépense">
-            <label><input type="radio" name="rgcat" value=""><i class="rdo"></i>Toutes</label>
-            <label><input type="radio" name="rgcat" value="rg"><i class="rdo"></i>Régie</label>
-            <label><input type="radio" name="rgcat" value="num"><i class="rdo"></i>Numérotées</label>
-            <label><input type="radio" name="rgcat" value="nn"><i class="rdo"></i>Non numérotées</label>
-            <label><input type="radio" name="rgcat" value="eng"><i class="rdo"></i>Engagements</label>
-            <label class="rgnfr2"><input type="radio" name="rgcat" value="nf"><i class="nfc sm"><svg class="nfs" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 4.2 2.9 17.1a2 2 0 0 0 1.7 3h14.8a2 2 0 0 0 1.7-3L13.7 4.2a2 2 0 0 0-3.4 0Z"/><path d="M12 9.5v4.2"/><circle cx="12" cy="16.9" r=".6" fill="currentColor"/></svg></i>Sans facture</label>
+          <div class="rgrad" role="group" aria-label="Type de dépense">
+            <button type="button" class="rgc" data-rgc="num" aria-pressed="false" title="Toucher : numérotées, puis non numérotées, puis tout"><i class="rgpu"></i><span>Numérotées</span></button>
+            <button type="button" class="rgc" data-rgc="eng" aria-pressed="false"><i class="rgpu"></i><span>Engagements</span></button>
+            <button type="button" class="rgc rgcnf" data-rgc="nf" aria-pressed="false"><i class="nfc sm"><svg class="nfs" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 4.2 2.9 17.1a2 2 0 0 0 1.7 3h14.8a2 2 0 0 0 1.7-3L13.7 4.2a2 2 0 0 0-3.4 0Z"/><path d="M12 9.5v4.2"/><circle cx="12" cy="16.9" r=".6" fill="currentColor"/></svg></i><span>Sans facture</span></button>
           </div>
           <label>Pièce n° de<input type="number" id="rgpa" min="0" inputmode="numeric"></label><label>à<input type="number" id="rgpb" min="0" inputmode="numeric"></label>
           <details class="rgdd rgnat" id="rgnatd"><summary>Nature<b id="rgnatt">toutes</b></summary><div id="rgnatl" class="rgddl"></div></details>
@@ -2356,7 +2360,7 @@ function renderRg(){renderRgCfg();ocrUi();rapUi();rgrRender();
   // tri : date (récentes d'abord), fournisseur (A → Z) ou période (ordre de l'année, non affectées à la fin), avec sous-totaux par groupe
   const so=LS.get("ab-rgsort","date"),pi=id=>{const k=PH.findIndex(p=>p.id===id);return k<0?1e9:k},byDate=(a,b)=>(b.date||"").localeCompare(a.date||"")||b.id.localeCompare(a.id);
   $("rgsort").value=so;$("rgsort").closest(".rgfl")&&0;$("rgdf").value=RGF.from;$("rgdt").value=RGF.to;$("rgpa").value=RGF.pa;$("rgpb").value=RGF.pb;
-  document.querySelectorAll("[name=rgcat]").forEach(c=>c.checked=c.value===RGF.cat);document.querySelector(".rgrad").classList.toggle("all",!RGF.cat);
+  rgcUi();
   {const o=[...$("rgsort").options];$("rgsrtt").textContent=(o.find(x=>x.value===so)||o[0]).textContent;
    $("rgsrtl").innerHTML=o.map(x=>`<label><input type="radio" name="rgsrt" value="${x.value}"${x.value===so?" checked":""}><i class="rdo"></i>${esc(x.textContent)}</label>`).join("")}
   {const N=[...new Set(rgLive().map(d=>d.nature||"").filter(Boolean))].sort((a,b)=>a.localeCompare(b,"fr",{numeric:true}));RGF.nat=RGF.nat.filter(n=>N.includes(n));
@@ -2399,11 +2403,18 @@ $("rgl").addEventListener("change",e=>{const id=e.target.dataset.rgs;if(!id)retu
 $("rgall").onchange=e=>{const on=e.target.checked;rgVis().filter(d=>!d.etat&&!d.nf&&!isEng(d)).forEach(d=>on?RGSEL.add(d.id):RGSEL.delete(d.id));renderRg()};
 [["rgdf","from"],["rgdt","to"],["rgpa","pa"],["rgpb","pb"]].forEach(([id,k])=>$(id).onchange=e=>{RGF[k]=e.target.value;renderRg()});
 $("rgfp").addEventListener("change",e=>{const t=e.target;
-  if(t.name==="rgcat"){RGF.cat=t.value;renderRg()}
-  else if(t.name==="rgsrt"){LS.set("ab-rgsort",t.value);$("rgsrtd").open=false;renderRg()}
+  if(t.name==="rgsrt"){LS.set("ab-rgsort",t.value);$("rgsrtd").open=false;renderRg()}
   else if(t.dataset.rgn!=null){const S=new Set(RGF.nat);t.checked?S.add(t.dataset.rgn):S.delete(t.dataset.rgn);RGF.nat=[...S];renderRg()}});
 $("rgfbt").onclick=()=>{const p=$("rgfp");p.hidden=!p.hidden;$("rgfbt").setAttribute("aria-expanded",!p.hidden)};
 $("rgfx").onclick=()=>{RGF={from:"",to:"",pa:"",pb:"",cat:"",nat:[]};renderRg()};
+// type de dépense : rien de choisi = tout ; « Numérotées » à 3 positions (tout → numérotées → non numérotées → tout) ;
+// « Engagements » et « Sans facture » : uniquement ceux-là ; un seul choix à la fois
+function rgcUi(){if(RGF.cat==="rg")RGF.cat="";const c=RGF.cat;
+  document.querySelectorAll(".rgrad [data-rgc]").forEach(b=>{const k=b.dataset.rgc,st=k==="num"?(c==="num"?1:c==="nn"?2:0):(c===k?1:0);
+    b.setAttribute("aria-pressed",st?"true":"false");b.classList.toggle("on",!!st);b.classList.toggle("st2",st===2);
+    if(k==="num")b.querySelector("span").textContent=st===2?"Non numérotées":"Numérotées"})}
+document.querySelector(".rgrad").addEventListener("click",e=>{const b=e.target.closest("[data-rgc]");if(!b)return;const k=b.dataset.rgc,c=RGF.cat;
+  RGF.cat=k==="num"?(c==="num"?"nn":c==="nn"?"":"num"):(c===k?"":k);renderRg()});
 // ----- génération de l'état (même présentation que les états de régie importés, si l'un d'eux est disponible) -----
 $("rggen").onclick=()=>{const sel=REGD.filter(d=>RGSEL.has(d.id)).sort((a,b)=>(a.date||"").localeCompare(b.date||"")||a.id.localeCompare(b.id));if(!sel.length)return;
   const tot=sel.reduce((s,d)=>s+(+d.montant||0),0),ds=sel.map(d=>d.date).filter(Boolean).sort(),from=ds[0]||"",to=ds[ds.length-1]||"";
