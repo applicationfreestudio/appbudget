@@ -814,9 +814,21 @@ details.rgsub>summary,details.rgdl>summary{min-height:45px;box-sizing:border-box
 h1{position:relative}.yrsel{position:absolute;right:12px;top:14px;margin:0;font:inherit;font-weight:800;font-size:1rem;padding:5px 28px 5px 12px;border:1px solid var(--ln);border-radius:10px;background:var(--card);color:var(--tx)}
 .sitl{display:flex;flex-direction:column;gap:6px;margin:4px 0 10px}.sitr{display:flex;align-items:center;gap:10px;padding:9px 12px;border:1px solid var(--ln);border-radius:12px}.sitr>span{flex:1;min-width:0;display:flex;flex-direction:column}.sitr small{color:var(--mu);font-size:.8rem}.sitr i{font-style:normal;font-weight:800;color:var(--acl,#2a6fb0)}.sitr.on{border-color:color-mix(in srgb,var(--acl,#2a6fb0) 45%,var(--ln))}.sitdel{flex:none;padding:6px 12px!important;color:var(--h,#c8473a)!important;font-weight:700}
 #sits{margin-left:auto;font-size:.8rem;font-weight:600;color:var(--mu);white-space:nowrap}
+/* jauge du prévu (carte agrandie) */
+.pg2{position:relative;padding:14px 4px 0;touch-action:none;user-select:none;-webkit-user-select:none}
+.pg2b{position:relative;height:14px;border-radius:99px;background:color-mix(in srgb,var(--mu) 18%,var(--card));overflow:visible;touch-action:none}
+.pg2f,.pg2x{position:absolute;top:0;bottom:0;border-radius:99px}.pg2f{left:0;width:var(--c);background:var(--bl)}.pg2x{left:var(--b0);width:var(--x);background:var(--h);border-radius:0 99px 99px 0}
+.pg2t{position:absolute;top:50%;left:var(--p);width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;background:var(--card);border:3px solid var(--acl,#2a6fb0);box-shadow:0 1px 4px rgba(0,0,0,.25);box-sizing:border-box}
+.pg2g{position:absolute;top:50%;left:var(--g);width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:var(--h);box-shadow:0 0 0 2px var(--card)}
+.pg2l{position:relative;height:52px}.pg2a{position:absolute;top:8px;left:clamp(46px,var(--p),calc(100% - 46px));transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;padding:4px 12px;border-radius:12px;border:1px solid color-mix(in srgb,var(--acl,#2a6fb0) 40%,var(--ln));background:var(--card);cursor:grab;touch-action:none;white-space:nowrap;line-height:1.15}
+.pg2a small{font-size:.72rem;color:var(--mu);font-weight:600}.pg2a b{font-size:1.05rem;color:var(--acl,#2a6fb0)}
+.pg2.off .pg2a{cursor:default;border-color:var(--ln)}.pg2.off .pg2a b{color:var(--tx)}.pg2.off .pg2t{border-color:var(--mu)}
+.pg2n{font-size:.82rem;color:var(--mu);margin:2px 0 4px}
+.pvin{display:flex;align-items:center;gap:8px;margin:10px 0 4px}.pvin input{flex:1;font:inherit;font-size:1.4rem;font-weight:800;text-align:right;padding:8px 12px;border:1px solid var(--ln);border-radius:12px;background:var(--card);color:inherit}.pvin span{font-size:1.3rem;font-weight:800}
+.pcw.big{padding-left:16px!important;aspect-ratio:auto!important}
 </style></head>
 <body><main>
-<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261116.94</small></span></span>
+<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261117.1</small></span></span>
   <span class="hb"><span class="urd" id="urd" hidden><button type="button" class="sgb" id="undo" aria-label="Annuler la dernière modification" title="Annuler"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button><button type="button" class="sgb" id="redo" aria-label="Rétablir la modification" title="Rétablir"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg></button></span><span class="hbr hmn"><button type="button" class="sgb" data-pg="home">Principal</button><button type="button" class="sgb" data-pg="reg">Dépenses</button><button type="button" class="sgb" data-pg="set">Paramètres</button><button type="button" class="sgb" id="nav2" hidden></button><i class="nsep" id="nsep" hidden></i><button type="button" class="sgb" id="nav" hidden>Paramètres<svg class="chv" viewBox="0 0 12 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4l6 8-6 8"/></svg></button><button class="tbtn" id="fs" aria-label="Plein écran" title="Plein écran"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button></span></span>
 <select id="yrsel" class="yrsel" aria-label="Année de travail" hidden></select></h1>
 <div class="sub"><div id="org"></div><div>Dépenses <span id="yr"></span> · <span id="dtw">situation au <b id="dt"></b></span></div></div>
@@ -969,7 +981,6 @@ h1{position:relative}.yrsel{position:absolute;right:12px;top:14px;margin:0;font:
     <div class="phf"><span id="phsum" class="note"></span><button class="tbtn raz" id="phraz" title="Remettre toutes les périodes à 0 %">RAZ</button><label class="phla" title="Bloquer toutes les périodes"><span class="sw psw"><input type="checkbox" id="phlkall" aria-label="Bloquer toutes les périodes"><i></i></span></label></div>
     <div class="phf phf3"><button class="tbtn" id="phvent">Ventiler les %</button><button class="tbtn" id="phround">Arrondir à la dizaine</button><button class="tbtn" id="phbase">Réinitialiser les périodes</button></div>
     <button class="tbtn phaddb" id="phadd">+ Ajouter une période</button>
-    <label class="phopt"><span class="sw psw"><input type="checkbox" id="phdecl"><i></i></span><span>Déclarer des dépenses sur les cartes de période<small>Curseur de dépense de la carte agrandie. Décoché, seules les dépenses enregistrées (régie et engagements) comptent sur les périodes.</small></span></label>
   </details>
   <details class="card up dsec" id="dsit">
     <summary><svg class="si" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2.5H6.5A2.5 2.5 0 0 0 4 5v14a2.5 2.5 0 0 0 2.5 2.5h11A2.5 2.5 0 0 0 20 19V8.5Z"/><path d="M14 2.5v6h6"/><path d="M14.5 12.6a3 3 0 1 0 0 3.8M9 13.7h4M9 15.3h4"/></svg><b>Mise à jour des données budgétaires</b><span id="sits" hidden></span></summary>
@@ -1237,7 +1248,7 @@ const V=r=>{const c=r[4]+r[5],g=RA[r[1]]||0,x=XA[r[1]]||0;return {b:r[3],c,g,x,t
 let XA={};
 // option des paramètres : ne pas déclarer de dépense sur les cartes de période (seules les dépenses enregistrées comptent)
 const noDecl=()=>!!LS.get("ab-nodecl",false);
-function xAcc(){const rows=chosen(),B=rows.reduce((s,r)=>s+r[3],0),o={};if(!B||noDecl())return o;
+function xAcc(){return {};const rows=chosen(),B=rows.reduce((s,r)=>s+r[3],0),o={};if(!B||noDecl())return o;
   const ex=phList().reduce((s,p)=>{if(PHSEL.has(p.id))return s;const e=B*(+p.pct||0)/100,c=p.lock&&p.lockAmt!=null?+p.lockAmt:Math.min(3,+p.av||0)*e;return s+Math.max(0,c)},0);
   if(ex>0.005)rows.forEach(r=>{if(r[3]>0)o[r[1]]=ex*r[3]/B});return o}
 const chosen=()=>A().filter(r=>!OFF.has(r[1]));
@@ -1252,37 +1263,27 @@ if(!PH.length){PH=phKey2026();LS.set("ab-phases",PH)} // aucune période enregis
 let PHSEL=new Set(LS.get("ab-phsel3",[]));
 const isSel=id=>PHSEL.has(id);
 function phCalc(){
-  // Règles :
-  //  - période terminée : son enveloppe de base est considérée consommée (restant 0) ;
-  //  - périodes non terminées : le budget restant non consommé (budget − dépenses) leur est ventilé
-  //    au prorata de leur montant de base ;
-  //  - un montant consommé déclaré sur une période non terminée (curseur ou montant bloqué) est ajouté
-  //    aux dépenses (V() via XA) : il diminue d'autant le budget restant, donc les enveloppes ventilées.
-  phFix();const L=phList(),T=totals(),env=L.map(x=>T.b*(+x.pct)/100),ND=noDecl();
-  {let mg=0;L.forEach((x,i)=>{if(x.lockAmt!=null){if(!PHSEL.has(x.id)&&env[i]>0)x.av=Math.min(3,+x.lockAmt/env[i]);delete x.lockAmt;mg=1}});if(mg)LS.set("ab-phases",PH)} // ancien cadenas de carte (montant de dépense figé) → curseur
-  const sel=L.map(x=>PHSEL.has(x.id)),nSel=sel.filter(Boolean).length;
-  const fk=L.map((x,i)=>!ND&&!sel[i]&&x.lock&&x.lockAmt!=null?+x.lockAmt:null);                  // verrouillée : montant bloqué
-  const av=L.map((x,i)=>sel[i]?1:ND?0:fk[i]!=null?(env[i]>0?fk[i]/env[i]:0):Math.max(0,Math.min(3,+x.av||0)));   // option : pas de dépense déclarée sur les cartes
-  const RPm=regPer(),rg=L.map(x=>RPm[x.id]||0);   // dépenses de régie affectées (déjà comptées dans la jauge via la régie)
-  const cons=env.map((v,i)=>sel[i]?v:fk[i]!=null?fk[i]:av[i]*v+rg[i]);
-  const dispo=T.b-T.t,W=env.reduce((s,v,i)=>s+(sel[i]?0:v),0);       // budget restant non consommé, base des périodes à ventiler
-  // Restant initial d'une période en cours : budget restant avant toute dépense déclarée (D0), ventilé au prorata de la clé de base.
-  // Une dépense déclarée sur une période baisse d'abord son propre restant ; au-delà de ce restant initial,
-  // le dépassement est pris sur le restant des autres périodes en cours, au prorata de leur clé de base
-  // (périodes à montant bloqué épargnées tant que d'autres peuvent absorber ; le verrou des paramètres n'empêche que la saisie).
-  const partial0=cons.reduce((s,v,i)=>s+(sel[i]?0:v),0),D0=dispo+partial0;
-  const adj=env.map((v,i)=>sel[i]?v:(W>0.005?D0*v/W:0));            // restant initial (enveloppe ventilée)
-  const r=env.map((v,i)=>sel[i]?0:adj[i]-cons[i]);
-  {let ov=0;const neg=[];r.forEach((x,i)=>{if(!sel[i]&&x<0){ov-=x;neg.push(i)}});
-    if(ov>0.005){let A=r.map((x,i)=>!sel[i]&&x>0&&!L[i].fix?i:-1).filter(i=>i>=0);
-      if(!A.length)A=r.map((x,i)=>!sel[i]&&x>0?i:-1).filter(i=>i>=0);
-      const Wa=A.reduce((s,i)=>s+env[i],0);
-      if(Wa>0.005){neg.forEach(i=>r[i]=0);A.forEach(i=>r[i]-=ov*env[i]/Wa)}}}
-  const remain=r;
-  const plannedSel=env.reduce((s,v,i)=>s+(sel[i]?v:0),0),restEnv=W;
-  const partial=cons.reduce((s,v,i)=>s+(sel[i]?0:v),0),restLeft=remain.reduce((s,v,i)=>s+(sel[i]?0:v),0);
-  return {L,T,env,sel,nSel,av,adj,cons,remain,rg,over:env.map(()=>0),extra:0,ded:env.map(()=>0),uncovered:0,plannedSel,restEnv,partial,restLeft,
-    consSel:plannedSel,nRest:L.length-nSel,dispo};
+  // Règle :
+  //  restant global = budget − consommé à la date de la situation − dépenses en cours
+  //  (engagements non rapprochés + dépenses de régie pas encore archivées dans un état) ;
+  //  ce restant est réparti selon la clé (%) sur les périodes non terminées ; une période terminée a un restant nul.
+  //  Montant bloqué : le prévu de la période est figé (restant = prévu − ses dépenses), le reste est réparti sur les autres.
+  //  Prévu d'une période = ses dépenses en cours + son restant.
+  const L=phList(),T=totals(),env=L.map(x=>T.b*(+x.pct)/100),sel=L.map(x=>PHSEL.has(x.id)),nSel=sel.filter(Boolean).length;
+  const RPm=regPer(),rg=L.map(x=>RPm[x.id]||0),cons=rg.slice();
+  const dispo=T.b-T.t;
+  const fx=L.map((x,i)=>!sel[i]&&x.fix&&x.fixAmt!=null?Math.max(+x.fixAmt||0,0):null);
+  const rFix=fx.reduce((s,v,i)=>s+(v!=null?v-cons[i]:0),0),Rv=dispo-rFix;
+  const W=L.reduce((s,x,i)=>s+(!sel[i]&&fx[i]==null?+x.pct:0),0);
+  const remain=L.map((x,i)=>sel[i]?0:fx[i]!=null?fx[i]-cons[i]:(W>0?Rv*(+x.pct)/W:0));
+  const adj=L.map((x,i)=>sel[i]?cons[i]:cons[i]+remain[i]);
+  // prévu maximal d'une période réglable : tout le restant réparti, sauf la part des périodes verrouillées (et un minimum pour les autres)
+  const xmax=L.map((x,i)=>{if(sel[i]||fx[i]!=null||x.lock||!(Rv>0)||!(W>0))return adj[i];
+    let lk=0,no=0;L.forEach((y,j)=>{if(j===i||sel[j]||fx[j]!=null)return;if(y.lock)lk+=+y.pct;else no++});
+    return cons[i]+Rv*Math.max(0,W-lk-1e-4*no)/W});
+  const restLeft=remain.reduce((s,v,i)=>s+(sel[i]?0:v),0),plannedSel=env.reduce((s,v,i)=>s+(sel[i]?v:0),0);
+  return {L,T,env,sel,nSel,av:L.map(()=>0),adj,cons,remain,rg,xmax,Rv,W,over:env.map(()=>0),extra:0,ded:env.map(()=>0),uncovered:0,plannedSel,restEnv:W,
+    partial:cons.reduce((s,v,i)=>s+(sel[i]?0:v),0),restLeft,consSel:plannedSel,nRest:L.length-nSel,dispo};
 }
 const PH_BASE=["Janvier → février","Vacances d'hiver","Février → avril","Vacances de printemps","Avril → juin","Vacances d'été · juillet","Vacances d'été · août","Septembre → octobre","Vacances de la Toussaint","Octobre → décembre","Vacances de Noël"];
 // nom de période affiché : flèche discrète entre deux mois
@@ -1290,7 +1291,7 @@ const MOIS="janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre
 const phName=t=>esc(t).replace(new RegExp(`(${MOIS})\\s*(?:[–—-]|→)\\s*(${MOIS})`,"gi"),'$1<i class="arw">→</i>$2');
 const phList=()=>PH.filter(p=>(+p.pct||0)>0);
 // montant bloqué : la part (%) suit le montant en euros
-function phFix(){const B=totals().b;if(B>0)PH.forEach(p=>{if(p.fix&&+p.fixAmt>0)p.pct=Math.round(+p.fixAmt/B*1e6)/1e4})}
+function phFix(){return;const B=totals().b;if(B>0)PH.forEach(p=>{if(p.fix&&+p.fixAmt>0)p.pct=Math.round(+p.fixAmt/B*1e6)/1e4})}
 const phTot=()=>phList().reduce((s,p)=>s+(+p.pct),0);
 // part du budget (en %) prévue jusqu'à la fin de la phase en cours
 const expectedPct=()=>phList().reduce((s,p)=>s+(PHSEL.has(p.id)?+p.pct:0),0);
@@ -1332,7 +1333,7 @@ function summary(live){
   const D=rows.reduce((s,r)=>{const v=V(r);return {m:s.m+r[5],e:s.e+r[4],g:s.g+v.g,x:s.x+v.x}},{m:0,e:0,g:0,x:0}),KD=$("kv").querySelector("details"),op=KD&&KD.open;
   $("kv").innerHTML=`<div><span>Budget</span><b>${f0(T.b)}</b></div>
     <details class="kvd"${op?" open":""}><summary><span>Consommé</span><b class="neg">${neg0(t)}</b></summary>
-      <div class="kvl"><div><span>Engagement</span><b class="neg">${neg0(D.m+D.e)}</b></div><div><span>Dépenses en cours</span><b class="neg">${neg0(D.g)}</b></div>${(()=>{const ch=new Set(rows.map(r=>r[1])),L=rgLive(),sm=d=>rgParts(d).reduce((s,p)=>s+(ch.has(p.compte)?p.montant:0),0),a=L.filter(d=>d.etat).reduce((s,d)=>s+sm(d),0),b=L.filter(d=>!d.etat).reduce((s,d)=>s+sm(d),0);return a+b>0.5?`<div class="kvs"><span>dont états de régie</span><b class="neg">${neg0(a)}</b></div><div class="kvs"><span>dont dépenses pas encore numérotées</span><b class="neg">${neg0(b)}</b></div>`:""})()}<div><span>Dépenses déclarées sur les périodes en cours</span><b class="neg">${neg0(D.x)}</b></div></div></details>
+      <div class="kvl"><div><span>Engagement</span><b class="neg">${neg0(D.m+D.e)}</b></div><div><span>Dépenses en cours</span><b class="neg">${neg0(D.g)}</b></div>${(()=>{const ch=new Set(rows.map(r=>r[1])),L=rgLive(),sm=d=>rgParts(d).reduce((s,p)=>s+(ch.has(p.compte)?p.montant:0),0),a=L.filter(d=>d.etat).reduce((s,d)=>s+sm(d),0),b=L.filter(d=>!d.etat).reduce((s,d)=>s+sm(d),0);return a+b>0.5?`<div class="kvs"><span>dont états de régie</span><b class="neg">${neg0(a)}</b></div><div class="kvs"><span>dont dépenses pas encore numérotées</span><b class="neg">${neg0(b)}</b></div>`:""})()}</div></details>
     <div class="dsp"><span>${T.b-t<0?"Dépassement":"Disponible"}</span>${sgn(T.b-t,f0)}</div>`;
 }
 
@@ -1348,7 +1349,7 @@ function totals(){const rows=chosen();return rows.reduce((s,r)=>{const v=V(r);re
 const pbW=(c,a,r)=>{if(c<=0.5)return[0,0];const P=Math.max(0,Math.min(a,c+r));if(c<=P+0.5)return[c/Math.max(c,c+Math.max(0,r))*100,0];const b=P/c*100;return[b,100-b]};
 const rfmt=r=>Math.abs(r)<0.5?"0 €":(r<0?"<span class=\"mns\">−</span>\u2060\u200a\u2060":"")+f0(Math.abs(r));
 // prévisionnel maximal (en % du budget) : tout le restant des autres périodes en cours (hors montants bloqués, verrouillées, terminées)
-const phPmax=(C,i)=>{const x=C.L[i],B=C.T.b||1;return (+x.pct)+Math.max(0,100-C.L.reduce((s,y)=>s+(+y.pct||0),0))+C.L.reduce((s,y,j)=>s+(j!==i&&!C.sel[j]&&!y.fix&&!y.lock&&(+y.pct||0)>0?Math.max(0,(+y.pct)-Math.max(1e-4,(C.cons[j]||0)/B*100)):0),0)};
+const phPmax=(C,i)=>{if(C.xmax)return C.xmax[i];const x=C.L[i],B=C.T.b||1;return (+x.pct)+Math.max(0,100-C.L.reduce((s,y)=>s+(+y.pct||0),0))+C.L.reduce((s,y,j)=>s+(j!==i&&!C.sel[j]&&!y.fix&&!y.lock&&(+y.pct||0)>0?Math.max(0,(+y.pct)-Math.max(1e-4,(C.cons[j]||0)/B*100)):0),0)};
 let BIGT=null,BIGF=false;   // BIGF : carte ouverte depuis la fiche d'une dépense (pas de « Période terminée » ici)
    // cible du prévisionnel quand la carte est ouverte depuis une dépense bloquée : {id, need (enveloppe à atteindre)}
 function phgHtml(C){return C.dispo<-0.5&&C.nRest?`<div class="note ko" style="margin-top:8px">Les dépenses dépassent le budget de ${f0(-C.dispo)} : les enveloppes des périodes en cours sont négatives.</div>`:""}
@@ -1359,26 +1360,22 @@ function renderPhase(){
   const C=phCalc(),{L,env}=C,tot=phTot(),keep=$("frise")?$("frise").scrollLeft:null,RK=regPerK();
   $("phn").textContent=`${C.nSel} / ${L.length} terminée${C.nSel>1?"s":""}`;$("phn").className="";
   const chip=(x,i,big)=>{const pas=C.sel[i],av=C.av[i],cons=C.cons[i],rest=C.remain[i],lk=!!x.lock;
-    const cls=pas?(rest<-0.5?"done bad":"done good"):(av>0?(rest<-0.5?"neg-f":"rest"):"");
+    const cls=pas?(rest<-0.5?"done bad":"done good"):(rest<-0.5?"neg-f":cons>0.5?"rest":"");
     const lb=x.fix&&!big?`<span class="plk fxe" title="Montant bloqué" aria-label="Montant bloqué">€</span>`:"";
     const hd=`<div class="pch"><span class="pn">${pas?'<i class="ck">✓</i>':""}${x.name?phName(x.name):"Période "+(i+1)}</span>
-      <div class="pam"><span><small>Consommé</small><b class="neg" data-pc>${neg0(cons)}</b></span><span><small data-pl>Restant</small><b class="${rest<-0.5?"neg":"pos"}" data-pr>${Math.abs(rest)<0.5?"0 €":(rest<0?"<span class=\"mns\">−</span>\u2060\u200a\u2060":"")+f0(Math.abs(rest))}</b></span></div>${(C.rg[i]||0)>0.004?`<div class="prg prk">${(RK.rg[x.id]||0)>0.004?`<span title="Régie">${ICO_RG}${neg0(RK.rg[x.id])}</span>`:""}${(RK.eng[x.id]||0)>0.004?`<span title="Engagements">${ICO_ENG}${neg0(RK.eng[x.id])}</span>`:""}</div>`:""}</div>`;
+      <div class="pam"><span><small>Consommé</small><b class="neg" data-pc>${neg0(cons)}</b></span><span><small data-pl>Restant</small><b class="${rest<-0.5?"neg":"pos"}" data-pr>${Math.abs(rest)<0.5?"0 €":(rest<0?"<span class=\"mns\">−</span>\u2060\u200a\u2060":"")+f0(Math.abs(rest))}</b></span></div>${(C.rg[i]||0)>0.004?`<div class="prg prk">${(RK.rg[x.id]||0)>0.004?`<span title="Régie">${ICO_RG}<b>${neg0(RK.rg[x.id])}</b></span>`:""}${(RK.eng[x.id]||0)>0.004?`<span title="Engagements">${ICO_ENG}<b>${neg0(RK.eng[x.id])}</b></span>`:""}</div>`:""}</div>`;
     if(!big){const bw=pbW(cons,C.adj[i],rest);   // carte de base : dépense (bleu = prévu, rouge = au-delà de l'alloué), or si terminée
       return `<div class="pcw ${cls}" data-pw="${x.id}">${lb}${hd}<div class="pbar">${pas?`<i style="width:100%;background:var(--w)"></i>`:`<i class="pbf" style="width:${bw[0]}%"></i><i class="pbx" style="width:${bw[1]}%"></i>`}</div></div>`}
-    // carte agrandie : curseur de dépense (horizontal) et curseur d'enveloppe (vertical, à gauche)
-    const M=pslMax(av),pos=av*100/M*100,cut=Math.min(pos,100/M*100),off=pas,offE=pas;
-    // prévisionnel maximal : jusqu'à vider les autres périodes en cours (sauf montants bloqués, verrouillées et terminées)
-    const pmax=phPmax(C,i),A0=C.adj[i],kk=+x.pct>0&&A0>0?A0/+x.pct:(+x.pct>0?env[i]/+x.pct:0),vsD=kk>0?cons/kk*10:0,snp=cons>0.5&&Math.abs(cons-A0)<0.5;
-    // cible venant de la fiche d'une dépense bloquée : prévisionnel à atteindre pour l'accepter
-    const tg=BIGT&&BIGT.id===x.id&&kk>0?(BIGT.need)/kk*10:0;
-    let vM=Math.max(Math.round(+x.pct*10),Math.floor(Math.min(pmax,Math.max(2*x.pct,+x.pct+10))*10));if(tg>0)vM=Math.max(vM,Math.min(Math.floor(pmax*10),Math.ceil(tg*1.08)));
-    const snt=!snp&&tg>0&&Math.abs(A0-BIGT.need)<0.5,vV=snp?vsD:snt?tg:+x.pct*10;   // collé à la dépense ou à la cible : le rond est exactement sur le repère
+    // carte agrandie : une seule jauge ; le rond et le montant « Prévu » se règlent au doigt (glisser) ou à la main (toucher le montant)
+    const A=C.adj[i],xm=C.xmax[i],tgv=BIGT&&BIGT.id===x.id?BIGT.need:0,off=pas||!!x.fix||!!x.lock||!(xm>A+0.5||A>cons+0.5)||RO,S=pg2S(A,cons,tgv,xm);
+    const why=pas?"":x.fix?"Montant bloqué : le prévu ne se règle pas.":x.lock?"Période verrouillée dans les paramètres.":!(C.Rv>0)?"Plus de restant à répartir : le prévu ne peut pas augmenter.":"";
     return `<div class="pcw big ${cls}" data-pw="${x.id}">${lb}${hd}
-      <div class="pslz">${pas?`<div class="pbar pbg"><i style="width:100%;background:var(--w)"></i></div>`:noDecl()||BIGF?(()=>{const bw=pbW(cons,C.adj[i],rest);return `<div class="pbar pbg"><i class="pbf" style="width:${bw[0]}%"></i><i class="pbx" style="width:${bw[1]}%"></i></div><div class="psls"><span class="pslt"><small>Prévu</small>${f0(Math.max(0,C.adj[i]))}</span></div>`})():(()=>{const A=Math.max(0,C.adj[i]),S=pslS(cons,A),vv=Math.round(cons),pp=vv/S*100,tt=Math.min(100,A/S*100);
-        return `<div class="pslw2${tt<99.5?" thr":""}${tt<99.5&&Math.abs(vv-A)<0.5?" snp":""}" style="--m:${tt}%;--mf:${tt/100};--dc:${vv>A+0.5?"var(--h)":"var(--bl)"}"><input type="range" class="psl psle"${off?" disabled":""} min="0" max="${S}" step="1" value="${vv}" data-av="${x.id}" data-env="${env[i]}" data-rg="${C.rg[i]||0}" data-adj="${A}" style="--v:${pp}%;--c:${Math.min(pp,tt)}%;--sc:${vv>A+0.5?"var(--h)":"var(--bl)"}" aria-label="Dépense de la période en euros : ${esc(x.name||"période")}"></div><div class="psls" style="--mf:${tt/100}"><span class="pslt">${tt<99.5?"<small>Prévu</small>"+f0(A):""}</span></div>`})()}</div>
-      ${!offE&&tg>0&&A0>=BIGT.need-0.5?`<div class="ptgok"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Prévisionnel suffisant : la dépense de ${f(BIGT.m)} est maintenant possible.</div>`:!offE&&tg>0?`<div class="ptg${tg<=pmax*10+0.01?"":" ko"}"><i></i>${tg<=pmax*10+0.01?`Monte le prévisionnel jusqu'au point rouge (${f0(BIGT.need)}) pour accepter la dépense.`:"Dépense impossible au regard du budget prévisionnel."}</div>`:""}
-      <div class="pdr">${BIGF?"":`<div class="pdn"><span>Période terminée</span><label class="sw psw" title="Période terminée"><input type="checkbox" data-done="${x.id}"${pas?" checked":""} aria-label="Période terminée"><i></i></label></div>`}<div class="pdn pfx"><span>Montant bloqué</span><label class="sw psw fxs" title="Bloquer le montant de la période"><input type="checkbox" data-fxb="${x.id}"${x.fix?" checked":""} aria-label="Bloquer le montant de la période"><i></i></label></div></div>
-      <input type="range" class="pve${snp?" snp":""}${snt?" snpt":""}" data-pe="${x.id}" data-tg="${tg||""}" data-pmax="${Math.floor(pmax*10*100)/100}" min="1" max="${vM}" step="any" value="${vV}" style="--v:${(vV-1)/Math.max(1,vM-1)*100}%"${offE?" disabled":""} aria-orientation="vertical" aria-label="Enveloppe (part du budget) : ${esc(x.name||"période")}">${(()=>{if(offE||!(cons>0.5)||!(kk>0))return"";const vs=vsD;if(vs<1||vs>vM)return"";return `<i class="pvd${snp?" on":""}" data-vs="${vs}" style="--f:${(vs-1)/Math.max(1,vM-1)}" title="Dépense en cours"></i>`})()}${!offE&&tg>=1&&tg<=pmax*10+0.01?`<i class="pvt" data-vs="${tg}" style="--f:${(tg-1)/Math.max(1,vM-1)}" title="Prévisionnel à atteindre pour la dépense"></i>`:""}</div>`};
+      <div class="pslz">${pas?`<div class="pbar pbg"><i style="width:100%;background:var(--w)"></i></div>`:`<div class="pg2${off?" off":""}" data-pg2="${x.id}" data-s="${S}" data-xm="${xm}" data-cons="${cons}" data-tg="${tgv||""}" style="${pg2V(cons,A,S,tgv)}">
+        <div class="pg2b"><i class="pg2f"></i><i class="pg2x"></i>${tgv>0?'<i class="pg2g" title="Prévu à atteindre pour la dépense"></i>':""}<i class="pg2t"></i></div>
+        <div class="pg2l"><span class="pg2a"${off?"":` role="button" tabindex="0" data-pa="${x.id}"`} aria-label="Prévu ${f0(A)}${off?"":" : glisser pour ajuster, toucher pour saisir le montant"}"><small>Prévu</small><b data-pv>${f0(A)}</b></span></div></div>`}</div>
+      ${why&&!pas?`<div class="pg2n">${why}</div>`:""}
+      ${!pas&&tgv>0&&A>=BIGT.need-0.5?`<div class="ptgok"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Prévisionnel suffisant : la dépense de ${f(BIGT.m)} est maintenant possible.</div>`:!pas&&tgv>0?`<div class="ptg${tgv<=xm+0.5?"":" ko"}"><i></i>${tgv<=xm+0.5?`Monte le prévu jusqu'au point rouge (${f0(BIGT.need)}) pour accepter la dépense.`:"Dépense impossible au regard du budget prévisionnel."}</div>`:""}
+      <div class="pdr">${BIGF?"":`<div class="pdn"><span>Période terminée</span><label class="sw psw" title="Période terminée"><input type="checkbox" data-done="${x.id}"${pas?" checked":""} aria-label="Période terminée"><i></i></label></div>`}<div class="pdn pfx"><span>Montant bloqué</span><label class="sw psw fxs" title="Bloquer le montant de la période"><input type="checkbox" data-fxb="${x.id}"${x.fix?" checked":""} aria-label="Bloquer le montant de la période"><i></i></label></div></div></div>`};
   const kind=x=>new RegExp(`(${MOIS})\\s*(?:[–—-]|→)\\s*(${MOIS})`,"i").test(x.name||"")?0:/vacances/i.test(x.name||"")?1:2;
   const rowsH=[0,1,2].map(k=>{const it=L.map((x,i)=>[x,i]).filter(([x])=>kind(x)===k);return it.length?`<div class="frow">${it.map(([x,i])=>chip(x,i)).join("")}</div>`:""}).join("");
   {const bi=BIG?L.findIndex(x=>x.id===BIG):-1;if(bi<0)BIG=null;
@@ -1388,7 +1385,7 @@ function renderPhase(){
     document.documentElement.classList.toggle("lock",!!BIG||!$("rgov").hidden)}
   $("pbhost").innerHTML=bigH;$("phb").innerHTML=`<div class="frise" id="frise">${rowsH}</div>
    <div id="phgw">${phgHtml(C)}</div>
-   <details id="phx"${window.PHXO?" open":""}><summary>Comment sont calculés les restants</summary><div class="note" style="margin-top:6px">Une période terminée consomme son enveloppe (restant 0). Le budget non consommé est ventilé sur les autres périodes au prorata de leur clé de base : c’est leur restant initial. Une dépense déclarée sur une période en cours baisse d’abord son propre restant ; au-delà, le dépassement est pris sur le restant des autres périodes en cours, au prorata de leur clé de base (les périodes verrouillées ou à montant bloqué sont épargnées tant que d’autres peuvent absorber).</div></details>`;
+   <details id="phx"${window.PHXO?" open":""}><summary>Comment sont calculés les restants</summary><div class="note" style="margin-top:6px">Restant global = budget − consommé à la date de la situation − dépenses en cours (engagements non rapprochés et dépenses de régie pas encore archivées dans un état). Ce restant est réparti selon la clé (%) sur les périodes non terminées ; une période terminée a un restant nul. Une période à montant bloqué garde son prévu (restant = prévu − ses dépenses) et le reste est réparti sur les autres. Prévu d’une période = ses dépenses en cours + son restant.</div></details>`;
   if(keep!==null)$("frise").scrollLeft=keep;
   fnavInit();fnavPaint(C);
 }
@@ -1396,7 +1393,7 @@ function renderPhase(){
 // Mini-carte : un bloc par période, placé comme dans la frise (3 lignes), coloré selon son état
 function fnavPaint(C){const f=$("frise"),n=$("fnav");if(!f||!n)return;const mm=n.querySelector(".mm"),SW=f.scrollWidth||1,rows=[...f.querySelectorAll(".frow")];
   mm.innerHTML=rows.map((r,ri)=>[...r.querySelectorAll("[data-pw]")].map(w=>{const i=C.L.findIndex(x=>x.id===w.dataset.pw);if(i<0)return"";
-    const av=C.av[i],c=av<=0?"color-mix(in srgb,var(--mu) 30%,var(--card))":C.sel[i]?pslC(av,C.remain[i]):`color-mix(in srgb,${pslC(av,C.remain[i])} 45%,var(--card))`;
+    const c=C.sel[i]?"var(--w)":C.remain[i]<-0.5?"var(--h)":C.cons[i]>0.5?"color-mix(in srgb,var(--bl) 45%,var(--card))":"color-mix(in srgb,var(--mu) 30%,var(--card))";
     return `<b style="left:${(w.offsetLeft-f.firstElementChild.offsetLeft)/SW*100}%;width:${w.offsetWidth/SW*100}%;top:${ri*(100/rows.length)}%;height:calc(${100/rows.length}% - 2px);background:${c}"></b>`}).join("")).join("")}
 function fnavInit(){const f=$("frise"),n=$("fnav");if(!f||!n)return;const t=n.querySelector("i");
   const upd=()=>{const W=n.clientWidth,max=f.scrollWidth-f.clientWidth;if(max<=1){n.style.display="none";return}n.style.display="";
@@ -1451,6 +1448,7 @@ function phLive(C,id){
     {const se=w.querySelector(".psle");if(se&&!C.sel[i]){se.dataset.adj=Math.max(0,C.adj[i]);se.dataset.env=C.env[i];pslPaintE(se)}}
     const sl=w.querySelector(".psl:not(.psle)");if(sl){if(x.id!==id&&!sl.matches(":active")){sl.value=Math.round(C.av[i]*100);pslPaint(sl)}sl.style.setProperty("--sc",pslC(C.av[i],r));sl.style.setProperty("--s1",C.av[i]>1.004?"var(--bl)":pslC(C.av[i],r))}}));
   {const t=document.querySelector("[data-ptot]");if(t){t.innerHTML=rfmt(C.restLeft);t.className=C.restLeft<-0.5?"neg":"pos";const k=document.querySelector("[data-pck]");if(k)k.innerHTML=Math.abs(C.restLeft-C.dispo)<1?"= disponible sur le budget global ✓":"Disponible sur le budget global : "+rfmt(C.dispo)}}
+  document.querySelectorAll(".pg2[data-pg2]").forEach(g=>{const i=C.L.findIndex(x=>x.id===g.dataset.pg2);if(i<0)return;g.dataset.cons=C.cons[i];pg2Paint(g,C.adj[i])});
   {const g=$("phgw");if(g)g.innerHTML=phgHtml(C)}fnavPaint(C);
 }
 // Cadenas : verrouille / déverrouille, rien d'autre. Appui sur une carte déverrouillée : carte agrandie.
@@ -1458,7 +1456,7 @@ function phLive(C,id){
 // Verrou (page Paramètres) : fige position, intitulé et part du budget ; plus de cadenas sur les cartes.
 function phLock(q,on){q.lock=!!on;delete q.lockAmt}
 // Montant bloqué : activé ou désactivé depuis la carte agrandie ou les paramètres
-function phFixSet(q,on){if(on){q.fix=true;q.fixAmt=Math.round(totals().b*(+q.pct||0)/100)}else{delete q.fix;delete q.fixAmt}}
+function phFixSet(q,on){if(on){const C=phCalc(),i=C.L.findIndex(x=>x.id===q.id);q.fix=true;q.fixAmt=Math.round(i>=0?C.adj[i]:0)}else{delete q.fix;delete q.fixAmt}}
 function bigClose(){BIG=null;BIGT=null;BIGF=false;savePH();setDate();renderHome();if(!$("rgov").hidden){document.documentElement.classList.add("lock");rgPerUi()}}
 phOn("click",e=>{const t=e.target;
   const fb=t.closest("[data-fxb]");if(fb){const q=PH.find(x=>x.id===fb.dataset.fxb);if(q){phFixSet(q,!q.fix);savePH();renderHome()}return}
@@ -1491,6 +1489,49 @@ let PVB=null;var BIG=null;document.addEventListener("toggle",e=>{if(e.target.id=
   const end=e=>{if(!D||e.pointerId!==D.pid)return;if(D.tm)clearInterval(D.tm);const el=cur(),mv=D.mv;D=null;if(mv)el.dispatchEvent(new Event("change",{bubbles:true}))};
   document.addEventListener("pointerup",end);document.addEventListener("pointercancel",end);
   document.addEventListener("click",e=>{if(e.target.closest&&e.target.closest(".pve"))e.stopPropagation()},true);
+})();
+// ===== Jauge de la carte agrandie : prévu de la période (rond + montant) =====
+const pg2S=(A,c,tg,xm)=>{const m=Math.max(A*1.25,c*1.25,tg*1.12,50),k=Math.pow(10,Math.floor(Math.log10(m))-1)*5;const S=Math.ceil(m/k)*k;return Math.max(Math.min(S,Math.max(xm||0,A,c,tg,1)),1)};
+const pg2V=(c,A,S,tg)=>{const p=Math.max(0,Math.min(100,A/S*100)),b=Math.max(0,Math.min(c,A))/S*100,x=Math.max(0,Math.min(100,c/S*100))-b;return `--p:${p}%;--c:${b}%;--x:${Math.max(0,x)}%;--b0:${b}%;--g:${tg>0?Math.min(100,tg/S*100):0}%`};
+function pg2Paint(g,A){const S=+g.dataset.s,c=+g.dataset.cons||0,tg=+g.dataset.tg||0;g.setAttribute("style",pg2V(c,A,S,tg));const b=g.querySelector("[data-pv]");if(b)b.textContent=f0(A)}
+// règle le prévu de la période id à X € : sa part (%) change, les autres périodes réglables suivent au prorata
+function pvSet(id,X){
+  if(!PVB||PVB.id!==id){const C=phCalc();PVB={id,C,i:C.L.findIndex(x=>x.id===id),p:new Map(PH.map(x=>[x.id,+x.pct||0]))}}
+  const {C,i}=PVB;if(i<0)return null;const cons=C.cons[i],Rv=C.Rv,W=C.W,r6=x=>Math.round(x*1e6)/1e6;if(!(Rv>0)||!(W>0))return null;
+  X=Math.max(cons,Math.min(C.xmax[i],X));
+  const O=C.L.filter((y,j)=>j!==i&&!C.sel[j]&&!y.fix&&!y.lock).map(y=>y.id),lk=C.L.reduce((s,y,j)=>s+(j!==i&&!C.sel[j]&&!y.fix&&y.lock?PVB.p.get(y.id):0),0),sO=O.reduce((s,k)=>s+PVB.p.get(k),0);
+  const av=W-lk,pi=Math.max(1e-4,Math.min(av-1e-4*O.length,W*(X-cons)/Rv)),nO=av-pi;
+  PH.forEach(y=>{if(y.id===id)y.pct=r6(pi);else if(O.includes(y.id))y.pct=r6(sO>0?Math.max(1e-4,PVB.p.get(y.id)*nO/sO):nO/O.length)});
+  PH.forEach(x=>{const r=document.querySelector(`.phr[data-id="${x.id}"]`);if(!r)return;const n=r.querySelector("[data-k=pct]");if(n)n.value=Math.round(x.pct*100)/100});phSum();
+  const C2=phCalc();renderHome(true);phLive(C2,id);return C2}
+// saisie à la main du prévu
+function pvAsk(id){const C=phCalc(),i=C.L.findIndex(x=>x.id===id);if(i<0)return;const x=C.L[i],mn=C.cons[i],mx=C.xmax[i];
+  openModal(`<h3>Prévu : ${x.name?phName(x.name):"Période"}</h3><p class="note">Entre ${f0(Math.ceil(mn))} (dépenses de la période) et ${f0(Math.floor(mx))}. Les autres périodes en cours sont ajustées au prorata de leur clé.</p>
+    <label class="pvin"><input id="pvv" type="text" inputmode="decimal" value="${Math.round(C.adj[i])}" aria-label="Montant prévu en euros"><span>€</span></label><div class="rgerr" id="pverr"></div>
+    <div class="mbt"><button class="tbtn" data-close>Annuler</button><button class="tbtn pri" id="pvok">Valider</button></div>`,()=>{const inp=$("pvv");setTimeout(()=>{inp.focus();inp.select()},50);
+    const ok=()=>{const v=parseFloat(String(inp.value).replace(/[\s €]/g,"").replace(",","."));if(!isFinite(v)){$("pverr").textContent="Montant invalide.";return}
+      if(v<mn-0.5||v>mx+0.5){$("pverr").textContent=`Le prévu doit être entre ${f0(Math.ceil(mn))} et ${f0(Math.floor(mx))}.`;return}
+      PVB=null;pvSet(id,v);PVB=null;closeModal();savePH();setDate();renderHome()};
+    $("pvok").onclick=ok;inp.onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();ok()}}})}
+// glisser le doigt sur le montant (ou la jauge) : le rond suit ; maintenu au bout, l'échelle s'agrandit
+(()=>{let D=null;
+  const g=()=>D&&(D.g.isConnected?D.g:(D.g=document.querySelector(`.pg2[data-pg2="${D.id}"]`)||D.g));
+  const apply=v=>{const G=g();if(D.tg&&Math.abs(v-D.tg)<=D.S*0.025)v=D.tg;else v=Math.round(v);D.v=v;const C=pvSet(D.id,v);if(C){const i=C.L.findIndex(x=>x.id===D.id);G.dataset.s=D.S;G.dataset.cons=C.cons[i];pg2Paint(G,C.adj[i])}};
+  document.addEventListener("pointerdown",e=>{const t=e.target.closest&&e.target.closest(".pg2a,.pg2b");if(!t)return;const G=t.closest(".pg2");if(!G||G.classList.contains("off"))return;e.preventDefault();
+    const r=G.querySelector(".pg2b").getBoundingClientRect(),C=phCalc(),i=C.L.findIndex(x=>x.id===G.dataset.pg2);
+    D={g:G,id:G.dataset.pg2,pid:e.pointerId,x0:e.clientX,w:Math.max(60,r.width),S:+G.dataset.s,xm:+G.dataset.xm,tg:+G.dataset.tg||0,v0:C.adj[i],v:C.adj[i],mv:false,tm:null};
+    try{t.setPointerCapture(e.pointerId)}catch(_){}},{passive:false});
+  document.addEventListener("pointermove",e=>{if(!D||e.pointerId!==D.pid)return;e.preventDefault();const dx=e.clientX-D.x0;if(!D.mv&&Math.abs(dx)<5)return;D.mv=true;
+    const raw=D.v0+dx/D.w*D.S;
+    if(raw>=D.S&&D.S<D.xm){if(!D.tm)D.tm=setInterval(()=>{if(!D){return}const nS=Math.min(D.xm,Math.max(D.S*1.04,D.S+10));D.v0+=0;D.S=nS;apply(nS);if(nS>=D.xm){clearInterval(D.tm);D.tm=null}},80);return}
+    if(D.tm){clearInterval(D.tm);D.tm=null;D.v0=D.v;D.x0=e.clientX;return}
+    apply(Math.max(0,Math.min(D.S,raw)))},{passive:false});
+  const end=e=>{if(!D||e.pointerId!==D.pid)return;if(D.tm)clearInterval(D.tm);const d=D;D=null;
+    if(d.mv){if(d.tg&&Math.abs(d.v-d.tg)<0.5){for(let it=0;it<4;it++){const C=phCalc(),i=C.L.findIndex(x=>x.id===d.id);if(Math.abs(C.adj[i]-d.tg)<0.005)break;PVB=null;pvSet(d.id,d.tg)}}PVB=null;savePH();setDate();renderHome()}
+    else if(e.type==="pointerup"&&e.target.closest&&e.target.closest(".pg2a"))pvAsk(d.id)};
+  document.addEventListener("pointerup",end);document.addEventListener("pointercancel",end);
+  document.addEventListener("click",e=>{if(e.target.closest&&e.target.closest(".pg2"))e.stopPropagation()},true);
+  document.addEventListener("keydown",e=>{const a=e.target.closest&&e.target.closest(".pg2a[data-pa]");if(a&&(e.key==="Enter"||e.key===" ")){e.preventDefault();pvAsk(a.dataset.pa)}});
 })();
 function pveSlide(id,v){
   // hausse : d'abord le reste à répartir, puis prise au prorata (part d'avant) sur les périodes ni verrouillées, ni figées (€), ni terminées
@@ -2516,15 +2557,13 @@ $("rgf").nature.addEventListener("change",e=>{const o=e.target.selectedOptions[0
   if(e.target.value!=="__new")return;const k=$("rgf").compte.value;e.target.value="";natAdd(k,v=>rgNat(natTxt(k,v)))});
 
 // ===== Fiche d'une dépense : jauge de la période et choix de la nature / du compte =====
-$("phdecl").checked=!noDecl();
-$("phdecl").addEventListener("change",e=>{LS.set("ab-nodecl",!e.target.checked);XA=xAcc();setDate();renderHome()});
 // niveau de dépense de la période choisie ; la dépense est bloquée si elle dépasse le restant de la période
 function rgPerInfo(){const F=$("rgf"),id=F.per.value;if(!id)return null;const C=phCalc(),i=C.L.findIndex(x=>x.id===id);if(i<0)return null;
   const old=RGE!=="new"?REGD.find(x=>x.id===RGE):null,own=old&&old.per===id&&rgLive().includes(old)?(+old.montant||0):0;
   const cons=Math.max(0,C.cons[i]-own),rest=C.sel[i]?0:C.remain[i]+own,m=Math.round((parseFloat(String(F.montant.value).replace(",","."))||0)*100)/100;
   const x=C.L[i],kk=+x.pct>0&&C.adj[i]>0?C.adj[i]/+x.pct:(+x.pct>0?C.env[i]/+x.pct:0),pm=phPmax(C,i);
   // impossible : même en vidant les autres périodes en cours, le prévisionnel ne peut pas couvrir la dépense
-  const imp=!C.sel[i]&&!x.fix&&!x.lock?(kk>0?(cons+m)/kk>pm+1e-6:true):!C.sel[i]&&(x.fix||x.lock)?m>rest+0.5:false;
+  const imp=!C.sel[i]&&!x.fix&&!x.lock?cons+m>pm+0.5:!C.sel[i]&&(x.fix||x.lock)?m>rest+0.5:false;
   return {id,i,name:x.name||"Période",cons,rest,m,need:cons+m,imp,fixed:!!(x.fix||x.lock),full:rest<=0.5,over:m>0&&m>rest+0.5,done:C.sel[i]}}
 function rgDraft(){let d=null;try{d=JSON.parse(sessionStorage.getItem("ab-draft")||"null");sessionStorage.removeItem("ab-draft")}catch(_){}if(!d||(RO&&!dgActive()))return;
   go("reg");rgOpen("new");const F=$("rgf");["date","montant","tiers","objet","pay","cheque"].forEach(k=>{if(d[k]!=null)F[k].value=d[k]});F.nf.checked=!!d.nf;if(typeof nfUi==="function")nfUi();payUi();
