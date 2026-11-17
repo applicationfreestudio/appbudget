@@ -831,12 +831,13 @@ details.rgsub>summary,details.rgdl>summary{min-height:45px;box-sizing:border-box
 html{overflow-x:hidden;overflow-anchor:none}main{position:relative;overflow-x:clip}
 main>section.pgx{position:relative;background:var(--bg);margin-left:-16px;margin-right:-16px;padding-left:16px;padding-right:16px;min-height:100vh;backface-visibility:hidden}
 main>section.pgx.pgabs{position:absolute;left:0;right:0;margin:0}
+main>section.pgx.pgtop{box-shadow:0 0 10px rgba(0,0,0,.12)}
 html.pgan main>section.pgx{transition:transform .35s cubic-bezier(.4,0,.2,1),opacity .35s}
 html.drg main>section.pgx{transition:none!important}
 .pamd span{text-align:left!important}.pam .pcr{display:flex;align-items:baseline;gap:.45em;flex-wrap:wrap}.pam .ppc{font-style:normal;font-size:.8em;font-weight:700;color:var(--mu);white-space:nowrap}
 </style></head>
 <body><main>
-<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261117.4</small></span></span>
+<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261117.5</small></span></span>
   <span class="hb"><span class="urd" id="urd" hidden><button type="button" class="sgb" id="undo" aria-label="Annuler la dernière modification" title="Annuler"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button><button type="button" class="sgb" id="redo" aria-label="Rétablir la modification" title="Rétablir"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg></button></span><span class="hbr hmn"><button type="button" class="sgb" data-pg="home">Principal</button><button type="button" class="sgb" data-pg="reg">Dépenses</button><button type="button" class="sgb" data-pg="set">Paramètres</button><button type="button" class="sgb" id="nav2" hidden></button><i class="nsep" id="nsep" hidden></i><button type="button" class="sgb" id="nav" hidden>Paramètres<svg class="chv" viewBox="0 0 12 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4l6 8-6 8"/></svg></button><button class="tbtn" id="fs" aria-label="Plein écran" title="Plein écran"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button></span></span>
 <select id="yrsel" class="yrsel" aria-label="Année de travail" hidden></select></h1>
 <div class="sub"><div id="org"></div><div>Dépenses <span id="yr"></span> · <span id="dtw">situation au <b id="dt"></b></span></div></div>
@@ -1265,10 +1266,10 @@ const fixName=n=>String(n||"").replace(/^(Janvier|Février|Avril|Septembre|Octob
 // Clé de répartition par défaut : dépenses 2026 réelles, rattachées à la date d'activité (voir README)
 const PH_KEY2026=[["Janvier → février",3.8],["Vacances d'hiver",10],["Février → avril",10.1],["Vacances de printemps",7.3],["Avril → juin",9.6],["Vacances d'été · juillet",13.5],["Vacances d'été · août",11.5],["Septembre → octobre",8.1],["Vacances de la Toussaint",8.6],["Octobre → décembre",4.1],["Vacances de Noël",4],["Séjour 1",2.9],["Séjour 2",5.1],["Petit séjour 1",1],["Petit séjour 2",.4]];
 const phKey2026=()=>PH_KEY2026.map(([name,pct],i)=>({id:"k26"+i.toString(36)+Date.now().toString(36).slice(-4),name,pct}));
-let PH=LS.get("ab-phases",[]).map(p=>({id:p.id,name:fixName(p.name),pct:p.pct??"",av:+p.av||0,avPrev:+p.avPrev||0,...(p.lock?{lock:true,lockAmt:p.lockAmt??null}:{}),...(p.fix?{fix:true,fixAmt:+p.fixAmt||0}:{})})); // [{id,name,pct}] dans l'ordre chronologique
+let PH=LS.get("ab-phases",[]).map(p=>({id:p.id,name:fixName(p.name),pct:p.pct??"",...(p.pct0!=null&&p.pct0!==""?{pct0:+p.pct0}:{}),av:+p.av||0,avPrev:+p.avPrev||0,...(p.lock?{lock:true,lockAmt:p.lockAmt??null}:{}),...(p.fix?{fix:true,fixAmt:+p.fixAmt||0}:{})})); // [{id,name,pct}] dans l'ordre chronologique
 if(!PH.length){PH=phKey2026();LS.set("ab-phases",PH)} // aucune période enregistrée : clé 2026 par défaut
 // Périodes passées : sélection libre, dans n'importe quel ordre
-let PHSEL=new Set(LS.get("ab-phsel3",[]));
+let PHSEL=new Set(LS.get("ab-phsel3",[]));PH.forEach(p=>{if(p.pct0==null)p.pct0=+p.pct||0});
 const isSel=id=>PHSEL.has(id);
 function phCalc(){
   // Règle :
@@ -1304,7 +1305,9 @@ const phTot=()=>phList().reduce((s,p)=>s+(+p.pct),0);
 // part du budget (en %) prévue jusqu'à la fin de la phase en cours
 const expectedPct=()=>phList().reduce((s,p)=>s+(PHSEL.has(p.id)?+p.pct:0),0);
 let PHAT=LS.get("ab-phat",0);
-function savePH(){PHAT=Date.now();LS.set("ab-phases",PH);LS.set("ab-phsel3",[...PHSEL]);LS.set("ab-phat",PHAT);cfDirty();if(DB)DB.doc("prefs/phases").set({list:JSON.stringify(PH),sel:[...PHSEL],v:3,at:PHAT}).catch(()=>{})}
+// clé de répartition « de départ » : celle réglée dans Paramètres ; les réglages du prévu sur les cartes ne la modifient pas
+function phKey0(){PH.forEach(p=>{p.pct0=+p.pct||0})}
+function savePH(){try{if(PAGE()==="set")phKey0()}catch(_){}PHAT=Date.now();LS.set("ab-phases",PH);LS.set("ab-phsel3",[...PHSEL]);LS.set("ab-phat",PHAT);cfDirty();if(DB)DB.doc("prefs/phases").set({list:JSON.stringify(PH),sel:[...PHSEL],v:3,at:PHAT}).catch(()=>{})}
 function setDate(){
   const hasD=!!DATA.date,d=hasD?new Date(DATA.date+"T12:00:00"):new Date(),y0=new Date(d.getFullYear(),0,1),y1=new Date(d.getFullYear()+1,0,1);
   YA=PHSEL.size&&phList().some(p=>PHSEL.has(p.id))?expectedPct()/100:(d-y0)/(y1-y0);
@@ -1355,8 +1358,8 @@ addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("md").hidden)closeModal()
 function totals(){const rows=chosen();return rows.reduce((s,r)=>{const v=V(r);return {b:s.b+v.b,t:s.t+v.t}},{b:0,t:0})}
 // barre de dépense : bleu = consommé / (consommé + restant) ; au-delà du restant initial, rouge pour le dépassement
 const pbW=(c,a,r)=>{if(c<=0.5)return[0,0];const P=Math.max(0,Math.min(a,c+r));if(c<=P+0.5)return[c/Math.max(c,c+Math.max(0,r))*100,0];const b=P/c*100;return[b,100-b]};
-// période terminée : sa part (%) dans les dépenses totales de toutes les périodes
-const pctTot=(C,i)=>{const t=C.cons.reduce((a,v)=>a+(+v||0),0);return (t>0.004?C.cons[i]/t*100:0).toLocaleString("fr-FR",{maximumFractionDigits:1})+"\u202f%"};
+// période terminée : pourcentage de la clé de répartition de départ
+const pctTot=(C,i)=>{const x=C.L[i],v=x.pct0!=null?+x.pct0:+x.pct||0;return v.toLocaleString("fr-FR",{maximumFractionDigits:1})+"\u202f%"};
 const rfmt=r=>Math.abs(r)<0.5?"0 €":(r<0?"<span class=\"mns\">−</span>\u2060\u200a\u2060":"")+f0(Math.abs(r));
 // prévisionnel maximal (en % du budget) : tout le restant des autres périodes en cours (hors montants bloqués, verrouillées, terminées)
 const phPmax=(C,i)=>{if(C.xmax)return C.xmax[i];const x=C.L[i],B=C.T.b||1;return (+x.pct)+Math.max(0,100-C.L.reduce((s,y)=>s+(+y.pct||0),0))+C.L.reduce((s,y,j)=>s+(j!==i&&!C.sel[j]&&!y.fix&&!y.lock&&(+y.pct||0)>0?Math.max(0,(+y.pct)-Math.max(1e-4,(C.cons[j]||0)/B*100)):0),0)};
@@ -1373,7 +1376,7 @@ function renderPhase(){
     const cls=pas?(rest<-0.5?"done bad":"done good"):(rest<-0.5?"neg-f":cons>0.5?"rest":"");
     const lb=x.fix&&!big?`<span class="plk fxe" title="Montant bloqué" aria-label="Montant bloqué">€</span>`:"";
     const hd=`<div class="pch"><span class="pn">${pas?'<i class="ck">✓</i>':""}${x.name?phName(x.name):"Période "+(i+1)}</span>
-      ${pas?`<div class="pam pamd"><span><small>Consommé</small><div class="pcr"><b class="neg" data-pc>${neg0(cons)}</b><em class="ppc" title="Part de la période dans les dépenses totales">${pctTot(C,i)}</em></div></span></div>`:`<div class="pam"><span><small>Consommé</small><b class="neg" data-pc>${neg0(cons)}</b></span><span><small data-pl>Restant</small><b class="${rest<-0.5?"neg":"pos"}" data-pr>${Math.abs(rest)<0.5?"0 €":(rest<0?"<span class=\"mns\">−</span>\u2060\u200a\u2060":"")+f0(Math.abs(rest))}</b></span></div>`}${(C.rg[i]||0)>0.004?`<div class="prg prk">${(RK.rg[x.id]||0)>0.004?`<span title="Régie">${ICO_RG}<b>${neg0(RK.rg[x.id])}</b></span>`:""}${(RK.eng[x.id]||0)>0.004?`<span title="Engagements">${ICO_ENG}<b>${neg0(RK.eng[x.id])}</b></span>`:""}</div>`:""}</div>`;
+      ${pas?`<div class="pam pamd"><span><small>Consommé</small><div class="pcr"><b class="neg" data-pc>${neg0(cons)}</b><em class="ppc" title="Clé de répartition de départ">${pctTot(C,i)}</em></div></span></div>`:`<div class="pam"><span><small>Consommé</small><b class="neg" data-pc>${neg0(cons)}</b></span><span><small data-pl>Restant</small><b class="${rest<-0.5?"neg":"pos"}" data-pr>${Math.abs(rest)<0.5?"0 €":(rest<0?"<span class=\"mns\">−</span>\u2060\u200a\u2060":"")+f0(Math.abs(rest))}</b></span></div>`}${(C.rg[i]||0)>0.004?`<div class="prg prk">${(RK.rg[x.id]||0)>0.004?`<span title="Régie">${ICO_RG}<b>${neg0(RK.rg[x.id])}</b></span>`:""}${(RK.eng[x.id]||0)>0.004?`<span title="Engagements">${ICO_ENG}<b>${neg0(RK.eng[x.id])}</b></span>`:""}</div>`:""}</div>`;
     if(!big){const bw=pbW(cons,C.adj[i],rest);   // carte de base : dépense (bleu = prévu, rouge = au-delà de l'alloué), or si terminée
       return `<div class="pcw ${cls}" data-pw="${x.id}">${lb}${hd}<div class="pbar">${pas?`<i style="width:100%;background:var(--w)"></i>`:`<i class="pbf" style="width:${bw[0]}%"></i><i class="pbx" style="width:${bw[1]}%"></i>`}</div></div>`}
     // carte agrandie : une seule jauge ; le rond et le montant « Prévu » se règlent au doigt (glisser) ou à la main (toucher le montant)
@@ -1629,7 +1632,7 @@ function slideTo(id,v,exact){
   if(take>0&&F>0){E.forEach(j=>out[j]=r(B[j]-take*B[j]/F));const fx=r4(F-take-E.reduce((a,j)=>a+out[j],0));if(fx){const k=E.slice().sort((a,b)=>out[b]-out[a]).find(j=>out[j]+fx>=0);if(k!=null)out[k]=r4(out[k]+fx)}}
   PH.forEach((x,j)=>{x.pct=Math.max(0,out[j]);const n=document.querySelector(`.phr[data-id="${x.id}"] [data-k=pct]`);if(n&&document.activeElement!==n)n.value=Math.round(x.pct*100)/100});
   const sl=document.querySelector(`[data-sl="${id}"]`);if(sl&&+sl.value!==v)sl.value=v;
-  LS.set("ab-phases",PH);phSum();
+  phKey0();LS.set("ab-phases",PH);phSum();
 }
 let phT=null;
 $("phlist").addEventListener("input",e=>{
@@ -2163,12 +2166,12 @@ $("cflist").addEventListener("click",async e=>{const r=e.target.closest("[data-c
     if(sv&&Array.isArray(sv.off)){OFF=new Set(sv.off);LS.set("ab-off",sv.off)}
     const ph=await db.doc("prefs/phases").get().catch(()=>null);
     const phv=ph&&ph.data&&ph.data();
-    if(phv&&typeof phv.list==="string"){try{PH=JSON.parse(phv.list).map(p=>({id:p.id,name:fixName(p.name),pct:p.pct??"",av:+p.av||0,avPrev:+p.avPrev||0,...(p.lock?{lock:true,lockAmt:p.lockAmt??null}:{}),...(p.fix?{fix:true,fixAmt:+p.fixAmt||0}:{})}));LS.set("ab-phases",PH)}catch(_){}}
+    if(phv&&typeof phv.list==="string"){try{PH=JSON.parse(phv.list).map(p=>({id:p.id,name:fixName(p.name),pct:p.pct??"",...(p.pct0!=null&&p.pct0!==""?{pct0:+p.pct0}:{}),av:+p.av||0,avPrev:+p.avPrev||0,...(p.lock?{lock:true,lockAmt:p.lockAmt??null}:{}),...(p.fix?{fix:true,fixAmt:+p.fixAmt||0}:{})}));LS.set("ab-phases",PH)}catch(_){}}
     if(phv&&phv.v===3&&Array.isArray(phv.sel)){PHSEL=new Set(phv.sel);LS.set("ab-phsel3",phv.sel)}
     if(phv&&phv.at)PHAT=phv.at;
     // suivi en direct : une modification faite ailleurs (autre appareil, restauration) remplace l'état local
     db.doc("prefs/phases").onSnapshot(sn=>{const v=sn.exists&&sn.data();if(!v||!(v.at>PHAT)||typeof v.list!=="string")return;
-      try{PH=JSON.parse(v.list).map(p=>({id:p.id,name:fixName(p.name),pct:p.pct??"",av:+p.av||0,avPrev:+p.avPrev||0,...(p.lock?{lock:true,lockAmt:p.lockAmt??null}:{}),...(p.fix?{fix:true,fixAmt:+p.fixAmt||0}:{})}));PHSEL=new Set(Array.isArray(v.sel)?v.sel:[]);PHAT=v.at;
+      try{PH=JSON.parse(v.list).map(p=>({id:p.id,name:fixName(p.name),pct:p.pct??"",...(p.pct0!=null&&p.pct0!==""?{pct0:+p.pct0}:{}),av:+p.av||0,avPrev:+p.avPrev||0,...(p.lock?{lock:true,lockAmt:p.lockAmt??null}:{}),...(p.fix?{fix:true,fixAmt:+p.fixAmt||0}:{})}));PHSEL=new Set(Array.isArray(v.sel)?v.sel:[]);PHAT=v.at;
         LS.set("ab-phases",PH);LS.set("ab-phsel3",[...PHSEL]);LS.set("ab-phat",PHAT);setDate();route()}catch(_){}},()=>{});
     const rg=await db.doc("regie/etats").get().catch(()=>null);
     const rv=rg&&rg.data&&rg.data();
