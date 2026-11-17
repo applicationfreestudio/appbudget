@@ -826,9 +826,16 @@ h1{position:relative}.yrsel{position:absolute;right:12px;top:14px;margin:0;font:
 .pg2n{font-size:.82rem;color:var(--mu);margin:2px 0 4px}
 .pvin{display:flex;align-items:center;gap:8px;margin:10px 0 4px}.pvin input{flex:1;font:inherit;font-size:1.4rem;font-weight:800;text-align:right;padding:8px 12px;border:1px solid var(--ln);border-radius:12px;background:var(--card);color:inherit}.pvin span{font-size:1.3rem;font-weight:800}
 .pcw.big{padding-left:16px!important;aspect-ratio:auto!important}
+/* changement de page en glissé (comme App Hike) : la page qui arrive glisse par-dessus, l'autre recule de 18 % et s'assombrit ; la page principale reste en dessous */
+main{position:relative}body{overflow-x:hidden;overflow-x:clip}
+main>section.pgx{position:relative;background:var(--bg);margin-left:-16px;margin-right:-16px;padding-left:16px;padding-right:16px;min-height:100vh;will-change:transform,opacity}
+main>section.pgx.pgabs{position:absolute;left:0;right:0;margin:0}
+main>section.pgx.pgtop{box-shadow:0 0 24px rgba(0,0,0,.35)}
+html.pgan main>section.pgx{transition:transform .35s cubic-bezier(.4,0,.2,1),opacity .35s}
+html.drg main>section.pgx{transition:none!important}
 </style></head>
 <body><main>
-<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261117.1</small></span></span>
+<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261117.2</small></span></span>
   <span class="hb"><span class="urd" id="urd" hidden><button type="button" class="sgb" id="undo" aria-label="Annuler la dernière modification" title="Annuler"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button><button type="button" class="sgb" id="redo" aria-label="Rétablir la modification" title="Rétablir"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg></button></span><span class="hbr hmn"><button type="button" class="sgb" data-pg="home">Principal</button><button type="button" class="sgb" data-pg="reg">Dépenses</button><button type="button" class="sgb" data-pg="set">Paramètres</button><button type="button" class="sgb" id="nav2" hidden></button><i class="nsep" id="nsep" hidden></i><button type="button" class="sgb" id="nav" hidden>Paramètres<svg class="chv" viewBox="0 0 12 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4l6 8-6 8"/></svg></button><button class="tbtn" id="fs" aria-label="Plein écran" title="Plein écran"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button></span></span>
 <select id="yrsel" class="yrsel" aria-label="Année de travail" hidden></select></h1>
 <div class="sub"><div id="org"></div><div>Dépenses <span id="yr"></span> · <span id="dtw">situation au <b id="dt"></b></span></div></div>
@@ -2721,18 +2728,37 @@ const PAGE=()=>location.hash==="#parametres"?"set":location.hash==="#regie"&&(!R
 const PORD=()=>RO&&!dgActive()?["home","set"]:["home","reg","set"],PLAB={home:"Principal",reg:"Dépenses",set:"Paramètres"};
 const PICO={home:'<path d="M4 11.5 12 5l8 6.5"/><path d="M6.5 10v9h11v-9"/>',reg:'<path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/>',set:'<circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/>'};
 const nlab=k=>`<span class="nl">${PLAB[k]}</span><svg class="ni" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="${PLAB[k]}">${PICO[k]}</svg>`;
-function go(v){location.hash=v==="set"||v==="parametres"?"parametres":v==="reg"||v==="regie"?"regie":"";route()}
+const HASH=v=>v==="set"||v==="parametres"?"parametres":v==="reg"||v==="regie"?"regie":"";
+function go(v){location.hash=HASH(v);route()}
+// ----- glissé entre les pages (même mécanique que App Hike) -----
+let PGC=null,PGA=null;
+const PEL=p=>$(p==="set"?"v-set":p==="reg"?"v-rg":"v-home");
+const pgRender=p=>p==="set"?renderSet():p==="reg"?renderRg():renderHome();
+function pgDir(a,b){const O=PORD();return O.indexOf(b)>O.indexOf(a)?1:-1}   // boutons : page plus à droite dans le menu → arrive par la droite
+function pgShow(pg){const D=document.documentElement;clearTimeout(pgShow.t);["home","reg","set"].forEach(k=>{const e=PEL(k);e.hidden=k!==pg;e.classList.remove("pgx","pgabs","pgtop");e.style.transform=e.style.opacity=e.style.top=e.style.zIndex=""});D.classList.remove("pgan","drg");PGA=null}
+function pgPrep(from,to){const F=PEL(from),T=PEL(to);F.hidden=false;F.classList.add("pgx");T.style.top=(F.offsetTop+scrollY)+"px";T.hidden=false;T.classList.add("pgx","pgabs");PGA={from,to};try{pgRender(to)}catch(e){}}
+function pgPose(from,to,dir,p){const F=PEL(from),T=PEL(to),W=innerWidth,sp=(el,tx,op,top)=>{el.style.transform="translateX("+tx+"px)";el.style.opacity=op;el.style.zIndex=top?3:2;el.classList.toggle("pgtop",!!top)};
+  if(to!=="home"){sp(T,dir*(1-p)*W,1,1);sp(F,-dir*.18*W*p,1-.6*p,0)}
+  else{sp(F,-dir*W*p,1,1);sp(T,dir*.18*W*(1-p),.4+.6*p,0)}}
+function pgEnd(pg,top){pgShow(pg);if(top)scrollTo(0,0);setTimeout(hdrFit)}
+function pgAnim(from,to,dir,p0){const D=document.documentElement;D.classList.remove("pgan","drg");pgPose(from,to,dir,p0||0);void D.offsetWidth;D.classList.add("pgan");pgPose(from,to,dir,1);clearTimeout(pgShow.t);pgShow.t=setTimeout(()=>pgEnd(to,true),380)}
+const pgMotion=()=>{try{return !matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){return true}};
 const CHL=`<svg class="chv" viewBox="0 0 12 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4l-6 8 6 8"/></svg>`,CHR=`<svg class="chv" viewBox="0 0 12 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4l6 8-6 8"/></svg>`;
 // page précédente à gauche (‹), page suivante à droite (›), séparées par un trait
-function route(){
+function route(d){
   const pg=PAGE(),O=PORD(),n=O.length,k=O.indexOf(pg),nx=O[(k+1)%n],pv=n>2?O[(k-1+n)%n]:null;   // en boucle : précédente ‹ | suivante ›
-  $("v-home").hidden=pg!=="home";$("yrsel").hidden=pg!=="home"||sitYears().length<2;$("v-set").hidden=pg!=="set";$("v-rg").hidden=pg!=="reg";
+  const prev=PGC;PGC=pg;$("yrsel").hidden=pg!=="home"||sitYears().length<2;
+  if(PGA&&PGA.to!==pg)pgShow(prev||pg);   // une autre page demandée pendant un glissé : on termine l'ancien d'un coup
+  const anim=!PGA&&prev&&prev!==pg&&pgMotion();
+  if(PGA)pgRender(pg);   // glissé en cours vers cette page : simple mise à jour de son contenu
+  else if(!anim){pgShow(pg);if(prev&&prev!==pg)scrollTo(0,0)}
   // menu : page courante mise en évidence ; pas de page Régie en consultation
   document.querySelectorAll(".hmn [data-pg]").forEach(b=>{b.hidden=!O.includes(b.dataset.pg);b.classList.toggle("cur",b.dataset.pg===pg);b.setAttribute("aria-current",b.dataset.pg===pg?"page":"false")});
-  pg==="set"?renderSet():pg==="reg"?renderRg():renderHome();
+  if(anim){pgPrep(prev,pg);pgAnim(prev,pg,typeof d==="number"?d:pgDir(prev,pg),0)}
+  else if(!PGA)pgRender(pg);
   setTimeout(hdrFit);
 }
-document.querySelectorAll(".hmn [data-pg]").forEach(b=>b.onclick=()=>{if(PAGE()!==b.dataset.pg){go(b.dataset.pg);scrollTo(0,0)}});
+document.querySelectorAll(".hmn [data-pg]").forEach(b=>b.onclick=()=>{if(PAGE()!==b.dataset.pg)go(b.dataset.pg)});
 // boutons en bas à droite de la bande : le titre garde toute la largeur ; le n° de version s'efface s'ils le recouvrent
 // la bande s'agrandit si les boutons touchent le logo, le titre ou le n° de version ; pictogrammes si la largeur manque
 function hdrFit(){const h=document.querySelector("h1"),hb=h&&h.querySelector(".hb");if(!hb)return;h.classList.remove("hc2","hpad");
@@ -2743,7 +2769,22 @@ function hdrFit(){const h=document.querySelector("h1"),hb=h&&h.querySelector(".h
 addEventListener("resize",hdrFit);new ResizeObserver(hdrFit).observe(document.querySelector("h1 .hb"));
 
 
-addEventListener("hashchange",route);
+addEventListener("hashchange",()=>route(-1));   // bouton « retour » du téléphone : la page repart vers la droite
+// glisser le doigt à gauche / à droite pour passer à la page suivante / précédente (en boucle), la page suit le doigt
+(()=>{let x0=0,y0=0,t0=0,ok=false,lk=0,dx=0,W=1,from="home",dir=0,to="home";const D=document.documentElement;
+  const hs=g=>{for(let e=g;e&&e!==document.body;e=e.parentElement){if(e.scrollWidth>e.clientWidth+2&&/(auto|scroll)/.test(getComputedStyle(e).overflowX))return true}return false};
+  const open=()=>D.classList.contains("lock")||[...document.querySelectorAll("#md,#pk,.pbo,.rgov")].some(e=>!e.hidden&&e.getClientRects().length);
+  const can=g=>!PGA&&PORD().length>1&&!open()&&!(g.closest&&g.closest('input[type=range],textarea,select,.pve,.pg2,.fnav,.phvs,.grip,#phr,.rgddl'))&&!hs(g);
+  const tgt=(f,d)=>{const O=PORD(),n=O.length;return O[(O.indexOf(f)+d+n)%n]};
+  document.addEventListener("touchstart",e=>{ok=e.touches.length===1&&can(e.target);lk=0;dx=0;if(!ok)return;const t=e.touches[0];x0=t.clientX;y0=t.clientY;t0=Date.now();W=innerWidth;from=PAGE()},{passive:true});
+  document.addEventListener("touchmove",e=>{if(!ok)return;const t=e.touches[0],mx=t.clientX-x0,my=t.clientY-y0;
+    if(!lk){if(Math.abs(mx)<10&&Math.abs(my)<10)return;if(Math.abs(mx)>Math.abs(my)*1.2){lk=1;D.classList.remove("pgan");D.classList.add("drg");dir=mx<0?1:-1;to=tgt(from,dir);pgPrep(from,to)}else{ok=false;return}}
+    const nd=mx<0?1:-1;if(nd!==dir){const n2=tgt(from,nd);if(n2!==to){pgShow(from);pgPrep(from,n2);D.classList.add("drg")}dir=nd;to=n2}
+    dx=mx;e.preventDefault();pgPose(from,to,dir,Math.min(1,Math.abs(dx)/W))},{passive:false});
+  const end=()=>{if(!ok||!lk){ok=false;return}ok=false;D.classList.remove("drg");const p=Math.min(1,Math.abs(dx)/W),v=Math.abs(dx)/Math.max(1,Date.now()-t0),gogo=p>.25||(v>.5&&Math.abs(dx)>40);
+    if(gogo){PGC=to;PGA={from,to};pgAnim(from,to,dir,p);if(PAGE()!==to)location.hash=HASH(to)}
+    else{D.classList.add("pgan");pgPose(from,to,dir,0);clearTimeout(pgShow.t);pgShow.t=setTimeout(()=>pgEnd(from,false),380)}};
+  document.addEventListener("touchend",end,{passive:true});document.addEventListener("touchcancel",()=>{dx=0;end()},{passive:true})})();
 setDate();route();
 
 // ===== Plein écran et installation (application Chrome) =====
