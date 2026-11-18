@@ -875,12 +875,14 @@ details.dsec>summary::after,details.rgsub>summary::after,details.rgdl>summary::a
 .kvd[open]>summary span::after,#artd[open]>summary h2::after{transform:rotate(180deg)!important}
 /* bandeau « situation » : même triangle */
 .sub.yrc #yr::after{border:0!important;width:11px;height:8px;vertical-align:middle!important;background:currentColor;-webkit-mask:var(--tri) center/contain no-repeat;mask:var(--tri) center/contain no-repeat}
+.sub>div:nth-child(2){display:flex;align-items:baseline;white-space:pre}.sub #dtw{min-width:0;overflow:hidden;text-overflow:ellipsis}.sub #tsti{flex:none}.sub #tsti[hidden]{display:none}
+.tsti .tsic{width:1.05em;height:1.05em;vertical-align:-.17em;margin-right:.2em}
 </style></head>
 <body><main>
-<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261118.1</small></span></span>
+<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261118.2</small></span></span>
   <span class="hb"><span class="urd" id="urd" hidden><button type="button" class="sgb" id="undo" aria-label="Annuler la dernière modification" title="Annuler"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button><button type="button" class="sgb" id="redo" aria-label="Rétablir la modification" title="Rétablir"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg></button></span><span class="hbr hmn"><button type="button" class="sgb" data-pg="home">Suivi</button><button type="button" class="sgb" data-pg="reg">Budget</button><button type="button" class="sgb" data-pg="set">Paramètres</button><button type="button" class="sgb" id="nav2" hidden></button><i class="nsep" id="nsep" hidden></i><button type="button" class="sgb" id="nav" hidden>Paramètres<svg class="chv" viewBox="0 0 12 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4l6 8-6 8"/></svg></button><button class="tbtn" id="fs" aria-label="Plein écran" title="Plein écran"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button></span></span>
 </h1>
-<div class="sub"><div id="org"></div><div>Dépenses <span id="yr"></span> · <span id="dtw">situation au <b id="dt"></b></span><span id="tsti" hidden> · <b class="tsti"></b></span></div></div>
+<div class="sub"><div id="org"></div><div>Dépenses <span id="yr"></span> · <span id="dtw">situation au <b id="dt"></b></span><span id="tsti" hidden> · <b class="tsti" title="Test : augmentation du budget global"><svg class="tsic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-label="Test"><path d="M9 3h6M10 3v6L4.5 18.5A1.7 1.7 0 0 0 6 21h12a1.7 1.7 0 0 0 1.5-2.5L14 9V3"/><path d="M7 15h10"/></svg><span></span></b></span></div></div>
 
 <!-- ===== Tableau de bord ===== -->
 <section id="v-home">
@@ -2872,7 +2874,7 @@ addEventListener("resize",hdrFit);new ResizeObserver(hdrFit).observe(document.qu
 
 
 // ----- TEST : augmenter le budget global -----
-function tstUi(){const on=TPLUS>0,t=$("tsti");if(t){t.hidden=!on;t.querySelector("b").textContent="test +"+f0(TPLUS)}
+function tstUi(){const on=TPLUS>0,t=$("tsti");if(t){t.hidden=!on;t.querySelector("b>span").textContent="+"+f0(TPLUS)}
   const st=$("tstst");if(st){const R=DATA.rows.concat(extraRows()),B=tstBase(R);
     st.innerHTML=on?`<b class="tsti">Test actif : +${f0(TPLUS)}</b> · budget des articles suivis ${f0(B)} → <b>${f0(B+TPLUS)}</b>${B>0?` (+${(TPLUS/B*100).toLocaleString("fr-FR",{maximumFractionDigits:1})} % sur chaque article suivi)`:" — aucun article suivi avec un budget : rien à répartir"}`:"Aucun test en cours : budget réel."}
   const v=$("tstv");if(v&&document.activeElement!==v)v.value=on?Math.round(TPLUS*100)/100:""}
