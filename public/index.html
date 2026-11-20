@@ -917,9 +917,10 @@ details.dsec>summary::after,details.rgsub>summary::after,details.rgdl>summary::a
 /* « Outils avancés » : sous-parties test et remise à zéro */
 #devc .dvs{border-top:1px solid var(--ln);padding:12px 0 4px;margin-top:8px}.h3i{display:flex;align-items:center;gap:8px;font-size:1rem;margin:0 0 6px}.h3i .si{width:19px;height:19px;color:var(--mu)}
 #devc .rzc .h3i,#devc .rzc .h3i .si{color:var(--h,#c8473a)}.ro #devc{display:none!important}
+.rgav select{font:inherit;padding:6px 8px;border:1px solid var(--ln);border-radius:8px;background:var(--card);color:var(--tx)}
 </style></head>
 <body><main>
-<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261120.8</small></span></span>
+<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261120.9</small></span></span>
   <span class="hb"><span class="urd" id="urd" hidden><button type="button" class="sgb" id="undo" aria-label="Annuler la dernière modification" title="Annuler"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button><button type="button" class="sgb" id="redo" aria-label="Rétablir la modification" title="Rétablir"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg></button></span><span class="hbr hmn"><button type="button" class="sgb" data-pg="home">Suivi</button><button type="button" class="sgb" data-pg="reg">Budget</button><button type="button" class="sgb" data-pg="set">Paramètres</button><button type="button" class="sgb" id="nav2" hidden></button><i class="nsep" id="nsep" hidden></i><button type="button" class="sgb" id="nav" hidden>Paramètres<svg class="chv" viewBox="0 0 12 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4l6 8-6 8"/></svg></button><button class="tbtn" id="fs" aria-label="Plein écran" title="Plein écran"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button></span></span>
 </h1>
 <div class="sub"><div id="org"></div><div>Dépenses <span id="yr"></span> · <span id="dtw">situation au <b id="dt"></b></span><span id="tsti" hidden> · <b class="tsti" title="Test : augmentation du budget global"><svg class="tsic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-label="Test"><path d="M9 3h6M10 3v6L4.5 18.5A1.7 1.7 0 0 0 6 21h12a1.7 1.7 0 0 0 1.5-2.5L14 9V3"/><path d="M7 15h10"/></svg><span></span></b></span></div></div>
@@ -2519,14 +2520,15 @@ $("rggen").onclick=()=>{const sel=REGD.filter(d=>RGSEL.has(d.id)).sort((a,b)=>(a
   const tot=sel.reduce((s,d)=>s+(+d.montant||0),0),ds=sel.map(d=>d.date).filter(Boolean).sort(),from=ds[0]||"",to=ds[ds.length-1]||"";
   const byA={};sel.forEach(d=>byA[d.compte]=(byA[d.compte]||0)+(+d.montant||0));
   const n0=(()=>{const imp=new Set(RGET.filter(e=>e.src==="import").map(e=>e.id));return REGD.filter(d=>imp.has(d.etat)).reduce((m,d)=>Math.max(m,parseInt(d.piece)||0),Math.max(0,parseInt(RGCFG.lastPiece)||0))+REGD.filter(d=>d.etat&&!imp.has(d.etat)).length})();
+  const yr0=+(to||from||"").slice(0,4)||YEAR,yrOpts=[...new Set([...sitYears(),YEAR,yr0-1,yr0,yr0+1,+(from||"").slice(0,4)||yr0,new Date().getFullYear()].map(Number).filter(Boolean))].sort((a,b)=>a-b);
   openModal(`<h3>Créer l'état de régie ?</h3>
     <div class="rgcf"><div><span>Période</span><b>${from?`du ${fd(from)} au ${fd(to)}`:"—"}</b></div><div><span>Dépenses</span><b>${sel.length}</b></div><div><span>Montant total</span><b class="rgm">${f(tot)}</b></div></div>
     <table class="rgct">${Object.entries(byA).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`<tr><td>${esc(nameOf(k))} <small>${esc(k)}</small></td><td>${f(v)}</td></tr>`).join("")}</table>
-    <div class="rgav"><label>Montant maximal de l'avance<input type="number" id="mrmax" step="0.01" value="${RGCFG.max??9000}"></label><label>Montant déjà « consommé »<input type="number" id="mrdej" step="0.01" value="${rgDeja(from).toFixed(2)}"></label><div>Montant restant après cet état <b id="mrres"></b></div></div>
+    <div class="rgav"><label>Année budgétaire<select id="mryr">${yrOpts.map(y=>`<option value="${y}"${y===yr0?" selected":""}>${y}</option>`).join("")}</select></label><label>Montant maximal de l'avance<input type="number" id="mrmax" step="0.01" value="${RGCFG.max??9000}"></label><label>Montant déjà « consommé »<input type="number" id="mrdej" step="0.01" value="${rgDeja(yr0).toFixed(2)}"></label><div>Montant restant après cet état <b id="mrres"></b></div></div>
     <p class="note">Les dépenses sont classées par date et reçoivent leur numéro de pièce (n° ${n0+1} à ${n0+sel.length}, à la suite des états déjà créés). L'état est enregistré dans la liste des états générés, d'où tu peux le télécharger en .ods ou en PDF.</p>
     <div class="mbt"><button class="tbtn" data-close>Annuler</button><button class="tbtn pri" id="mrget">Créer l'état</button></div>`,
-    ()=>{const up=()=>{$("mrres").textContent=f((+$("mrmax").value||0)-(+$("mrdej").value||0)-tot)};$("mrmax").oninput=up;$("mrdej").oninput=up;up();
-      $("mrget").onclick=async()=>{const e={id:"et"+Date.now().toString(36),at:new Date().toISOString(),from,to,max:+$("mrmax").value||0,deja:+$("mrdej").value||0};
+    ()=>{const up=()=>{$("mrres").textContent=f((+$("mrmax").value||0)-(+$("mrdej").value||0)-tot)};$("mrmax").oninput=up;$("mrdej").oninput=up;up();$("mryr").onchange=()=>{$("mrdej").value=rgDeja(+$("mryr").value).toFixed(2);up()};
+      $("mrget").onclick=async()=>{const e={id:"et"+Date.now().toString(36),at:new Date().toISOString(),from,to,max:+$("mrmax").value||0,deja:+$("mrdej").value||0,year:+$("mryr").value||yr0};
       RGET.push(e);sel.forEach(d=>d.etat=e.id);rgRenum();RGSEL.clear();saveRegD();saveRgEt();setDate();closeModal();renderRg();
 }})};
 ["rgett","rgart"].forEach(k=>$(k).addEventListener("change",e=>{const c=e.target.closest("[data-rgta]");if(!c)return;(RGTL[c.dataset.rgta]||[]).forEach(x=>c.checked?RGESEL.add(x.id):RGESEL.delete(x.id));renderRg()}));
@@ -2555,9 +2557,11 @@ $("rgetl").onclick=async e=>{const dl=e.target.closest("[data-rgdl]"),pd=e.targe
     openModal(`<h3>Supprimer cet état de régie ?</h3><p class="note">${et.from?`Du ${fd(et.from)} au ${fd(et.to)} · `:""}${n.length} pièce${n.length>1?"s":""} · ${f(n.reduce((s,d)=>s+(+d.montant||0),0))}<br>Les dépenses restent enregistrées et redeviennent sélectionnables ; les numéros de pièce des autres états sont réattribués.</p><div class="mbt"><button class="tbtn" data-close>Non</button><button class="tbtn pri" id="mrgx">Oui, supprimer</button></div>`,
       ()=>{$("mrgx").onclick=()=>{RGET=RGET.filter(r=>r.id!==et.id);rgRenum();saveRegD();saveRgEt();setDate();closeModal();renderRg();if(et.file&&CF.auth)cfFetch("files/documents/regie-etats/"+et.file,{method:"DELETE"}).catch(()=>{})}})}};
 // déjà « consommé » sur l'année : états générés avant celui-ci + états de régie importés de la même année, antérieurs à la période
-// avance déjà « consommée » : états de l'année antérieurs, hors états archivés (archivés = sortis de l'avance)
-function rgDeja(from){const y=(from||new Date().toISOString()).slice(0,4);let s=0;
-  RGET.forEach(e=>{if(!e.arch&&(e.to||e.from||"").slice(0,4)===y&&(!from||(e.to||"")<from))s+=REGD.filter(d=>d.etat===e.id).reduce((a,d)=>a+(+d.montant||0),0)});return Math.round(s*100)/100}
+// année budgétaire d'un état : choisie à sa création (sinon l'année de sa dernière dépense)
+const etYear=e=>+(e.year||(e.to||e.from||e.at||"").slice(0,4))||YEAR;
+// avance déjà « consommée » pour une année budgétaire : états de cette année seulement, créés avant (beforeAt), hors états archivés (sortis de l'avance)
+function rgDeja(year,beforeAt){let s=0;
+  RGET.forEach(e=>{if(!e.arch&&etYear(e)===+year&&(!beforeAt||(e.at||"")<beforeAt))s+=REGD.filter(d=>d.etat===e.id).reduce((a,d)=>a+(+d.montant||0),0)});return Math.round(s*100)/100}
 // ----- fichier ODS identique au « Tableau régie avance » (styles, colonnes, total, avance, synthèse par compte) -----
 const MOISF=["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"];
 const xe=v=>String(v??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
@@ -2599,7 +2603,7 @@ function dlBlob(blob,name){const u=URL.createObjectURL(blob),a=document.createEl
 async function rgPdf(id){const e=RGET.find(r=>r.id===id);if(!e)throw new Error("état introuvable");
   if(!window.jspdf)await loadScript(new URL("/lib/jspdf.umd.min.js",location.origin).href);
   if(!window.jspdf.jsPDF.API.autoTable)await loadScript(new URL("/lib/jspdf.plugin.autotable.min.js",location.origin).href);
-  if(e.max==null)e.max=RGCFG.max??9000;if(e.deja==null)e.deja=rgDeja(e.from);
+  if(e.max==null)e.max=RGCFG.max??9000;if(e.deja==null)e.deja=rgDeja(etYear(e),e.at);
   const L=rgSplit(REGD.filter(d=>d.etat===id).sort((a,b)=>String(a.piece).localeCompare(String(b.piece),"fr",{numeric:true}))),r2=v=>Math.round(v*100)/100,tot=r2(L.reduce((s,d)=>s+(+d.montant||0),0));
   const eu=v=>eurF(v).replace(/[  ]/g," "),m=e.from||e.at.slice(0,10),y=m.slice(0,4),mo=+m.slice(5,7)-1,dd=t=>t?t.slice(8,10)+"/"+t.slice(5,7)+"/"+t.slice(2,4):"";
   const doc=new window.jspdf.jsPDF({orientation:"landscape",unit:"mm",format:"a4"}),W=doc.internal.pageSize.getWidth(),H=doc.internal.pageSize.getHeight();
@@ -2623,7 +2627,7 @@ async function rgPdf(id){const e=RGET.find(r=>r.id===id);if(!e)throw new Error("
   const name=`Tableau régie avance AJ Selles sur cher - ${MOISF[mo]} ${y}${rgSuf(e)}.pdf`,blob=doc.output("blob");dlBlob(blob,name);if(e.pdf!==name){e.pdf=name;saveRgEt()}
   if(CF.auth)cfFetch("files/documents/regie-etats/"+name,{method:"PUT",headers:{"Content-Type":"application/pdf"},body:blob}).catch(()=>{});return name}
 async function rgDownload(id){const e=RGET.find(r=>r.id===id);if(!e)throw new Error("état introuvable");
-  if(e.max==null)e.max=RGCFG.max??9000;if(e.deja==null)e.deja=rgDeja(e.from);
+  if(e.max==null)e.max=RGCFG.max??9000;if(e.deja==null)e.deja=rgDeja(etYear(e),e.at);
   const L=REGD.filter(d=>d.etat===id).sort((a,b)=>String(a.piece).localeCompare(String(b.piece),"fr",{numeric:true})),{blob,name}=rgOds(e,L);
   dlBlob(blob,name);
   if(e.file!==name){e.file=name;saveRgEt()}
