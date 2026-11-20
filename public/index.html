@@ -914,9 +914,12 @@ details.dsec>summary::after,details.rgsub>summary::after,details.rgdl>summary::a
 /* fenêtre de saisie en haut de l'écran : le clavier ne la cache pas */
 #md.mtop{transition:padding-bottom .15s}
 .pg2a b{font-size:1.4rem}
+/* « Outils avancés » : sous-parties test et remise à zéro */
+#devc .dvs{border-top:1px solid var(--ln);padding:12px 0 4px;margin-top:8px}.h3i{display:flex;align-items:center;gap:8px;font-size:1rem;margin:0 0 6px}.h3i .si{width:19px;height:19px;color:var(--mu)}
+#devc .rzc .h3i,#devc .rzc .h3i .si{color:var(--h,#c8473a)}.ro #devc{display:none!important}
 </style></head>
 <body><main>
-<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261120.6</small></span></span>
+<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261120.7</small></span></span>
   <span class="hb"><span class="urd" id="urd" hidden><button type="button" class="sgb" id="undo" aria-label="Annuler la dernière modification" title="Annuler"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button><button type="button" class="sgb" id="redo" aria-label="Rétablir la modification" title="Rétablir"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg></button></span><span class="hbr hmn"><button type="button" class="sgb" data-pg="home">Suivi</button><button type="button" class="sgb" data-pg="reg">Budget</button><button type="button" class="sgb" data-pg="set">Paramètres</button><button type="button" class="sgb" id="nav2" hidden></button><i class="nsep" id="nsep" hidden></i><button type="button" class="sgb" id="nav" hidden>Paramètres<svg class="chv" viewBox="0 0 12 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4l6 8-6 8"/></svg></button><button class="tbtn" id="fs" aria-label="Plein écran" title="Plein écran"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button></span></span>
 </h1>
 <div class="sub"><div id="org"></div><div>Dépenses <span id="yr"></span> · <span id="dtw">situation au <b id="dt"></b></span><span id="tsti" hidden> · <b class="tsti" title="Test : augmentation du budget global"><svg class="tsic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-label="Test"><path d="M9 3h6M10 3v6L4.5 18.5A1.7 1.7 0 0 0 6 21h12a1.7 1.7 0 0 0 1.5-2.5L14 9V3"/><path d="M7 15h10"/></svg><span></span></b></span></div></div>
@@ -1140,24 +1143,28 @@ details.dsec>summary::after,details.rgsub>summary::after,details.rgdl>summary::a
     <h3 class="h3s">Notifications</h3>
     <div id="pshb"></div>
   </details>
-  <div class="card up" id="thc">
-    <h2 class="h2i"><svg class="si" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18c1.4 0 2-1 2-2 0-.6-.3-1-.6-1.4-.3-.4-.5-.8-.5-1.3 0-1 .8-1.8 1.8-1.8H17a4 4 0 0 0 4-4c0-4.2-4-7.5-9-7.5Z"/><circle cx="7.5" cy="11" r="1.2" fill="currentColor"/><circle cx="10" cy="7" r="1.2" fill="currentColor"/><circle cx="15" cy="7.5" r="1.2" fill="currentColor"/></svg>Couleur du thème</h2>
+  <details class="card up dsec" id="thc">
+    <summary><svg class="si" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18c1.4 0 2-1 2-2 0-.6-.3-1-.6-1.4-.3-.4-.5-.8-.5-1.3 0-1 .8-1.8 1.8-1.8H17a4 4 0 0 0 4-4c0-4.2-4-7.5-9-7.5Z"/><circle cx="7.5" cy="11" r="1.2" fill="currentColor"/><circle cx="10" cy="7" r="1.2" fill="currentColor"/><circle cx="15" cy="7.5" r="1.2" fill="currentColor"/></svg><b>Couleur du thème</b></summary>
     <div class="thm" id="thm" role="radiogroup" aria-label="Mode d'affichage"><button type="button" data-t="auto" role="radio" title="Selon le réglage de l'appareil">Système</button><button type="button" data-t="light" role="radio">Clair</button><button type="button" data-t="dark" role="radio">Sombre</button></div>
     <div class="acc" id="acc"></div>
     <div class="sl2"><label for="acci">Intensité</label><input id="acci" type="range" min="-100" max="100" step="5" value="0"><span id="accv">Normale</span></div>
     <label class="chk2"><input type="checkbox" id="sbc"><span>Colorer la barre système dans le thème<small>Sinon, elle garde sa couleur par défaut.</small></span></label>
-  </div>
-  <div class="card up" id="tstc">
-    <h2 class="h2i"><svg class="si" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M10 3v6L4.5 18.5A1.7 1.7 0 0 0 6 21h12a1.7 1.7 0 0 0 1.5-2.5L14 9V3"/><path d="M7 15h10"/></svg>Test : augmenter le budget global</h2>
+  </details>
+  <details class="card up dsec" id="devc">
+    <summary><svg class="si" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg><b>Outils avancés</b></summary>
+    <p class="note" style="margin:4px 0 6px">Opérations de test et de maintenance.</p>
+  <div class="dvs" id="tstc">
+    <h3 class="h3i"><svg class="si" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M10 3v6L4.5 18.5A1.7 1.7 0 0 0 6 21h12a1.7 1.7 0 0 0 1.5-2.5L14 9V3"/><path d="M7 15h10"/></svg>Test : augmenter le budget global</h3>
     <p class="note">Pour essayer : le montant s'ajoute au budget, réparti uniquement sur les articles suivis, au prorata de leur budget voté. Uniquement sur cet appareil : rien n'est enregistré dans la situation, les sauvegardes ou en ligne. « Retirer » revient au budget réel.</p>
     <div class="tstr"><label class="tstf"><input type="number" id="tstv" inputmode="decimal" min="0" step="100" placeholder="Montant"><span>€</span></label><button class="tbtn pri" id="tstgo">Appliquer</button><button class="tbtn" id="tstno">Retirer</button></div>
     <div class="note" id="tstst" style="margin-top:8px"></div>
   </div>
-  <div class="card up rzc" id="rzc">
-    <h2 class="h2i"><svg class="si" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>Remise à zéro</h2>
+  <div class="dvs rzc" id="rzc">
+    <h3 class="h3i"><svg class="si" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>Remise à zéro</h3>
     <p class="note">Remet à zéro toute la situation budgétaire : consommation des articles, situation importée, périodes (clé 2026, aucune terminée), dépenses, engagements et états de régie. Les personnes autorisées (accès externes) sont conservées, ainsi que les paramètres de la régie, les natures, le lien de consultation, la sauvegarde en ligne et le thème.</p>
     <button class="tbtn rzb" id="rzgo">Remettre à zéro la situation budgétaire</button>
   </div>
+  </details>
 </section>
 
 
