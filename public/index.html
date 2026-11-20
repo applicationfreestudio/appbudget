@@ -890,9 +890,22 @@ details.dsec>summary::after,details.rgsub>summary::after,details.rgdl>summary::a
 /* jauge non réglable (verrouillée, montant bloqué…) : nettement grisée */
 .pg2.off{opacity:.45;filter:grayscale(1)}.pg2.off .pg2a{pointer-events:none}
 .pg2u{all:unset;cursor:pointer;margin-left:6px;padding:3px 10px;border-radius:9px;border:1px solid color-mix(in srgb,var(--a) 50%,var(--ln));color:var(--a);font-weight:700;font-size:.8rem;white-space:nowrap}
+/* curseur de la jauge : plus petit, blanc à l'intérieur */
+.pg2t{width:18px;height:18px;margin:-9px 0 0 -9px;border-width:2px;background:#fff}
+/* fenêtres minimalistes (prévu, consommé) */
+.mni{display:flex;flex-direction:column;gap:6px}.mnh{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:.85rem;font-weight:700;color:var(--mu)}
+.mnx{all:unset;cursor:pointer;font-size:1.5rem;line-height:1;padding:0 4px;color:var(--mu)}
+.mni .pvin{margin:4px 0 0;min-width:0}.mni .pvin input{min-width:0;width:100%;box-sizing:border-box}.mnr{font-size:.78rem;color:var(--mu);text-align:right}.mnok{width:100%;margin-top:6px;padding:11px}
+.pcw.big .pam>span:first-child{cursor:pointer;border-radius:8px}.pcw.big .pam>span:first-child small::after{content:" ›";font-weight:800}
+.cdh{display:flex;justify-content:space-between;align-items:baseline;font-size:.85rem;color:var(--mu);padding:2px 0 6px;border-bottom:1px solid var(--ln)}.cdh b{font-size:1.1rem;color:var(--tx)}
+.cdl{max-height:58vh;overflow:auto;-webkit-overflow-scrolling:touch;margin:0 -4px;padding:0 4px}
+.cdr{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--ln)}.cdr:last-child{border-bottom:0}
+.cdi{flex:none;display:grid;place-items:center;width:30px;height:30px;border-radius:9px;background:var(--bg);color:var(--a)}.cdi .eng{color:#8a5a00}
+.cdt{flex:1;min-width:0;display:flex;flex-direction:column}.cdt b{font-size:.9rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cdt small .nfc{display:inline-grid;vertical-align:-4px;transform:scale(.8);margin-right:2px}
+.cdt small{font-size:.76rem;color:var(--mu);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cdm{flex:none;font-size:.92rem;font-variant-numeric:tabular-nums}
 </style></head>
 <body><main>
-<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261120.1</small></span></span>
+<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261120.2</small></span></span>
   <span class="hb"><span class="urd" id="urd" hidden><button type="button" class="sgb" id="undo" aria-label="Annuler la dernière modification" title="Annuler"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button><button type="button" class="sgb" id="redo" aria-label="Rétablir la modification" title="Rétablir"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg></button></span><span class="hbr hmn"><button type="button" class="sgb" data-pg="home">Suivi</button><button type="button" class="sgb" data-pg="reg">Budget</button><button type="button" class="sgb" data-pg="set">Paramètres</button><button type="button" class="sgb" id="nav2" hidden></button><i class="nsep" id="nsep" hidden></i><button type="button" class="sgb" id="nav" hidden>Paramètres<svg class="chv" viewBox="0 0 12 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4l6 8-6 8"/></svg></button><button class="tbtn" id="fs" aria-label="Plein écran" title="Plein écran"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button></span></span>
 </h1>
 <div class="sub"><div id="org"></div><div>Dépenses <span id="yr"></span> · <span id="dtw">situation au <b id="dt"></b></span><span id="tsti" hidden> · <b class="tsti" title="Test : augmentation du budget global"><svg class="tsic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-label="Test"><path d="M9 3h6M10 3v6L4.5 18.5A1.7 1.7 0 0 0 6 21h12a1.7 1.7 0 0 0 1.5-2.5L14 9V3"/><path d="M7 15h10"/></svg><span></span></b></span></div></div>
@@ -1422,7 +1435,7 @@ function summary(live){
 
 // ===== Fenêtre modale =====
 function openModal(html,after){$("mdb").innerHTML=html;$("md").hidden=false;document.documentElement.classList.add("lock");after&&after()}
-function closeModal(){$("md").hidden=true;document.documentElement.classList.remove("lock")}
+function closeModal(){$("md").hidden=true;if(!(typeof BIG!=="undefined"&&BIG))document.documentElement.classList.remove("lock")}
 $("md").addEventListener("click",e=>{if(e.target.id==="md"||e.target.closest("[data-close]"))closeModal()});
 addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("md").hidden)closeModal()});
 
@@ -1455,8 +1468,8 @@ function renderPhase(){
     if(!big){const bw=pbW(cons,C.adj[i],rest);   // carte de base : dépense (bleu = prévu, rouge = au-delà de l'alloué), or si terminée
       return `<div class="pcw ${cls}" data-pw="${x.id}">${lb}${hd}<div class="pbar">${pas?`<i style="width:100%;background:var(--w)"></i>`:`<i class="pbf" style="width:${bw[0]}%"></i><i class="pbx" style="width:${bw[1]}%"></i>`}</div></div>`}
     // carte agrandie : une seule jauge ; le rond et le montant « Prévu » se règlent au doigt (glisser) ou à la main (toucher le montant)
-    const A=C.adj[i],xm=C.xmax[i],tgv=BIGT&&BIGT.id===x.id?BIGT.need:0,off=pas||!!x.fix||!!x.lock||!(xm>A+0.5||A>cons+0.5)||RO,S=pg2S(A,cons,tgv,xm);
-    const why=pas?"":x.fix?"Montant bloqué : le prévu ne se règle pas.":x.lock?`Période verrouillée dans les paramètres : le prévu ne se règle pas.${RO?"":` <button type="button" class="pg2u" data-unlk="${x.id}">Déverrouiller</button>`}`:!(C.Rv>0)?"Plus de restant à répartir : le prévu ne peut pas augmenter.":"";
+    const A=C.adj[i],xm=xmaxS(C,i),tgv=BIGT&&BIGT.id===x.id?BIGT.need:0,off=pas||!!x.fix||!(xm>A+0.5||A>cons+0.5)||RO,S=pg2S(A,cons,tgv,xm);
+    const why=pas?"":x.fix?"Montant bloqué : le prévu ne se règle pas.":!(C.Rv>0)?"Plus de restant à répartir : le prévu ne peut pas augmenter.":"";
     return `<div class="pcw big ${cls}" data-pw="${x.id}">${lb}${hd}
       <div class="pslz">${pas?`<div class="pbar pbg"><i style="width:100%;background:var(--w)"></i></div>`:`<div class="pg2${off?" off":""}" data-pg2="${x.id}" data-s="${S}" data-xm="${xm}" data-cons="${cons}" data-tg="${tgv||""}" style="${pg2V(cons,A,S,tgv)}">
         <div class="pg2b"><i class="pg2f"></i><i class="pg2x"></i>${tgv>0?'<i class="pg2g" title="Prévu à atteindre pour la dépense"></i>':""}<i class="pg2t"></i></div>
@@ -1548,7 +1561,7 @@ function phFixSet(q,on){if(on){const C=phCalc(),i=C.L.findIndex(x=>x.id===q.id);
 function bigClose(){BIG=null;BIGT=null;BIGF=false;savePH();setDate();renderHome();if(!$("rgov").hidden){document.documentElement.classList.add("lock");rgPerUi()}}
 phOn("click",e=>{const t=e.target;
   const fb=t.closest("[data-fxb]");if(fb){const q=PH.find(x=>x.id===fb.dataset.fxb);if(q){phFixSet(q,!q.fix);savePH();renderHome()}return}
-  {const ub=t.closest("[data-unlk]");if(ub){const q=PH.find(x=>x.id===ub.dataset.unlk);if(q){phLock(q,false);savePH();setDate();renderHome()}return}}
+  {const cs=t.closest(".pcw.big .pam>span:first-child");if(cs){const w=cs.closest(".pcw[data-pw]");if(w)consAsk(w.dataset.pw);return}}
   if(t.closest(".psl,.pve,.pdn"))return;
   if(t.closest("#pbo")){bigClose();return}                                         // carte agrandie, liste ou fond : retour en carte de base
   const w=t.closest(".pcw[data-pw]");if(!w)return;
@@ -1584,25 +1597,38 @@ const pg2S=(A,c,tg,xm)=>{const m=Math.max(A*1.25,c*1.25,tg*1.12,50),k=Math.pow(1
 const pg2V=(c,A,S,tg)=>{const p=Math.max(0,Math.min(100,A/S*100)),b=Math.max(0,Math.min(c,A))/S*100,x=Math.max(0,Math.min(100,c/S*100))-b;return `--p:${p}%;--c:${b}%;--x:${Math.max(0,x)}%;--b0:${b}%;--g:${tg>0?Math.min(100,tg/S*100):0}%`};
 function pg2Paint(g,A){const S=+g.dataset.s,c=+g.dataset.cons||0,tg=+g.dataset.tg||0;g.setAttribute("style",pg2V(c,A,S,tg));const b=g.querySelector("[data-pv]");if(b)b.textContent=f0(A)}
 // règle le prévu de la période id à X € : sa part (%) change, les autres périodes réglables suivent au prorata
+// suivi : prévu maximal d'une période — le verrou des Paramètres ne compte pas ici, seul « Montant bloqué » fige
+function xmaxS(C,i){const x=C.L[i];if(C.sel[i]||(x.fix&&x.fixAmt!=null)||!(C.Rv>0)||!(C.W>0))return C.adj[i];let no=0;C.L.forEach((y,j)=>{if(j!==i&&!C.sel[j]&&!(y.fix&&y.fixAmt!=null))no++});return C.cons[i]+C.Rv*Math.max(0,C.W-1e-4*no)/C.W}
 function pvSet(id,X){
   if(!PVB||PVB.id!==id){const C=phCalc();PVB={id,C,i:C.L.findIndex(x=>x.id===id),p:new Map(PH.map(x=>[x.id,+x.pct||0]))}}
   const {C,i}=PVB;if(i<0)return null;const cons=C.cons[i],Rv=C.Rv,W=C.W,r6=x=>Math.round(x*1e6)/1e6;if(!(Rv>0)||!(W>0))return null;
-  X=Math.max(cons,Math.min(C.xmax[i],X));
-  const O=C.L.filter((y,j)=>j!==i&&!C.sel[j]&&!y.fix&&!y.lock).map(y=>y.id),lk=C.L.reduce((s,y,j)=>s+(j!==i&&!C.sel[j]&&!y.fix&&y.lock?PVB.p.get(y.id):0),0),sO=O.reduce((s,k)=>s+PVB.p.get(k),0);
+  X=Math.max(cons,Math.min(xmaxS(C,i),X));
+  const O=C.L.filter((y,j)=>j!==i&&!C.sel[j]&&!y.fix).map(y=>y.id),lk=0,sO=O.reduce((s,k)=>s+PVB.p.get(k),0);
   const av=W-lk,pi=Math.max(1e-4,Math.min(av-1e-4*O.length,W*(X-cons)/Rv)),nO=av-pi;
   PH.forEach(y=>{if(y.id===id)y.pct=r6(pi);else if(O.includes(y.id))y.pct=r6(sO>0?Math.max(1e-4,PVB.p.get(y.id)*nO/sO):nO/O.length)});
   PH.forEach(x=>{const r=document.querySelector(`.phr[data-id="${x.id}"]`);if(!r)return;const n=r.querySelector("[data-k=pct]");if(n)n.value=Math.round(x.pct*100)/100});phSum();
   const C2=phCalc();renderHome(true);phLive(C2,id);return C2}
 // saisie à la main du prévu
-function pvAsk(id){const C=phCalc(),i=C.L.findIndex(x=>x.id===id);if(i<0)return;const x=C.L[i],mn=C.cons[i],mx=C.xmax[i];
-  openModal(`<h3>Prévu : ${x.name?phName(x.name):"Période"}</h3><p class="note">Entre ${f0(Math.ceil(mn))} (dépenses de la période) et ${f0(Math.floor(mx))}. Les autres périodes en cours sont ajustées au prorata de leur clé.</p>
-    <label class="pvin"><input id="pvv" type="text" inputmode="decimal" value="${Math.round(C.adj[i])}" aria-label="Montant prévu en euros"><span>€</span></label><div class="rgerr" id="pverr"></div>
-    <div class="mbt"><button class="tbtn" data-close>Annuler</button><button class="tbtn pri" id="pvok">Valider</button></div>`,()=>{const inp=$("pvv");setTimeout(()=>{inp.focus();inp.select()},50);
-    const ok=()=>{const v=parseFloat(String(inp.value).replace(/[\s €]/g,"").replace(",","."));if(!isFinite(v)){$("pverr").textContent="Montant invalide.";return}
-      if(v<mn-0.5||v>mx+0.5){$("pverr").textContent=`Le prévu doit être entre ${f0(Math.ceil(mn))} et ${f0(Math.floor(mx))}.`;return}
+function pvAsk(id){const C=phCalc(),i=C.L.findIndex(x=>x.id===id);if(i<0)return;const x=C.L[i],mn=C.cons[i],mx=xmaxS(C,i);
+  openModal(`<div class="mni"><div class="mnh"><span>Prévu · ${x.name?phName(x.name):"Période"}</span><button type="button" class="mnx" data-close aria-label="Fermer">×</button></div>
+    <label class="pvin"><input id="pvv" type="text" inputmode="decimal" value="${Math.round(C.adj[i])}" aria-label="Montant prévu en euros"><span>€</span></label>
+    <div class="mnr">de ${f0(Math.ceil(mn))} à ${f0(Math.floor(mx))}</div><div class="rgerr" id="pverr"></div>
+    <button class="tbtn pri mnok" id="pvok">Valider</button></div>`,()=>{const inp=$("pvv");setTimeout(()=>{inp.focus();inp.select()},50);
+    const ok=()=>{const v=parseFloat(String(inp.value).replace(/[\s €]/g,"").replace(",","."));if(!isFinite(v)){$("pverr").textContent="Montant invalide.";return}
+      if(v<mn-0.5||v>mx+0.5){$("pverr").textContent=`Entre ${f0(Math.ceil(mn))} et ${f0(Math.floor(mx))}.`;return}
       PVB=null;pvSet(id,v);PVB=null;closeModal();savePH();setDate();renderHome()};
     $("pvok").onclick=ok;inp.onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();ok()}}})}
+// détail du consommé d'une période : les dépenses rattachées, à parcourir
+function consAsk(id){const p=PH.find(x=>x.id===id);if(!p)return;const L=rgLive().filter(d=>d.per===id).sort((a,b)=>(b.date||"").localeCompare(a.date||""));
+  const tot=L.reduce((s,d)=>s+(+d.montant||0),0),nfI=(document.querySelector(".rgcnf .nfc")||{}).outerHTML||"";
+  const row=d=>{const nat=natStrip(d.compte,d.nature)||d.compte||"",ob=[d.objet,d.tiers].filter(Boolean).join(" · ");
+    return `<div class="cdr"><span class="cdi">${isEng(d)?ICO_ENG:ICO_RG}</span><div class="cdt"><b>${esc(nat)}</b><small>${d.nf?`${nfI} sans facture · `:""}${d.date?fd(d.date):""}${d.piece?` · n° ${d.piece}`:""}${ob?` · ${esc(ob)}`:""}</small></div><b class="cdm">${f0c(+d.montant||0)}</b></div>`};
+  openModal(`<div class="mni"><div class="mnh"><span>Consommé · ${p.name?phName(p.name):"Période"}</span><button type="button" class="mnx" data-close aria-label="Fermer">×</button></div>
+    <div class="cdh"><span>${L.length} dépense${L.length>1?"s":""}</span><b>${f0c(tot)}</b></div>
+    <div class="cdl">${L.length?L.map(row).join(""):'<div class="note">Aucune dépense rattachée à cette période.</div>'}</div></div>`)}
+const f0c=v=>v.toLocaleString("fr-FR",{minimumFractionDigits:2,maximumFractionDigits:2})+"\u202f€";
 // glisser le doigt sur le montant (ou la jauge) : le rond suit ; maintenu au bout, l'échelle s'agrandit
+let PG2MV=0;
 (()=>{let D=null;
   const g=()=>D&&(D.g.isConnected?D.g:(D.g=document.querySelector(`.pg2[data-pg2="${D.id}"]`)||D.g));
   const apply=v=>{const G=g();if(D.tg&&Math.abs(v-D.tg)<=D.S*0.025)v=D.tg;else v=Math.round(v);D.v=v;const C=pvSet(D.id,v);if(C){const i=C.L.findIndex(x=>x.id===D.id);G.dataset.s=D.S;G.dataset.cons=C.cons[i];pg2Paint(G,C.adj[i])}};
@@ -1617,9 +1643,11 @@ function pvAsk(id){const C=phCalc(),i=C.L.findIndex(x=>x.id===id);if(i<0)return;
     apply(Math.max(0,Math.min(D.S,raw)))},{passive:false});
   const end=e=>{if(!D||e.pointerId!==D.pid)return;if(D.tm)clearInterval(D.tm);const d=D;D=null;
     if(d.mv){if(d.tg&&Math.abs(d.v-d.tg)<0.5){for(let it=0;it<4;it++){const C=phCalc(),i=C.L.findIndex(x=>x.id===d.id);if(Math.abs(C.adj[i]-d.tg)<0.005)break;PVB=null;pvSet(d.id,d.tg)}}PVB=null;savePH();setDate();renderHome()}
-    else if(e.type==="pointerup"&&e.target.closest&&e.target.closest(".pg2a"))pvAsk(d.id)};
+    else{} if(d.mv)PG2MV=Date.now()};
   document.addEventListener("pointerup",end);document.addEventListener("pointercancel",end);
-  document.addEventListener("click",e=>{if(e.target.closest&&e.target.closest(".pg2"))e.stopPropagation()},true);
+  // toucher « Prévu » : la fenêtre s'ouvre au clic (et non au relâcher), sinon ce même clic retombait sur le fond de la fenêtre et la refermait aussitôt
+  document.addEventListener("click",e=>{if(!(e.target.closest&&e.target.closest(".pg2")))return;e.stopPropagation();
+    const a=e.target.closest(".pg2a[data-pa]");if(a&&Date.now()-PG2MV>350)pvAsk(a.dataset.pa)},true);
   document.addEventListener("keydown",e=>{const a=e.target.closest&&e.target.closest(".pg2a[data-pa]");if(a&&(e.key==="Enter"||e.key===" ")){e.preventDefault();pvAsk(a.dataset.pa)}});
 })();
 function pveSlide(id,v){
