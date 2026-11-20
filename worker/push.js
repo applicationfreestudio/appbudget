@@ -68,16 +68,17 @@ export async function encryptPayload(sub, text) {
 }
 
 // Envoie un message à tous les appareils abonnés ; supprime les abonnements expirés
-export async function notifyAll(env, msg, subject) {
+// prefix : appareils de l'administrateur (par défaut) ou d'une personne autorisée (acces/dpush/<id>/)
+export async function notifyAll(env, msg, subject, prefix = "acces/push/") {
   if (!env.FILES) return 0;
-  const list = await env.FILES.list({ prefix: "acces/push/" });
+  const list = await env.FILES.list({ prefix });
   if (!list.objects.length) return 0;
   const v = await vapidKeys(env);
   let n = 0;
   await Promise.all(list.objects.map(async (o) => {
     try {
       const sub = await (await env.FILES.get(o.key)).json();
-      const body = await encryptPayload(sub, JSON.stringify(msg));
+      const body = await encryptPayload(sub, JSON.stringify(sub.url ? { ...msg, url: sub.url } : msg));
       const r = await fetch(sub.endpoint, {
         method: "POST",
         headers: { Authorization: await vapidAuth(sub.endpoint, v, subject), "Content-Encoding": "aes128gcm", "Content-Type": "application/octet-stream", TTL: "86400", Urgency: "high" },

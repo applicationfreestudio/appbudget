@@ -63,6 +63,25 @@ export async function recapAcces(request, env, url, rest, ctx) {
     if (!d || d.id !== m[1]) return json({ error: "demande introuvable" }, 404);
     return json({ id: d.id, nom: d.nom, prenom: d.prenom, email: d.email, status: d.status, at: d.at });
   }
+  // notifications de la personne (ex. « accès accordé ») : clé publique, abonnement de son appareil
+  if (rest === "push/key" && request.method === "GET") return json({ key: (await vapidKeys(env)).pub });
+  m = rest.match(/^acces\/([a-z0-9]{12})\/push$/);
+  if (m && (request.method === "POST" || request.method === "DELETE")) {
+    const d = await delegate(request, env);
+    if (!d || d.id !== m[1]) return json({ error: "accès non reconnu" }, 401);
+    let b;
+    try { b = await readBody(request, 4096); } catch (_) { return json({ error: "requête invalide" }, 400); }
+    const s = b.sub || {};
+    if (!/^https:\/\//.test(String(s.endpoint || ""))) return json({ error: "abonnement invalide" }, 400);
+    const pre = `acces/dpush/${d.id}/`, key = pre + (await sha(s.endpoint)) + ".json";
+    if (request.method === "DELETE") { await env.FILES.delete(key); return json({ ok: true }); }
+    if (!s.keys || !s.keys.p256dh || !s.keys.auth) return json({ error: "abonnement invalide" }, 400);
+    const have = await env.FILES.list({ prefix: pre });
+    if (have.objects.length >= 5 && !have.objects.some((o) => o.key === key)) return json({ error: "trop d'appareils" }, 429);
+    const base = url.pathname.replace(/\/acces\/[a-z0-9]{12}\/push$/, "");
+    await put(env, key, { endpoint: s.endpoint, keys: { p256dh: s.keys.p256dh, auth: s.keys.auth }, url: base, at: new Date().toISOString() });
+    return json({ ok: true });
+  }
   // saisie d'une dépense
   if (rest === "saisie" && request.method === "POST") {
     const d = await delegate(request, env);
@@ -129,12 +148,21 @@ export async function apiAcces(request, env, url, path, ctx) {
     let b;
     try { b = await readBody(request, 1024); } catch (_) { return json({ error: "requête invalide" }, 400); }
     const a = b.action;
-    if (a === "supprimer") { await env.FILES.delete(key); return json({ ok: true }); }
+    if (a === "supprimer") {
+      await env.FILES.delete(key);
+      const ps = await env.FILES.list({ prefix: `acces/dpush/${d.id}/` });
+      await Promise.all(ps.objects.map((o) => env.FILES.delete(o.key)));
+      return json({ ok: true });
+    }
     const st = { accepter: "active", refuser: "refusee", revoquer: "revoquee" }[a];
     if (!st) return json({ error: "action inconnue" }, 400);
+    const was = d.status;
     d.status = st;
     d.decidedAt = new Date().toISOString();
     await put(env, key, d);
+    // confirmation à la personne, sur les appareils où elle a activé les notifications
+    if (st === "active" && was !== "active")
+      ctx.waitUntil(notifyAll(env, { title: "Accès accordé", body: `Bonjour ${d.prenom}, ton accès est validé : tu peux maintenant saisir des dépenses.`, url: "/", tag: "acces-ok" }, subject(url), `acces/dpush/${d.id}/`));
     return json({ ok: true, demande: pub(d) });
   }
   // notifications : clé publique, abonnement d'un appareil, test
