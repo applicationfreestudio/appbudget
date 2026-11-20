@@ -895,7 +895,7 @@ details.dsec>summary::after,details.rgsub>summary::after,details.rgdl>summary::a
 /* fenêtres minimalistes (prévu, consommé) */
 .mni{display:flex;flex-direction:column;gap:6px}.mnh{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:.85rem;font-weight:700;color:var(--mu)}
 .mnx{all:unset;cursor:pointer;font-size:1.5rem;line-height:1;padding:0 4px;color:var(--mu)}
-.mni .pvin{margin:4px 0 0;min-width:0}.mni .pvin input{min-width:0;width:100%;box-sizing:border-box}.mnr{font-size:.78rem;color:var(--mu);text-align:right}.mnok{width:100%;margin-top:6px;padding:11px}
+.mni .pvin{margin:4px 0 0;min-width:0}.mni .pvin input{min-width:0;width:100%;box-sizing:border-box}.mnr{font-size:.78rem;color:var(--mu);text-align:right}.mnb{display:flex;justify-content:flex-end;margin-top:4px}.mnok{padding:8px 16px;font-weight:700;color:var(--a);border-color:color-mix(in srgb,var(--a) 40%,var(--ln))}
 .pcw.big .pam>span:first-child{cursor:pointer;border-radius:8px}.pcw.big .pam>span:first-child small::after{content:" ›";font-weight:800}
 .cdh{display:flex;justify-content:space-between;align-items:baseline;font-size:.85rem;color:var(--mu);padding:2px 0 6px;border-bottom:1px solid var(--ln)}.cdh b{font-size:1.1rem;color:var(--tx)}
 .cdl{max-height:58vh;overflow:auto;-webkit-overflow-scrolling:touch;margin:0 -4px;padding:0 4px}
@@ -911,9 +911,11 @@ details.dsec>summary::after,details.rgsub>summary::after,details.rgdl>summary::a
 /* carte agrandie : positions figées */
 .pcw.big .pph{visibility:hidden;min-height:26px;box-sizing:border-box}.pcw.big .pn{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .mni[data-close]{cursor:pointer}
+/* fenêtre de saisie en haut de l'écran : le clavier ne la cache pas */
+#md.mtop{align-items:flex-start;padding-top:max(56px,calc(env(safe-area-inset-top) + 40px))}
 </style></head>
 <body><main>
-<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261120.3</small></span></span>
+<h1><span class="ti"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" style="fill:var(--acl,#2a6fb0)"/><path d="M8 25.5a11 11 0 0 1 20 0" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.6" stroke-linecap="round"/><text x="18" y="24" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-weight="800" font-size="17" fill="#fff">€</text><circle cx="27.5" cy="9" r="3" fill="#e6b84a"/></svg><span class="tt"><span id="ttl">App Budget</span><small class="ver">v261120.4</small></span></span>
   <span class="hb"><span class="urd" id="urd" hidden><button type="button" class="sgb" id="undo" aria-label="Annuler la dernière modification" title="Annuler"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button><button type="button" class="sgb" id="redo" aria-label="Rétablir la modification" title="Rétablir"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg></button></span><span class="hbr hmn"><button type="button" class="sgb" data-pg="home">Suivi</button><button type="button" class="sgb" data-pg="reg">Budget</button><button type="button" class="sgb" data-pg="set">Paramètres</button><button type="button" class="sgb" id="nav2" hidden></button><i class="nsep" id="nsep" hidden></i><button type="button" class="sgb" id="nav" hidden>Paramètres<svg class="chv" viewBox="0 0 12 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4l6 8-6 8"/></svg></button><button class="tbtn" id="fs" aria-label="Plein écran" title="Plein écran"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button></span></span>
 </h1>
 <div class="sub"><div id="org"></div><div>Dépenses <span id="yr"></span> · <span id="dtw">situation au <b id="dt"></b></span><span id="tsti" hidden> · <b class="tsti" title="Test : augmentation du budget global"><svg class="tsic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-label="Test"><path d="M9 3h6M10 3v6L4.5 18.5A1.7 1.7 0 0 0 6 21h12a1.7 1.7 0 0 0 1.5-2.5L14 9V3"/><path d="M7 15h10"/></svg><span></span></b></span></div></div>
@@ -1442,7 +1444,7 @@ function summary(live){
 }
 
 // ===== Fenêtre modale =====
-function openModal(html,after){$("mdb").innerHTML=html;$("md").hidden=false;document.documentElement.classList.add("lock");after&&after()}
+function openModal(html,after){$("md").classList.remove("mtop");$("mdb").innerHTML=html;$("md").hidden=false;document.documentElement.classList.add("lock");after&&after()}
 function closeModal(){$("md").hidden=true;if(!(typeof BIG!=="undefined"&&BIG))document.documentElement.classList.remove("lock")}
 $("md").addEventListener("click",e=>{if(e.target.id==="md"||e.target.closest("[data-close]"))closeModal()});
 addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("md").hidden)closeModal()});
@@ -1623,7 +1625,7 @@ function pvAsk(id){const C=phCalc(),i=C.L.findIndex(x=>x.id===id);if(i<0)return;
   openModal(`<div class="mni"><div class="mnh"><span>Prévu · ${x.name?phName(x.name):"Période"}</span><button type="button" class="mnx" data-close aria-label="Fermer">×</button></div>
     <label class="pvin"><input id="pvv" type="text" inputmode="decimal" value="${Math.round(C.adj[i])}" aria-label="Montant prévu en euros"><span>€</span></label>
     <div class="mnr">de ${f0(Math.ceil(mn))} à ${f0(Math.floor(mx))}</div><div class="rgerr" id="pverr"></div>
-    <button class="tbtn pri mnok" id="pvok">Valider</button></div>`,()=>{const inp=$("pvv");setTimeout(()=>{inp.focus();inp.select()},50);
+    <div class="mnb"><button class="tbtn mnok" id="pvok">Valider</button></div></div>`,()=>{$("md").classList.add("mtop");const inp=$("pvv");setTimeout(()=>{inp.focus();inp.select()},50);
     const ok=()=>{const v=parseFloat(String(inp.value).replace(/[\s €]/g,"").replace(",","."));if(!isFinite(v)){$("pverr").textContent="Montant invalide.";return}
       if(v<mn-0.5||v>mx+0.5){$("pverr").textContent=`Entre ${f0(Math.ceil(mn))} et ${f0(Math.floor(mx))}.`;return}
       PVB=null;pvSet(id,v);PVB=null;closeModal();savePH();setDate();renderHome()};
